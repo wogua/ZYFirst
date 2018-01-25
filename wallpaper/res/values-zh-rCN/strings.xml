@@ -1,0 +1,4 @@
+<resources>
+    <string name="pick_image">选择图片</string>
+    <string name="setwallpaper_failed">设置壁纸失败</string>
+</resources>

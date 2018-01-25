@@ -1,0 +1,4 @@
+<resources>
+    <string name="pick_image">Pick Image</string>
+    <string name="setwallpaper_failed">set wallpaper failed</string>
+</resources>
