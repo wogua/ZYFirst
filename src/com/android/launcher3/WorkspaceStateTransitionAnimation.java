@@ -332,14 +332,14 @@ public class WorkspaceStateTransitionAnimation {
                 mNewScale = mOverviewModeShrinkFactor;
             }
         }
-        //M:liuzuo begin
+        //M:lijun begin
 /*        if (toPage == SCROLL_TO_CURRENT_PAGE) {
             toPage = mWorkspace.getPageNearestToCenterOfScreen();
         }*/
 
        /* if(!states.oldStateIsFolderImport)
             mWorkspace.snapToPage(-1, duration, mZoomInInterpolator);*/
-        //M:liuzuo end
+        //M:lijun end
         int toPage = mWorkspace.getPageNearestToCenterOfScreen();
         // TODO: Animate the celllayout alpha instead of the pages.
         for (int i = 0; i < childCount; i++) {
@@ -389,12 +389,12 @@ public class WorkspaceStateTransitionAnimation {
                 if (initialAlpha != finalAlpha || initialTranslationY != finalTranslationY || initialScale != finalScale) {
                     LauncherViewPropertyAnimator alphaAnim =
                             new LauncherViewPropertyAnimator(cl.getShortcutsAndWidgets());
-     					// cyl modify for bug2696 start
+     					// lijun modify for bug2696 start
      					 if(!states.oldStateIsSpringLoaded && !states.stateIsSpringLoaded){
                            alphaAnim.alpha(finalAlpha);
      					  }
 						 //alphaAnim.alpha(finalAlpha)
-     					// cyl modify for bug2696 end		                     
+     					// lijun modify for bug2696 end
                       alphaAnim.translationY(finalTranslationY)//lijun add for celllayout topbar
                             .scaleY(finalScale)//lijun add for celllayout topbar
                             .scaleX(finalScale)//lijun add for celllayout topbar
@@ -496,7 +496,7 @@ public class WorkspaceStateTransitionAnimation {
                         .alpha(finalPageIndicatorAlpha)
                         .translationY(finalPageIndicatorTranslationY).withLayer();
                 pageIndicatorOrigAnima.addListener(new AlphaUpdateListener(pageIndicatorOrig,
-                        accessibilityEnabled));  //liuzuo remove
+                        accessibilityEnabled));  //lijun remove
             } else {
                 // create a dummy animation so we don't need to do null checks later
                 pageIndicatorOrigAnima = ValueAnimator.ofFloat(0, 0);
@@ -547,11 +547,11 @@ public class WorkspaceStateTransitionAnimation {
             }
             //lijun modify end
 
-            //liuzuo add for invisiable hotseat in  special situation
+            //lijun add for invisiable hotseat in  special situation
             if(!mLauncher.isSuccessAddIcon()) {
                 mStateAnimator.play(hotseatAlpha);
             }
-            //liuzuo modify end
+            //lijun modify end
             mStateAnimator.play(qsbAlphaAnimation);
             mStateAnimator.addListener(new AnimatorListenerAdapter() {
                 boolean canceled = false;

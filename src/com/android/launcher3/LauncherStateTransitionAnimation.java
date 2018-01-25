@@ -986,7 +986,7 @@ public class LauncherStateTransitionAnimation {
                 mLauncher.refreshWallPaperList(false);
             }else if(launcherState == Launcher.State.ICONARRANGE){
                 fromView = mLauncher.getArrangeNavigationBar();
-            }else if(launcherState == Launcher.State.SPECIALEFFECT){// cyl add for special effect
+            }else if(launcherState == Launcher.State.SPECIALEFFECT){// lijun add for special effect
                 fromView = mLauncher.getSpecialEffectPreview();
             }else if(launcherState == Launcher.State.WORKSPACE){
                 return null;
@@ -1002,7 +1002,7 @@ public class LauncherStateTransitionAnimation {
             }else if(launcherState == Launcher.State.ICONARRANGE){
                 toView = mLauncher.getArrangeNavigationBar();
                 mLauncher.mWorkspace.addEmptyScreenAsArrange();
-            } else if(launcherState == Launcher.State.SPECIALEFFECT){ // cyl add for special effect
+            } else if(launcherState == Launcher.State.SPECIALEFFECT){ // lijun add for special effect
                 toView = mLauncher.getSpecialEffectPreview(); 
             }else if(launcherState == Launcher.State.WORKSPACE){
                 return null;
@@ -1019,7 +1019,7 @@ public class LauncherStateTransitionAnimation {
             initialized =  mLauncher.getmWallpaperButton() != null;
         }else if(launcherState == Launcher.State.ICONARRANGE){
             initialized =  mLauncher.getArrangeNavigationBar() != null;
-        }else if(launcherState == Launcher.State.SPECIALEFFECT){ // cyl add for special effect
+        }else if(launcherState == Launcher.State.SPECIALEFFECT){ // lijun add for special effect
             initialized =  mLauncher.getSpecialEffectPreview() != null; 
         }else{
             initialized = false;

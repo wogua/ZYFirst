@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by antino on 17-3-14.
+ * Created by lijun on 17-3-14.
  */
 public abstract class IconGetterAbsImpl implements IIconGetter{
     protected static String TAG = "IconGetter";

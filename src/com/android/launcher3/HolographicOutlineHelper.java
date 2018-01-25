@@ -86,7 +86,7 @@ public class HolographicOutlineHelper {
     public void applyExpensiveOutlineWithBlur(Bitmap srcDst, Canvas srcDstCanvas,
             boolean clipAlpha) {
 
-        //liuzuo remove begin
+        //lijun remove begin
       /*  if (ProviderConfig.IS_DOGFOOD_BUILD && srcDst.getConfig() != Bitmap.Config.ALPHA_8) {
             throw new RuntimeException("Outline blue is only supported on alpha bitmaps");
         }
@@ -151,7 +151,7 @@ public class HolographicOutlineHelper {
         brightOutline.recycle();
         thickOuterBlur.recycle();
         thickInnerBlur.recycle();*/
-        //liuzuo remove end
+        //lijun remove end
     }
 
     Bitmap createMediumDropShadow(BubbleTextView view) {

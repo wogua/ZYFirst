@@ -28,7 +28,7 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Created by liuzuo on 17-5-22.
+ * Created by lijun on 17-5-22.
  */
 
 public class CalendarDynamic implements IDynamicIcon {
@@ -233,7 +233,7 @@ public class CalendarDynamic implements IDynamicIcon {
     }
 
     /**
-     * liuzuo : add for  typeface
+     * lijun : add for  typeface
      */
     private int getTypefaceFromLanguage() {
         if ("en".equals(Locale.getDefault().getLanguage())) {

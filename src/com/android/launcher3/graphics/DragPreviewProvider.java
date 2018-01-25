@@ -73,7 +73,7 @@ public class DragPreviewProvider {
         mView = view;
 
         if (mView instanceof TextView) {
-            //liuzuo add begin
+            //lijun add begin
             if (view instanceof BubbleTextView) {
                 int unreadWidth = getUnreadWidth();
                 int uninstallWidth = getUninstallDrawable().getIntrinsicWidth();
@@ -82,7 +82,7 @@ public class DragPreviewProvider {
                     mUninstallDrawableSize = 0;
                 }*/
             }
-            //liuzuo add end
+            //lijun add end
             Drawable d = Workspace.getTextViewIcon((TextView) mView);
             Rect bounds = getDrawableBounds(d);
             previewPadding = DRAG_BITMAP_PADDING - bounds.left - bounds.top;
@@ -151,7 +151,7 @@ public class DragPreviewProvider {
                 int height = bounds.height()-mUninstallDrawableSize-DRAG_BITMAP_PADDING;
 
                 float scaleAndPosition = getScaleAndPosition(ints);
-                Log.d("liuzuo","x="+ints[0]+"        y= "+ints[1]+"    scaleAndPosition="+scaleAndPosition+"   getX="+mView.getX()+"  getY="+mView.getY());
+                Log.d("lijun","x="+ints[0]+"        y= "+ints[1]+"    scaleAndPosition="+scaleAndPosition+"   getX="+mView.getX()+"  getY="+mView.getY());
                 offsetX = (ints[0]-mView.getX())/2-width*(1-scaleAndPosition)/2;
                 offsetY = (ints[1]-mView.getY())/2-height*(1-scaleAndPosition)/2;
             }
@@ -230,7 +230,7 @@ public class DragPreviewProvider {
      */
     public Bitmap createDragOutline(Canvas canvas) {
         final Bitmap b = Bitmap.createBitmap(mView.getWidth() + DRAG_BITMAP_PADDING,
-                mView.getHeight() + DRAG_BITMAP_PADDING, Bitmap.Config.ARGB_8888);//liuzuo ARGB_8888 >> ALPHA_8
+                mView.getHeight() + DRAG_BITMAP_PADDING, Bitmap.Config.ARGB_8888);//lijun ARGB_8888 >> ALPHA_8
         canvas.setBitmap(b);
         drawDragView(canvas);
         HolographicOutlineHelper.obtain(mView.getContext())
@@ -251,12 +251,12 @@ public class DragPreviewProvider {
             int inset = -((PreloadIconDrawable) d).getOutset();
             bounds.inset(inset, inset);
         }
-        //liuzuo add begin
+        //lijun add begin
         bounds.left += -mUninstallDrawableSize /2;
         bounds.top += -mUninstallDrawableSize /2;
         bounds.bottom+= mUninstallDrawableSize /2;
         bounds.right+= mUninstallDrawableSize /2;
-        //liuzuo add end
+        //lijun add end
         return bounds;
     }
 

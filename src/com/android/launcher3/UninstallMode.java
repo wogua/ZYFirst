@@ -1,7 +1,7 @@
 package com.android.launcher3;
 
 /**
- * Created by liuzuo on 17-2-28.
+ * Created by lijun on 17-2-28.
  */
 
 public interface UninstallMode {

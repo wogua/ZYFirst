@@ -10,7 +10,7 @@ import android.util.Log;
 import com.android.launcher3.theme.utils.ResUtils;
 
 /**
- * Created by antino on 17-3-14.
+ * Created by lijun on 17-3-14.
  */
 public class DefaultIconGetter extends IconGetterAbsImpl {
     public static String THEME_PKG="com.android.dlauncher";

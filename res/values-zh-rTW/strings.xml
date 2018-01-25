@@ -110,7 +110,7 @@
     <string name="confirm_action">是</string>
     <string name="valcants_button_text">點擊此處對齊圖標</string>
     <string name="arrange_button_text">整理圖標</string>
-    <!--liuzuo add-->
+    <!--lijun add-->
     <string name="folder_import_addicon">添加</string>
     <string name="clock_launcher_label">"桌面時鐘"</string>
     <string name="folder_importmode_button">添加到資料夾(<xliff:g id="count">%d</xliff:g>) </string>
@@ -123,12 +123,12 @@
     <string name="default_folder">保千里應用</string>
     <string name="default_folder_tools">系統工具</string>
     <string name="other_folder">其他</string>
-    <!--liuzuo add for dym-->
+    <!--lijun add for dym-->
     <string name="dym_calendar_week_format">EEEE</string>
 
     <!--lijun add for theme change-->
     <string name="theme_loding_text">主題加載中...</string>
-    <!--cyl add for special effect-->
+    <!--lijun add for special effect-->
     <string name="special_effect_setting">特效設置</string>
     <string name="cycle_slide">迴圈案頭</string>
     <!-- lijun add for uninstall shortcut -->

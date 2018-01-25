@@ -143,7 +143,7 @@ public class DeviceProfile {
     //lijun add for Wallpaper panel start
     public int wallpaperContainerBarHeightPx;
     //lijun add for Wallpaper panel end
-  public int workspaceToHotsetGapOffset;//liuzuo add for reduce gap
+  public int workspaceToHotsetGapOffset;//lijun add for reduce gap
     // Insets
     private Rect mInsets = new Rect();
 
@@ -331,13 +331,13 @@ public class DeviceProfile {
                 + Utilities.calculateTextHeight(res.getDimension(R.dimen.folder_label_text_size));
 
         // Don't let the folder get too close to the edges of the screen.
-        //liuzuo: change width for folder  begin
+        //lijun: change width for folder  begin
         Rect workspacePadding = getWorkspacePadding(null);
         int cellHeight2Workspace = (availableHeightPx - workspacePadding.top - workspacePadding.bottom)/inv.numRows;
         int cellWeight2Workspace = (availableWidthPx - cellWidthGap*2)/inv.numFolderColumns;
         folderCellWidthPx =cellWeight2Workspace/*Math.min(iconSizePx + 2 * cellPaddingX,
                 (availableWidthPx - 4 * edgeMarginPx) / inv.numFolderColumns)*/;
-        //liuzuo: change width for folder  end
+        //lijun: change width for folder  end
         folderCellHeightPx = cellHeight2Workspace;//Math.min(iconSizePx + 3 * cellPaddingY + folderChildTextSize,
                 //(availableHeightPx - 4 * edgeMarginPx - folderBottomPanelSize) / inv.numFolderRows);
         folderChildDrawablePaddingPx = Math.max(0,

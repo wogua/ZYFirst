@@ -5,7 +5,7 @@ import android.content.res.Resources;
 import com.android.launcher3.R;
 
 /**
- * Created by liuzuo on 17-3-9.
+ * Created by lijun on 17-3-9.
  */
 
 public class SudokuFolderIconLayoutRule implements FolderIcon.PreviewLayoutRule {

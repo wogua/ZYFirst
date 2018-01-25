@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Created by antino on 17-3-14.
+ * Created by lijun on 17-3-14.
  */
 public class IconManager {
     public static final String TAG = "IconManager";

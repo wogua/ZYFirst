@@ -11,7 +11,7 @@ import com.android.launcher3.LauncherAppState;
 import com.android.launcher3.compat.LauncherActivityInfoCompat;
 
 /**
- * Created by antino on 17-3-14.
+ * Created by lijun on 17-3-14.
  */
 public class TestIconProvider extends IconProvider {
     IconManager mIconManager;

@@ -1193,7 +1193,7 @@ public class LauncherProvider extends ContentProvider {
         }
     }
     /**
-     * liuzuo add for  clearIconsFromDb
+     * lijun add for  clearIconsFromDb
      */
     public void clearIcons(){
         SQLiteDatabase db = mOpenHelper.getWritableDatabase();

@@ -30,7 +30,7 @@ import org.json.JSONObject;
 
 
 /**
- * Created by liuzuo on 17-5-25.
+ * Created by lijun on 17-5-25.
  */
 
 public class WeatherDynamic implements IDynamicIcon {

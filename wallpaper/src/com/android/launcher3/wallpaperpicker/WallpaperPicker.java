@@ -602,7 +602,7 @@ public class WallpaperPicker extends RecyclerView {
             cropTask.setOnBitmapCropped(onBitmapCroppedHandler);
         }
         cropTask.setNoCrop(true);
-        cropTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);//liuzuo change execute to  executeOnExecutor
+        cropTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);//lijun change execute to  executeOnExecutor
     }
 
     static void setWallpaper(Context context, Resources res, int resId) {

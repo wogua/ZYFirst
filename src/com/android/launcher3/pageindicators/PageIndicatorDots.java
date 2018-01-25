@@ -51,15 +51,15 @@ public class PageIndicatorDots extends PageIndicator implements ColorManager.IWa
 
     private static final float SHIFT_PER_ANIMATION = 0.5f;
     private static final float SHIFT_THRESHOLD = 0.1f;
-    private static final long ANIMATION_DURATION = 0;//liuzuo 0>>150
+    private static final long ANIMATION_DURATION = 0;//lijun 0>>150
     //lijun add start
     private static final float GAP_COEFFICIENT_MAX = 2.5f;
     private static final float GAP_COEFFICIENT_MIN = 0.25f;
     private float gapCoefficient = GAP_COEFFICIENT_MAX;
     //lijun add end
 
-    private static final int ENTER_ANIMATION_START_DELAY = 0;//liuzuo 0>>300
-    private static final int ENTER_ANIMATION_STAGGERED_DELAY = 0;//liuzuo 0>>150
+    private static final int ENTER_ANIMATION_START_DELAY = 0;//lijun 0>>300
+    private static final int ENTER_ANIMATION_STAGGERED_DELAY = 0;//lijun 0>>150
     private static final int ENTER_ANIMATION_DURATION = 400;
 
     // This value approximately overshoots to 1.5 times the original size.
@@ -145,13 +145,13 @@ public class PageIndicatorDots extends PageIndicator implements ColorManager.IWa
 
         //mActiveColor = Utilities.getColorAccent(context);
         //lijun modify for colorchange
-//        mActiveColor = getResources().getColor(R.color.page_indicator_dot_color_active);//liuzuo add
+//        mActiveColor = getResources().getColor(R.color.page_indicator_dot_color_active);//lijun add
 //        mInActiveColor = getResources().getColor(R.color.page_indicator_dot_color);
         if (ColorManager.getInstance().isBlackText()) {
-            mActiveColor = getResources().getColor(R.color.page_indicator_dot_light_color_active);//liuzuo add
+            mActiveColor = getResources().getColor(R.color.page_indicator_dot_light_color_active);//lijun add
             mInActiveColor = getResources().getColor(R.color.page_indicator_dot_light_color);
         } else {
-            mActiveColor = getResources().getColor(R.color.page_indicator_dot_color_active);//liuzuo add
+            mActiveColor = getResources().getColor(R.color.page_indicator_dot_color_active);//lijun add
             mInActiveColor = getResources().getColor(R.color.page_indicator_dot_color);
         }
 
@@ -364,7 +364,7 @@ public class PageIndicatorDots extends PageIndicator implements ColorManager.IWa
         sTempRect.left = startX + startCircle * circleGap;
         sTempRect.right = sTempRect.left + diameter;
         /*
-        liuzuo remove dot animation begin
+        lijun remove dot animation begin
          */
 /*        if (delta < SHIFT_PER_ANIMATION) {
             // dot is capturing the right circle.
@@ -377,7 +377,7 @@ public class PageIndicatorDots extends PageIndicator implements ColorManager.IWa
             sTempRect.left += delta * circleGap * 2;
         }*/
          /*
-        liuzuo remove dot animation end
+        lijun remove dot animation end
          */
         if (mIsRtl) {
             float rectWidth = sTempRect.width();
@@ -424,10 +424,10 @@ public class PageIndicatorDots extends PageIndicator implements ColorManager.IWa
     @Override
     public void onColorChange(int[] colors) {
         if (ColorManager.getInstance().isBlackText()) {
-            mActiveColor = getResources().getColor(R.color.page_indicator_dot_light_color_active);//liuzuo add
+            mActiveColor = getResources().getColor(R.color.page_indicator_dot_light_color_active);//lijun add
             mInActiveColor = getResources().getColor(R.color.page_indicator_dot_light_color);
         } else {
-            mActiveColor = getResources().getColor(R.color.page_indicator_dot_color_active);//liuzuo add
+            mActiveColor = getResources().getColor(R.color.page_indicator_dot_color_active);//lijun add
             mInActiveColor = getResources().getColor(R.color.page_indicator_dot_color);
         }
         invalidate();
@@ -437,10 +437,10 @@ public class PageIndicatorDots extends PageIndicator implements ColorManager.IWa
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         if (ColorManager.getInstance().isBlackText()) {
-            mActiveColor = getResources().getColor(R.color.page_indicator_dot_light_color_active);//liuzuo add
+            mActiveColor = getResources().getColor(R.color.page_indicator_dot_light_color_active);//lijun add
             mInActiveColor = getResources().getColor(R.color.page_indicator_dot_light_color);
         } else {
-            mActiveColor = getResources().getColor(R.color.page_indicator_dot_color_active);//liuzuo add
+            mActiveColor = getResources().getColor(R.color.page_indicator_dot_color_active);//lijun add
             mInActiveColor = getResources().getColor(R.color.page_indicator_dot_color);
         }
         invalidate();

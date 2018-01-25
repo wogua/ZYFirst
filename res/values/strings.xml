@@ -261,7 +261,7 @@
     <!-- Accessibility description for the shortcuts menu shown for an app. -->
 
     <string name="shortcuts_menu_description"><xliff:g id="number_of_shortcuts" example="3">%1$d</xliff:g> shortcuts for <xliff:g id="app_name" example="Messenger">%2$s</xliff:g></string>
-    <!--liuzuo add-->
+    <!--lijun add-->
     <string name="folder_import_addicon">Add Apps</string>
     <string name="clock_launcher_label">"Launcher Clock"</string>
     <string name="hide_folder_confirm">Dismiss</string>
@@ -280,7 +280,7 @@
     <string name="aline_toast_text">icons alined</string>
     <string name="new_folder_text">New Folder</string>
 
-    <!--liuzuo add for dym-->
+    <!--lijun add for dym-->
     <string name="dym_calendar_week_format">EEE</string>
     <string name="default_folder">protruly app</string>
     <string name="default_folder_tools">Tools</string>
@@ -292,7 +292,7 @@
 
     <!--lijun add for theme change-->
     <string name="theme_loding_text">theme loading ...</string>
-    <!--cyl add for special effect-->
+    <!--lijun add for special effect-->
     <string name="special_effect_setting">Special effects settings</string>
     <string name="cycle_slide">Loop desktop</string>
 

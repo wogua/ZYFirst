@@ -911,7 +911,7 @@ public class IconCache {
         mIconDb.clearDatas();
     }
     /**
-     * liuzuo add for getIconProvider
+     * lijun add for getIconProvider
      */
     public IconProvider getIconProvider() {
         return mIconProvider;

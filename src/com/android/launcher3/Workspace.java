@@ -115,7 +115,7 @@ import static com.android.launcher3.Workspace.State.OVERVIEW_HIDDEN;
  * Each page contains a number of icons, folders or widgets the user can
  * interact with. A workspace is meant to be used with a fixed width only.
  */
- //PagedView  cyl modify for special effect :PagedView
+ //PagedView  lijun modify for special effect :PagedView
 public class Workspace extends SpecialEffectPagedView  
         implements DropTarget, DragSource, DragScroller, View.OnTouchListener,
         DragController.DragListener, LauncherTransitionable, ViewGroup.OnHierarchyChangeListener,
@@ -160,7 +160,7 @@ public class Workspace extends SpecialEffectPagedView
 
 
     //lijun add for homebutton end
-    private boolean mPrepareUninstallMode;//liuzuo add
+    private boolean mPrepareUninstallMode;//lijun add
     public long arrangeAddScreenId = -1;
     /**
      * CellInfo for the cell that is currently being dragged
@@ -387,11 +387,11 @@ public class Workspace extends SpecialEffectPagedView
 
     boolean isHotseatAnimating = false;//lijun add for hotseat animate
 
-    //PagedView  cyl add for special effect start
+    //PagedView  lijun add for special effect start
     private boolean mAnimateScrollEffectMode = false;
     private ScrollEffectAnimator mScrollEffectAnimator;
 	private boolean cycleSlideFlag = true;
-    //PagedView  cyl add for special effect end
+    //PagedView  lijun add for special effect end
      
     /**
      * Used to inflate the Workspace from XML.
@@ -561,7 +561,7 @@ public class Workspace extends SpecialEffectPagedView
             }*/
             //lijun remove end
         }
-        //UninstallMode add by liuzuo begin
+        //UninstallMode add by lijun begin
         Runnable runnable =new Runnable() {
             @Override
             public void run() {
@@ -571,10 +571,10 @@ public class Workspace extends SpecialEffectPagedView
                 mPrepareUninstallMode = false ;
             }
         };
-        //UninstallMode add by liuzuo end
+        //UninstallMode add by lijun end
         if (!FeatureFlags.LAUNCHER3_LEGACY_WORKSPACE_DND&&mLauncher.getState()!= Launcher.State.ICONARRANGE) {
             // Always enter the spring loaded mode
-           if(!mLauncher.isWidgetsViewVisible()){ // cyl fix bug5057
+           if(!mLauncher.isWidgetsViewVisible()){ // lijun fix bug5057
              mPrepareUninstallMode = true;
 			 mForceScreenScrolled = true;
            }           
@@ -596,7 +596,7 @@ public class Workspace extends SpecialEffectPagedView
         if (!mDeferRemoveExtraEmptyScreen && (!mLauncher.isUnInstallMode()&& !mPrepareUninstallMode&&!mLauncher.isLauncherArrangeMode())) {
             removeExtraEmptyScreen(true, mDragSourceInternal != null);
         }
-        mPrepareUninstallMode = false; // cyl fix bug5057
+        mPrepareUninstallMode = false; // lijun fix bug5057
 		
         //lijun add start for pageindicator
 //        if (FeatureFlags.SHOW_PAGEINDICATOR_CUBE) {
@@ -1455,12 +1455,12 @@ public class Workspace extends SpecialEffectPagedView
             // maybe we should be deleting these items from the LauncherModel?
             Log.e(TAG, "Failed to add to item at (" + lp.cellX + "," + lp.cellY + ") to CellLayout");
         }else {
-           /* //UnistallMode add by liuzuo begin
+           /* //UnistallMode add by lijun begin
                     if(mLauncher.isUninstallMode&&child instanceof UninstallMode ) {
                         UninstallMode uninstallMode = (UninstallMode) child;
                         uninstallMode.showUninstallApp();
                     }
-            //UnistallMode add by liuzuo  end*/
+            //UnistallMode add by lijun  end*/
         }
 
         if (!(child instanceof Folder)) {
@@ -1689,11 +1689,11 @@ public class Workspace extends SpecialEffectPagedView
         }
         //lijun add end
 
-        // cyl add for special effect start
+        // lijun add for special effect start
 		if (mAnimateScrollEffectMode) {
             animateScrollEffect(false);
         }
-	    // cyl add for special effect end
+	    // lijun add for special effect end
     }
 
     protected void onScrollInteractionBegin() {
@@ -1983,7 +1983,7 @@ public class Workspace extends SpecialEffectPagedView
     }
 
     /**
-     * add by liuzuo
+     * add by lijun
      * @param finalValue
      * @return hotseat animation not indicator
      *
@@ -2137,11 +2137,11 @@ public class Workspace extends SpecialEffectPagedView
     }
 
     private void updatePageAlphaValues(int screenCenter) {
-		// cyl add for bug2696 :mLauncher.isUninstallMode
+		// lijun add for bug2696 :mLauncher.isUninstallMode
         if (mLauncher.isUninstallMode ||mPrepareUninstallMode||
 			(mWorkspaceFadeInAdjacentScreens &&
-                //!workspaceInModalState() && // cyl del for set alpha
-                !inModalStateSetAlpha() &&  // cyl add for set alpha
+                //!workspaceInModalState() && // lijun del for set alpha
+                !inModalStateSetAlpha() &&  // lijun add for set alpha
                 !mIsSwitchingState)) {
 
             for (int i = numCustomPages(); i < getChildCount(); i++) {
@@ -2149,8 +2149,8 @@ public class Workspace extends SpecialEffectPagedView
                 if (child != null) {
                     float scrollProgress = getScrollProgress(screenCenter, child, i);
                     float alpha = 1 - Math.abs(scrollProgress);
-					// cyl add for bug2696 :mLauncher.isUninstallMode
-					// cyl add for cycle slide start
+					// lijun add for bug2696 :mLauncher.isUninstallMode
+					// lijun add for cycle slide start
 					float childAlpha = child.getShortcutsAndWidgets().getAlpha();
 					if(mPrepareUninstallMode || mLauncher.isUninstallMode){
 						if(alpha > 0){
@@ -2172,7 +2172,7 @@ public class Workspace extends SpecialEffectPagedView
                         //mPrepareUninstallMode = false;
 					  continue;
 					} */
-					// cyl add for cycle slide end
+					// lijun add for cycle slide end
                     child.getShortcutsAndWidgets().setAlpha(alpha);
 					
                     if (isQsbContainerPage(i)) {
@@ -2347,10 +2347,10 @@ public class Workspace extends SpecialEffectPagedView
         return mState != State.NORMAL
                 &&mState!=State.FOLDER_IMPORT
                 &&mState!=State.SPRING_LOADED
-                &&mState!=OVERVIEW_HIDDEN;//liuzuo add for addIcon OVERVIEW_HIDDEN ; lijun add SPRING_LOADED
+                &&mState!=OVERVIEW_HIDDEN;//lijun add for addIcon OVERVIEW_HIDDEN ; lijun add SPRING_LOADED
     }
 
-  // cyl add for set alpha  start
+  // lijun add for set alpha  start
     public boolean inModalStateSetAlpha() {
         return mState != State.NORMAL
                 &&mState!=State.FOLDER_IMPORT
@@ -2358,7 +2358,7 @@ public class Workspace extends SpecialEffectPagedView
                 &&mState!= OVERVIEW_HIDDEN
                 &&mState!=State.SPRING_LOADED;
     }
-  // cyl add for set alpha  start	
+  // lijun add for set alpha  start
 
     void enableChildrenCache(int fromPage, int toPage) {
         if (fromPage > toPage) {
@@ -2430,12 +2430,12 @@ public class Workspace extends SpecialEffectPagedView
                 // enable layers between left and right screen inclusive, except for the
                 // customScreen, which may animate its content during transitions.
 
-                // cyl add for special effect start
+                // lijun add for special effect start
                 if(((i == 0 || i == screenCount - 1) && (getScrollX() < 0 || getScrollX() > mMaxScrollX))
                    && shouldDrawChild(layout)){
                     layout.enableHardwareLayer(true);
                 }else {
-                 // cyl add for special effect end
+                 // lijun add for special effect end
                     boolean enableLayer = layout != customScreen &&
                             leftScreen <= i && i <= rightScreen && shouldDrawChild(layout);
                     layout.enableHardwareLayer(enableLayer);
@@ -2770,15 +2770,15 @@ public class Workspace extends SpecialEffectPagedView
         PageIndicatorCube.dropToWorkspace = false;
         //lijun add end
         child.setVisibility(INVISIBLE);
-        //liuzuo add for uninstallMode begin
+        //lijun add for uninstallMode begin
         if(child instanceof UninstallMode.UninstallAnimation){
             UninstallMode.UninstallAnimation uninstallAnimation = (UninstallMode.UninstallAnimation) child;
             uninstallAnimation.stopShakeAnimation();
         }
-        //liuzuo add for uninstallMode end
-//liuzuo add begin
+        //lijun add for uninstallMode end
+//lijun add begin
         if( child.getParent().getParent() instanceof  CellLayout) {
-//liuzuo add end 
+//lijun add end
             CellLayout layout = (CellLayout) child.getParent().getParent();
             isStartDragOnHotseat = layout.isHotseat();//lijun add for pageindicator
             layout.prepareChildForDrag(child);
@@ -2821,15 +2821,15 @@ public class Workspace extends SpecialEffectPagedView
         mOutlineProvider = previewProvider;
 
         // The drag bitmap follows the touch point around on the screen
-        boolean showUnread = mLauncher.isShowUnread();//liuzuo add
+        boolean showUnread = mLauncher.isShowUnread();//lijun add
         final Bitmap b = previewProvider.createDragBitmap(mCanvas,showUnread);
-        //liuzuo add begin
+        //lijun add begin
         if(!mLauncher.isLauncherArrangeMode()) {
             mCanvas.setBitmap(b);
             previewProvider.drawDragViewUninstallDrawable(mCanvas);
             mCanvas.setBitmap(null);
         }
-        //liuzuo add end
+        //lijun add end
         int halfPadding = previewProvider.previewPadding / 2;
 
         float scale = previewProvider.getScaleAndPosition(b, mTempXY);
@@ -2876,7 +2876,7 @@ public class Workspace extends SpecialEffectPagedView
     public boolean transitionStateShouldAllowDrop() {
         return ((!isSwitchingState() || mTransitionProgress > 0.5f) &&
                 (mState == State.NORMAL || mState == State.SPRING_LOADED
-||mLauncher.isLauncherArrangeMode()));//liuzuo add 
+||mLauncher.isLauncherArrangeMode()));//lijun add
     }
 
     /**
@@ -2935,14 +2935,14 @@ public class Workspace extends SpecialEffectPagedView
             }
 
             int[] resultSpan = new int[2];
-	   // cyl add for hotseat icon center
+	   // lijun add for hotseat icon center
 			boolean full = true;
 			if(mLauncher.isHotseatLayout(dropTargetLayout) 
 				&& mLauncher.getHotseat().notFull()){
 				full = false;
 			}
 			if(full){
-			// cyl add for hotseat icon center end
+			// lijun add for hotseat icon center end
             mTargetCell = dropTargetLayout.performReorder((int) mDragViewVisualCenter[0],
                     (int) mDragViewVisualCenter[1], minSpanX, minSpanY, spanX, spanY,
                     null, mTargetCell, resultSpan, CellLayout.MODE_ACCEPT_DROP);
@@ -2961,11 +2961,11 @@ public class Workspace extends SpecialEffectPagedView
                         return false;
                     }
                 }
-                //liuzuo add begin
+                //lijun add begin
                 if(mLauncher.isLauncherArrangeMode()&&foundCell){
                     return true;
                 }
-                //liuzuo add end
+                //lijun add end
                 mLauncher.showOutOfSpaceMessage(isHotseat);
                 return false;
             }
@@ -3060,14 +3060,14 @@ public class Workspace extends SpecialEffectPagedView
             ShortcutInfo sourceInfo = (ShortcutInfo) newView.getTag();
             ShortcutInfo destInfo = (ShortcutInfo) v.getTag();
 
-            // cyl add for hotseat icon center start
+            // lijun add for hotseat icon center start
             if(destInfo.container == LauncherSettings.Favorites.CONTAINER_HOTSEAT){
                 int count = mLauncher.getHotseat().getContainer().getChildCount();
                 if(count < mLauncher.getHotseat().MAX_COUNT_X){
                     return false;
                 }
             }
-            // cyl add for hotseat icon center end
+            // lijun add for hotseat icon center end
 
             // if the drag started here, we need to remove it from the workspace
             if (!external) {
@@ -3147,7 +3147,7 @@ public class Workspace extends SpecialEffectPagedView
                 mapPointFromSelfToChild(dropTargetLayout, mDragViewVisualCenter);
             }
         }
-        // cyl add for hotseat icon center start
+        // lijun add for hotseat icon center start
          boolean hasAddtoHotseat = false;
          boolean toHotseat = false;
 		 if (dropTargetLayout != null) {
@@ -3157,7 +3157,7 @@ public class Workspace extends SpecialEffectPagedView
                 toHotseat = false;
             }
           }
-		// cyl add for hotseat icon center end
+		// lijun add for hotseat icon center end
         int snapScreen = -1;
         boolean resizeOnDrop = false;
         if (d.dragSource != this) {
@@ -3186,33 +3186,33 @@ public class Workspace extends SpecialEffectPagedView
                 float distance = dropTargetLayout.getDistanceFromCell(mDragViewVisualCenter[0],
                         mDragViewVisualCenter[1], mTargetCell);
 
-                 ItemInfo item = d.dragInfo;  // cyl add for hotseat icon center 
-                 long itemContainer = item.container; // cyl add for hotseat icon center
+                 ItemInfo item = d.dragInfo;  // lijun add for hotseat icon center
+                 long itemContainer = item.container; // lijun add for hotseat icon center
                 // If the item being dropped is a shortcut and the nearest drop
                 // cell also contains a shortcut, then create a folder with the two shortcuts.
                 if (!mInScrollArea && createUserFolderIfNecessary(cell, container,
                         dropTargetLayout, mTargetCell, distance, false, d.dragView, null)) {
-                    // cyl add for hotseat icon center start
+                    // lijun add for hotseat icon center start
 					if(toHotseat || itemContainer == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
                         mLauncher.getHotseat().onDrop(true, d.x, null, cell, false);
                     }
-					// cyl add for hotseat icon center end
+					// lijun add for hotseat icon center end
                     return;
                 }
 
                 if (addToExistingFolderIfNecessary(cell, dropTargetLayout, mTargetCell,
                         distance, d, false)) {
-                   // cyl add for hotseat icon center start 
+                   // lijun add for hotseat icon center start
                      if(toHotseat || itemContainer == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
                         mLauncher.getHotseat().onDrop(true, d.x, null, cell, false);
                       }
-				   // cyl add for hotseat icon center end
+				   // lijun add for hotseat icon center end
                     return;
                 }
 
                 // Aside from the special case where we're dropping a shortcut onto a shortcut,
                 // we need to find the nearest cell location that is vacant
-               // ItemInfo item = d.dragInfo;  // cyl del for hotseat icon center
+               // ItemInfo item = d.dragInfo;  // lijun del for hotseat icon center
                 int minSpanX = item.spanX;
                 int minSpanY = item.spanY;
                 if (item.minSpanX > 0 && item.minSpanY > 0) {
@@ -3221,7 +3221,7 @@ public class Workspace extends SpecialEffectPagedView
                 }
 
                 int[] resultSpan = new int[2];
-               // cyl add for hotseat icon center start
+               // lijun add for hotseat icon center start
                boolean foundCell = false;
 			   boolean isFull = mLauncher.getHotseat().isFull();
                 if(toHotseat) {
@@ -3231,7 +3231,7 @@ public class Workspace extends SpecialEffectPagedView
                         foundCell = !isFull;
                     }
                 } else {
-                // cyl add for hotseat icon center end
+                // lijun add for hotseat icon center end
                 mTargetCell = dropTargetLayout.performReorder((int) mDragViewVisualCenter[0],
                         (int) mDragViewVisualCenter[1], minSpanX, minSpanY, spanX, spanY, cell,
                         mTargetCell, resultSpan, CellLayout.MODE_ON_DROP);
@@ -3259,7 +3259,7 @@ public class Workspace extends SpecialEffectPagedView
                     final ItemInfo info = (ItemInfo) cell.getTag();
                     if (hasMovedLayouts) {
 						
-                     // cyl add for hotseat icon center start
+                     // lijun add for hotseat icon center start
                        if(toHotseat){
                             if(!dragFromHotseat(d.dragInfo)) {
                                 if(mLauncher.getHotseat().isFull()) {
@@ -3282,7 +3282,7 @@ public class Workspace extends SpecialEffectPagedView
                                 mLauncher.getHotseat().onDrop(true, d.x, d.dragView, cell, true);
                             }
                         }else{
-					 // cyl add for hotseat icon center end		
+					 // lijun add for hotseat icon center end
 					 
                         // Reparent the view
                         CellLayout parentCell = getParentCellLayoutForView(cell);
@@ -3294,7 +3294,7 @@ public class Workspace extends SpecialEffectPagedView
                         addInScreen(cell, container, screenId, mTargetCell[0], mTargetCell[1],
                                 info.spanX, info.spanY);
 						
-                        // cyl add for hotseat icon center start
+                        // lijun add for hotseat icon center start
                         if(dragFromHotseat(d.dragInfo)) {
                                 mLauncher.getHotseat().onDrop(true, d.x, null, cell, false);
                          }
@@ -3302,7 +3302,7 @@ public class Workspace extends SpecialEffectPagedView
                          if (obj instanceof ShortcutInfo) {
                                 ((ShortcutInfo)obj).container = container;
                           }
-						 // cyl add for hotseat icon center end
+						 // lijun add for hotseat icon center end
 							
                       }
                     }
@@ -3336,7 +3336,7 @@ public class Workspace extends SpecialEffectPagedView
                         }
                     }
 					
-                    if (!toHotseat) {  // cyl add for hotseat icon center 
+                    if (!toHotseat) {  // lijun add for hotseat icon center
                     LauncherModel.modifyItemInDatabase(mLauncher, info, container, screenId, lp.cellX,
                             lp.cellY, item.spanX, item.spanY);
                         targetCubeIndex = getPageIndexForScreenId(getIdForScreen(dropTargetLayout));//lijun add
@@ -3347,7 +3347,7 @@ public class Workspace extends SpecialEffectPagedView
                     mTargetCell[0] = lp.cellX;
                     mTargetCell[1] = lp.cellY;
 					
-                   // cyl modify for hotseat icon center start
+                   // lijun modify for hotseat icon center start
                     CellLayout layout = null;
                     if(cell.getParent() != null) {
                         layout = (CellLayout) cell.getParent().getParent();
@@ -3359,9 +3359,9 @@ public class Workspace extends SpecialEffectPagedView
 					
                     //CellLayout layout = (CellLayout) cell.getParent().getParent();
                     //layout.markCellsAsOccupiedForView(cell);
-                   // cyl modify for hotseat icon center end
+                   // lijun modify for hotseat icon center end
 					
-					// cyl add for hotseat icon center start
+					// lijun add for hotseat icon center start
 					final ItemInfo info = (ItemInfo) cell.getTag();
                     if(toHotseat) {
                         if(!dragFromHotseat(d.dragInfo) && mLauncher.getHotseat().isFull()) {
@@ -3369,7 +3369,7 @@ public class Workspace extends SpecialEffectPagedView
                         }
                         mLauncher.getHotseat().onDrop(false, 0, d.dragView, cell, true);
                     } else {
-                        //mLauncher.showOutOfSpaceMessage(false);//liuzuo remove
+                        //mLauncher.showOutOfSpaceMessage(false);//lijun remove
                         if(layout!=null) {
                             targetCubeIndex = getPageIndexForScreenId(getIdForScreen(layout));//lijun add
                         }
@@ -3385,11 +3385,11 @@ public class Workspace extends SpecialEffectPagedView
                         }
                         
                     }	
-				  // cyl add for hotseat icon center end
+				  // lijun add for hotseat icon center end
 				  
                 }
             }else{
-          // cyl add for hotseat icon center start
+          // lijun add for hotseat icon center start
 			  final ItemInfo itemInfo = (ItemInfo) cell.getTag();
                if(dragFromHotseat(d.dragInfo)){
 				 CellLayout parent = getParentCellLayoutForView(cell);
@@ -3407,7 +3407,7 @@ public class Workspace extends SpecialEffectPagedView
             {
               return;
             }
-		   // cyl add for hotseat icon center end
+		   // lijun add for hotseat icon center end
 		   
             final CellLayout parent = (CellLayout) cell.getParent().getParent();
             // Prepare it to be animated into its new position
@@ -3430,7 +3430,7 @@ public class Workspace extends SpecialEffectPagedView
                     animateWidgetDrop(info, parent, d.dragView,
                             onCompleteRunnable, animationType, cell, false);
                 } else {
-                  if(!hasAddtoHotseat){ // cyl add for hotseat icon center 
+                  if(!hasAddtoHotseat){ // lijun add for hotseat icon center
                     int duration = snapScreen < 0 ? -1 : ADJACENT_SCREEN_DROP_DURATION;
                     mLauncher.getDragLayer().animateViewIntoPosition(d.dragView, cell, duration,
                             onCompleteRunnable, this);
@@ -3485,7 +3485,7 @@ public class Workspace extends SpecialEffectPagedView
         if (!workspaceInModalState() && FeatureFlags.LAUNCHER3_LEGACY_WORKSPACE_DND) {
             mLauncher.getDragLayer().showPageHints();
         }
-       // cyl add for hotseat icon center start
+       // lijun add for hotseat icon center start
         if (mLauncher.isHotseatLayout(mDragTargetLayout)) {	
 		   ItemInfo item = d.dragInfo;
 		   if(item == null){
@@ -3493,7 +3493,7 @@ public class Workspace extends SpecialEffectPagedView
 		   }
            mLauncher.getHotseat().onEnterHotseat(mDragController.getCurTouchX(), (int)item.screenId, dragFromHotseat(d.dragInfo), mDragController.getCurTouchY());
         }	
-	   // cyl add for hotseat icon center end
+	   // lijun add for hotseat icon center end
     }
 
     @Override
@@ -3739,7 +3739,7 @@ public class Workspace extends SpecialEffectPagedView
         }
         return bestMatchingScreen;
     }
-    //add by xiejun : push icons
+    //add by lijun : push icons
     public static boolean isWidget;
     private boolean isDragWidget(DragObject d) {
         isWidget= (d.dragInfo instanceof LauncherAppWidgetInfo ||
@@ -3779,13 +3779,13 @@ public class Workspace extends SpecialEffectPagedView
             // We want the point to be mapped to the dragTarget.
             if (mLauncher.isHotseatLayout(mDragTargetLayout)) {
                 mapPointFromSelfToHotseatLayout(mLauncher.getHotseat(), mDragViewVisualCenter);					
-                mLauncher.getHotseat().onEnterHotseat(mDragController.getCurTouchX(), (int)item.screenId, dragFromHotseat(d.dragInfo), mDragController.getCurTouchY());// cyl add for hotseat icon center
+                mLauncher.getHotseat().onEnterHotseat(mDragController.getCurTouchX(), (int)item.screenId, dragFromHotseat(d.dragInfo), mDragController.getCurTouchY());// lijun add for hotseat icon center
             } else {
                 mapPointFromSelfToChild(mDragTargetLayout, mDragViewVisualCenter);
-			   // cyl add for hotseat icon center start
+			   // lijun add for hotseat icon center start
 				boolean isDragFromHotseat = dragFromHotseat(d.dragInfo);
 				mLauncher.getHotseat().onExitHotseat(isDragFromHotseat); 
-			   // cyl add for hotseat icon center end
+			   // lijun add for hotseat icon center end
             }
 
             int minSpanX = item.spanX;
@@ -3820,14 +3820,14 @@ public class Workspace extends SpecialEffectPagedView
                     item.spanY, child, mTargetCell);
 
             if (!nearestDropOccupied) {
-			   if(!mLauncher.isHotseatLayout(mDragTargetLayout)){// cyl add for hotseat icon center
+			   if(!mLauncher.isHotseatLayout(mDragTargetLayout)){// lijun add for hotseat icon center
                 mDragTargetLayout.visualizeDropLocation(child, mOutlineProvider,
                         mTargetCell[0], mTargetCell[1], item.spanX, item.spanY, false, d);
 			   	}
             } else if ((mDragMode == DRAG_MODE_NONE || mDragMode == DRAG_MODE_REORDER)
                     && !mReorderAlarm.alarmPending() && (mLastReorderX != reorderX ||
                     mLastReorderY != reorderY)) {
-               if(!mLauncher.isHotseatLayout(mDragTargetLayout)){// cyl add for hotseat icon center 
+               if(!mLauncher.isHotseatLayout(mDragTargetLayout)){// lijun add for hotseat icon center
                 int[] resultSpan = new int[2];
                 mDragTargetLayout.performReorder((int) mDragViewVisualCenter[0],
                         (int) mDragViewVisualCenter[1], minSpanX, minSpanY, item.spanX, item.spanY,
@@ -3942,11 +3942,11 @@ public class Workspace extends SpecialEffectPagedView
         final View dragOverView = mDragTargetLayout.getChildAt(mTargetCell[0], mTargetCell[1]);
         ItemInfo info = dragObject.dragInfo;
         boolean userFolderPending = willCreateUserFolder(info, dragOverView, false);
-	    // cyl add for hotseat icon center start
+	    // lijun add for hotseat icon center start
 		if (mLauncher.isHotseatLayout(mDragTargetLayout) && mLauncher.getHotseat().notFull()){
 			userFolderPending = false;
 		}
-		// cyl add for hotseat icon center end
+		// lijun add for hotseat icon center end
         if (mDragMode == DRAG_MODE_NONE && userFolderPending &&
                 !mFolderCreationAlarm.alarmPending()) {
 
@@ -3968,11 +3968,11 @@ public class Workspace extends SpecialEffectPagedView
         }
 
         boolean willAddToFolder = willAddToExistingUserFolder(info, dragOverView);
-	    // cyl add for hotseat icon center start
+	    // lijun add for hotseat icon center start
 		if (mLauncher.isHotseatLayout(mDragTargetLayout) && mLauncher.getHotseat().notFull()){
 			willAddToFolder = false;
 		}
-		// cyl add for hotseat icon center end		
+		// lijun add for hotseat icon center end
         if (willAddToFolder && mDragMode == DRAG_MODE_NONE) {
             mDragOverFolderIcon = ((FolderIcon) dragOverView);
             mDragOverFolderIcon.onDragEnter(info);
@@ -4255,7 +4255,7 @@ public class Workspace extends SpecialEffectPagedView
             LauncherModel.addOrMoveItemInDatabase(mLauncher, info, container, screenId,
                     mTargetCell[0], mTargetCell[1]);
 			
-           // cyl add for hotseat icon center start
+           // lijun add for hotseat icon center start
             boolean hasAddtoHotseat = false;
             if(mLauncher.isHotseatLayout(cellLayout)) {
                 int index = mLauncher.getHotseat().getAppropriateIndex(mDragController.getCurTouchX());
@@ -4263,14 +4263,14 @@ public class Workspace extends SpecialEffectPagedView
 				view.setVisibility(INVISIBLE);
 				mLauncher.getHotseat().onDrop(true, d.x, d.dragView, view, true);				
 				hasAddtoHotseat = true;
-            } else {// cyl add for hotseat icon center end
+            } else {// lijun add for hotseat icon center end
             addInScreen(view, container, screenId, mTargetCell[0], mTargetCell[1], info.spanX,
                     info.spanY, insertAtFirst);
             cellLayout.onDropChild(view);
             cellLayout.getShortcutsAndWidgets().measureChild(view);
             }
 
-			// cyl add for hotseat icon center :hasAddtoHotseat
+			// lijun add for hotseat icon center :hasAddtoHotseat
             if (d.dragView != null && !hasAddtoHotseat) {
                 // We wrap the animation call in the temporary set and reset of the current
                 // cellLayout to its final transform -- this means we animate the drag view to
@@ -4650,13 +4650,13 @@ public class Workspace extends SpecialEffectPagedView
      */
     public void onDropCompleted(final View target, final DragObject d,
             final boolean isFlingToDelete, final boolean success) {
-        //UninstallMode add by liuzuo begin
+        //UninstallMode add by lijun begin
         /*if(mDragInfo!=null && mDragInfo.cell instanceof UninstallMode.UninstallAnimation){
-            Log.d("liuzuo556", "  onDropCompleted =" + (ItemInfo)mDragInfo.cell.getTag());
+            Log.d("lijun556", "  onDropCompleted =" + (ItemInfo)mDragInfo.cell.getTag());
             UninstallMode.UninstallAnimation uninstallAnimationView = (UninstallMode.UninstallAnimation) mDragInfo.cell;
             uninstallAnimationView.startShakeAnimation();
         }*/
-        //UninstallMode add by liuzuo end
+        //UninstallMode add by lijun end
         if (mDeferDropAfterUninstall) {
             mDeferredAction = new Runnable() {
                 public void run() {
@@ -4683,7 +4683,7 @@ public class Workspace extends SpecialEffectPagedView
                         + "Workspace#onDropCompleted. Please file a bug. ");
             };
 
-           // cyl add for hotseat icon center start
+           // lijun add for hotseat icon center start
             if(mLauncher.getHotseat().checkDragitem(mDragInfo.cell)) {
                     //back to hotseat
                     ItemInfo info = (ItemInfo)mDragInfo.cell.getTag();
@@ -4701,16 +4701,16 @@ public class Workspace extends SpecialEffectPagedView
             }else if(mLauncher.getHotseat().getHotseatDragState()){	
 			  mLauncher.getHotseat().onDrop(false, 0, d.dragView, mDragInfo.cell, true);
             }
-		  // cyl add for hotseat icon center end
+		  // lijun add for hotseat icon center end
 			
         }
 		
-		// cyl add for hotseat icon center :mDragInfo != null 
+		// lijun add for hotseat icon center :mDragInfo != null
         if ((d.cancelled || (beingCalledAfterUninstall && !mUninstallSuccessful))
                 && (mDragInfo != null && mDragInfo.cell != null)) {
             mDragInfo.cell.setVisibility(VISIBLE);
         }
-        //M:liuzuo add addIcon  begin
+        //M:lijun add addIcon  begin
         if(target instanceof Folder){
             Folder folder = (Folder) target;
             folder.showFolderAddView();
@@ -4725,7 +4725,7 @@ public class Workspace extends SpecialEffectPagedView
                 }
             }
         }
-        //M:liuzuo add addIcon  end
+        //M:lijun add addIcon  end
         mOutlineProvider = null;
         mDragInfo = null;
 
@@ -5105,14 +5105,14 @@ public class Workspace extends SpecialEffectPagedView
                 if (child instanceof DropTarget) {
                     mDragController.removeDropTarget((DropTarget) child);
                 }
-			   // cyl add for hotseat icon center start
+			   // lijun add for hotseat icon center start
 				if(mLauncher.isHotseatLayout(layoutParent))
 				{
 				  removeHoeseatItem = true;
 				}else {
                     refreshviewCache(getPageIndexForScreenId(getIdForScreen(layoutParent)),null,null,false);
                 }
-			   // cyl add for hotseat icon center end
+			   // lijun add for hotseat icon center end
             }
 
             if (childrenToRemove.size() > 0) {
@@ -5130,12 +5130,12 @@ public class Workspace extends SpecialEffectPagedView
             refreshLastTargetViewCache();
         }*/
         //lijun modify end
-	   // cyl add for hotseat icon center start
+	   // lijun add for hotseat icon center start
 		if(removeHoeseatItem)
 		{
 		  mLauncher.getHotseat().removeHotseatEmptyItem();
 		}
-	   // cyl add for hotseat icon center end
+	   // lijun add for hotseat icon center end
     }
 
     private void checkSchemeShortcut(HashMap<ItemInfo, View> children) {
@@ -5437,7 +5437,7 @@ public class Workspace extends SpecialEffectPagedView
             });
         }
     }
-//UninstallMod  add by liuzuo
+//UninstallMod  add by lijun
     public void enterUninstallMode(){
         mLauncher.isUninstallMode = true;		
         showOrHideUnstallMode(true);
@@ -5494,7 +5494,7 @@ public class Workspace extends SpecialEffectPagedView
             FolderPagedView pagedView = openFolder.getContent();
             CellLayout folderPagedView = pagedView.getCurrentCellLayout();
             for (int i = 0; i < pagedView.getChildCount(); i++) {
-                Log.d("liuzuo885", "openFolder.size()=" + pagedView.getChildCount());
+                Log.d("lijun885", "openFolder.size()=" + pagedView.getChildCount());
                 CellLayout cellLayout = (CellLayout) pagedView.getChildAt(i);
                 if (show) {
                     cellLayout.showUninstallApp();
@@ -5757,7 +5757,7 @@ public class Workspace extends SpecialEffectPagedView
     //liijun add for homebutton end
 
     /**
-     * liuzuo add for invisible workspace
+     * lijun add for invisible workspace
      */
     public void hideWorkspace(){
 /*        disableLayoutTransitions();
@@ -5772,7 +5772,7 @@ public class Workspace extends SpecialEffectPagedView
         Log.d(TAG,"workspace invisible");
     }
     /**
-     * liuzuo add for visible workspace
+     * lijun add for visible workspace
      */
     public void showWorkspace(){
 /*        disableLayoutTransitions();
@@ -5786,7 +5786,7 @@ public class Workspace extends SpecialEffectPagedView
         }
         Log.d(TAG,"workspace visible");
     }
-    //liuzuo add for addIcon begin
+    //lijun add for addIcon begin
     public Folder getFolderForTag(final Object tag) {
         return (Folder) getFirstMatch(new ItemOperator() {
 
@@ -5815,9 +5815,9 @@ public class Workspace extends SpecialEffectPagedView
         return mState != State.NORMAL
                 && mState != State.FOLDER_IMPORT && mState != State.OVERVIEW && mLauncher.mState!= Launcher.State.ICONARRANGE && !mLauncher.isUninstallMode;
     }
-    //liuzuo add for addIcon end
+    //lijun add for addIcon end
 
-    //liuzuo add for home Button areas;
+    //lijun add for home Button areas;
     private boolean isOutHomeButtonAreas(MotionEvent event, View view) {
         if ((mState == State.OVERVIEW || mState == OVERVIEW_HIDDEN) && view instanceof CellLayout) {
             Rect rect = new Rect();
@@ -6111,7 +6111,7 @@ public class Workspace extends SpecialEffectPagedView
         return false;
     }
 
-	// cyl add for hotseat icon center start
+	// lijun add for hotseat icon center start
     public boolean dragFromHotseat(Object dragInfo) {
         ItemInfo info = (ItemInfo)dragInfo;
         return info.container == LauncherSettings.Favorites.CONTAINER_HOTSEAT;
@@ -6183,12 +6183,12 @@ public class Workspace extends SpecialEffectPagedView
             // maybe we should be deleting these items from the LauncherModel?
             Log.e(TAG, "Failed to add to item at (" + lp.cellX + "," + lp.cellY + ") to CellLayout");
         }else {
-           /* //UnistallMode add by liuzuo begin
+           /* //UnistallMode add by lijun begin
                     if(mLauncher.isUninstallMode&&child instanceof UninstallMode ) {
                         UninstallMode uninstallMode = (UninstallMode) child;
                         uninstallMode.showUninstallApp();
                     }
-            //UnistallMode add by liuzuo  end*/
+            //UnistallMode add by lijun  end*/
         }
 
         if (!(child instanceof Folder)) {
@@ -6207,9 +6207,9 @@ public class Workspace extends SpecialEffectPagedView
         mDelayedResizeRunnable = runnable;
     }
   	
-   // cyl add for hotseat icon center end	
+   // lijun add for hotseat icon center end
 
-  // cyl add for cycle slide start
+  // lijun add for cycle slide start
    public void setCycleSlideFlag(){
      cycleSlideFlag  = mLauncher.getSharedPrefs().getBoolean(SpecialEffectPagedView.SPECIAL_EFFECT_CYCLE_SLIDE, true) && notHorizontal();        
    }
@@ -6220,9 +6220,9 @@ public class Workspace extends SpecialEffectPagedView
     }
 	return false;
   }  
- // cyl add for cycle slide end
+ // lijun add for cycle slide end
  
- // cyl add for special effect  start
+ // lijun add for special effect  start
     public boolean inScaleState() {
         return  mState==State.OVERVIEW
                 || mState== OVERVIEW_HIDDEN
@@ -6252,7 +6252,7 @@ public class Workspace extends SpecialEffectPagedView
         mLauncher.getHandler().removeCallbacks(mScrollEffectAnimator);
         mLauncher.getHandler().postDelayed(mScrollEffectAnimator, animationDelay);
     }	 
-  // cyl add for special effect  end
+  // lijun add for special effect  end
 
 
     /**
@@ -6358,7 +6358,7 @@ public class Workspace extends SpecialEffectPagedView
         }
     }
     /**
-     * liuzuo add for unread feature
+     * lijun add for unread feature
      * Update unread number of  folders in workspace and hotseat.
      */
     public void updateFoldersUnread() {
@@ -6387,7 +6387,7 @@ public class Workspace extends SpecialEffectPagedView
     }
 
     /**
-     * liuzuo add for unread feature
+     * lijun add for unread feature
      * Update unread number in all
      */
     public void refreashUnread() {
@@ -6442,7 +6442,7 @@ public class Workspace extends SpecialEffectPagedView
         }
         return bounds;
     } /**
-     * liuzuo add for dual shortcut
+     * lijun add for dual shortcut
      */
     public void removeDualShortcut(ItemInfo itemInfo) {
         HashSet<String> componentNames = new HashSet<>();
@@ -6509,14 +6509,14 @@ public class Workspace extends SpecialEffectPagedView
                 if (child instanceof DropTarget) {
                     mDragController.removeDropTarget((DropTarget) child);
                 }
-                // cyl add for hotseat icon center start
+                // lijun add for hotseat icon center start
                 if(mLauncher.isHotseatLayout(layoutParent))
                 {
                     removeHoeseatItem = true;
                 }else {
                     refreshviewCache(getPageIndexForScreenId(getIdForScreen(layoutParent)),null,null,false);
                 }
-                // cyl add for hotseat icon center end
+                // lijun add for hotseat icon center end
             }
 
             if (childrenToRemove.size() > 0) {
@@ -6534,11 +6534,11 @@ public class Workspace extends SpecialEffectPagedView
             refreshLastTargetViewCache();
         }*/
         //lijun modify end
-        // cyl add for hotseat icon center start
+        // lijun add for hotseat icon center start
         if(removeHoeseatItem)
         {
             mLauncher.getHotseat().removeHotseatEmptyItem();
         }
-        // cyl add for hotseat icon center end
+        // lijun add for hotseat icon center end
     }
 }

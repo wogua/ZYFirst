@@ -56,9 +56,9 @@ public class FolderInfo extends ItemInfo {
      * The apps and shortcuts
      */
 
-    //M:liuzuo add for addIcon begin
+    //M:lijun add for addIcon begin
     ArrayList<ShortcutInfo> checkInfos = new ArrayList<ShortcutInfo>();
-    //M:liuzuo add for addIcon end
+    //M:lijun add for addIcon end
 
     public ArrayList<ShortcutInfo> contents = new ArrayList<ShortcutInfo>();
 
@@ -135,11 +135,11 @@ public class FolderInfo extends ItemInfo {
         public void onRemove(ShortcutInfo item);
         public void onTitleChanged(CharSequence title);
         public void onItemsChanged(boolean animate);
-        //M:liuzuo add for addIcon begin
+        //M:lijun add for addIcon begin
         public void onAddIconInfo(ArrayList<ShortcutInfo> items);
         public void onRemoveIconInfo(ArrayList<ShortcutInfo> items);
         public void onClearIconInfo();
-        //M:liuzuo add for addIcon end
+        //M:lijun add for addIcon end
     }
 
     public boolean hasOption(int optionFlag) {
@@ -162,7 +162,7 @@ public class FolderInfo extends ItemInfo {
             LauncherModel.updateItemInDatabase(context, this);
         }
     }
-    //M:liuzuo add the addIcon begin
+    //M:lijun add the addIcon begin
     public void removeInfo() {
         if(checkInfos.size() <= 0) return;
         contents.removeAll(checkInfos);
@@ -192,5 +192,5 @@ public class FolderInfo extends ItemInfo {
     public void addCheckInfos(ShortcutInfo info){
         checkInfos.add(info);
     }
-    //M:liuzuo add addIcon end
+    //M:lijun add addIcon end
 }

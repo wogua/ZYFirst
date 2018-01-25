@@ -12,7 +12,7 @@ import android.net.Uri;
 import android.util.Log;
 
 /**
- * Created by antino on 16-11-9.
+ * Created by lijun on 16-11-9.
  */
 public class ResUtils {
     public static int  getDimen(Context context, String resPkg, String resName, int defaultValue){

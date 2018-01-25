@@ -132,7 +132,7 @@ public class FolderIcon extends FrameLayout implements FolderListener ,Uninstall
 
     private float mSlop;
     private boolean isShowingUnread;
-    //liuzuo: add foldericon mode
+    //lijun: add foldericon mode
     private static final String FOLDERICON_BG_PATH = "foldericon_bg";
     public enum FolderIconMode {SudokuFolderIconLayoutRule,StackFolderIconLayoutRule,ClippedFolderIconLayoutRule}
 
@@ -157,7 +157,7 @@ public class FolderIcon extends FrameLayout implements FolderListener ,Uninstall
     private void init() {
         mLongPressHelper = new CheckLongPressHelper(this);
         mStylusEventHelper = new StylusEventHelper(new SimpleOnStylusPressListener(this), this);
-        //liuzuo : add foldericonMode begin
+        //lijun : add foldericonMode begin
         switch (mFolderIconMode){
             case ClippedFolderIconLayoutRule:
                 mPreviewLayoutRule = new ClippedFolderIconLayoutRule();
@@ -173,7 +173,7 @@ public class FolderIcon extends FrameLayout implements FolderListener ,Uninstall
                 new StackFolderIconLayoutRule() :
                 new ClippedFolderIconLayoutRule();*//*
                 new SudokuFolderIconLayoutRule();*/
-        //liuzuo : add foldericonMode end
+        //lijun : add foldericonMode end
     }
 
     public static FolderIcon fromXml(int resId, Launcher launcher, ViewGroup group,
@@ -197,7 +197,7 @@ public class FolderIcon extends FrameLayout implements FolderListener ,Uninstall
         icon.setClipToPadding(false);
         icon.mFolderName = (BubbleTextView) icon.findViewById(R.id.folder_icon_name);
         icon.mFolderName.setTextColor(ColorManager.getInstance().getColors()[0]);//lijun add for color change
-        //liuzuo add for change folderName begin
+        //lijun add for change folderName begin
         String folderName = null;
         int stringId = 0;
         if("".equals(folderInfo.title)) {
@@ -208,7 +208,7 @@ public class FolderIcon extends FrameLayout implements FolderListener ,Uninstall
                 folderName = (String) folderInfo.title;
             }
         }
-        //liuzuo add for change folderName end
+        //lijun add for change folderName end
         icon.mFolderName.setText(folderName);
         icon.mFolderName.setCompoundDrawablePadding(0);
         FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) icon.mFolderName.getLayoutParams();
@@ -222,7 +222,7 @@ public class FolderIcon extends FrameLayout implements FolderListener ,Uninstall
         Folder folder = Folder.fromXml(launcher);
         folder.setDragController(launcher.getDragController());
         folder.setFolderIcon(icon);
-        folderInfo. unbind();//liuzuo add
+        folderInfo. unbind();//lijun add
         folder.bind(folderInfo);
         icon.setFolder(folder);
 
@@ -321,11 +321,11 @@ public class FolderIcon extends FrameLayout implements FolderListener ,Uninstall
 
         // This will animate the dragView (srcView) into the new folder
         onDrop(srcInfo, srcView, dstRect, scaleRelativeToDragLayer, 1, postAnimationRunnable);
-//UninstallMode add by liuzuo befin
+//UninstallMode add by lijun befin
         if(mLauncher.isUninstallMode){
             this.startShakeAnimation();
         }
-//UninstallMode add by liuzuo end
+//UninstallMode add by lijun end
     }
 
     public void performDestroyAnimation(final View finalView, Runnable onCompleteRunnable) {
@@ -439,7 +439,7 @@ public class FolderIcon extends FrameLayout implements FolderListener ,Uninstall
     private void computePreviewDrawingParams(Drawable d) {
         computePreviewDrawingParams(d.getIntrinsicWidth(), getMeasuredWidth());
     }
-    //UninstallMode add by liuzuo begin
+    //UninstallMode add by lijun begin
     @Override
     public void showUninstallApp() {
         startShakeAnimation();
@@ -458,7 +458,7 @@ public class FolderIcon extends FrameLayout implements FolderListener ,Uninstall
     public void stopShakeAnimation(){
         this.clearAnimation();
     }
-    //UninstallMode add by liuzuo end
+    //UninstallMode add by lijun end
     static class PreviewItemDrawingParams {
         PreviewItemDrawingParams(float transX, float transY, float scale, float overlayAlpha) {
             this.transX = transX;
@@ -586,7 +586,7 @@ public class FolderIcon extends FrameLayout implements FolderListener ,Uninstall
         private static final int SHADOW_OPACITY = 80;
 
         ValueAnimator mScaleAnimator;
-        //liuzuo change bg of folderIcon
+        //lijun change bg of folderIcon
         private Drawable mFolderIconbg;
         private int folderBgSize;
 
@@ -603,7 +603,7 @@ public class FolderIcon extends FrameLayout implements FolderListener ,Uninstall
             if(mFolderIconbg==null){
                 mFolderIconbg = resources.getDrawable(R.drawable.foldericon_bg);
             }
-            this.previewSize = folderBgSize;/*previewSize - 2 * previewPadding*///liuzuo change
+            this.previewSize = folderBgSize;/*previewSize - 2 * previewPadding*///lijun change
 
             basePreviewOffsetX = (availableSpace - this.previewSize) / 2;
             basePreviewOffsetY = previewPadding + grid.folderBackgroundOffset + topPadding;
@@ -658,7 +658,7 @@ public class FolderIcon extends FrameLayout implements FolderListener ,Uninstall
             paint.setStyle(Paint.Style.FILL);
             paint.setXfermode(null);
             paint.setAntiAlias(true);
-            //liuzuo add for bg  begin
+            //lijun add for bg  begin
             Rect rect = getRect(folderIcon);
             folderIcon.setBounds(rect);
             int alpha = (int) Math.min(MAX_BG_OPACITY, BG_OPACITY * mColorMultiplier);
@@ -674,7 +674,7 @@ public class FolderIcon extends FrameLayout implements FolderListener ,Uninstall
             paint.setShadowLayer(mStrokeWidth, 0, mStrokeWidth, Color.argb(SHADOW_OPACITY, 0, 0, 0));
             //canvas.drawCircle(radius, radius, radius, paint);
             folderIcon.draw(canvas);
-            //liuzuo add for bg  end
+            //lijun add for bg  end
             canvas.restore();
         }
 
@@ -877,7 +877,7 @@ public class FolderIcon extends FrameLayout implements FolderListener ,Uninstall
 
         //lijun add for unread start
 //        if(!hadDrawImport) {
-        if(mLauncher.isShowUnread()) {//liuzuo add
+        if(mLauncher.isShowUnread()) {//lijun add
                 boolean showingUnread = isShowingUnread;
                 BadgeController.drawUnreadEventIfNeed(canvas, this, isShowingUnread);
             }
@@ -1043,7 +1043,7 @@ public class FolderIcon extends FrameLayout implements FolderListener ,Uninstall
         requestLayout();
     }
 
-    //M:liuzuo add for addIcon begin
+    //M:lijun add for addIcon begin
     @Override
     public void onAddIconInfo(ArrayList<ShortcutInfo> items) {
         invalidate();
@@ -1063,7 +1063,7 @@ public class FolderIcon extends FrameLayout implements FolderListener ,Uninstall
         invalidate();
     }
 
-    //M:liuzuo add for addIcon end
+    //M:lijun add for addIcon end
 
     public void onAdd(ShortcutInfo item) {
         updateFolderUnreadNum();//lijun add for unread
@@ -1265,7 +1265,7 @@ public class FolderIcon extends FrameLayout implements FolderListener ,Uninstall
         }
         setFolderUnreadNum(unreadNumTotal);
     }
-    //liuzuo add for badge;
+    //lijun add for badge;
     public boolean isShowingUnread() {
         return isShowingUnread;
     }

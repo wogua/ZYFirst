@@ -39,7 +39,7 @@ import android.widget.EditText;
 public class ExtendedEditText extends EditText {
 
     private boolean mShowImeAfterFirstLayout;
-    //liuzuo add
+    //lijun add
     private Drawable mRightDrawable;
     private boolean isHasFocus;
     private boolean mCleanVisible;
@@ -117,7 +117,7 @@ public class ExtendedEditText extends EditText {
                     .showSoftInput(this, InputMethodManager.SHOW_IMPLICIT);
     }
 
-    //liuzuo add for the UI of editText;
+    //lijun add for the UI of editText;
     private void init(){
 
         Drawable[] drawables=this.getCompoundDrawables();

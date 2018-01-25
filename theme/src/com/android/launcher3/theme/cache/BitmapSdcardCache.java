@@ -20,7 +20,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * Created by antino on 16-11-8.
+ * Created by lijun on 16-11-8.
  */
 @TargetApi(Build.VERSION_CODES.KITKAT)
 public class BitmapSdcardCache {

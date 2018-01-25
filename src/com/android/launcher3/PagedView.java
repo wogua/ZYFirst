@@ -110,7 +110,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
     protected LauncherScroller mScroller;
     private Interpolator mDefaultInterpolator;
     private VelocityTracker mVelocityTracker;
-   public @Thunk int mPageSpacing = 0; // cyl add public for special effect
+   public @Thunk int mPageSpacing = 0; // lijun add public for special effect
 
     private float mParentDownMotionX;
     private float mParentDownMotionY;
@@ -211,15 +211,15 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
     protected int mUnboundedScrollX;
     //lijun add end
 
-    private int mMotionPointerCount = 0; // cyl add for cycle slide
+    private int mMotionPointerCount = 0; // lijun add for cycle slide
 
-	// cyl add for special effect start
+	// lijun add for special effect start
 	public boolean reordering = false;
 	protected float mTouchX;
 	protected float mSlideTime;
 	protected static final float NANOTIME_DIV = 1000000000.0f;
 	protected int screenDifference = 50; // getViewportWidth() - child.getWidth()
-	// cyl add for special effect end	
+	// lijun add for special effect end
     public PagedView(Context context) {
         this(context, null);
     }
@@ -440,14 +440,14 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
         }
         mForceScreenScrolled = true;
         mCurrentPage = validateNewPage(currentPage);
-       // cyl add start for bug: after uninstall app page not show
+       // lijun add start for bug: after uninstall app page not show
         View child =  getChildAt(mCurrentPage);
         if (child != null && child instanceof CellLayout) {
 		  if(((CellLayout)child).getShortcutsAndWidgets().getAlpha() < 1.0f){
 		    ((CellLayout)child).getShortcutsAndWidgets().setAlpha(1.0f);
 		  }
         }
-	  // cyl add end			
+	  // lijun add end
         updateCurrentPageScroll();
         notifyPageSwitchListener();
         invalidate();
@@ -493,7 +493,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
             mIsPageMoving = false;
             onPageEndMoving();
         }
-		reordering = false; // cyl add for special effect 
+		reordering = false; // lijun add for special effect
     }
 
     public boolean isPageMoving() {
@@ -531,7 +531,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
     @Override
     public void scrollBy(int x, int y) {
         //lijun add for overscroll
-          // cyl add for special effect 
+          // lijun add for special effect
         if ((FeatureFlags.CYCLE_SLIDE && inScaleState())
 			&& FeatureFlags.OVERSCROLL_SPRINGBACK) {
             int overScrollX = 0;
@@ -587,7 +587,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
             x = Math.max(x, mFreeScrollMinScrollX);
         }
 		
-       // cyl add for cycle slide start
+       // lijun add for cycle slide start
         mUnboundedScrollX = x;
 		if (isNormalState()) {
           boolean isXBeforeFirstPage = mIsRtl ? (x > mMaxScrollX) : (x < 0);
@@ -601,7 +601,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
   		  }
 			super.scrollTo(x, y);
 		} else {
-	   // cyl add for cycle slide end
+	   // lijun add for cycle slide end
         boolean isXBeforeFirstPage = mIsRtl ? (x > mMaxScrollX) : (x < 0);
         boolean isXAfterLastPage = mIsRtl ? (x < 0) : (x > mMaxScrollX);
         if (isXBeforeFirstPage && !FeatureFlags.OVERSCROLL_SPRINGBACK) {//lijun add && !FeatureFlags.OVERSCROLL_SPRINGBACK
@@ -640,10 +640,10 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
             mLastMotionY = p[1];
             updateDragViewTranslationDuringDrag();
         }
-		// cyl add for special effect start
+		// lijun add for special effect start
 		mTouchX = x;
 		mSlideTime = System.nanoTime() / NANOTIME_DIV;
-		 // cyl add for special effect end
+		 // lijun add for special effect end
     }
 
     private void sendScrollAccessibilityEvent() {
@@ -1129,7 +1129,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
 
             range[1] = curScreen;
 
-            // cyl add for cycle slide start
+            // lijun add for cycle slide start
 		 if (isNormalState() && count > 1) {
 		 	int leftScreen = range[0];
 			int rightScreen = range[1];
@@ -1143,7 +1143,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
                     range[1] = 0;
                 } 			
 		 }
-	    // cyl add for cycle slide end
+	    // lijun add for cycle slide end
 	    
         } else {
             range[0] = -1;
@@ -1160,11 +1160,11 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
         return child.getVisibility() == VISIBLE;
     }
 
-	// cyl add for cycle slide start
+	// lijun add for cycle slide start
     protected void drawScreen(Canvas canvas, int i, long drawingTime) {
         drawChild(canvas, getPageAt(i), drawingTime);
     }
-   // cyl add for cycle slide end	
+   // lijun add for cycle slide end
 
     @Override
     protected void dispatchDraw(Canvas canvas) {
@@ -1191,7 +1191,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
                 canvas.save();
                 canvas.clipRect(getScrollX(), getScrollY(), getScrollX() + getRight() - getLeft(),
                         getScrollY() + getBottom() - getTop());
-                // cyl add for cycle slide start
+                // lijun add for cycle slide start
                 if (isNormalState() && getChildCount() > 1) {					
                     int offset = pageCount * getViewportWidth() - screenDifference;				
                     if (rightScreen < leftScreen) {
@@ -1217,24 +1217,24 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
 							final View v = getPageAt(i);
 							if (v == mDragView && reordering) continue;
 							if (leftScreen <= i && i <= rightScreen && shouldDrawChild(v)) {
-								// cyl modify for special effect  start
+								// lijun modify for special effect  start
 								 drawScreen(canvas,i,drawingTime);
 								 //drawChild(canvas, v, drawingTime);
-								// cyl modify for special effect  end
+								// lijun modify for special effect  end
 							}
 						}
 
                     }
                 } else {
-                // cyl add for cycle slide end
+                // lijun add for cycle slide end
                  for (int i = pageCount - 1; i >= 0; i--) {
 						final View v = getPageAt(i);
 						if (v == mDragView && reordering) continue;
 						if (leftScreen <= i && i <= rightScreen && shouldDrawChild(v)) {
-							// cyl modify for special effect  start
+							// lijun modify for special effect  start
 							   drawScreen(canvas,i,drawingTime);
 							  //drawChild(canvas, v, drawingTime);
-							// cyl modify for special effect  end
+							// lijun modify for special effect  end
 						}
 					}
 
@@ -1242,7 +1242,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
 
 
                 // Draw the drag view on top (if there is one)
-                // cyl add for special effect: reordering  
+                // lijun add for special effect: reordering
                 if (mDragView != null && reordering) {
                     drawChild(canvas, mDragView, drawingTime);
                 }
@@ -1569,10 +1569,10 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
             mLastMotionX = x;
             mLastMotionXRemainder = 0;
             onScrollInteractionBegin();
-			// cyl add for special effect start
+			// lijun add for special effect start
 			mTouchX = getScrollX();
 			mSlideTime = System.nanoTime() / NANOTIME_DIV; 
-			// cyl add for special effect end
+			// lijun add for special effect end
             pageBeginMoving();
             // Stop listening for things like pinches.
             requestDisallowInterceptTouchEvent(true);
@@ -1812,7 +1812,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
 
                 if (pointerIndex == -1) return true;
 				
-                // cyl add for cycle slide start
+                // lijun add for cycle slide start
                 if(mMotionPointerCount <= 0){
 				   mMotionPointerCount = ev.getPointerCount();
                 }
@@ -1825,7 +1825,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
                    resetTouchState();
                    return true;					
                 }
-				// cyl add for cycle slide end
+				// lijun add for cycle slide end
 				
                 final float x = ev.getX(pointerIndex);
                 final float deltaX = mLastMotionX + mLastMotionXRemainder - x;
@@ -1836,10 +1836,10 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
                 // keep the remainder because we are actually testing if we've moved from the last
                 // scrolled position (which is discrete).
                 if (Math.abs(deltaX) >= 1.0f) {
-					// cyl add for special effect start
+					// lijun add for special effect start
 					mTouchX += deltaX;
 					mSlideTime = System.nanoTime() / NANOTIME_DIV; 
-					// cyl add for special effect end
+					// lijun add for special effect end
                     scrollBy((int) deltaX, 0);
                     mLastMotionX = x;
                     mLastMotionXRemainder = deltaX - (int) deltaX;
@@ -1847,7 +1847,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
                     awakenScrollBars();
                 }
             } else if (mTouchState == TOUCH_STATE_REORDERING) {
-                reordering = true; // cyl add for special effect 
+                reordering = true; // lijun add for special effect
 				// Update the last motion position
                 mLastMotionX = ev.getX();
                 mLastMotionY = ev.getY();
@@ -1873,7 +1873,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
                 final int pageUnderPointIndex = getDragOverPageIndex();
                 //lijun modify end
                 // Do not allow any page to be moved to 0th position.
-                //TODO:xiejun for reorder screens
+                //TODO:lijun for reorder screens
                 if (/*pageUnderPointIndex > 0 &&*/ pageUnderPointIndex != indexOfChild(mDragView)) {
                     mTempVisiblePagesRange[0] = 0;
                     mTempVisiblePagesRange[1] = getPageCount() - 1;
@@ -1972,25 +1972,25 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
                     // move to the left and fling to the right will register as a fling to the right.
                     boolean isDeltaXLeft = mIsRtl ? deltaX > 0 : deltaX < 0;
                     boolean isVelocityXLeft = mIsRtl ? velocityX > 0 : velocityX < 0;
-					// cyl modify for cycle slide :isNormalState()
+					// lijun modify for cycle slide :isNormalState()
                     if (((isSignificantMove && !isDeltaXLeft && !isFling) ||
                             (isFling && !isVelocityXLeft)) && (isNormalState()? (mCurrentPage >= 0) : (mCurrentPage > 0))) {
                         finalPage = returnToOriginalPage ? mCurrentPage : mCurrentPage - 1;
-						// cyl add for cycle slide start
+						// lijun add for cycle slide start
 						 if(isNormalState() && finalPage==-1){
                             finalPage=getChildCount() - 1;
                          }
-						// cyl add for cycle slide end
+						// lijun add for cycle slide end
                         snapToPageWithVelocity(finalPage, velocityX);
                     } else if (((isSignificantMove && isDeltaXLeft && !isFling) ||
                             (isFling && isVelocityXLeft)) &&
                              (isNormalState() ? (mCurrentPage < getChildCount()) : (mCurrentPage < getChildCount() - 1))) {
                         finalPage = returnToOriginalPage ? mCurrentPage : mCurrentPage + 1;
-				        // cyl add for cycle slide start		
+				        // lijun add for cycle slide start
 						if(isNormalState() && finalPage >= getChildCount()){
                             finalPage= 0;
                          }
-					    // cyl add for cycle slide end
+					    // lijun add for cycle slide end
                         snapToPageWithVelocity(finalPage, velocityX);
                     } else {
                         snapToDestination();
@@ -2086,7 +2086,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
         mActivePointerId = INVALID_POINTER;
         mEdgeGlowLeft.onRelease();
         mEdgeGlowRight.onRelease();
-		mMotionPointerCount = 0; // cyl add for cycle slide
+		mMotionPointerCount = 0; // lijun add for cycle slide
     }
 
     /**
@@ -2176,7 +2176,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
         }
     }
 
-    // cyl add public for special effect
+    // lijun add public for special effect
     public int getPageNearestToCenterOfScreen() {
         return getPageNearestToCenterOfScreen(getScrollX());
     }
@@ -2339,7 +2339,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
         }
         //lijun add end
 
-       // cyl add for cycle slide start
+       // lijun add for cycle slide start
         if ((isNormalState() && getChildCount() > 1) 
 			&& ((mCurrentPage == 0 && whichPage == getChildCount() - 1) || (mCurrentPage == getChildCount() - 1 && whichPage == 0)) 
 			&& Math.abs(delta) > 1080)  {
@@ -2353,7 +2353,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
             }
 		   mScroller.startScroll(mUnboundedScrollX, 0, delta, 0, duration);	
         }else{
-        // cyl add for cycle slide end
+        // lijun add for cycle slide end
            mScroller.startScroll(getUnboundedScrollX(), 0, delta, 0, duration);
 		}
 
@@ -2371,21 +2371,21 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
     public void scrollLeft() {
         if (getNextPage() > 0){
 			snapToPage(getNextPage() - 1);
-		// cyl add for cycle slide start	
+		// lijun add for cycle slide start
         }else if (isNormalState() && getNextPage() == 0) {
             snapToPage(getChildCount() - 1);
         }
-	   // cyl add for cycle slide end
+	   // lijun add for cycle slide end
     }
 
     public void scrollRight() {
         if (getNextPage() < getChildCount() -1){
 			snapToPage(getNextPage() + 1);
-		// cyl add for cycle slide start	
+		// lijun add for cycle slide start
         } else if (isNormalState() && getNextPage() < getChildCount() - 1) {
             snapToPage(0);
         }
-		// cyl add for cycle slide end
+		// lijun add for cycle slide end
     }
 
     @Override
@@ -2494,7 +2494,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
         //lijun add for aline button end
 
         // Do not allow the first page to be moved around
-        //TODO:xiejun for reorder screenss
+        //TODO:lijun for reorder screenss
         if (mTouchState != TOUCH_STATE_REST || dragViewIndex < 0) return false;
 
         mTempVisiblePagesRange[0] = 0;
@@ -2633,7 +2633,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
         return true;
     }
 
-    protected boolean isNormalState(){return false;} // cyl add for cycle slide
+    protected boolean isNormalState(){return false;} // lijun add for cycle slide
 
     //lijun add for themechanged bug
     public void clearDragView(){
@@ -2643,7 +2643,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
         }
     }
 
- // cyl add for special effect start
+ // lijun add for special effect start
    public boolean inScaleState() {return false;} 
- // cyl add for special effect end
+ // lijun add for special effect end
 }

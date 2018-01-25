@@ -120,7 +120,7 @@
             android:layout_height="match_parent"
             android:visibility="invisible"
             launcher:layout_ignoreInsets="true" />
-        <!--liuzuo add the background of workspace when opening folder begin  -->
+        <!--lijun add the background of workspace when opening folder begin  -->
         <ImageView android:id="@+id/img_workspace_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -128,8 +128,8 @@
             launcher:layout_ignoreInsets="true"
             android:scaleType="fitXY"
             android:visibility="gone" />
-        <!--liuzuo end -->
-        <!--liuzuo add  for addIcon begin  -->
+        <!--lijun end -->
+        <!--lijun add  for addIcon begin  -->
         <LinearLayout
             android:id="@+id/folder_importmode_button_container"
             android:layout_width="fill_parent"
@@ -151,7 +151,7 @@
                 style="?android:attr/borderlessButtonStyle"
                 />
         </LinearLayout>
-        <!--liuzuo :add  for addIcon  end -->
+        <!--lijun :add  for addIcon  end -->
 
         <!-- lijun add for wallpaper -->
         <com.android.launcher3.wallpaperpicker.WallpaperPagedViewContainer
@@ -193,7 +193,7 @@
             </com.android.launcher3.ArrangeNavLinearLayout>
         </com.android.launcher3.ArrangeNavigationBar>
         
-   <!-- cyl add for special effect start -->
+   <!-- lijun add for special effect start -->
 	    <include
           android:id="@+id/specialeffect_container"
           android:layout_width="match_parent"
@@ -201,7 +201,7 @@
           android:layout_gravity="center_horizontal|bottom"
           layout="@layout/specialeffect_layout"
           android:visibility="gone" />
-   <!--  cyl add for special effect  end -->
+   <!--  lijun add for special effect  end -->
    
     </com.android.launcher3.dragndrop.DragLayer>
 

@@ -138,10 +138,10 @@ public class DragController implements DragDriver.EventListener, TouchController
     /**
      * Interface to receive notifications when a drag starts or stops
      */
-   // cyl add for hotseat icon center start 
+   // lijun add for hotseat icon center start
     private int curTouchX;
 	private int curTouchY;
-   // cyl add for hotseat icon center end
+   // lijun add for hotseat icon center end
    
     public interface DragListener {
         /**
@@ -383,7 +383,7 @@ public class DragController implements DragDriver.EventListener, TouchController
     /**
      * This only gets called as a result of drag view cleanup being deferred in endDrag();
      */
-    public void onDeferredEndDrag(DragView dragView) {  // cyl add public for hotseat icon center
+    public void onDeferredEndDrag(DragView dragView) {  // lijun add public for hotseat icon center
         dragView.remove();
 
         if (mDragObject!=null&&mDragObject.deferDragViewCleanupPostAnimation) {
@@ -536,10 +536,10 @@ public class DragController implements DragDriver.EventListener, TouchController
         DropTarget dropTarget = findDropTarget(x, y, coordinates);
         mDragObject.x = coordinates[0];
         mDragObject.y = coordinates[1];
-	    // cyl add for hotseat icon center start 
+	    // lijun add for hotseat icon center start
 		curTouchX = x;
 		curTouchY = y;
-		// cyl add for hotseat icon center end 
+		// lijun add for hotseat icon center end
         checkTouchMove(dropTarget);
 
         // Check if we are hovering over the scroll areas
@@ -894,7 +894,7 @@ public class DragController implements DragDriver.EventListener, TouchController
         return false;
     }
 
-// cyl add for hotseat icon center start 
+// lijun add for hotseat icon center start
    public int getCurTouchX()
    {
       return curTouchX;
@@ -905,6 +905,6 @@ public class DragController implements DragDriver.EventListener, TouchController
       return curTouchY;
    }
 
-// cyl add for hotseat icon center start 
+// lijun add for hotseat icon center start
 
 }

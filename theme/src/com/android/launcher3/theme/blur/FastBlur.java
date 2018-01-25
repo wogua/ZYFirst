@@ -8,7 +8,7 @@ import com.android.launcher3.theme.utils.PhotoUtils;
 
 
 /**
- * Created by antino on 16-8-17.
+ * Created by lijun on 16-8-17.
  */
 public class FastBlur implements IBlur {
     @Override

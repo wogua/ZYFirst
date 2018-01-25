@@ -794,11 +794,11 @@ public class DragLayer extends InsettableFrameLayout {
                 if (onFinishAnimationRunnable != null) {
                     onFinishAnimationRunnable.run();
                 }
-                //liuzuo add for uninstallMode begin
+                //lijun add for uninstallMode begin
                 if(mLauncher.isUninstallMode&&child!=null && child instanceof UninstallMode) {
                     UninstallMode uninstallAnimationView = (UninstallMode) child;
                     uninstallAnimationView.showUninstallApp();
-                    //liuzuo add for uninstallMode end
+                    //lijun add for uninstallMode end
                 }
             }
         };
@@ -963,7 +963,7 @@ public class DragLayer extends InsettableFrameLayout {
         mDropView = null;
         invalidate();
     }
-//liuzuo add for clearing drop animated bgein
+//lijun add for clearing drop animated bgein
     public void clearAnimatedView(DragView dragView) {
         if (mDropAnim != null) {
             mDropAnim.cancel();
@@ -974,7 +974,7 @@ public class DragLayer extends InsettableFrameLayout {
         mDropView = null;
         invalidate();
     }
-//liuzuo add for clearing drop animated end
+//lijun add for clearing drop animated end
     public View getAnimatedView() {
         return mDropView;
     }
@@ -1266,7 +1266,7 @@ public class DragLayer extends InsettableFrameLayout {
         animateView2(view, from, to, finalAlpha, initScaleX, initScaleY, finalScaleX, finalScaleY, duration,
                 null, null, onCompleteRunnable, animationEndStyle, anchorView);
     }
-//liuzuo add animate of drop icon in arrange mode begin
+//lijun add animate of drop icon in arrange mode begin
     public void animateViewIntoPosition3(DragView dragView, final View child,
                                          final Runnable onFinishAnimationRunnable, View anchorView) {
         animateViewIntoPosition3(dragView, child, -1, onFinishAnimationRunnable, anchorView);
@@ -1353,7 +1353,7 @@ public class DragLayer extends InsettableFrameLayout {
         animateViewIntoPosition2(dragView, fromX, fromY, toX, toY, 1, 1, 1, toScale, toScale,
                 onCompleteRunnable, ANIMATION_END_DISAPPEAR, duration, anchorView);
     }
-//liuzuo add animate of drop icon in arrange mode end
+//lijun add animate of drop icon in arrange mode end
     /**
      * This method animates a view at the end of a drag and drop animation.
      *
@@ -1493,7 +1493,7 @@ public class DragLayer extends InsettableFrameLayout {
     class CustomAnimation extends ValueAnimator{
         public DragView dragView;
     }
-    //liuzuo add
+    //lijun add
     public TouchController getActiveController() {
         return mActiveController;
     }

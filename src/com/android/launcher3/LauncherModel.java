@@ -417,7 +417,7 @@ public class LauncherModel extends BroadcastReceiver
                 occupied.markCells(r, true);
             }
         }
-        //modify by xiejun For icon Install
+        //modify by lijun For icon Install
         boolean finalOccupiedFlag = false;
         for(int y = profile.numRows -1; y >= 0; y--){
             for(int x = profile.numColumns-1; x >= 0; x--){
@@ -4012,21 +4012,21 @@ public class LauncherModel extends BroadcastReceiver
     /**parameter
      * Make an ShortcutInfo object for a shortcut that isn't an application.
      */
-    public void loadInfoFromCursor(ShortcutInfo info, Cursor c, CursorIconInfo iconInfo,Intent intent) {//liuzuo add the parameter of Intent
+    public void loadInfoFromCursor(ShortcutInfo info, Cursor c, CursorIconInfo iconInfo,Intent intent) {//lijun add the parameter of Intent
         info.title = iconInfo.getTitle(c);
         Bitmap icon = iconInfo.loadIcon(c, info);
        /* if(icon!=null){
             icon=normalizeIcon(icon);
         }*/
         // the fallback icon
-         //liuzuo add for dual icon begin
+         //lijun add for dual icon begin
         if (intent.getAction() == "com.lbe.parallel.ACTION_LAUNCH_PACKAGE") {
             UserHandle user = info.user.getUser();
             String dualComponent = null;
             dualComponent = intent.getStringExtra("EXTRA_LAUNCH_PACKAGE");
             icon = mIconCache.getIconProvider().getIconFromPackageName(dualComponent, user);
         }
-        //liuzuo add for dual icon end
+        //lijun add for dual icon end
         if (icon == null) {
             icon = mIconCache.getDefaultIcon(info.user);
             info.usingFallbackIcon = true;
@@ -4073,11 +4073,11 @@ public class LauncherModel extends BroadcastReceiver
         // Only support intents for current user for now. Intents sent from other
         // users wouldn't get here without intent forwarding anyway.
         info.user = UserHandleCompat.myUserHandle();
-      /*  liuzuo add for normalization icon begin
+      /*  lijun add for normalization icon begin
         if(icon!=null) {
             icon=normalizeIcon(icon);
         }
-        liuzuo add for normalization icon end*/
+        lijun add for normalization icon end*/
         if (icon == null) {
             icon = mIconCache.getDefaultIcon(info.user);
             info.usingFallbackIcon = true;
@@ -4191,7 +4191,7 @@ public class LauncherModel extends BroadcastReceiver
     public boolean isAllAppsLoaded() {
         return mAllAppsLoaded;
     }
-    //liuzuo add for normalization icon begin
+    //lijun add for normalization icon begin
     private Bitmap normalizeIcon(Bitmap icon) {
         if (icon != null) {
             BitmapDrawable drawable = new BitmapDrawable(mIconCache.normalizeIcons(icon));
@@ -4202,7 +4202,7 @@ public class LauncherModel extends BroadcastReceiver
         return null;
     }
 
-    //liuzuo add for normalization icon end
+    //lijun add for normalization icon end
 
     //lijun add start for unread
     public ArrayList<String> getCustomShortcutIds(Context context, String pkg) {

@@ -72,7 +72,7 @@
         <item>com.moji.daling</item>
     </string-array>
 
-<!-- cyl add for special effect  start -->
+<!-- lijun add for special effect  start -->
     <string-array name="entries_effect_preference">
         <item>Classic</item>
         <item>Cube</item>
@@ -124,5 +124,5 @@
         <item>@drawable/ic_effects_flip_up</item>
         <item>@drawable/ic_effects_flip_down</item>
     </array>
-<!-- cyl add for special effect  end -->
+<!-- lijun add for special effect  end -->
 </resources>

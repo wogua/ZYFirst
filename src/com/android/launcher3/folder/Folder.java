@@ -163,26 +163,26 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
     private View mFooter;
     private int mFooterHeight;
 
-    //liuzuo: change the UI of folder begin
+    //lijun: change the UI of folder begin
     //FrameLayout mContentWrapper;
     private int mIndicatorHeight;
     private FrameLayout mContainer;
     private int mFooterPaddingBottom;
     private final String FOLDER_BG_PATH = "folder_bg.9";
-    //liuzuo: change the UI of folder end
+    //lijun: change the UI of folder end
 
-    //liuzuo add addIcon begin
+    //lijun add addIcon begin
     boolean isImportMode =false;
     public boolean mSnapToLastpage;
     ArrayList<BubbleTextView> mCheckedViews = new ArrayList<BubbleTextView>();
     private final int mIconAniamtioninterval;
-    //liuzuo add addIcon end
+    //lijun add addIcon end
     // Cell ranks used for drag and drop
 
-    //liuzuo add for history of opened begin
+    //lijun add for history of opened begin
     private SharedPreferences mSharedPreferences;
     private boolean mIsClearFolderNameFocus;
-    //liuzuo add for history of opened end
+    //lijun add for history of opened end
     @Thunk int mTargetRank, mPrevTargetRank, mEmptyCellRank;
 
     @ViewDebug.ExportedProperty(category = "launcher",
@@ -264,10 +264,10 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
             }
         });
         mFolderName.setOnFocusChangeListener(this);
-        //liuzuo add for addIcon begin
+        //lijun add for addIcon begin
         mContent.setFolderClickListener(this);
-        mFolderName.setClearDrawableVisible(false);//liuzuo add for editTitle
-        //liuzuo add for addIcon end
+        mFolderName.setClearDrawableVisible(false);//lijun add for editTitle
+        //lijun add for addIcon end
         mContainer.setBackground(LauncherAppState.getInstance().getIconCache().getIconProvider().getIconFromManager(mLauncher,FOLDER_BG_PATH,R.drawable.folder_bg));
         mContainer.setPadding(getPaddingLeft(),getPaddingTop(),getPaddingRight(),getResources().getDimensionPixelSize(R.dimen.folder_content_container_padding_bottom));
         if (!Utilities.ATLEAST_MARSHMALLOW) {
@@ -296,7 +296,7 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
                 InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
 
         mFooter = findViewById(R.id.folder_footer);
-        mSharedPreferences = Utilities.getPrefs(getContext());//liuzuo add for editGuide
+        mSharedPreferences = Utilities.getPrefs(getContext());//lijun add for editGuide
         // We find out how tall footer wants to be (it is set to wrap_content), so that
         // we can allocate the appropriate amount of space for it.
         int measureSpec = MeasureSpec.UNSPECIFIED;
@@ -309,7 +309,7 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
     }
 
     public void onClick(View v) {
-        //M:liuzuo add for addIcon begin
+        //M:lijun add for addIcon begin
         if(isAnimating()){
             return;
         }
@@ -337,17 +337,17 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
         }
 
         //mIsMoving =false;
-        //M:liuzuo add for  addIcon end
+        //M:lijun add for  addIcon end
     }
 
     public boolean onLongClick(View v) {
         // Return if global dragging is not enabled
         if (!mLauncher.isDraggingEnabled()) return true;
         if (mLauncher.getImportMode()/*||mLauncher.getState()== Launcher.State.ICONARRANGE*/) return false;
-        //M:liuzuo add addIcon begin
+        //M:lijun add addIcon begin
         if(!mLauncher.getImportMode()&&!(mLauncher.getWorkspace().getState()== Workspace.State.OVERVIEW) )
             mContent.hideAddView(true);
-        //M:liuzuo add addIcon  end
+        //M:lijun add addIcon  end
         DragOptions dragOptions = new DragOptions();
         if (v instanceof BubbleTextView) {
             BubbleTextView icon = (BubbleTextView) v;
@@ -520,11 +520,11 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
         // the folder itself.
         requestFocus();
         super.onAttachedToWindow();
-        //liuzuo add for addIcon begin
+        //lijun add for addIcon begin
         mContent.showFolderAddView(false);
         mContent.setCurrentPage(0);
         mFolderName.setEnabled(true);
-        //liuzuo add for addIcon end
+        //lijun add for addIcon end
     }
 
     @Override
@@ -671,7 +671,7 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
         } else {
             prepareReveal();
             centerAboutIcon();
-//liuzuo old openAnimation
+//lijun old openAnimation
 /*            AnimatorSet anim = LauncherAnimUtils.createAnimatorSet();
             int width = getPaddingLeft() + getPaddingRight() + mContent.getDesiredWidth();
             int height = getFolderHeight();
@@ -714,7 +714,7 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
             anim.play(textAlpha);
             anim.play(reveal);*/
 
-//liuzuo new  openAnimation begin
+//lijun new  openAnimation begin
             final ArrayList<View> itemsInReadingOrder = getItemsInReadingOrder();
             for(View view:itemsInReadingOrder){
                 if(view instanceof  BubbleTextView){
@@ -789,7 +789,7 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
             anim.play(textAlpha);
             anim.play(scaleAni);
             //anim.play(reveal);
-            // liuzuo new  openAnimation end
+            // lijun new  openAnimation end
 
             openFolderAnim = anim;
 
@@ -836,7 +836,7 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
                 onCompleteRunnable.run();
                 mContent.setFocusOnFirstChild();
                 if(FeatureFlags.UNINSTALL_MODE){
-                    showOrHideUnstallMark();//uninstall add by liuzuo
+                    showOrHideUnstallMark();//uninstall add by lijun
             }
                 isDropEnabled=true;
         }
@@ -966,7 +966,7 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
         anim.play(textAlpha);
         anim.play(scaleAni);
         //anim.play(reveal);
-        // liuzuo new  openAnimation end
+        // lijun new  openAnimation end
 
         closeFolderAnim = anim;
 
@@ -977,7 +977,7 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
         closeFolderAnim.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                hideUnstallMark();//uninstall add by liuzuo
+                hideUnstallMark();//uninstall add by lijun
                 close(true);
                 isDropEnabled=true;
                 Folder.this.post(new Runnable() {
@@ -1000,7 +1000,7 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
         setLayerType(LAYER_TYPE_HARDWARE, null);
         closeFolderAnim.start();
     }
-    //unstallMode add by liuzuo begin
+    //unstallMode add by lijun begin
     public void showOrHideUnstallMark() {
 /*        if(mLauncher.isUninstallMode){
             mContent.getCurrentCellLayout().showUninstallApp();
@@ -1039,7 +1039,7 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
     public View getmCurrentDragView() {
         return mCurrentDragView;
     }
-    //unstallMode add by liuzuo end
+    //unstallMode add by lijun end
     public void close(boolean wasAnimated) {
         // TODO: Clear all active animations.
         DragLayer parent = (DragLayer) getParent();
@@ -1267,14 +1267,14 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
                     mSuppressFolderDeletion = true;
                 }
                 mScrollPauseAlarm.cancelAlarm();
-                //M:liuzuo add addIcon  begin
+                //M:lijun add addIcon  begin
                 //completeDragExit();
             }
             if(target instanceof Folder){
                 Folder folder=(Folder) target;
                 folder.showFolderAddView();
             }
-//liuzuo add begin
+//lijun add begin
             if(target instanceof ArrangeNavigationBar){
                 if (mState == STATE_ANIMATING) {
                     mRearrangeOnClose = true;
@@ -1283,18 +1283,18 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
                     clearDragInfo();
                 }
             }else {
-//liuzuo add end
+//lijun add end
                 completeDragExit();
             }
-            //M:liuzuo end
+            //M:lijun end
         }else {
-            //M:liuzuo add addIcon  begin
+            //M:lijun add addIcon  begin
             if(target instanceof Folder){
                 mContent.showFolderAddView(true,true);
             }
-            //M:liuzuo add addIcon  end
+            //M:lijun add addIcon  end
         }
-        //M:liuzuo add uninstallMode begin
+        //M:lijun add uninstallMode begin
         if(target instanceof  Folder) {
             ArrayList<View> viewArrayList = getItemsInReadingOrder();
             for (View view : viewArrayList) {
@@ -1307,7 +1307,7 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
                 }
             }
         }
-        //M:liuzuo add uninstallMode end
+        //M:lijun add uninstallMode end
         mDeleteFolderOnDropCompleted = false;
         mDragInProgress = false;
         mItemAddedBackToSelfViaIcon = false;
@@ -1542,7 +1542,7 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
     public void rearrangeChildren(int itemCount,boolean uninstalling) {
 
         ArrayList<View> views = getItemsInReadingOrder();
-        //liuzuo add for uninstallMode begin
+        //lijun add for uninstallMode begin
         if(mLauncher.isUninstallMode&&uninstalling) {
             for (View view : views) {
                 if (view instanceof BubbleTextView) {
@@ -1551,9 +1551,9 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
                 }
             }
         }
-        //liuzuo add for uninstallMode end
+        //lijun add for uninstallMode end
         mContent.arrangeChildren(views, Math.max(itemCount, views.size()));
-        //liuzuo add for uninstallMode begin
+        //lijun add for uninstallMode begin
         if(mLauncher.isUninstallMode&&uninstalling) {
             for (View view : views) {
                 if (view instanceof BubbleTextView) {
@@ -1562,7 +1562,7 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
                 }
             }
         }
-        //liuzuo add for uninstallMode end
+        //lijun add for uninstallMode end
         mItemsInvalidated = true;
     }
     public int getItemCount() {
@@ -1591,7 +1591,7 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
                     }
 
                     // Remove the folder
-                    mFolderIcon.stopShakeAnimation();//UninstallMode add by liuzuo
+                    mFolderIcon.stopShakeAnimation();//UninstallMode add by lijun
                     mLauncher.removeItem(mFolderIcon, mInfo, true /* deleteFromDb */);
                     if (mFolderIcon instanceof DropTarget) {
                         mDragController.removeDropTarget((DropTarget) mFolderIcon);
@@ -1602,25 +1602,25 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
                         // at the same time in the CellLayout.  We need to add the new item with
                         // addInScreenFromBind() to ensure that hotseat items are placed correctly.
 
-                        // cyl add for hotseat icon center start
+                        // lijun add for hotseat icon center start
                         if(mInfo.container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
                             int index = mInfo.cellX;                            
                             mLauncher.getWorkspace().addInHotseat(newIcon, mInfo.container, index,
                                     index, 0, mInfo.spanX, mInfo.spanY, index);
 							mLauncher.getHotseat().onDrop(true,-1,  null, newIcon, true);
                         } else {
-                         // cyl add for hotseat icon center end
+                         // lijun add for hotseat icon center end
                             mLauncher.getWorkspace().addInScreenFromBind(newIcon, mInfo.container,
                                     mInfo.screenId, mInfo.cellX, mInfo.cellY, mInfo.spanX, mInfo.spanY);
                         }
                         // Focus the newly created child
                         newIcon.requestFocus();
-                        //liuzuo add for uninstallMode begin
+                        //lijun add for uninstallMode begin
                         if(mLauncher.isUninstallMode && newIcon instanceof UninstallMode) {
                             UninstallMode uninstallAnimationView = (UninstallMode) newIcon;
                             uninstallAnimationView.showUninstallApp();
                         }
-                        //liuzuo add for uninstallMode end
+                        //lijun add for uninstallMode end
                     }
                 }
             }
@@ -1673,10 +1673,10 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
     }
 
     public void onDrop(DragObject d) {
-		boolean refreshHotseat = false; // cyl add for hotseat icon center
-        mContent.ainmationCancel();//liuzuo add for addicon
+		boolean refreshHotseat = false; // lijun add for hotseat icon center
+        mContent.ainmationCancel();//lijun add for addicon
         Runnable cleanUpRunnable = null;
-        //UnistallMode add by liuzuo begin
+        //UnistallMode add by lijun begin
         ArrayList<View> views = getItemsInReadingOrder();
 /*        if(folderPagedView!=null&&mLauncher.isUninstallMode ) {
             folderPagedView.hideUninstallApp();
@@ -1686,7 +1686,7 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
                  ((UninstallMode) view).hideUninstallApp();
             }
         }
-        //UnistallMode add by liuzuo end
+        //UnistallMode add by lijun end
         // If we are coming from All Apps space, we defer removing the extra empty screen
         // until the folder closes
         if (d.dragSource != mLauncher.getWorkspace() && !(d.dragSource instanceof Folder)) {
@@ -1724,11 +1724,11 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
             si = (ShortcutInfo) d.dragInfo;
         }
 
-		// cyl add for hotseat icon center start
+		// lijun add for hotseat icon center start
 		if(si != null && si.container == LauncherSettings.Favorites.CONTAINER_HOTSEAT){
 			refreshHotseat = true;
 		}
-		// cyl add for hotseat icon center end
+		// lijun add for hotseat icon center end
 		
         if (mIsExternalDrag) {
             currentDragView = mContent.createAndAddViewForRank(si, mEmptyCellRank);
@@ -1787,13 +1787,13 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
             d.stateAnnouncer.completeAction(R.string.item_moved);
         }
 
-       // cyl add for hotseat icon center start
+       // lijun add for hotseat icon center start
 		if(refreshHotseat){
 			mLauncher.getHotseat().onDrop(true, d.x, null, null, false);
 		}
-	   // cyl add for hotseat icon center end
+	   // lijun add for hotseat icon center end
 	   
-/*        //UnistallMode add by liuzuo begin
+/*        //UnistallMode add by lijun begin
         *//*if(mLauncher.isUninstallMode && currentDragView instanceof UninstallMode ) {
             *//**//*UninstallMode uninstallMode = (UninstallMode) currentDragView;
             uninstallMode.showUninstallApp();*//**//*
@@ -1801,7 +1801,7 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
             folderPagedView.showUninstallApp();
         }*//*
         ArrayList<View> viewArrayList = getItemsInReadingOrder();
-        Log.d("liuzuo889", "openFolder.size()=" + views.size());
+        Log.d("lijun889", "openFolder.size()=" + views.size());
         for(View view:viewArrayList){
             if(view!=currentDragView&&view instanceof UninstallMode){
                 if (mLauncher.isUninstallMode) {
@@ -1811,7 +1811,7 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
                 }
             }
         }
-        //UnistallMode add by liuzuo  end*/
+        //UnistallMode add by lijun  end*/
     }
 
     // This is used so the item doesn't immediately appear in the folder when added. In one case
@@ -2024,7 +2024,7 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
             updateTextViewFocus();
         }
     }
-    //liuzuo : add for addIcon begin
+    //lijun : add for addIcon begin
 
     public void setFolderBackground(boolean b) {
 
@@ -2044,9 +2044,9 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
     public View getDragViewOfFolder() {
         return mDragViewOfFolder;
     }
-    //liuzuo : add for addIcon end
+    //lijun : add for addIcon end
 
-    //liuzuo add for editTitleGuide begin
+    //lijun add for editTitleGuide begin
     public void firstCreateAddSharePreferences(){
         Log.d(TAG,"firstCreateAddSharePreferences");
         if(mSharedPreferences!=null){
@@ -2059,8 +2059,8 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
             mSharedPreferences.edit().remove(FOLDER_OPENED+mInfo.id).apply();;
         }
     }
-    //liuzuo add for editTitleGuide end
-    //liuzuo add for update folder color
+    //lijun add for editTitleGuide end
+    //lijun add for update folder color
     public void updateColor(int color){
         mFolderName.setTextColor(color);
         ArrayList<View> itemsInReadingOrder = getItemsInReadingOrder();
@@ -2175,9 +2175,9 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
             mOnExitAlarm.cancelAlarm();
         }
     }
-    //liuzuo add begin
+    //lijun add begin
     public boolean isAnimating(){
         return mState == STATE_ANIMATING;
     }
-    //liuzuo add end
+    //lijun add end
 }

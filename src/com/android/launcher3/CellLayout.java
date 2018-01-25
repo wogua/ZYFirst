@@ -185,7 +185,7 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler ,Un
     private final static Paint sPaint = new Paint();
 
 
-    //UninstallMode add by liuzuo
+    //UninstallMode add by lijun
     private LauncherAppWidgetHostView mOnClickWidgetView;
 
     // Related to accessible drag and drop
@@ -396,7 +396,7 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler ,Un
                 mCountX, mCountY);
     }
 
-    // cyl add for hotseat icon center start
+    // lijun add for hotseat icon center start
     public void setGridSize(int cellW, int cellH, int wGap, int hGap) {
         mCellWidth = cellW;
         mCellHeight = cellH;
@@ -407,7 +407,7 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler ,Un
                 mCountX,mCountY);
         requestLayout();
     }
-// cyl add for hotseat icon center end
+// lijun add for hotseat icon center end
 
     public void setGridSize(int x, int y) {
         mCountX = x;
@@ -683,7 +683,7 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler ,Un
                 Log.d(TAG, "Adding view to ShortcutsAndWidgetsContainer: " + child);
             }
             mShortcutsAndWidgets.addView(child, index, lp);
-			// cyl add for hotseat icon center start
+			// lijun add for hotseat icon center start
 			ItemInfo info = (ItemInfo)child.getTag();
             if (this == mLauncher.getHotseat().getCellLayout()) {
                 mLauncher.getHotseat().initViewCacheList();
@@ -693,7 +693,7 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler ,Un
                     mLauncher.getHotseat().initViewCacheList();
                 }
             }
-           // cyl add for hotseat icon center end
+           // lijun add for hotseat icon center end
             if (markCells) markCellsAsOccupiedForView(child);
 
             return true;
@@ -717,12 +717,12 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler ,Un
 
     @Override
     public void removeView(View view) {
-        //UninstallMode add by liuzuo begin
+        //UninstallMode add by lijun begin
         if(view instanceof BubbleTextView){
             BubbleTextView textView = (BubbleTextView) view;
             textView.stopShakeAnimation();
         }
-        //UninstallMode add by liuzuo end
+        //UninstallMode add by lijun end
         markCellsAsUnoccupiedForView(view);
         mShortcutsAndWidgets.removeView(view);
     }
@@ -735,12 +735,12 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler ,Un
 
     @Override
     public void removeViewInLayout(View view) {
-        //UninstallMode add by liuzuo begin
+        //UninstallMode add by lijun begin
         if(view instanceof BubbleTextView){
             BubbleTextView textView = (BubbleTextView) view;
             textView.stopShakeAnimation();
         }
-        //UninstallMode add by liuzuo end
+        //UninstallMode add by lijun end
         markCellsAsUnoccupiedForView(view);
         mShortcutsAndWidgets.removeViewInLayout(view);
     }
@@ -863,7 +863,7 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler ,Un
         return mCellWidth;
     }
 
-   // cyl add public for special effect
+   // lijun add public for special effect
     public int getCellHeight() {
         return mCellHeight;
     }
@@ -1100,20 +1100,20 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler ,Un
                     if (mReorderAnimators.containsKey(lp)) {
                         mReorderAnimators.remove(lp);
                     }
-                    //liuzuo add for UninstallMode begin
+                    //lijun add for UninstallMode begin
                     if(child instanceof UninstallAnimation&&mLauncher.isUninstallMode&&child.getVisibility()==VISIBLE){
                         UninstallAnimation uninstallAnimationView = (UninstallAnimation) child;
                         uninstallAnimationView.startShakeAnimation();
                     }
-                    //liuzuo add for UninstallMode end
+                    //lijun add for UninstallMode end
                 }
                 public void onAnimationCancel(Animator animation) {
-                    //liuzuo add for UninstallMode begin
+                    //lijun add for UninstallMode begin
                     if(child instanceof UninstallAnimation&&mLauncher.isUninstallMode){
                         UninstallAnimation uninstallAnimationView = (UninstallAnimation) child;
                         uninstallAnimationView.startShakeAnimation();
                     }
-                    //liuzuo add for UninstallMode end
+                    //lijun add for UninstallMode end
                     cancelled = true;
                 }
             });
@@ -1491,7 +1491,7 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler ,Un
         mTmpOccupied.markCells(c, true);
         return success;
     }
-    //uninstallMode  add by liuzuo begin
+    //uninstallMode  add by lijun begin
     @Override
     public void showUninstallApp() {
         showOrHideUnstallMark(true);
@@ -1551,7 +1551,7 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler ,Un
         this.mOnClickWidgetView = onClickWidgetView;
     }
 
-//uninstallMode  add by liuzuo end
+//uninstallMode  add by lijun end
 
     /**
      * This helper class defines a cluster of views. It helps with defining complex edges
@@ -1784,7 +1784,7 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler ,Un
         // they would be pushed by the cluster. For example, if the cluster is leading with its
         // left edge, we consider sort the views by their right edge, from right to left.
         cluster.sortConfigurationForEdgePush(whichEdge);
-        //modify by xiejun:push icons
+        //modify by lijun:push icons
         if(!isWidget()) {
             if (whichEdge == ViewCluster.LEFT) {
                 //order by row desc
@@ -1827,7 +1827,7 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler ,Un
                 // For each view that isn't in the cluster, we see if the leading edge of the
                 // cluster is contacting the edge of that view. If so, we add that view to the
                 // cluster.
-                //modify by xiejun:push icons
+                //modify by lijun:push icons
                 if(!isWidget()) {
                     if(v instanceof LauncherAppWidgetHostView){
                         continue;
@@ -1846,7 +1846,7 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler ,Un
 
                         // Adding view to cluster, mark it as not occupied.
                         mTmpOccupied.markCells(c, false);
-                        //modify by xiejun:push icons
+                        //modify by lijun:push icons
                         if(!isWidget()) {
                             pushIconByRow(c, countX, countY, whichEdge);
                         }
@@ -2002,7 +2002,7 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler ,Un
             // to find a solution by pushing along the perpendicular axis.
 
             // Swap the components
-            //modify by xiejun:push icons
+            //modify by lijun:push icons
             if(isWidget()) {
                 int temp = direction[1];
                 direction[1] = direction[0];
@@ -2059,7 +2059,7 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler ,Un
                 if (!lp.canReorder) {
                     return false;
                 }
-                //modify by xiejun:push icons
+                //modify by lijun:push icons
                 if(!isWidget() && child instanceof LauncherAppWidgetHostView){
                     return false;
                 }
@@ -2598,7 +2598,7 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler ,Un
         }
         //lijun add end
 
-        //modify by xiejun:push icons
+        //modify by lijun:push icons
         if(!isWidget()) {
             if (mDirectionVector[0] != 0) {
                 mDirectionVector[1] = 0;
@@ -2625,7 +2625,7 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler ,Un
         // favor a solution in which the item is not resized, but
         if (swapSolution.isSolution && swapSolution.area() >= noShuffleSolution.area()) {
             finalSolution = swapSolution;
-        } else if (noShuffleSolution.isSolution && isWidget()/*modify by xiejun:push icons*/) {
+        } else if (noShuffleSolution.isSolution && isWidget()/*modify by lijun:push icons*/) {
             finalSolution = noShuffleSolution;
         }
 
@@ -3228,7 +3228,7 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler ,Un
         }
     }
 
-    //add by xiejun : push icons
+    //add by lijun : push icons
     private boolean isWidget(){
         if(Workspace.isWidget){
             return true;
@@ -3290,12 +3290,12 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler ,Un
         }
         return -1;
     }
-    //M:liuzuo add addIcon  begin
+    //M:lijun add addIcon  begin
     public void onlyRemoveView(View view) {
         markCellsAsUnoccupiedForView(view);
         mShortcutsAndWidgets.removeView(view);
     }
-    //M:liuzuo add addIcon  end
+    //M:lijun add addIcon  end
 
     /**
      * *************************************

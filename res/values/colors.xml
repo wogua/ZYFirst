@@ -64,7 +64,7 @@
     <color name="celllayout_frame_nail_background_color_normal_outline_dark">#26000000</color>
     <color name="celllayout_frame_nail_background_color_normal_outline_light">#66ffffff</color>
 
-    <!-- liuzuo add for folder -->
+    <!-- lijun add for folder -->
     <color name="workspace_bg_color">#B2000000</color>
 
     <!-- lijun add for aline button -->
@@ -80,7 +80,7 @@
     <color name="page_indicator_dot_light_color">#804c4c4c  </color>
     <color name="page_indicator_dot_light_color_active">#ff4c4c4c</color>
 
-    <!-- liuzuo Add for dynamic      -->
+    <!-- lijun Add for dynamic      -->
     <color name="dym_calender_date_text_color">#4a4a4a</color>
     <color name="dym_calender_week_text_color">#fa4856</color>
     <color name="dym_weather_text_color">#ffffff</color>
@@ -88,7 +88,7 @@
     <!-- lijun add for theme loading -->
     <color name="theme_loading_bg_color">#ee000000</color>
 
-  <!-- cyl add for special effect -->
+  <!-- lijun add for special effect -->
   <color name="preview_effects_item_title_textcolor">#FFFFFFFF</color>
 
 </resources>

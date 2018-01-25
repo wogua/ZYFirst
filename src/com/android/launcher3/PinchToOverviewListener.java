@@ -216,7 +216,7 @@ public class PinchToOverviewListener extends ScaleGestureDetector.SimpleOnScaleG
         mPreviousTimeMillis = System.currentTimeMillis();
         return false;
     }
-    //liuzuo add
+    //lijun add
     public boolean isPinchStarted() {
         return mPinchStarted;
     }

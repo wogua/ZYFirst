@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Build;
 
 /**
- * Created by antino on 16-8-17.
+ * Created by lijun on 16-8-17.
  */
 public class BlurFactory {
     static IBlur mIBlur =null;

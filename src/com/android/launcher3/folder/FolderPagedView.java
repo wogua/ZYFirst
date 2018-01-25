@@ -108,7 +108,7 @@ public class FolderPagedView extends PagedView {
     private PagedFolderKeyEventListener mKeyListener;
 
     private PageIndicator mPageIndicator;
-    //liuzuo : add for addIcon
+    //lijun : add for addIcon
     private TextView mAddIcon;
     private View.OnClickListener mOnClickListenerl;
     private int mWidthGap;
@@ -716,7 +716,7 @@ public class FolderPagedView extends PagedView {
         pos[0] = 0;
         pos[1] = getViewportHeight();
     }
-    //liuzuo : add for addIcon begin
+    //lijun : add for addIcon begin
     public class FolderAddInfo extends ItemInfo{
 
         public FolderAddInfo(int x, int y) {
@@ -948,7 +948,7 @@ public class FolderPagedView extends PagedView {
         arrangeChildren(views, views.size(), false);
         return rank;
     }
-    //liuzuo : add for addIcon end
+    //lijun : add for addIcon end
     public void setLastPage(){
         setCurrentPage(getItemCount()/mMaxItemsPerPage);
     }
@@ -1013,5 +1013,5 @@ public class FolderPagedView extends PagedView {
         }
         return super.onInterceptTouchEvent(ev);
     }
-    protected boolean isNormalState(){return false;} // cyl add for cycle slide
+    protected boolean isNormalState(){return false;} // lijun add for cycle slide
 }

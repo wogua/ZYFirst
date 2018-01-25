@@ -12,7 +12,7 @@ import android.renderscript.ScriptIntrinsicBlur;
 import com.android.launcher3.theme.utils.PhotoUtils;
 
 /**
- * Created by antino on 16-8-17.
+ * Created by lijun on 16-8-17.
  */
 public class RenderscriptBlur implements IBlur{
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)

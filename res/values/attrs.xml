@@ -120,7 +120,7 @@
     </declare-styleable>
     <!--lijun add for colormanager end-->
 
-<!-- cyl add for special effect  start -->
+<!-- lijun add for special effect  start -->
     <declare-styleable name="HorizontalListView">
         <attr name="dividerWidth" format="dimension" />
         <attr name="alignStartPosition" format="boolean"/>
@@ -128,5 +128,5 @@
         <attr name="android:requiresFadingEdge" />
         <attr name="android:fadingEdgeLength" />
     </declare-styleable>
-<!-- cyl add for special effect  end -->
+<!-- lijun add for special effect  end -->
 </resources>

@@ -59,7 +59,7 @@ public final class FeatureFlags {
     //lijun add for overscroll
     public static final boolean OVERSCROLL_SPRINGBACK = true;
 
-      // cyl add for cycle slide 
+      // lijun add for cycle slide
 	public static final boolean CYCLE_SLIDE = true;
 
     public static final boolean UNREAD_ENABLE = true;

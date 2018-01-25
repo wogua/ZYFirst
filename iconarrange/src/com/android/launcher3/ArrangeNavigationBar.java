@@ -37,7 +37,7 @@ import java.util.LinkedHashMap;
 import java.util.Set;
 
 /**
- * Created by antino on 17-3-31.
+ * Created by lijun on 17-3-31.
  */
 public class ArrangeNavigationBar extends HorizontalScrollView implements DragSource,DropTarget,DragController.DragListener, View.OnLongClickListener, View.OnClickListener {
     private static final String TAG ="ArrangeNavigationBar";
@@ -908,7 +908,7 @@ public class ArrangeNavigationBar extends HorizontalScrollView implements DragSo
         if(view instanceof  BubbleTextView){
             BubbleTextView textView = (BubbleTextView) view;
             if(textView.hasIDynamicIcon()){
-                //boolean showUnread = mLauncher.isShowUnread();//liuzuo add
+                //boolean showUnread = mLauncher.isShowUnread();//lijun add
 
                 return PhotoUtils.drawable2bitmap(textView.getIcon());//new DragPreviewProvider(view).createDragBitmap(mCanvas,showUnread)
             }

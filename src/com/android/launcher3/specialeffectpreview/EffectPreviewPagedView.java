@@ -228,7 +228,7 @@ public class EffectPreviewPagedView extends PagedView implements View.OnLongClic
 
     @Override
     public boolean onLongClick(View v) {
-        // Log.d("cyl", "onLongClick");
+        // Log.d("lijun", "onLongClick");
         return false;
     }
 

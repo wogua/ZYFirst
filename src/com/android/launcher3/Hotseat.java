@@ -65,7 +65,7 @@ public class Hotseat extends FrameLayout
     private ColorDrawable mBackground;
     private ValueAnimator mBackgroundColorAnimator;
 
-    // cyl add for hotseat icon center start
+    // lijun add for hotseat icon center start
     private AnimatorSet mAnimatorSet;
     private BubbleTextView mInvisibleView;
     private boolean mInvisibleViewAdded = false;
@@ -84,7 +84,7 @@ public class Hotseat extends FrameLayout
 	private int workspaceCountX;
 	private int mWGap;
     public static final int MAX_COUNT_X = 4;
-    // cyl add for hotseat icon center end
+    // lijun add for hotseat icon center end
 
     public Hotseat(Context context) {
         this(context, null);
@@ -142,10 +142,10 @@ public class Hotseat extends FrameLayout
         super.onFinishInflate();
 
         DeviceProfile grid = mLauncher.getDeviceProfile();
-	// cyl add for hotseat icon center start	
+	// lijun add for hotseat icon center start
 		workspaceCountX = (int) grid.inv.numColumns; 
 		mViewCacheList = new ArrayList<View>(MAX_COUNT_X);
-	// cyl add for hotseat icon center end	
+	// lijun add for hotseat icon center end
         mContent = (CellLayout) findViewById(R.id.layout);
         if (grid.isLandscape && !grid.isLargeTablet) {
             mContent.setGridSize(1, (int) grid.inv.numHotseatIcons);
@@ -254,7 +254,7 @@ public class Hotseat extends FrameLayout
         return mBackgroundColor;
     }
 
-// cyl add for hotseat icon center start
+// lijun add for hotseat icon center start
      //generate invisible view for auto-replace
     private void generateInvisibleView() {
         int allAppsButtonRank = mLauncher.getDeviceProfile().inv.getAllAppsButtonRank();
@@ -790,11 +790,11 @@ public class Hotseat extends FrameLayout
                    destX += 10;
 				   destY += 10;
                  }else{
-                     //liuzuo add for offset begin
+                     //lijun add for offset begin
                    destX += getDropOffsetX();
 				   destY += getDropOffsetY();
 
-                     //liuzuo add for offset end
+                     //lijun add for offset end
                  }
 
                 final Runnable r = new Runnable() {
@@ -986,17 +986,17 @@ public class Hotseat extends FrameLayout
                             //R.dimen.textview_padding_in_hotseat)) / 2;
                     if (v instanceof BubbleTextView) {
                         btv = (BubbleTextView) v;
-                       // btv.setTempPadding(paddingLeftAndRight); cyl del
+                       // btv.setTempPadding(paddingLeftAndRight); lijun del
                     } else if (v instanceof FolderIcon) {
                         FolderIcon fi = (FolderIcon) v;
-                       // fi.setTempPadding(paddingLeftAndRight); cyl del
+                       // fi.setTempPadding(paddingLeftAndRight); lijun del
                     }
                 } else {
                     if (v instanceof BubbleTextView) {
                         btv = (BubbleTextView) v;
-                       // btv.resetTempPadding(); cyl del
+                       // btv.resetTempPadding(); lijun del
                     } else if (v instanceof FolderIcon) {
-                       // ((FolderIcon) v).resetTempPadding(); cyl del
+                       // ((FolderIcon) v).resetTempPadding(); lijun del
                     }
                 }
 
@@ -1006,7 +1006,7 @@ public class Hotseat extends FrameLayout
                 lp.x = l + lp.leftMargin;
                 //ItemInfo info = (ItemInfo)v.getTag();
                 l += (cellW + mWGap);
-                //lp.startWithGap = (visibleCount < workspaceCountX); cyl del
+                //lp.startWithGap = (visibleCount < workspaceCountX); lijun del
             }
             mContent.setGridSize(cellW, mContent.getCellHeight(), mWGap, mContent.getHeightGap());
         }
@@ -1356,14 +1356,14 @@ public class Hotseat extends FrameLayout
      uninstallAnimation.stopShakeAnimation();
    } 	
  }
- // cyl add for hotseat icon center end
+ // lijun add for hotseat icon center end
 
-    // liuzuo add for offset drop animation begin
+    // lijun add for offset drop animation begin
 private int  getDropOffsetY(){
     return getResources().getDrawable(R.drawable.ic_uninstall).getIntrinsicHeight()/2-14;
 }
     private int  getDropOffsetX(){
         return getResources().getDrawable(R.drawable.ic_uninstall).getIntrinsicWidth()/2-2;
     }
-    // liuzuo add for offset drop animation end
+    // lijun add for offset drop animation end
 }

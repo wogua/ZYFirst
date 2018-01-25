@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.util.Log;
 
 /**
- * Created by liuzuo on 17-6-7.
+ * Created by lijun on 17-6-7.
  */
 
 public class DymBroadcastReceiver extends BroadcastReceiver {
