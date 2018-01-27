@@ -1,74 +1,71 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
 <resources>
-<!--主题名字-->
-<string name="theme_name">Monster Theme</string>
-<!--主题版本号-->
-<string name="theme_version">v1.1</string>
-<!--主题类型是否为异型-->
-<bool name="is_heteromorphic_theme">false</bool>
-<!--三方没有重绘的图标在底板中的显示位置-->
-<dimen name="ptop">0dp</dimen>
-<bool name="pleft">0dp</bool>
-<bool name="pright">0dp</bool>
-<bool name="pbottom">0dp</bool>
+    <!--主题名字-->
+    <string name="theme_name">Monster Theme</string>
+    <!--主题版本号-->
+    <string name="theme_version">v1.1</string>
+    <!--主题类型是否为异型-->
+    <bool name="is_heteromorphic_theme">false</bool>
+    <!--三方没有重绘的图标在底板中的显示位置-->
+    <dimen name="ptop">0dp</dimen>
 
-<!--日历日期文本颜色-->
-<color name="com.android.launcher3$dym_calendar_day_text">#eac796</color>
-<!--日历星期文本颜色-->
-<color name="com.android.launcher3$dym_calendar_week_text">#eac796</color>
-<!--天气文本颜色-->
-<color name="com.android.launcher3$dym_weather_text">#eac796</color>
+    <!--日历日期文本颜色-->
+    <color name="com.android.launcher3$dym_calendar_day_text">#eac796</color>
+    <!--日历星期文本颜色-->
+    <color name="com.android.launcher3$dym_calendar_week_text">#eac796</color>
+    <!--天气文本颜色-->
+    <color name="com.android.launcher3$dym_weather_text">#eac796</color>
 
-<string-array>
-<!-- System App-->
-<!-- VVETIME投影 -->
-<item>com.android.settings|com.android.settings$com.android.settings.Settings$HdmiSettingsActivity|VVETIME投影#ic_VVETIMET.png</item>
-<!-- 通讯录 -->
-<item>com.android.contacts|com.android.contacts$com.android.contacts.activities.PeopleActivity|通讯录#ic_contacts.png</item>
-<!-- 电话 -->
-<item>com.android.dialer|com.android.dialer$com.android.dialer.DialtactsActivity|电话#ic_phone.png</item>
-<!-- 省电助手 -->
-<item>com.mediatek.batterywarning|com.mediatek.batterywarning$com.eastaeon.memorymanager.MainActivity|省电助手#xxx.png</item>
-<!-- 下载 -->
-<item>com.android.providers.downloads.ui|com.android.providers.downloads.ui$com.android.providers.downloads.ui.DownloadList|下载#ic_download.png</item>
-<!-- 文件管理 -->
-<item>com.mediatek.filemanager|com.mediatek.filemanager$com.mediatek.filemanager.FileManagerOperationActivity|文件管理#ic_filemanager.png</item>
-<!-- 图库 -->
-<item>com.android.gallery3d|com.android.gallery3d$com.android.gallery3d.app.GalleryActivity|图库#ic_gallery.png</item>
-<!-- 时钟 -->
-<item>com.android.deskclock|com.android.deskclock$com.android.deskclock.DeskClock|时钟#ic_deskclock.png</item>
-<!-- 日历 -->
-<item>com.android.calendar|com.android.calendar$com.android.calendar.AllInOneActivity|日历#ic_calendar.png</item>
-<!-- SIM卡应用 -->
-<item>com.android.stk|com.android.stk$com.android.stk.StkMain|SIM卡应用#ic_sim.png</item>
-<!-- 备份与恢复 -->
-<item>com.mediatek.datatransfer|com.mediatek.datatransfer$com.mediatek.datatransfer.BootActivity|备份与恢复#xxx.png</item>
-<!-- 信息 -->
-<item>com.android.mms|com.android.mms$com.android.mms.ui.BootActivity|信息#ic_mms.png</item>
-<!-- 浏览器 -->
-<item>com.android.browser|com.android.browser$com.android.browser.BrowserActivity|浏览器#ic_browser.png</item>
-<!-- 设置 -->
-<item>com.android.settings|com.android.settings$com.android.settings.Settings|设置#ic_settings.png</item>
+    <string-array name="icon_array">
+        <!-- System App-->
+        <!-- VVETIME投影 -->
+        <item>com.android.settings|com.android.settings$com.android.settings.Settings$HdmiSettingsActivity|VVETIME投影#ic_vvetimet.png</item>
+        <!-- 通讯录 -->
+        <item>com.android.contacts|com.android.contacts$com.android.contacts.activities.PeopleActivity|通讯录#ic_contacts.png</item>
+        <!-- 电话 -->
+        <item>com.android.dialer|com.android.dialer$com.android.dialer.DialtactsActivity|电话#ic_phone.png</item>
+        <!-- 省电助手 -->
+        <item>com.mediatek.batterywarning|com.mediatek.batterywarning$com.eastaeon.memorymanager.MainActivity|省电助手#xxx.png</item>
+        <!-- 下载 -->
+        <item>com.android.providers.downloads.ui|com.android.providers.downloads.ui$com.android.providers.downloads.ui.DownloadList|下载#ic_download.png</item>
+        <!-- 文件管理 -->
+        <item>com.mediatek.filemanager|com.mediatek.filemanager$com.mediatek.filemanager.FileManagerOperationActivity|文件管理#ic_filemanager.png</item>
+        <!-- 图库 -->
+        <item>com.android.gallery3d|com.android.gallery3d$com.android.gallery3d.app.GalleryActivity|图库#ic_gallery.png</item>
+        <!-- 时钟 -->
+        <item>com.android.deskclock|com.android.deskclock$com.android.deskclock.DeskClock|时钟#ic_deskclock.png</item>
+        <!-- 日历 -->
+        <item>com.android.calendar|com.android.calendar$com.android.calendar.AllInOneActivity|日历#ic_calculator.png</item>
+        <!-- SIM卡应用 -->
+        <item>com.android.stk|com.android.stk$com.android.stk.StkMain|SIM卡应用#ic_sim.png</item>
+        <!-- 备份与恢复 -->
+        <item>com.mediatek.datatransfer|com.mediatek.datatransfer$com.mediatek.datatransfer.BootActivity|备份与恢复#xxx.png</item>
+        <!-- 信息 -->
+        <item>com.android.mms|com.android.mms$com.android.mms.ui.BootActivity|信息#ic_mms.png</item>
+        <!-- 浏览器 -->
+        <item>com.android.browser|com.android.browser$com.android.browser.BrowserActivity|浏览器#ic_browser.png</item>
+        <!-- 设置 -->
+        <item>com.android.settings|com.android.settings$com.android.settings.Settings|设置#ic_settings.png</item>
 
-<!-- ThirdPart App-->
-<!-- 音乐 -->
-<item>com.android.music|com.android.music$com.android.music.MusicBrowserActivity|音乐#ic_music.png</item>
-<!-- 计算器 -->
-<item>com.android.calculator2|com.android.calculator2$com.android.calculator2.Calculator|计算器#ic_calculate.png</item>
-<!-- 录音机 -->
-<item>com.android.soundrecorder|com.android.soundrecorder$com.android.soundrecorder.SoundRecorder|录音机#ic_soundrecorder.png</item>
-<!-- 搜索 -->
-<item>com.android.quicksearchbox|com.android.quicksearchbox$com.android.quicksearchbox.SearchActivity|搜索#ic_search.png</item>
-<!-- FM 电台 -->
-<item>com.android.fmradio|com.android.fmradio$com.android.fmradio.FmMainActivity|FM 电台#ic_FM.png</item>
-<!-- 相机 -->
-<item>com.mediatek.camera|com.mediatek.camera$com.android.camera.ZsdCameraActivity|相机#ic_camera.png</item>
-<!-- 威起来 -->
-<item>com.vvelink.yiqilai|com.vvelink.yiqilai$com.vvelink.yiqilai.launch.LaunchActivity|威起来#xxx.png</item>
-<!-- 讯飞输入法 -->
-<item>com.iflytek.inputmethod|com.iflytek.inputmethod$com.iflytek.inputmethod.LauncherActivity|讯飞输入法#ic_iflytek.png</item>
-<!-- 账号 -->
-<item>com.vve.account|com.vve.account$com.vve.account.MainActivity|账号#xxx.png</item>
+        <!-- ThirdPart App-->
+        <!-- 音乐 -->
+        <item>com.android.music|com.android.music$com.android.music.MusicBrowserActivity|音乐#ic_music.png</item>
+        <!-- 计算器 -->
+        <item>com.android.calculator2|com.android.calculator2$com.android.calculator2.Calculator|计算器#ic_calculator.png</item>
+        <!-- 录音机 -->
+        <item>com.android.soundrecorder|com.android.soundrecorder$com.android.soundrecorder.SoundRecorder|录音机#ic_soundrecorder.png</item>
+        <!-- 搜索 -->
+        <item>com.android.quicksearchbox|com.android.quicksearchbox$com.android.quicksearchbox.SearchActivity|搜索#ic_search.png</item>
+        <!-- FM 电台 -->
+        <item>com.android.fmradio|com.android.fmradio$com.android.fmradio.FmMainActivity|FM 电台#ic_fm.png</item>
+        <!-- 相机 -->
+        <item>com.mediatek.camera|com.mediatek.camera$com.android.camera.ZsdCameraActivity|相机#ic_camera.png</item>
+        <!-- 威起来 -->
+        <item>com.vvelink.yiqilai|com.vvelink.yiqilai$com.vvelink.yiqilai.launch.LaunchActivity|威起来#xxx.png</item>
+        <!-- 讯飞输入法 -->
+        <item>com.iflytek.inputmethod|com.iflytek.inputmethod$com.iflytek.inputmethod.LauncherActivity|讯飞输入法#ic_iflytek.png</item>
+        <!-- 账号 -->
+        <item>com.vve.account|com.vve.account$com.vve.account.MainActivity|账号#xxx.png</item>
 
-</string-array>
+    </string-array>
 </resources>
