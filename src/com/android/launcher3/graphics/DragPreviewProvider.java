@@ -31,7 +31,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.android.dlauncher.badge.BadgeController;
+import com.android.zylauncher.badge.BadgeController;
 import com.android.launcher3.AppInfo;
 import com.android.launcher3.BubbleTextView;
 import com.android.launcher3.FolderInfo;

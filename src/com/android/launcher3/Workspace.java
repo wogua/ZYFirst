@@ -61,9 +61,9 @@ import android.view.animation.Interpolator;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.android.dlauncher.badge.BadgeController;
-import com.android.dlauncher.badge.BadgeInfo;
-import com.android.dlauncher.badge.LauncherBadgeProvider;
+import com.android.zylauncher.badge.BadgeController;
+import com.android.zylauncher.badge.BadgeInfo;
+import com.android.zylauncher.badge.LauncherBadgeProvider;
 import com.android.launcher3.Launcher.CustomContentCallbacks;
 import com.android.launcher3.Launcher.LauncherOverlay;
 import com.android.launcher3.UninstallDropTarget.DropTargetSource;

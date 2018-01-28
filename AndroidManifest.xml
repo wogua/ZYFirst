@@ -48,7 +48,7 @@
 
     <!-- lijun add for unread start -->
     <permission
-        android:name="com.android.dlauncher.badge.permission.READ_BADGE"
+        android:name="com.android.zylauncher.badge.permission.READ_BADGE"
         android:permissionGroup="android.permission-group.SYSTEM_TOOLS"
         android:protectionLevel="normal"
         android:label="@string/badge_read_setting"
@@ -78,7 +78,7 @@
         <!-- lijun add for unread start -->
         <meta-data
             android:name="badge_provider"
-            android:value="com.android.dlauncher.badge" />
+            android:value="com.android.zylauncher.badge" />
         <!-- lijun add for unread end -->
         <!--
         Main launcher activity. When extending only change the name, and keep all the
@@ -201,9 +201,9 @@
 
         <!-- lijun add for unread start -->
         <provider
-            android:name="com.android.dlauncher.badge.LauncherBadgeProvider"
-            android:authorities="com.android.dlauncher.badge"
-            android:permission="com.android.dlauncher.badge.permission.READ_BADGE"
+            android:name="com.android.zylauncher.badge.LauncherBadgeProvider"
+            android:authorities="com.android.zylauncher.badge"
+            android:permission="com.android.zylauncher.badge.permission.READ_BADGE"
             android:exported="true" />
         <!-- lijun add for unread end -->
     </application>

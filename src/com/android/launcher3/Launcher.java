@@ -97,9 +97,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.dlauncher.badge.BadgeController;
-import com.android.dlauncher.badge.BadgeInfo;
-import com.android.dlauncher.badge.LauncherBadgeProvider;
+import com.android.zylauncher.badge.BadgeController;
+import com.android.zylauncher.badge.BadgeInfo;
+import com.android.zylauncher.badge.LauncherBadgeProvider;
 import com.android.launcher3.DropTarget.DragObject;
 import com.android.launcher3.LauncherSettings.Favorites;
 import com.android.launcher3.accessibility.LauncherAccessibilityDelegate;
@@ -1604,6 +1604,7 @@ public class Launcher extends Activity
         };
 
         // Bind wallpaper button actions
+
         mWallpaperButton = findViewById(R.id.wallpaper_button);
         mWallpaperButton.setOnClickListener(new OnClickListener() {
             @Override

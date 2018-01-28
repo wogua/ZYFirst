@@ -13,7 +13,7 @@ import com.android.launcher3.theme.utils.ResUtils;
  * Created by lijun on 17-3-14.
  */
 public class DefaultIconGetter extends IconGetterAbsImpl {
-    public static String THEME_PKG="com.android.dlauncher";
+    public static String THEME_PKG="com.android.zylauncher";
 
     @Override
     protected boolean init(Context context) {

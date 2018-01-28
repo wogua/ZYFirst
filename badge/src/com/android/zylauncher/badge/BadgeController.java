@@ -1,4 +1,4 @@
-package com.android.dlauncher.badge;
+package com.android.zylauncher.badge;
 
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;

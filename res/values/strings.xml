@@ -286,9 +286,9 @@
     <string name="default_folder_tools">Tools</string>
     <string name="other_folder">other apps</string>
 
-    <string name="xml_default_folder">com.android.dlauncher:string:default_folder</string>
-    <string name="xml_default_folder_tools">com.android.dlauncher:string:default_folder_tools</string>
-    <string name="xml_other_folder">com.android.dlauncher:string:other_folder</string>
+    <string name="xml_default_folder">com.android.zylauncher:string:default_folder</string>
+    <string name="xml_default_folder_tools">com.android.zylauncher:string:default_folder_tools</string>
+    <string name="xml_other_folder">com.android.zylauncher:string:other_folder</string>
 
     <!--lijun add for theme change-->
     <string name="theme_loding_text">theme loading ...</string>

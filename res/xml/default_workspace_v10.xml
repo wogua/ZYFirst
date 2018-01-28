@@ -16,7 +16,7 @@
 <favorites xmlns:launcher="http://schemas.android.com/apk/res-auto/com.android.launcher3">
     <appwidget
         launcher:className="com.android.launcher3.appwidget.LauncherClock"
-        launcher:packageName="com.android.dlauncher"
+        launcher:packageName="com.android.zylauncher"
         launcher:screen="0"
         launcher:spanX="4"
         launcher:spanY="2"

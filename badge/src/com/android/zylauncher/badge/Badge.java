@@ -1,4 +1,4 @@
-package com.android.dlauncher.badge;
+package com.android.zylauncher.badge;
 
 import android.net.Uri;
 
@@ -26,7 +26,7 @@ public class Badge {
     public static final String KEY_ITEM_COUNT = "KEY_ITEM_COUNT";
 
     /*Authority*/
-    public static final String AUTHORITY = "com.android.dlauncher.badge";
+    public static final String AUTHORITY = "com.android.zylauncher.badge";
 
     /*Content URI*/
     public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/badge");

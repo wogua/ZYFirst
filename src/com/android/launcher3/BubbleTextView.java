@@ -43,8 +43,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-import com.android.dlauncher.badge.BadgeController;
-import com.android.dlauncher.badge.LauncherBadgeProvider;
+import com.android.zylauncher.badge.BadgeController;
+import com.android.zylauncher.badge.LauncherBadgeProvider;
 import com.android.launcher3.IconCache.IconLoadRequest;
 import com.android.launcher3.dynamicui.DynamicProvider;
 import com.android.launcher3.dynamicui.IDynamicIcon;

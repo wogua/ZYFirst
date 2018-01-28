@@ -26,7 +26,7 @@ import android.os.Handler;
 import android.os.Process;
 import android.util.Log;
 
-import com.android.dlauncher.badge.BadgeController;
+import com.android.zylauncher.badge.BadgeController;
 import com.android.launcher3.colors.ColorManager;
 import com.android.launcher3.compat.LauncherAppsCompat;
 import com.android.launcher3.compat.PackageInstallerCompat;

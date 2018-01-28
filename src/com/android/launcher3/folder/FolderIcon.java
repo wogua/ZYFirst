@@ -46,8 +46,8 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.android.dlauncher.badge.BadgeController;
-import com.android.dlauncher.badge.BadgeInfo;
+import com.android.zylauncher.badge.BadgeController;
+import com.android.zylauncher.badge.BadgeInfo;
 import com.android.launcher3.Alarm;
 import com.android.launcher3.AppInfo;
 import com.android.launcher3.BubbleTextView;

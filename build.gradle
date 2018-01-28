@@ -46,7 +46,7 @@ android {
 
     productFlavors {
         aosp {
-            applicationId 'com.android.dlauncher'
+            applicationId 'com.android.zylauncher'
             testApplicationId 'com.android.launcher3.tests'
         }
     }

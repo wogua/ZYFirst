@@ -126,16 +126,16 @@ public abstract class IconGetterAbsImpl implements IIconGetter{
             Log.i(TAG,"IconGetterAbsImpl getLBEWaterMark fail");
             return null;
         }
-        return ResUtils.getIconBitmap("com.android.dlauncher","ic_lbe_watermark",context,mDensityDpi);
+        return ResUtils.getIconBitmap("com.android.zylauncher","ic_lbe_watermark",context,mDensityDpi);
     }
 
     private Context createThemeContext(Context context) throws Exception{
         Context themeContext = null;
         if(context!=null){
-            if(context.getPackageName().equals("com.android.dlauncher")){
+            if(context.getPackageName().equals("com.android.zylauncher")){
                 return context;
             }
-            themeContext = context.createPackageContext("com.android.dlauncher", Context.CONTEXT_IGNORE_SECURITY);
+            themeContext = context.createPackageContext("com.android.zylauncher", Context.CONTEXT_IGNORE_SECURITY);
         }
         return themeContext;
     }

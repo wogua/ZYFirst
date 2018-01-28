@@ -636,15 +636,15 @@ public class DeviceProfile {
             lp = (FrameLayout.LayoutParams) overviewMode.getLayoutParams();
             lp.gravity = Gravity.LEFT | Gravity.BOTTOM;
 
-            int visibleChildCount = getVisibleChildCount(overviewMode);
-            int totalItemWidth = visibleChildCount * overviewModeBarItemWidthPx;
-            int maxWidth = totalItemWidth + (visibleChildCount-1) * overviewModeBarSpacerWidthPx;
-
-            lp.width = Math.min(availableWidthPx, maxWidth);
-            lp.height = getOverviewModeButtonBarHeight();
-            // Center the overview buttons on the workspace page
-            lp.leftMargin = workspacePadding.left + (availableWidthPx -
-                    workspacePadding.left - workspacePadding.right - lp.width) / 2;
+//            int visibleChildCount = getVisibleChildCount(overviewMode);
+//            int totalItemWidth = visibleChildCount * overviewModeBarItemWidthPx;
+//            int maxWidth = totalItemWidth + (visibleChildCount-1) * overviewModeBarSpacerWidthPx;
+//
+//            lp.width = Math.min(availableWidthPx, maxWidth);
+//            lp.height = getOverviewModeButtonBarHeight();
+//            // Center the overview buttons on the workspace page
+//            lp.leftMargin = workspacePadding.left + (availableWidthPx -
+//                    workspacePadding.left - workspacePadding.right - lp.width) / 2;
             overviewMode.setLayoutParams(lp);
         }
 

@@ -555,7 +555,7 @@ public final class Utilities {
     public static boolean isSystemApp(String packageName,Context context) {
         PackageManager pm = context.getPackageManager();
         if ("com.android.launcher3".equals(packageName)
-                || "com.android.dlauncher".equals(packageName)) return true;
+                || "com.android.zylauncher".equals(packageName)) return true;
         if (packageName != null) {
             try {
                 PackageInfo info = pm.getPackageInfo(packageName, 0);

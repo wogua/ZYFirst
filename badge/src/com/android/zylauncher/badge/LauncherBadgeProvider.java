@@ -1,4 +1,4 @@
-package com.android.dlauncher.badge;
+package com.android.zylauncher.badge;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
@@ -69,7 +69,7 @@ public class LauncherBadgeProvider extends ContentProvider {
         Bundle b = new Bundle();
         b.putInt("count", count);
         try {
-            Uri uri = Uri.parse("content://com.android.dlauncher.badge/badge");
+            Uri uri = Uri.parse("content://com.android.zylauncher.badge/badge");
             Bundle bundle = context.getContentResolver().call(uri, method, null, b);
             if (bundle != null && bundle.getBoolean("result")) {
                 Log.d("Badge", "setUnreadNumber true");
@@ -92,7 +92,7 @@ public class LauncherBadgeProvider extends ContentProvider {
         b.putStringArrayList("app_shortcut_custom_id", null);
         b.putInt("app_badge_count", 10);
         try {
-            Uri uri = Uri.parse("content://com.android.dlauncher.badge/badge");
+            Uri uri = Uri.parse("content://com.android.zylauncher.badge/badge");
             Bundle bundle = context.getContentResolver().call(uri, method, null, b);
             if (bundle != null && bundle.getBoolean("result")) {
                 return true;
