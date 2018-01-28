@@ -23,4 +23,11 @@
         android:persistent="true"
         />
 
+    <SwitchPreference
+        android:key="launcher_badge_key"
+        android:title="@string/badge_text"
+        android:defaultValue="@bool/badge_flag"
+        android:persistent="true"
+        />
+
 </PreferenceScreen>

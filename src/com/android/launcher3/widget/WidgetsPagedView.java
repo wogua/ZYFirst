@@ -203,7 +203,7 @@ public class WidgetsPagedView extends PagedView implements View.OnLongClickListe
         final int cellLayoutSize = infoSize/rowSize + ((infoSize%rowSize>0)?1:0);
         removeAllViews();
         for(int i = 0 ; i < cellLayoutSize ; i ++){
-            LinearLayout widgetCellLayout = (LinearLayout)mLayoutInflater.inflate(R.layout.widgets_container_pageview_celllayout,this,false);
+            LinearLayout widgetCellLayout = (LinearLayout)mLayoutInflater.inflate(R.layout.buttom_pageview_celllayout,this,false);
             finish:
             for(int j = 0 ; j < rowSize ; j ++){
                 final int index = i*rowSize + j;

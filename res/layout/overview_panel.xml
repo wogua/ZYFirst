@@ -73,7 +73,7 @@
         android:textSize="12sp" />
 
     <com.android.launcher3.colors.ChameleonTextView
-        android:id="@+id/settings_button"
+        android:id="@+id/special_effect_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -84,6 +84,23 @@
         android:stateListAnimator="@animator/overview_button_anim"
         android:maxLines="1"
         android:text="@string/special_effect_setting"
+        android:textAllCaps="true"
+        android:ellipsize="end"
+        android:textColor="@android:color/white"
+        android:textSize="12sp" />
+
+    <com.android.launcher3.colors.ChameleonTextView
+        android:id="@+id/settings_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawablePadding="4dp"
+        android:drawableTop="@drawable/ic_setting"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center_horizontal"
+        android:stateListAnimator="@animator/overview_button_anim"
+        android:maxLines="1"
+        android:text="@string/settings_button_text"
         android:textAllCaps="true"
         android:ellipsize="end"
         android:textColor="@android:color/white"

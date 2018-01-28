@@ -11,7 +11,6 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -147,7 +146,7 @@ public class EffectPreviewPagedView extends PagedView implements View.OnLongClic
             int position = 0;
             removeAllViews();
             for (int i = 0; i < cellLayoutSize && position <= SpecialEffectPagedView.Type.ROLL_DOWN; i++) {
-                LinearLayout cellLayout = (LinearLayout) mLayoutInflater.inflate(R.layout.widgets_container_pageview_celllayout, this, false);
+                LinearLayout cellLayout = (LinearLayout) mLayoutInflater.inflate(R.layout.buttom_pageview_celllayout, this, false);
 
                 for (int j = 0; j < rowSize && position <= SpecialEffectPagedView.Type.ROLL_DOWN; j++) {
                     ViewHolder vh = new ViewHolder();

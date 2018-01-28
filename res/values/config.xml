@@ -132,4 +132,6 @@
 
     <!-- lijun add for cycle slide -->
     <bool name="cycle_slide_flag">true</bool>
+
+    <bool name="badge_flag">true</bool>
 </resources>

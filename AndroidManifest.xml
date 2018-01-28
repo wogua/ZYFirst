@@ -106,7 +106,7 @@
         </activity>
 
         <!--         The settings activity. When extending keep the intent filter present -->
-       <!-- <activity
+        <activity
             android:name=".SettingsActivity"
             android:autoRemoveFromRecents="true"
             android:label="@string/settings_button_text">
@@ -114,7 +114,7 @@
                 <action android:name="android.intent.action.APPLICATION_PREFERENCES" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity>-->
+        </activity>
 
         <!--
         The settings provider contains Home's data, like the workspace favorites. The permissions

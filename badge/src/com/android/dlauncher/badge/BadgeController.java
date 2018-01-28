@@ -36,6 +36,9 @@ import java.util.ArrayList;
 
 public class BadgeController extends BroadcastReceiver {
 
+    public static final String BADGE_PREFERENCE_KEY = "launcher_badge_key";
+    public static boolean sBadgeEnable = true;
+
     public static final boolean DEBUG = true;
     private static final String TAG = "BadgeController";
 
@@ -61,6 +64,7 @@ public class BadgeController extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        if(!sBadgeEnable)return;
         String action = intent.getAction();
         Log.d(TAG, "BadgeController onReceive action=" + action);
         if (Intent.ACTION_PACKAGE_DATA_CLEARED.equals(action) || Intent.ACTION_PACKAGE_REMOVED.equals(action)) {
@@ -122,7 +126,7 @@ public class BadgeController extends BroadcastReceiver {
     }
 
     public static void drawUnreadEventIfNeed(Canvas canvas, View icon, boolean isShowingUnread) {
-        if (!FeatureFlags.UNREAD_ENABLE) return;
+        if (!FeatureFlags.UNREAD_ENABLE || !BadgeController.sBadgeEnable) return;
         ItemInfo info = (ItemInfo) icon.getTag();
         if (info != null && info.unreadNum > 0) {
             Resources res = icon.getContext().getResources();

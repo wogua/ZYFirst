@@ -1180,6 +1180,7 @@ public class Launcher extends Activity
             mLauncherCallbacks.onResume();
         }
 		mWorkspace.setCycleSlideFlag(); // lijun add for cycle slide
+        BadgeController.sBadgeEnable = Utilities.getPrefs(this).getBoolean(BadgeController.BADGE_PREFERENCE_KEY, true);
     }
 
     @Override
@@ -1282,7 +1283,7 @@ public class Launcher extends Activity
             // setting.
             return !getResources().getBoolean(R.bool.allow_rotation);
         }*/
-        return false;
+        return true;
         //lijun modify end
     }
 
@@ -1631,28 +1632,35 @@ public class Launcher extends Activity
         mWidgetsButton.setOnLongClickListener(performClickOnLongClick);
         mWidgetsButton.setOnTouchListener(getHapticFeedbackTouchListener());
 
-        // Bind settings actions
+        View specialEffectButton = findViewById(R.id.special_effect_button);
+        specialEffectButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!mWorkspace.rejectClickOnMenuButton()) {
+                    showSpecialEffectPreview(true);
+                }
+            }
+        });
+        specialEffectButton.setOnLongClickListener(performClickOnLongClick);
+        specialEffectButton.setOnTouchListener(getHapticFeedbackTouchListener());
+
         View settingsButton = findViewById(R.id.settings_button);
-		/* // lijun add for special effect
+		 // lijun add for special effect
         boolean hasSettings = hasSettings();
-        if (hasSettings) { */
+        if (hasSettings) {
             settingsButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (!mWorkspace.rejectClickOnMenuButton()) {
-					   // lijun modify for special effect start
-						showSpecialEffectPreview(true); 
-                        //onClickSettingsButton(view);
-                       // lijun modify for special effect end
+                        onClickSettingsButton(view);
                     }
                 }
             });
             settingsButton.setOnLongClickListener(performClickOnLongClick);
             settingsButton.setOnTouchListener(getHapticFeedbackTouchListener());
-		/* 	// lijun add for special effect
         } else {
             settingsButton.setVisibility(View.GONE);
-        } */
+        }
 
         mOverviewPanel.setAlpha(0f);
     }
@@ -4940,7 +4948,7 @@ public class Launcher extends Activity
         }
 		getHotseat().initViewCacheList(); // lijun add for hotseat icon center
 
-        if (FeatureFlags.UNREAD_ENABLE) {
+        if (FeatureFlags.UNREAD_ENABLE && BadgeController.sBadgeEnable) {
             mBadgeController.reloadBadges();//lijun add for unread
         }
     }

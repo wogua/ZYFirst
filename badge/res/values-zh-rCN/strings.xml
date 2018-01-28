@@ -17,7 +17,7 @@
 -->
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="badge_read_setting">setting badges</string>
-    <string name="badge_read_des">Allows the app to set badges.</string>
-    <string name="badge_text">Badges</string>
+    <string name="badge_read_setting">角标设置</string>
+    <string name="badge_read_des">允许应用设置角标.</string>
+    <string name="badge_text">角标</string>
 </resources>
