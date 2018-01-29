@@ -129,4 +129,10 @@
         <attr name="android:fadingEdgeLength" />
     </declare-styleable>
 <!-- lijun add for special effect  end -->
+
+
+    <declare-styleable name="PreferenceWithTip">
+        <attr name="tipstring" format="string"></attr>
+        <attr name="titlestring" format="string"></attr>
+    </declare-styleable>
 </resources>

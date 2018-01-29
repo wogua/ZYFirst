@@ -298,4 +298,7 @@
 
     <!-- lijun add for uninstall shortcut -->
     <string name="shortcut_uninstalled">Shortcut \"<xliff:g id="name" example="Browser">%s</xliff:g>\" was removed.</string>
+
+    <string name="layout">Layout</string>
+
 </resources>

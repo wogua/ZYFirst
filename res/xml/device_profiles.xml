@@ -112,7 +112,7 @@
         launcher:hotseatIconSize="60"
         launcher:defaultLayoutId="@xml/default_workspace_4x4"
     />
-    <!--POTRURLY lijun modify numRows from 4 to 5-->
+    <!-- lijun modify numRows from 4 to 5-->
     <profile
         launcher:name="Nexus 5"
         launcher:minWidthDps="335"

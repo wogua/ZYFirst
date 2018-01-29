@@ -133,4 +133,6 @@
 
     <!-- lijun add for uninstall shortcut -->
     <string name="shortcut_uninstalled">"已删除“<xliff:g id="NAME">%s</xliff:g>”快捷方式。"</string>
+
+    <string name="layout">桌面布局</string>
 </resources>

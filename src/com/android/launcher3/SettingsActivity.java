@@ -18,12 +18,17 @@ package com.android.launcher3;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.preference.ListPreference;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
 
 /**
  * Settings activity for Launcher. Currently implements the following setting: Allow rotation
  */
 public class SettingsActivity extends Activity {
+
+    public static final String KEY_LAYOUT = "launcher_layout";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,12 +44,29 @@ public class SettingsActivity extends Activity {
      */
     public static class LauncherSettingsFragment extends PreferenceFragment {
 
+        ListPreference lp;
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             getPreferenceManager().setSharedPreferencesName(LauncherFiles.SHARED_PREFERENCES_KEY);
             addPreferencesFromResource(R.xml.launcher_preferences);
+
+            lp=(ListPreference)findPreference(KEY_LAYOUT);
+            lp.setOnPreferenceChangeListener(onPreferenceChangeListener);
         }
+
+        Preference.OnPreferenceChangeListener onPreferenceChangeListener = new Preference.OnPreferenceChangeListener(){
+
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                final String key = preference.getKey();
+                if (KEY_LAYOUT.equals(key)) {
+
+                }
+                return true;
+            }
+        };
 
         @Override
         public void onDestroy() {

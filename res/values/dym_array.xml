@@ -125,4 +125,21 @@
         <item>@drawable/ic_effects_flip_down</item>
     </array>
 <!-- lijun add for special effect  end -->
+
+
+    <string-array name="layout_selection">
+        <item>4x4</item>
+        <item>4x5</item>
+        <item>5x5</item>
+        <item>5x6</item>
+    </string-array>
+    <!-- Do not translate. -->
+    <string-array name="layout_selection_value" translatable="false">
+        <item>4.4</item>
+        <item>4.5</item>
+        <item>5.5</item>
+        <item>5.6</item>
+    </string-array>
+
+
 </resources>
