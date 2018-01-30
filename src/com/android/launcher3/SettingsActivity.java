@@ -44,7 +44,7 @@ public class SettingsActivity extends Activity {
      */
     public static class LauncherSettingsFragment extends PreferenceFragment {
 
-        ListPreference lp;
+        PreferenceWithTip lp;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,7 @@ public class SettingsActivity extends Activity {
             getPreferenceManager().setSharedPreferencesName(LauncherFiles.SHARED_PREFERENCES_KEY);
             addPreferencesFromResource(R.xml.launcher_preferences);
 
-            lp=(ListPreference)findPreference(KEY_LAYOUT);
+            lp=(PreferenceWithTip)findPreference(KEY_LAYOUT);
             lp.setOnPreferenceChangeListener(onPreferenceChangeListener);
         }
 
@@ -62,7 +62,7 @@ public class SettingsActivity extends Activity {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 final String key = preference.getKey();
                 if (KEY_LAYOUT.equals(key)) {
-
+                    lp.onPreferenceChanaged(newValue);
                 }
                 return true;
             }

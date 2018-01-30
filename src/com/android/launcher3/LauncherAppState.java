@@ -129,6 +129,7 @@ public class LauncherAppState {
         filter.addAction(Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE);
         filter.addAction(Intent.ACTION_MANAGED_PROFILE_UNLOCKED);
         filter.addAction("com.hb.theme.ACTION_THEME_CHANGE");
+        filter.addAction("com.zylauncher.ACTION_LAYOUT_CHANGE");
         // For extracting colors from the wallpaper
         if (Utilities.isNycOrAbove()) {
             // TODO: add a broadcast entry to the manifest for pre-N.

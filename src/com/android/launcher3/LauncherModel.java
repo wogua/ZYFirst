@@ -1477,6 +1477,11 @@ public class LauncherModel extends BroadcastReceiver
             //lijun add for themechanged end
 
             forceReload();
+        }else if("com.zylauncher.ACTION_LAYOUT_CHANGE".equals(action)){
+            LauncherAppState app = LauncherAppState.getInstanceNoCreate();
+            if (app != null) {
+                app.reloadWorkspace();
+            }
         }
     }
 

@@ -23,6 +23,7 @@ import android.content.res.XmlResourceParser;
 import android.graphics.Point;
 import android.os.Build;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.Xml;
 import android.view.Display;
 import android.view.WindowManager;
@@ -143,6 +144,7 @@ public class InvariantDeviceProfile {
         InvariantDeviceProfile closestProfile = closestProfiles.get(0);
         numRows = closestProfile.numRows;
         numColumns = closestProfile.numColumns;
+        Log.d("lijun22","reload here >??");
         numHotseatIcons = closestProfile.numHotseatIcons;
         defaultLayoutId =getDefaultLayoutId(closestProfile);
         numFolderRows = closestProfile.numFolderRows;

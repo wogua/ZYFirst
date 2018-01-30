@@ -276,7 +276,6 @@ public class SpecialEffectPagedView extends SlidePagedView {
         double percentage = getPercentage(child, screen);
 			
         if( percentage <= -1 || percentage >= 1 ) {
-			Log.d("lijun", "drawScreen: screen = " + screen + "  " +percentage);
 			super.drawScreen(canvas, screen, drawingTime);
 			return;
         }
