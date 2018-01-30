@@ -108,6 +108,7 @@
         <!--         The settings activity. When extending keep the intent filter present -->
         <activity
             android:name=".SettingsActivity"
+            android:theme="@android:style/Theme.Holo.Light"
             android:autoRemoveFromRecents="true"
             android:label="@string/settings_button_text">
             <intent-filter>
