@@ -301,4 +301,6 @@
 
     <string name="layout">Layout</string>
 
+    <string name="hide_app_title">Hide apps</string>
+
 </resources>

@@ -215,6 +215,24 @@
             android:paddingStart="6dp"
             android:weightSum="4">
 
+
+            <com.android.launcher3.colors.ChameleonTextView
+                android:id="@+id/hide_app_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="4dp"
+                android:drawableTop="@drawable/ic_hide_app"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center_horizontal"
+                android:maxLines="1"
+                android:stateListAnimator="@animator/overview_button_anim"
+                android:text="@string/hide_app_title"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
+
             <com.android.launcher3.colors.ChameleonTextView
                 android:id="@+id/settings_button"
                 android:layout_width="0dp"

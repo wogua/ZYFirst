@@ -224,7 +224,7 @@ public class Launcher extends Activity
 
     /** The different states that Launcher can be in. */
     public enum State { NONE, WORKSPACE, WORKSPACE_SPRING_LOADED, APPS, APPS_SPRING_LOADED,
-        WIDGETS, WIDGETS_SPRING_LOADED,FOLDER_IMPORT,WALLPAPER ,ICONARRANGE,SPECIALEFFECT}//lijun add UNINSTALL_NORMAL mode
+        WIDGETS, WIDGETS_SPRING_LOADED,FOLDER_IMPORT,WALLPAPER ,ICONARRANGE,SPECIALEFFECT,HIDE_APP}//lijun add UNINSTALL_NORMAL mode
 
     public State getState() {
         return mState;
@@ -282,6 +282,9 @@ public class Launcher extends Activity
     private View mVulvanClearBuuton;
     private WallpaperPagedViewContainer mWallpaperPicker;//lijun add for wallpaper
     private View mAlineButton;
+    private View mHideAppButton;
+    private View mSettingsButton;
+    private View specialEffectButton;
 
     //lijun add the background of workspace when opening folder
     ImageView mWorkspaceBg;
@@ -1567,22 +1570,12 @@ public class Launcher extends Activity
         //lijun add for wallpaper
         mWallpaperPicker = (WallpaperPagedViewContainer) findViewById(R.id.wallpaper_picker);
         mVulvanClearBuuton =findViewById(R.id.valcants_clear_button);
-        mVulvanClearBuuton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickVacantsClearButton(v);
-            }
-        });
+        mVulvanClearBuuton.setOnClickListener(buttonClickLisener);
 
         //lijun add for alinebutton
         mAlineButton = findViewById(R.id.aline);
         mAlineButton.setAlpha(0.0f);
-        mAlineButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                confirmVacantsClear();
-            }
-        });
+        mAlineButton.setOnClickListener(buttonClickLisener);
         //Icon Arrange begin
         mNavigationbar = (ArrangeNavigationBar) findViewById(R.id.navigationbar);
         //Icon Arrange begin
@@ -1590,6 +1583,8 @@ public class Launcher extends Activity
      // lijun add for special effect start
         mPreviewContainer = (PreviewContainer)findViewById(R.id.specialeffect_container);      
 	 // lijun add for special effect end
+
+        mHideAppNavigationbar = (HideAppNavigationBar) findViewById(R.id.hide_app_navigationbar);
     }
 
     private void setupOverviewPanel() {
@@ -1606,65 +1601,70 @@ public class Launcher extends Activity
         // Bind wallpaper button actions
 
         mWallpaperButton = findViewById(R.id.wallpaper_button);
-        mWallpaperButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!mWorkspace.rejectClickOnMenuButton()) {
-                    //lijun modify for wallpaper
-//                    onClickWallpaperPicker(view);
-                    onClickWallpaperPickerNew(view);
-                    //lijun modify end
-                }
-            }
-        });
+        mWallpaperButton.setOnClickListener(buttonClickLisener);
         mWallpaperButton.setOnLongClickListener(performClickOnLongClick);
         mWallpaperButton.setOnTouchListener(getHapticFeedbackTouchListener());
 
         // Bind widget button actions
         mWidgetsButton = findViewById(R.id.widget_button);
-        mWidgetsButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!mWorkspace.rejectClickOnMenuButton()) {
-                    onClickAddWidgetButton(view);
-                }
-            }
-        });
+        mWidgetsButton.setOnClickListener(buttonClickLisener);
         mWidgetsButton.setOnLongClickListener(performClickOnLongClick);
         mWidgetsButton.setOnTouchListener(getHapticFeedbackTouchListener());
 
-        View specialEffectButton = findViewById(R.id.special_effect_button);
-        specialEffectButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!mWorkspace.rejectClickOnMenuButton()) {
-                    showSpecialEffectPreview(true);
-                }
-            }
-        });
+        specialEffectButton = findViewById(R.id.special_effect_button);
+        specialEffectButton.setOnClickListener(buttonClickLisener);
         specialEffectButton.setOnLongClickListener(performClickOnLongClick);
         specialEffectButton.setOnTouchListener(getHapticFeedbackTouchListener());
 
-        View settingsButton = findViewById(R.id.settings_button);
+        mSettingsButton = findViewById(R.id.settings_button);
 		 // lijun add for special effect
         boolean hasSettings = hasSettings();
         if (hasSettings) {
-            settingsButton.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (!mWorkspace.rejectClickOnMenuButton()) {
-                        onClickSettingsButton(view);
-                    }
-                }
-            });
-            settingsButton.setOnLongClickListener(performClickOnLongClick);
-            settingsButton.setOnTouchListener(getHapticFeedbackTouchListener());
+            mSettingsButton.setOnClickListener(buttonClickLisener);
+            mSettingsButton.setOnLongClickListener(performClickOnLongClick);
+            mSettingsButton.setOnTouchListener(getHapticFeedbackTouchListener());
         } else {
-            settingsButton.setVisibility(View.GONE);
+            mSettingsButton.setVisibility(View.GONE);
         }
+
+        mHideAppButton = findViewById(R.id.hide_app_button);
+        mHideAppButton.setOnClickListener(buttonClickLisener);
+        mHideAppButton.setOnLongClickListener(performClickOnLongClick);
+        mHideAppButton.setOnTouchListener(getHapticFeedbackTouchListener());
 
         mOverviewPanel.setAlpha(0f);
     }
+
+    private View.OnClickListener buttonClickLisener = new View.OnClickListener(){
+
+        @Override
+        public void onClick(View v) {
+            if (mHideAppButton == v) {
+                onHideAppButonClick();
+            } else if (mSettingsButton == v) {
+                if (!mWorkspace.rejectClickOnMenuButton()) {
+                    onClickSettingsButton(v);
+                }
+            } else if (mWidgetsButton == v) {
+                if (!mWorkspace.rejectClickOnMenuButton()) {
+                    onClickAddWidgetButton(v);
+                }
+            } else if (mWallpaperButton == v) {
+                if (!mWorkspace.rejectClickOnMenuButton()) {
+                    onClickWallpaperPickerNew(v);
+                }
+            } else if (specialEffectButton == v) {
+                if (!mWorkspace.rejectClickOnMenuButton()) {
+                    showSpecialEffectPreview(true);
+                }
+            } else if (mAlineButton == v) {
+                confirmVacantsClear();
+            } else if (mVulvanClearBuuton == v) {
+                onClickVacantsClearButton(v);
+            }
+
+        }
+    };
 
     /**
      * Sets the all apps button. This method is called from {@link Hotseat}.
@@ -3238,6 +3238,18 @@ public class Launcher extends Activity
             }
         }
     }
+
+    private void onHideAppButonClick(){
+        if(!mModel.isAllAppsLoaded() || mWorkspaceLoading || mWorkspace.rejectClickOnMenuButton()){
+            return;
+        }
+        if (mIsSafeModeEnabled) {
+            Toast.makeText(this, R.string.safemode_wallpaper_error, Toast.LENGTH_SHORT).show();
+        } else {
+            showHideAppNavigationBar(true);
+        }
+    }
+
     public boolean isInVacantsClear=false;
     protected void onClickVacantsClearButton(View view) {
         if(!mModel.isAllAppsLoaded() || mWorkspaceLoading || mWorkspace.rejectClickOnMenuButton()){
@@ -3858,7 +3870,8 @@ public class Launcher extends Activity
             }
         }
         //lijun add end
-        if (mState != State.WORKSPACE && mState!= State.WORKSPACE_SPRING_LOADED&&mState!=State.ICONARRANGE) return false;//lijun add for iconarrange
+        if (mState != State.WORKSPACE && mState != State.WORKSPACE_SPRING_LOADED && mState != State.ICONARRANGE && mState != State.HIDE_APP)
+            return false;//lijun add for iconarrange
 
         //lijun add start
         if (isUnInstallMode() && ((v instanceof Workspace) || (v instanceof CellLayout))) {
@@ -4079,7 +4092,7 @@ public class Launcher extends Activity
 //        mStateTransitionAnimation.startAnimationToWorkspace(mState, mWorkspace.getState(),
 //                Workspace.State.OVERVIEW, animated, postAnimRunnable);
       // lijun add for special effect :State.SPECIALEFFECT
-        if (mState == State.WIDGETS || mState == State.WALLPAPER||mState == State.ICONARRANGE || mState == State.SPECIALEFFECT) {
+        if (mState == State.WIDGETS || mState == State.WALLPAPER||mState == State.ICONARRANGE || mState == State.SPECIALEFFECT || mState == State.HIDE_APP) {
             Folder.ICONARRANGING = false;
             showOverviewModeFromOverviewHidenMode(State.WORKSPACE, true);
         } else {
@@ -4134,7 +4147,7 @@ public class Launcher extends Activity
      */
     private boolean showOverviewModeFromOverviewHidenMode(State toState, boolean animated){
         // lijun add for special effect :State.SPECIALEFFECT
-        if (mState != State.WIDGETS && mState != State.WALLPAPER&&mState!=State.ICONARRANGE && mState != State.SPECIALEFFECT) {
+        if (mState != State.WIDGETS && mState != State.WALLPAPER&&mState!=State.ICONARRANGE && mState != State.SPECIALEFFECT && mState != State.HIDE_APP) {
             return false;
         }
         if (toState != State.WORKSPACE) {
@@ -6170,6 +6183,13 @@ public class Launcher extends Activity
         return false;
     }
 
+    public boolean isHideAppShowing() {
+        if (mHideAppNavigationbar.getAlpha() > 0.5 && mHideAppNavigationbar.getVisibility() == View.VISIBLE) {
+            return true;
+        }
+        return false;
+    }
+
     //lijun add for wallpaper change start
     @Override
     public void onWallpaperChange(Bitmap wallpaperThumb, boolean b) {
@@ -6213,6 +6233,12 @@ public class Launcher extends Activity
         return (mState == State.ICONARRANGE);
     }
 
+    public HideAppNavigationBar mHideAppNavigationbar;
+
+    public HideAppNavigationBar getmHideAppNavigationbar() {
+        return mHideAppNavigationbar;
+    }
+
     private void showArrangeNavigationBar(boolean animated){
         if(mNavigationbar!=null){
             Folder.ICONARRANGING = true;
@@ -6222,6 +6248,15 @@ public class Launcher extends Activity
         }
     }
     //Icon Arrange end
+
+    private void showHideAppNavigationBar(boolean animated) {
+        if (mHideAppNavigationbar != null) {
+            Folder.ICONARRANGING = true;
+            mState = State.HIDE_APP;
+            mStateTransitionAnimation.startAnimationBetweenOverviewAndOverviewHiden(Workspace.State.OVERVIEW_HIDDEN, State.HIDE_APP, animated);
+            getDragController().addDropTarget(mHideAppNavigationbar);//lijun add
+        }
+    }
 
     //lijun add start
     private Toast mToast;
@@ -6311,32 +6346,44 @@ public class Launcher extends Activity
         boolean needHideWallpaper;
         boolean needHideIconarrange;
         boolean needHideSpecialEffect;
+        boolean needHideHideApp;
 		
         if (launcherState == State.WIDGETS) {
             needHideWidgets = false;
             needHideWallpaper = isWallpaperPanelShowing();
             needHideIconarrange = isArrangeBarShowing();
 			needHideSpecialEffect = isSpecialEffectShowing();
+            needHideHideApp =isHideAppShowing();
         } else if (launcherState == State.WALLPAPER) {
             needHideWidgets = isWidgetsPanelShowing();
             needHideWallpaper = false;
             needHideIconarrange = isArrangeBarShowing();
 			needHideSpecialEffect = isSpecialEffectShowing();
+            needHideHideApp =isHideAppShowing();
         } else if (launcherState == State.ICONARRANGE) {
             needHideWidgets = isWidgetsPanelShowing();
             needHideWallpaper = isWallpaperPanelShowing();
             needHideIconarrange = false;
 			needHideSpecialEffect = isSpecialEffectShowing();
+            needHideHideApp =isHideAppShowing();
+        } else if (launcherState == State.HIDE_APP) {
+            needHideWidgets = isWidgetsPanelShowing();
+            needHideWallpaper = isWallpaperPanelShowing();
+            needHideIconarrange = isArrangeBarShowing();
+            needHideSpecialEffect = isSpecialEffectShowing();
+            needHideHideApp =false;
         } else if (launcherState == State.SPECIALEFFECT) {
             needHideWidgets = isWidgetsPanelShowing();
             needHideWallpaper = isWallpaperPanelShowing();
             needHideIconarrange = isArrangeBarShowing();
 			needHideSpecialEffect = false;
+            needHideHideApp =isHideAppShowing();
         } else if (launcherState == State.WORKSPACE) {
             needHideWidgets = isWidgetsPanelShowing();
             needHideWallpaper = isWallpaperPanelShowing();
             needHideIconarrange = isArrangeBarShowing();
 			needHideSpecialEffect = isSpecialEffectShowing();
+            needHideHideApp =isHideAppShowing();
         } else {
             return;
         }
@@ -6357,7 +6404,13 @@ public class Launcher extends Activity
         if (needHideSpecialEffect) {
             mPreviewContainer.setVisibility(View.INVISIBLE);
             mPreviewContainer.setAlpha(0);
-        }		
+        }
+        if (needHideIconarrange) {
+            mHideAppNavigationbar.setVisibility(View.INVISIBLE);
+            mHideAppNavigationbar.setAlpha(0);
+            mHideAppNavigationbar.onBackPressed(false);
+            Folder.ICONARRANGING = false;
+        }
         if(getOpenFolder()!=null&&mAniWorkspaceBg==null&&mWorkspaceBg.getVisibility()==View.VISIBLE){
             openOrCloseFolderAnimation(false);
         }

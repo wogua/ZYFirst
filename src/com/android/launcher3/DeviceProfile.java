@@ -286,7 +286,6 @@ public class DeviceProfile {
 
     private void updateIconSize(float scale, int drawablePadding, Resources res,
                                 DisplayMetrics dm) {
-        Log.d("lijun22","updateIconSize");
         iconSizePx = (int) (Utilities.pxFromDp(inv.iconSize, dm) * scale);
         iconTextSizePx = (int) (Utilities.pxFromSp(inv.iconTextSize, dm) * scale);
         iconDrawablePaddingPx = drawablePadding;
@@ -665,6 +664,17 @@ public class DeviceProfile {
             int visibleChildCount = 5;
             bar.setItemWidth(totalItemWidth/visibleChildCount);
             bar.setLayoutParams(lpBar);
+        }
+
+        HideAppNavigationBar bar2= launcher.getmHideAppNavigationbar();
+        LayoutParams lpBar2 = bar2.getLayoutParams();
+        if(bar2!=null){
+            int totalItemWidth = availableWidthPx-getArrangeNavigationBarPadding()*2;
+            lpBar2.width = totalItemWidth;
+            lpBar2.height = (availableHeightPx - workspacePadding.top - workspacePadding.bottom)/inv.numRows;
+            int visibleChildCount = 5;
+            bar2.setItemWidth(totalItemWidth/visibleChildCount);
+            bar2.setLayoutParams(lpBar);
         }
     }
 

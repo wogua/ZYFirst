@@ -562,17 +562,18 @@ public class Workspace extends SpecialEffectPagedView
             //lijun remove end
         }
         //UninstallMode add by lijun begin
-        Runnable runnable =new Runnable() {
+        Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                if(FeatureFlags.UNINSTALL_MODE/*&&!mLauncher.isUninstallMode*/ && !mLauncher.isWidgetsViewVisible()&&mState!=State.FOLDER_IMPORT&&!mLauncher.isUninstallMode&&mLauncher.getState()!= Launcher.State.ICONARRANGE)
+                if (FeatureFlags.UNINSTALL_MODE/*&&!mLauncher.isUninstallMode*/ && !mLauncher.isWidgetsViewVisible() && mState != State.FOLDER_IMPORT
+                        && !mLauncher.isUninstallMode && mLauncher.getState() != Launcher.State.ICONARRANGE && mLauncher.getState() != Launcher.State.HIDE_APP)
                     //if(FeatureFlags.UNINSTALL_MODE/*&&!mLauncher.isUninstallMode*/ && !mLauncher.isWidgetsViewVisible())
                     enterUninstallMode();
-                mPrepareUninstallMode = false ;
+                mPrepareUninstallMode = false;
             }
         };
         //UninstallMode add by lijun end
-        if (!FeatureFlags.LAUNCHER3_LEGACY_WORKSPACE_DND&&mLauncher.getState()!= Launcher.State.ICONARRANGE) {
+        if (!FeatureFlags.LAUNCHER3_LEGACY_WORKSPACE_DND&&mLauncher.getState()!= Launcher.State.ICONARRANGE&&mLauncher.getState()!= Launcher.State.HIDE_APP) {
             // Always enter the spring loaded mode
            if(!mLauncher.isWidgetsViewVisible()){ // lijun fix bug5057
              mPrepareUninstallMode = true;
@@ -5780,7 +5781,7 @@ public class Workspace extends SpecialEffectPagedView
             layout.setVisibility(VISIBLE);
         }
         enableLayoutTransitions();*/
-        if(mState!=State.FOLDER_IMPORT&&mLauncher.mState!= Launcher.State.ICONARRANGE) {
+        if(mState!=State.FOLDER_IMPORT&&mLauncher.mState!= Launcher.State.ICONARRANGE&&mLauncher.mState!= Launcher.State.HIDE_APP) {
             ValueAnimator animator = createHotseatAlphaAnimatorNotIndicator(1f);
             animator.start();
         }
@@ -5813,7 +5814,8 @@ public class Workspace extends SpecialEffectPagedView
     }
     public boolean workspaceInModalStateForTouchIntercetp() {
         return mState != State.NORMAL
-                && mState != State.FOLDER_IMPORT && mState != State.OVERVIEW && mLauncher.mState!= Launcher.State.ICONARRANGE && !mLauncher.isUninstallMode;
+                && mState != State.FOLDER_IMPORT && mState != State.OVERVIEW && mLauncher.mState!= Launcher.State.ICONARRANGE
+                && mLauncher.mState!= Launcher.State.HIDE_APP&& !mLauncher.isUninstallMode;
     }
     //lijun add for addIcon end
 
@@ -5828,9 +5830,9 @@ public class Workspace extends SpecialEffectPagedView
             rect.top = rect.top - 30;
             boolean contains = rect.contains((int) event.getRawX(), (int) event.getRawY());
 
-            if(!contains && mLauncher.mState == Launcher.State.ICONARRANGE){
+            if (!contains && (mLauncher.mState == Launcher.State.ICONARRANGE || mLauncher.mState == Launcher.State.HIDE_APP)) {
                 return false;
-            }else {
+            } else {
                 return !contains;
             }
         }
@@ -5847,9 +5849,9 @@ public class Workspace extends SpecialEffectPagedView
             rect.top = rect.top - 30;
             boolean contains = rect.contains((int) event.getRawX(), (int) event.getRawY());
 
-            if(contains && mLauncher.mState == Launcher.State.ICONARRANGE){
+            if (contains && (mLauncher.mState == Launcher.State.ICONARRANGE || mLauncher.mState == Launcher.State.HIDE_APP)) {
                 return true;
-            }else {
+            } else {
                 return contains;
             }
         }

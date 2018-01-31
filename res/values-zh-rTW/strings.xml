@@ -133,4 +133,7 @@
     <string name="cycle_slide">迴圈案頭</string>
     <!-- lijun add for uninstall shortcut -->
     <string name="shortcut_uninstalled">"已移除「<xliff:g id="NAME">%s</xliff:g>」捷徑。"</string>
+
+    <string name="layout">桌面佈局</string>
+    <string name="hide_app_title">隱藏圖標</string>
 </resources>
