@@ -942,4 +942,23 @@ public final class Utilities {
             accessibilityManager.sendAccessibilityEvent(event);
         }
     }
+
+    public static int[] getLayoutValues(Context context) {
+        String value = Utilities.getPrefs(context).getString(SettingsActivity.KEY_LAYOUT, null);
+        if (value == null || "".equals(value)) return null;
+        int[] values = new int[2];
+        if ("4.4".equals(value)) {
+            values[0] = 4;
+            values[1] = 4;
+        } else if ("5.4".equals(value)) {
+            values[0] = 5;
+            values[1] = 4;
+        } else if ("5.5".equals(value)) {
+            values[0] = 5;
+            values[1] = 5;
+        } else {
+            values = null;
+        }
+        return values;
+    }
 }

@@ -142,9 +142,15 @@ public class InvariantDeviceProfile {
                 invDistWeightedInterpolate(minWidthDps,  minHeightDps, closestProfiles);
 
         InvariantDeviceProfile closestProfile = closestProfiles.get(0);
-        numRows = closestProfile.numRows;
-        numColumns = closestProfile.numColumns;
-        Log.d("lijun22","reload here >??");
+        //lijun add for layout change
+        int[] layouts = Utilities.getLayoutValues(context);
+        if(layouts != null){
+            numRows = layouts[0];
+            numColumns = layouts[1];
+        }else {
+            numRows = closestProfile.numRows;
+            numColumns = closestProfile.numColumns;
+        }
         numHotseatIcons = closestProfile.numHotseatIcons;
         defaultLayoutId =getDefaultLayoutId(closestProfile);
         numFolderRows = closestProfile.numFolderRows;

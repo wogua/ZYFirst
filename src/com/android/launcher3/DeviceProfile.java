@@ -23,6 +23,7 @@ import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -285,6 +286,7 @@ public class DeviceProfile {
 
     private void updateIconSize(float scale, int drawablePadding, Resources res,
                                 DisplayMetrics dm) {
+        Log.d("lijun22","updateIconSize");
         iconSizePx = (int) (Utilities.pxFromDp(inv.iconSize, dm) * scale);
         iconTextSizePx = (int) (Utilities.pxFromSp(inv.iconTextSize, dm) * scale);
         iconDrawablePaddingPx = drawablePadding;

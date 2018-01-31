@@ -29,7 +29,12 @@ public class PreferenceWithTip extends ListPreference {
         super(context, attrs, defStyleAttr);
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.PreferenceWithTip);
         tipstring = ta.getString(R.styleable.PreferenceWithTip_tipstring);
-        value = Utilities.getPrefs(context).getString(SettingsActivity.KEY_LAYOUT, "");
+        value = Utilities.getPrefs(context).getString(SettingsActivity.KEY_LAYOUT, null);
+        if(value == null){
+            LauncherAppState app = LauncherAppState.getInstance();
+            InvariantDeviceProfile profile = app.getInvariantDeviceProfile();
+            value = profile.numRows+"x"+profile.numColumns;
+        }
         pTitle = ta.getString(R.styleable.PreferenceWithTip_titlestring);
         ta.recycle();
     }

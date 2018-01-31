@@ -1479,6 +1479,16 @@ public class LauncherModel extends BroadcastReceiver
             forceReload();
         }else if("com.zylauncher.ACTION_LAYOUT_CHANGE".equals(action)){
             LauncherAppState app = LauncherAppState.getInstanceNoCreate();
+            final Callbacks callbacks = getCallback();
+            if(callbacks !=null && callbacks instanceof Launcher) {
+                Launcher launcher = (Launcher) callbacks;
+                int[] layouts = Utilities.getLayoutValues(launcher);
+                if(layouts != null){
+                    launcher.getDeviceProfile().inv.numRows =layouts[0];
+                    launcher.getDeviceProfile().inv.numColumns =layouts[1];
+                }
+            }
+
             if (app != null) {
                 app.reloadWorkspace();
             }
