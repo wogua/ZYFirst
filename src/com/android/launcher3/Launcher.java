@@ -2744,7 +2744,7 @@ public class Launcher extends Activity
             closeShortcutsContainer();
         } else if (isAppsViewVisible()) {
             showWorkspace(true);
-        } else if (isWidgetsViewVisible() || isWallpaperMode()||isLauncherArrangeMode() ||isSpecialEffectMode()) {//lijun add isWallpaperMode()
+        } else if (isWidgetsViewVisible() || isWallpaperMode()||isLauncherArrangeMode() ||isSpecialEffectMode() || isLauncherHideAppMode()) {//lijun add isWallpaperMode()
           // lijun add for special effect :isSpecialEffectMode()
             //Icon Arrange begin
             if(isLauncherArrangeMode()){
@@ -2761,7 +2761,21 @@ public class Launcher extends Activity
                     showOverviewMode(true);
                     //mNavigationbar.setVisibility(View.GONE);
                 }
-            }else{
+            }else if(isLauncherHideAppMode()) {
+                Folder openFolder = mWorkspace.getOpenFolder();
+                if(openFolder!=null) {
+                    if (openFolder.isEditingName()) {
+                        openFolder.dismissEditingName();
+                    } else {
+                        closeFolder();
+                    }
+                }else{
+                    ((HideAppNavigationBar)getmHideAppNavigationbar()).onBackPressed();
+
+                    showOverviewMode(true);
+                    //mNavigationbar.setVisibility(View.GONE);
+                }
+            } else{
                 Folder.ICONARRANGING = false;
                 showOverviewMode(true);
             }
@@ -2938,6 +2952,16 @@ public class Launcher extends Activity
             }else if (tag instanceof ShortcutInfo) {
                 if(v.getParent()!=null){
                     getArrangeNavigationBar().addIconIntoNavigationbar(v);
+                }
+            }
+            return;
+        }
+        if(isLauncherHideAppMode()){
+            if (v instanceof FolderIcon) {
+                onClickFolderIcon(v);
+            }else if (tag instanceof ShortcutInfo) {
+                if(v.getParent()!=null){
+                    getmHideAppNavigationbar().addIconIntoNavigationbar(v);
                 }
             }
             return;
@@ -3952,7 +3976,9 @@ public class Launcher extends Activity
 //lijun add for arrangeMode begin
                     if(isLauncherArrangeMode()&&v.getParent().getParent() instanceof  ArrangeNavigationBar){
                         getArrangeNavigationBar(). startDrag(v,dragOptions);
-                    }else if(isArrangeBarShowing()&&(v.getTag() instanceof  FolderInfo||v.getTag() instanceof LauncherAppWidgetInfo)){
+                    }else if(isLauncherHideAppMode()&&v.getParent().getParent() instanceof  HideAppNavigationBar){
+                        getmHideAppNavigationbar().startDrag(v,dragOptions);
+                    }else if((isArrangeBarShowing()||isLauncherHideAppMode())&&(v.getTag() instanceof  FolderInfo||v.getTag() instanceof LauncherAppWidgetInfo)){
                         return false;
                     }else {
 //lijun add for arrangeMode end
@@ -6238,7 +6264,9 @@ public class Launcher extends Activity
     public HideAppNavigationBar getmHideAppNavigationbar() {
         return mHideAppNavigationbar;
     }
-
+    public boolean isLauncherHideAppMode() {
+        return (mState == State.HIDE_APP);
+    }
     private void showArrangeNavigationBar(boolean animated){
         if(mNavigationbar!=null){
             Folder.ICONARRANGING = true;

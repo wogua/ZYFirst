@@ -141,11 +141,11 @@ public class ZipIconGetter extends IconGetterAbsImpl{
     protected Drawable getIconByName(String iconName) {
         String iconPath = localDrawablelPath + "/" + iconName;
         File f = new File(iconPath);
-        Log.e(TAG,"f:"+f.getPath()+",can read : " + f.canRead()+",can write : "+f.canWrite());
+//        Log.e(TAG,"f:"+f.getPath()+",can read : " + f.canRead()+",can write : "+f.canWrite());
         Drawable drawable = null;
         float scale = 1.0f;
         if (!f.exists()) {
-            Log.e(TAG,"f2:"+f.getPath()+",can read : " + f.canRead()+",can write : "+f.canWrite());
+//            Log.e(TAG,"f2:"+f.getPath()+",can read : " + f.canRead()+",can write : "+f.canWrite());
             iconPath = mPath + mIconDpiFolderHigh + "/" + iconName;
             scale = getScaleFroDpi(mDensityDpi, true);
             f = new File(iconPath);
@@ -189,7 +189,7 @@ public class ZipIconGetter extends IconGetterAbsImpl{
     protected Uri getUriByName(String iconName) {
         String iconPath = localDrawablelPath + "/" + iconName;
         File f = new File(iconPath);
-        Log.e(TAG,"f:"+f.getPath()+",can read : " + f.canRead()+",can write : "+f.canWrite());
+//        Log.e(TAG,"f:"+f.getPath()+",can read : " + f.canRead()+",can write : "+f.canWrite());
         Drawable drawable = null;
         float scale = 1.0f;
         if (!f.exists()) {
@@ -217,7 +217,7 @@ public class ZipIconGetter extends IconGetterAbsImpl{
         try {
             String iconPath = localDrawablelPath + "/" + iconName;
             File f = new File(iconPath);
-            Log.e(TAG,"f:"+f.getPath()+",can read : " + f.canRead()+",can write : "+f.canWrite());
+//            Log.e(TAG,"f:"+f.getPath()+",can read : " + f.canRead()+",can write : "+f.canWrite());
             Drawable drawable = null;
             float scale = 1.0f;
             if (!f.exists()) {
@@ -238,9 +238,9 @@ public class ZipIconGetter extends IconGetterAbsImpl{
             options.inSampleSize = 1;
             fin = new FileInputStream(f);
             result = BitmapFactory.decodeStream(fin, null, options).copy(Bitmap.Config.ARGB_8888, true);
-            Log.d(TAG, "Bitmap iconName:" + iconName + ",icon size : " + result.getWidth() + "," + result.getHeight());
+//            Log.d(TAG, "Bitmap iconName:" + iconName + ",icon size : " + result.getWidth() + "," + result.getHeight());
             if (scale != 1.0f) {
-                Log.e(TAG, "Bitmap iconName:" + iconName + ",scale:" + scale);
+//                Log.e(TAG, "Bitmap iconName:" + iconName + ",scale:" + scale);
                 result = PhotoUtils.zoom(result, scale);
             }
         } catch (Exception e) {

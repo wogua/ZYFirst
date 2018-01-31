@@ -53,7 +53,7 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
 
     private int mIconWidth;
     private int mIconHeight;
-    private int mTargetRank=1;
+    private int mTargetRank=0;
     public HideAppNavigationBar(Context context) {
         this(context,null);
     }
@@ -106,7 +106,7 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
             Log.i(Launcher.TAG,"addViewToTheFirstPage :Something may be wrong here.view = "+view);
             ((ViewGroup)(view.getParent())).removeView(view);
         }
-        mNav.addView(view,1);
+        mNav.addView(view,0);
         view.setOnClickListener(this);
         view.setOnLongClickListener(this);
         //view.setOnKeyListener(null);
@@ -428,7 +428,7 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
             post(new Runnable() {
                 @Override
                 public void run() {
-                mLauncher.getDragLayer().animateViewIntoPosition2(dragView,v,null,null);
+                mLauncher.getDragLayer().animateViewIntoPosition4(dragView,v,-1,null,null);
                 }
             });
 
@@ -542,7 +542,7 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
         }
         mCurrentDragView=null;
         mCurrentDragArrangeInfo=null;
-        mTargetRank = 1;
+        mTargetRank = 0;
     }
 
     @Override
@@ -591,12 +591,12 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
 
         int round = Math.round(x / viewWidth);
         if(round==0){
-            return 1;
+            return 0;
         }/*else if( round>4){
             return childCount<round?childCount:round;
         }*/else {
 
-            return childCount<round?childCount:round;
+            return childCount<round?childCount-1:round-1;
         }
     }
 
@@ -667,7 +667,6 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
                     position, false);
         }
         public void startAnimation(){
-            Log.i("xxxxx","position[0] = "+position[0]+" , position[1] = "+position[1]+" info.rank = "+info.rank);
             dragView.show(position[0],position[1]);
 
             float scaleRelativeToDragLayer = 1.0f;
@@ -716,7 +715,7 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
                     icon.hideItem((ShortcutInfo) info,index);
                 }
             }else {
-                mLauncher.getDragLayer().animateViewIntoPosition2(dragView, targetView, callback, null);
+                mLauncher.getDragLayer().animateViewIntoPosition4(dragView, targetView, -1,callback, null);
             }
         }
 
