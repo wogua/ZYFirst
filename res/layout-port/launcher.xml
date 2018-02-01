@@ -216,6 +216,14 @@
                 android:clipChildren="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <com.android.launcher3.BubbleTextView
+                    style="@style/Icon"
+                    android:id="@+id/hide_app_temp"
+                    android:focusable="false"
+                    android:text="@string/hide_app_title"
+                    launcher:centerVertically="true"
+                    android:includeFontPadding="false"
+                    android:drawableTop="@drawable/ic_hide_app"/>
             </com.android.launcher3.ArrangeNavLinearLayout>
         </com.android.launcher3.HideAppNavigationBar>
 

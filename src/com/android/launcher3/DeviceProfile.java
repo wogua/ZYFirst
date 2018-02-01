@@ -656,7 +656,7 @@ public class DeviceProfile {
         }
 
         ArrangeNavigationBar bar= launcher.getArrangeNavigationBar();
-        LayoutParams lpBar = bar.getLayoutParams();
+        FrameLayout.LayoutParams lpBar = (FrameLayout.LayoutParams) bar.getLayoutParams();
         if(bar!=null){
             int totalItemWidth = availableWidthPx-getArrangeNavigationBarPadding()*2;
             lpBar.width = totalItemWidth;
@@ -674,7 +674,7 @@ public class DeviceProfile {
             lpBar2.height = (availableHeightPx - workspacePadding.top - workspacePadding.bottom)/inv.numRows;
             int visibleChildCount = 5;
             bar2.setItemWidth(totalItemWidth/visibleChildCount);
-            bar2.setLayoutParams(lpBar);
+            bar2.setLayoutParams(lpBar2);
         }
     }
 

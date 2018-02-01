@@ -185,6 +185,8 @@ public class LauncherModel extends BroadcastReceiver
     //       shortcuts within folders).
     static final ArrayList<ItemInfo> sBgWorkspaceItems = new ArrayList<ItemInfo>();
 
+    static final ArrayList<ItemInfo> sHideAppItems = new ArrayList<ItemInfo>();//lijun add
+
     // sBgAppWidgets is all LauncherAppWidgetInfo created by LauncherModel. Passed to bindAppWidget()
     static final ArrayList<LauncherAppWidgetInfo> sBgAppWidgets =
         new ArrayList<LauncherAppWidgetInfo>();
@@ -1630,6 +1632,8 @@ public class LauncherModel extends BroadcastReceiver
                 Log.d(TAG, "loadAndBindWorkspace mWorkspaceLoaded=" + mWorkspaceLoaded);
             }
 
+
+
             if (!mWorkspaceLoaded) {
                 loadWorkspace();
                 synchronized (LoaderTask.this) {
@@ -1927,6 +1931,8 @@ public class LauncherModel extends BroadcastReceiver
             InvariantDeviceProfile profile = app.getInvariantDeviceProfile();
             int countX = profile.numColumns;
             int countY = profile.numRows;
+
+            HideAppNavigationBar.loadHideAppsFromPrf(context);//lijun add
 
             boolean clearDb = false;
             try {
@@ -2306,6 +2312,10 @@ public class LauncherModel extends BroadcastReceiver
                                                 findOrMakeFolder(sBgFolders, container);
                                         folderInfo.add(info, false);
                                         break;
+                                    }
+                                    if(HideAppNavigationBar.isHideInfo(info)){
+                                        info.isHide = true;
+                                        sHideAppItems.add(info);
                                     }
                                     sBgItemsIdMap.put(info.id, info);
                                 } else {
@@ -4271,5 +4281,14 @@ public class LauncherModel extends BroadcastReceiver
                 }
             }
         }
+    }
+
+    public ItemInfo parseHideItemInfo(final String a){
+        for(ItemInfo info:sHideAppItems){
+            if(HideAppNavigationBar.parseItemInfo(info).equals(a)){
+                return info;
+            }
+        }
+        return null;
     }
 }

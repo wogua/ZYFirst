@@ -112,6 +112,8 @@ public class ItemInfo {
 
     public int unreadNum = 0;//lijun add for unread
 
+    public boolean isHide = false;
+
     public ItemInfo() {
         user = UserHandleCompat.myUserHandle();
     }

@@ -4617,6 +4617,10 @@ public class Launcher extends Activity
                 continue;
             }
 
+            if(item.isHide){
+                continue;
+            }
+
             final View view;
             switch (item.itemType) {
                 case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
@@ -4937,6 +4941,7 @@ public class Launcher extends Activity
         hideThemeChangingDialog();
         mModel.reloadForThemechanged = false;
         //lijun add for themechanged end
+        getmHideAppNavigationbar().reloadHideApps();
         Runnable r = new Runnable() {
             public void run() {
                 finishBindingItems();
