@@ -58,17 +58,24 @@ public class IconManager {
     public static synchronized IconManager getInstance(Context context, boolean useMemoryCache, boolean useSDcardCache) {
         if (mInstance == null || mRealGetter == null) {
             mInstance = new IconManager(context);
-            mRealGetter = new ZipIconGetter();
+//            mRealGetter = new ZipIconGetter();
+//            boolean inited = mRealGetter.init(context);
+//            Log.d(TAG, "getInstance 1");
+//            if (!inited) {
+//                Log.d(TAG, "getInstance 2");
+//                mRealGetter = new DefaultIconGetter();
+//                inited = mRealGetter.init(context);
+//                if (!inited) {
+//                    Log.d(TAG, "getInstance 3");
+//                    mRealGetter = null;
+//                }
+//            }
+
+            mRealGetter = new DefaultIconGetter();
             boolean inited = mRealGetter.init(context);
-            Log.d(TAG, "getInstance 1");
             if (!inited) {
-                Log.d(TAG, "getInstance 2");
-                mRealGetter = new DefaultIconGetter();
-                inited = mRealGetter.init(context);
-                if (!inited) {
-                    Log.d(TAG, "getInstance 3");
-                    mRealGetter = null;
-                }
+                Log.d(TAG, "getInstance 3");
+                mRealGetter = null;
             }
             if (inited) {
                 mBitmapCache = new BitmapCacheDelegate(context, useMemoryCache, useSDcardCache);
@@ -78,19 +85,26 @@ public class IconManager {
                     themeVersion = config[1];
                 }
 
-                checkThemeChanged(context);
+//                checkThemeChanged(context);
                 if (mRealGetter == null) {
-                    mRealGetter = new ZipIconGetter();
-                     inited = mRealGetter.init(context);
-                    Log.d(TAG, "getInstance 11");
+//                    mRealGetter = new ZipIconGetter();
+//                     inited = mRealGetter.init(context);
+//                    Log.d(TAG, "getInstance 11");
+//                    if (!inited) {
+//                        Log.d(TAG, "getInstance 22");
+//                        mRealGetter = new DefaultIconGetter();
+//                        inited = mRealGetter.init(context);
+//                        if (!inited) {
+//                            Log.d(TAG, "getInstance 33");
+//                            mRealGetter = null;
+//                        }
+//                    }
+
+                    mRealGetter = new DefaultIconGetter();
+                    inited = mRealGetter.init(context);
                     if (!inited) {
-                        Log.d(TAG, "getInstance 22");
-                        mRealGetter = new DefaultIconGetter();
-                        inited = mRealGetter.init(context);
-                        if (!inited) {
-                            Log.d(TAG, "getInstance 33");
-                            mRealGetter = null;
-                        }
+                        Log.d(TAG, "getInstance 33");
+                        mRealGetter = null;
                     }
                 }
             }
