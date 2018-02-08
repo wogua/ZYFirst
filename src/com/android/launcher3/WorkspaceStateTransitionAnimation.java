@@ -344,6 +344,7 @@ public class WorkspaceStateTransitionAnimation {
         // TODO: Animate the celllayout alpha instead of the pages.
         for (int i = 0; i < childCount; i++) {
             final CellLayout cl = (CellLayout) mWorkspace.getChildAt(i);
+            if(cl.isCustomContentPage())continue;
             float initialAlpha = cl.getShortcutsAndWidgets().getAlpha();
             float finalAlpha;
             //lijun add start

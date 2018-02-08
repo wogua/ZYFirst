@@ -6014,6 +6014,7 @@ public class Launcher extends Activity
         float childScale = progress * (1f - CellLayout.CELLLAYOUT_CONTENT_SCALE) + CellLayout.CELLLAYOUT_CONTENT_SCALE;
         for (int i = 0; i < childCount; i++) {
             final CellLayout cl = (CellLayout) mWorkspace.getChildAt(i);
+            if(cl.isCustomContentPage())continue;
             View homeButton = cl.getmHomeButton();
             ShortcutAndWidgetContainer swc = cl.getShortcutsAndWidgets();
             swc.setScaleX(childScale);

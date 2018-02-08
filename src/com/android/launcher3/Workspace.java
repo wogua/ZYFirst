@@ -1012,6 +1012,7 @@ public class Workspace extends SpecialEffectPagedView
                 mLauncher.getLayoutInflater().inflate(R.layout.workspace_screen, this, false);
         customScreen.disableDragTarget();
         customScreen.disableJailContent();
+        customScreen.setCustomContentPage();
 
         mWorkspaceScreens.put(CUSTOM_CONTENT_SCREEN_ID, customScreen);
         mScreenOrder.add(0, CUSTOM_CONTENT_SCREEN_ID);

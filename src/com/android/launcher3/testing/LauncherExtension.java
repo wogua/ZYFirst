@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 import com.android.launcher3.AppInfo;
 import com.android.launcher3.Launcher;
 import com.android.launcher3.LauncherCallbacks;
+import com.android.launcher3.R;
 import com.android.launcher3.allapps.AllAppsSearchBarController;
 import com.android.launcher3.logging.UserEventDispatcher;
 import com.android.launcher3.util.ComponentKey;
@@ -174,8 +175,10 @@ public class LauncherExtension extends Launcher {
 
         @Override
         public void populateCustomContentContainer() {
-            FrameLayout customContent = new FrameLayout(LauncherExtension.this);
-            customContent.setBackgroundColor(Color.GRAY);
+//            FrameLayout customContent = new FrameLayout(LauncherExtension.this);
+//            customContent.setBackgroundColor(Color.GRAY);
+
+            View customContent = getLayoutInflater().inflate(R.layout.custom_content_container,null);
             addToCustomContentPage(customContent, mCustomContentCallbacks, "");
         }
 
