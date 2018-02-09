@@ -35,7 +35,7 @@ public class CustomCardContainer extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-
+        initList();
     }
 
     private void initList() {
@@ -47,7 +47,11 @@ public class CustomCardContainer extends LinearLayout {
             CardInfo cardInfo = new CardInfo();
             cardInfo.title = "自定义卡片";
             cardInfo.icon = testIcon;
+            cardInfoList.add(cardInfo);
         }
+
+        mAdapter = new CardListAdapter(cardInfoList);
+        mList.setAdapter(mAdapter);
     }
 
 }

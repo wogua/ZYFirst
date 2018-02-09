@@ -14,6 +14,10 @@ public class CardListAdapter extends BaseAdapter {
 
     private List<CardInfo> mData;
 
+    public CardListAdapter(List<CardInfo> data){
+        mData = data;
+    }
+
     @Override
     public int getCount() {
         return mData.size();
