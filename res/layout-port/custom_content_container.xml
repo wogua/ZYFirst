@@ -18,13 +18,26 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#e2e4fe">
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/card_search_background"
+        android:drawableLeft="@drawable/ic_allapps_search"
+        android:textSize="14sp"
+        android:text="@string/search_hint" />
 
     <com.android.launcher3.customcontent.CustomCardListView
         android:id="@+id/custom_card_listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="15dp"
         android:listSelector="@android:color/transparent"
         android:cacheColorHint="@android:color/transparent"
         android:divider="@null"

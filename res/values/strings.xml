@@ -303,4 +303,6 @@
 
     <string name="hide_app_title">Hide apps</string>
 
+    <string name="custom_content_title">Left custom page</string>
+    <string name="search_hint">Search webs,apps,files...</string>
 </resources>

@@ -47,4 +47,11 @@
         android:persistent="true"
         />
 
+    <SwitchPreference
+        android:key="launcher_customcontent_key"
+        android:title="@string/custom_content_title"
+        android:defaultValue="@bool/custom_content_flag"
+        android:persistent="true"
+        />
+
 </PreferenceScreen>

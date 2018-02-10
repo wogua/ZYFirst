@@ -136,4 +136,6 @@
 
     <string name="layout">桌面佈局</string>
     <string name="hide_app_title">隱藏圖標</string>
+    <string name="custom_content_title">負一屏</string>
+    <string name="search_hint">搜索網頁,應用,文件...</string>
 </resources>

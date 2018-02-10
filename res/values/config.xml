@@ -134,4 +134,5 @@
     <bool name="cycle_slide_flag">true</bool>
 
     <bool name="badge_flag">true</bool>
+    <bool name="custom_content_flag">false</bool>
 </resources>
