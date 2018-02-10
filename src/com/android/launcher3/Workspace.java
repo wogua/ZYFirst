@@ -5144,6 +5144,7 @@ public class Workspace extends SpecialEffectPagedView
         Set<ItemInfo> itemInfos = children.keySet();
         PackageManager packageManager = mLauncher.getPackageManager();
         for (ItemInfo info : itemInfos) {
+            if(info == null)continue;
             if (UninstallShortcutReceiver.isDualIntent(info.getIntent())) {
                 List<ResolveInfo> resolveInfos = packageManager.queryIntentActivities(info.getIntent(), 0);
                 if (resolveInfos == null || resolveInfos.size() == 0) {
@@ -6209,27 +6210,28 @@ public class Workspace extends SpecialEffectPagedView
     public void setmDelayedResizeRunnable(Runnable runnable) {
         mDelayedResizeRunnable = runnable;
     }
-  	
-   // lijun add for hotseat icon center end
 
-  // lijun add for cycle slide start
-   public void setCycleSlideFlag(){
-     cycleSlideFlag  = Utilities.getPrefs(mLauncher).getBoolean(SpecialEffectPagedView.SPECIAL_EFFECT_CYCLE_SLIDE, true);
-   }
-   
-  protected boolean isNormalState(){
-    if(cycleSlideFlag && mState == State.NORMAL){
-	return true;
+    // lijun add for hotseat icon center end
+
+    // lijun add for cycle slide start
+    public void setCycleSlideFlag() {
+        cycleSlideFlag = Utilities.getPrefs(mLauncher).getBoolean(SpecialEffectPagedView.SPECIAL_EFFECT_CYCLE_SLIDE, true)
+                && !Utilities.getPrefs(mLauncher).getBoolean(SettingsActivity.KEY_CUSTOM_CONTENT, false);
     }
-	return false;
-  }  
- // lijun add for cycle slide end
- 
- // lijun add for special effect  start
+
+    protected boolean isNormalState() {
+        if (cycleSlideFlag && mState == State.NORMAL) {
+            return true;
+        }
+        return false;
+    }
+    // lijun add for cycle slide end
+
+    // lijun add for special effect  start
     public boolean inScaleState() {
-        return  mState==State.OVERVIEW
-                || mState== OVERVIEW_HIDDEN
-                || mState==State.SPRING_LOADED;
+        return mState == State.OVERVIEW
+                || mState == OVERVIEW_HIDDEN
+                || mState == State.SPRING_LOADED;
     }
 
     private class ScrollEffectAnimator implements Runnable {

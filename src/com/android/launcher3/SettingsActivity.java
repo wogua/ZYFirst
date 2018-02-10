@@ -28,6 +28,7 @@ import android.preference.PreferenceFragment;
 public class SettingsActivity extends Activity {
 
     public static final String KEY_LAYOUT = "launcher_layout";
+    public static final String KEY_CUSTOM_CONTENT = "launcher_customcontent_key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
