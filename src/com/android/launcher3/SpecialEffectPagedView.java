@@ -263,7 +263,7 @@ public class SpecialEffectPagedView extends SlidePagedView {
 
     protected void drawScreen(Canvas canvas, int screen, long drawingTime) {
         if(mLauncher.getDragController().isDragging()
-            || (!isPageMoving()) || reordering){
+            || (!isPageMoving()) || reordering || mLauncher.isLandscape){
             super.drawScreen(canvas, screen, drawingTime);
             return;
         }
