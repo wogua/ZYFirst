@@ -2138,11 +2138,9 @@ public class Workspace extends SpecialEffectPagedView
     }
 
     private void updatePageAlphaValues(int screenCenter) {
-		// lijun add for bug2696 :mLauncher.isUninstallMode
         if (mLauncher.isUninstallMode ||mPrepareUninstallMode||
 			(mWorkspaceFadeInAdjacentScreens &&
-                //!workspaceInModalState() && // lijun del for set alpha
-                !inModalStateSetAlpha() &&  // lijun add for set alpha
+                !inModalStateSetAlpha() &&
                 !mIsSwitchingState)) {
 
             for (int i = numCustomPages(); i < getChildCount(); i++) {
@@ -2150,8 +2148,10 @@ public class Workspace extends SpecialEffectPagedView
                 if (child != null) {
                     float scrollProgress = getScrollProgress(screenCenter, child, i);
                     float alpha = 1 - Math.abs(scrollProgress);
-					// lijun add for bug2696 :mLauncher.isUninstallMode
-					// lijun add for cycle slide start
+                    if(mLauncher.isLandscape){
+                        child.getShortcutsAndWidgets().setAlpha(alpha);
+                        continue;
+                    }
 					float childAlpha = child.getShortcutsAndWidgets().getAlpha();
 					if(mPrepareUninstallMode || mLauncher.isUninstallMode){
 						if(alpha > 0){
@@ -2167,13 +2167,8 @@ public class Workspace extends SpecialEffectPagedView
 					  }else{
 					     continue;
 					  }
-                	}   					
-					/* if((isNormalState() && alpha <= 0)
-					  ||((!mLauncher.isUninstallMode&&!mPrepareUninstallMode) && (getState()==State.SPRING_LOADED&&alpha==0))){
-                        //mPrepareUninstallMode = false;
-					  continue;
-					} */
-					// lijun add for cycle slide end
+                	}
+
                     child.getShortcutsAndWidgets().setAlpha(alpha);
 					
                     if (isQsbContainerPage(i)) {
@@ -2181,7 +2176,6 @@ public class Workspace extends SpecialEffectPagedView
                     }
                 }
             }
-            //mPrepareUninstallMode = false;
         }
     }
 

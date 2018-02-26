@@ -23,6 +23,7 @@ public class PreferenceWithTip extends ListPreference {
     TextView pTipView;
     String value;
 
+    String rawValue;
     View tempView;
 
     public PreferenceWithTip(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -35,8 +36,10 @@ public class PreferenceWithTip extends ListPreference {
             InvariantDeviceProfile profile = app.getInvariantDeviceProfile();
             value = profile.numRows+"x"+profile.numColumns;
         }
+        rawValue = value.replace("x",".");
         pTitle = ta.getString(R.styleable.PreferenceWithTip_titlestring);
         ta.recycle();
+        setValue(rawValue);
     }
 
     public PreferenceWithTip(Context context, AttributeSet attrs) {

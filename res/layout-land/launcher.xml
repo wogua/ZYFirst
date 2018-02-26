@@ -80,6 +80,7 @@
 
         <!--lijun add start for cube pageindicator -->
         <include layout="@layout/page_indicator_dots"
+            android:visibility="gone"
             android:id="@+id/page_indicator_dots" />
         <include
             layout="@layout/page_indicator_cube"
@@ -181,6 +182,7 @@
             </com.android.launcher3.ArrangeNavLinearLayout>
         </com.android.launcher3.ArrangeNavigationBar>
 
+        <!-- lijun add hide app bar -->
         <com.android.launcher3.HideAppNavigationBar
             android:id="@+id/hide_app_navigationbar"
             android:scrollbars="horizontal"
@@ -194,6 +196,7 @@
             android:clipChildren="false"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
+            android:background="#28ffffff"
             android:visibility="gone">
             <com.android.launcher3.ArrangeNavLinearLayout
                 android:id="@+id/hide_app_nav_linear"
@@ -202,6 +205,14 @@
                 android:clipChildren="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <com.android.launcher3.BubbleTextView
+                    style="@style/Icon"
+                    android:id="@+id/hide_app_temp"
+                    android:focusable="false"
+                    android:text="@string/hide_app_title"
+                    launcher:centerVertically="true"
+                    android:includeFontPadding="false"
+                    android:drawableTop="@drawable/ic_hide_app"/>
             </com.android.launcher3.ArrangeNavLinearLayout>
         </com.android.launcher3.HideAppNavigationBar>
    <!-- lijun add for special effect start -->

@@ -374,7 +374,11 @@ public class PageIndicatorCube extends LinearLayout implements DropTarget {
         if (showFull) {
             addView(leftScrollIndicatorMarker, 0);
         }
-        leftScrollIndicatorMarker.setVisibility(showLeftScrollIndicator ? View.VISIBLE : View.INVISIBLE);
+        if(mLauncher.isLandscape){
+            leftScrollIndicatorMarker.setVisibility(GONE);
+        }else {
+            leftScrollIndicatorMarker.setVisibility(showLeftScrollIndicator ? View.VISIBLE : View.INVISIBLE);
+        }
         for (int i = 0; i < mMarkers.size(); ++i) {
             PageIndicatorMarker marker = (PageIndicatorMarker) mMarkers.get(i);
             if (windowStart <= i && i <= windowEnd) {
@@ -395,7 +399,11 @@ public class PageIndicatorCube extends LinearLayout implements DropTarget {
 //            addView(rightScrollIndicatorMarker, windowStart - windowEnd + 2);
             addView(rightScrollIndicatorMarker);
         }
-        rightScrollIndicatorMarker.setVisibility(showRightScrollIndicator ? View.VISIBLE : View.INVISIBLE);
+        if(mLauncher.isLandscape){
+            rightScrollIndicatorMarker.setVisibility(GONE);
+        }else {
+            rightScrollIndicatorMarker.setVisibility(showRightScrollIndicator ? View.VISIBLE : View.INVISIBLE);
+        }
         if (!allowAnimations) {
 //            enableLayoutTransitions();
         }
@@ -445,7 +453,11 @@ public class PageIndicatorCube extends LinearLayout implements DropTarget {
         if (showFull) {
             addView(leftScrollIndicatorMarker, 0);
         }
-        leftScrollIndicatorMarker.setVisibility(showLeftScrollIndicator ? View.VISIBLE : View.INVISIBLE);
+        if(mLauncher.isLandscape){
+            leftScrollIndicatorMarker.setVisibility(GONE);
+        }else {
+            leftScrollIndicatorMarker.setVisibility(showLeftScrollIndicator ? View.VISIBLE : View.INVISIBLE);
+        }
         for (int i = 0; i < mMarkers.size(); ++i) {
             PageIndicatorMarker marker =  mMarkers.get(i);
             if (windowStart <= i && i <= windowEnd) {
@@ -465,7 +477,11 @@ public class PageIndicatorCube extends LinearLayout implements DropTarget {
         if (showFull) {
             addView(rightScrollIndicatorMarker, windowStart - windowEnd + 2);
         }
-        rightScrollIndicatorMarker.setVisibility(showRightScrollIndicator ? View.VISIBLE : View.INVISIBLE);
+        if(mLauncher.isLandscape){
+            rightScrollIndicatorMarker.setVisibility(GONE);
+        }else {
+            rightScrollIndicatorMarker.setVisibility(showRightScrollIndicator ? View.VISIBLE : View.INVISIBLE);
+        }
 
         mWindowRange[0] = windowStart;
         mWindowRange[1] = windowEnd;
@@ -1295,5 +1311,14 @@ public class PageIndicatorCube extends LinearLayout implements DropTarget {
         
     }
     // lijun add for hotseat icon center end
+
+    @Override
+    public void setVisibility(int visibility) {
+        if(mLauncher.isLandscape && visibility!= View.GONE){
+            super.setVisibility(View.GONE);
+        }else {
+            super.setVisibility(visibility);
+        }
+    }
 
 }

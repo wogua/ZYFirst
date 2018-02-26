@@ -164,7 +164,9 @@ public class PageIndicatorManager {
                     mLauncher.showOverviewMode(true);
                 }
             };
-            mPageIndicatorDots.setOnClickListener(listener);
+            if(!mLauncher.isLandscape){
+                mPageIndicatorDots.setOnClickListener(listener);
+            }
         }
     }
 
@@ -180,6 +182,10 @@ public class PageIndicatorManager {
 
     public void showCubeIndicator(){
         if(!ONDRAGING && mPageIndicatorDots !=null && mPageIndicatorCube!= null) {
+            if(mLauncher.isLandscape){
+                mPageIndicatorCube.setVisibility(View.GONE);
+                mPageIndicatorDots.setVisibility(View.GONE);
+            }
             mPageIndicatorDots.setOnTouchListener(null);
             mWorkspace.refreshviewCaches();
             ONDRAGING = true;
@@ -191,7 +197,10 @@ public class PageIndicatorManager {
     }
     public void hideCubeIndicator(){
         if(mPageIndicatorDots !=null && mPageIndicatorCube!= null) {
-
+            if(mLauncher.isLandscape){
+                mPageIndicatorCube.setVisibility(View.GONE);
+                mPageIndicatorDots.setVisibility(View.GONE);
+            }
             mPageIndicatorDots.setOnTouchListener(mCircleIndicatorTouchListener);
             ONDRAGING = false;
             if(mLauncher != null && mLauncher.getDragController()!= null){

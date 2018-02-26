@@ -245,6 +245,8 @@ public class Launcher extends Activity
     private static int NEW_APPS_ANIMATION_INACTIVE_TIMEOUT_SECONDS = 5;
     @Thunk static int NEW_APPS_ANIMATION_DELAY = 500;
 
+    public boolean isLandscape = false;
+
     //lijun add for permission check
     public static String[] sAllPermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE};//,Manifest.permission.READ_SMS,Manifest.permission.READ_CALL_LOG
 
@@ -477,6 +479,12 @@ public class Launcher extends Activity
         }
         if (LauncherAppState.PROFILE_STARTUP) {
             Trace.beginSection("Launcher-onCreate");
+        }
+
+        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            isLandscape = false;
+        } else {
+            isLandscape = true;
         }
 
         ColorManager.getInstance().removeAllCallBacks();//lijun add

@@ -29,6 +29,7 @@ import android.graphics.Outline;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.RectF;
+import android.support.annotation.IntDef;
 import android.util.AttributeSet;
 import android.util.Property;
 import android.view.MotionEvent;
@@ -501,5 +502,14 @@ public class PageIndicatorDots extends PageIndicator implements ColorManager.IWa
 
     private boolean isVisible() {
         return this.getVisibility() == View.VISIBLE && this.getAlpha() > 0.01f;
+    }
+
+    @Override
+    public void setVisibility(int visibility) {
+        if(mLauncher.isLandscape && visibility!= View.GONE){
+            super.setVisibility(View.GONE);
+        }else {
+            super.setVisibility(visibility);
+        }
     }
 }
