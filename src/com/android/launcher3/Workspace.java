@@ -2148,14 +2148,14 @@ public class Workspace extends SpecialEffectPagedView
                 if (child != null) {
                     float scrollProgress = getScrollProgress(screenCenter, child, i);
                     float alpha = 1 - Math.abs(scrollProgress);
-                    if(mLauncher.isLandscape ){
-                        if(mState == State.OVERVIEW || mState == State.OVERVIEW_HIDDEN){
-                            child.getShortcutsAndWidgets().setAlpha(1.0f);
-                        }else {
-                            child.getShortcutsAndWidgets().setAlpha(alpha);
-                        }
-                        continue;
-                    }
+//                    if(mLauncher.isLandscape ){
+//                        if(mState == State.OVERVIEW || mState == State.OVERVIEW_HIDDEN){
+//                            child.getShortcutsAndWidgets().setAlpha(1.0f);
+//                        }else {
+//                            child.getShortcutsAndWidgets().setAlpha(alpha);
+//                        }
+//                        continue;
+//                    }
 					float childAlpha = child.getShortcutsAndWidgets().getAlpha();
 					if(mPrepareUninstallMode || mLauncher.isUninstallMode){
 						if(alpha > 0){
@@ -2564,7 +2564,8 @@ public class Workspace extends SpecialEffectPagedView
         int workspaceBottom = getViewportHeight() - mInsets.bottom;
         Resources res = mLauncher.getResources();
         float a = 1- (res.getInteger(R.integer.config_workspaceOverviewShrinkPercentage)/100f);
-        return (int) (( workspaceTop - workspaceBottom)*a*0.3);
+        int temp = mLauncher.isLandscape?-35:0;
+        return (int) (( workspaceTop - workspaceBottom)*a*0.3) + temp;
     }
 
     float getSpringLoadedTranslationY() {

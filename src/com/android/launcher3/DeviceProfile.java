@@ -465,7 +465,8 @@ public class DeviceProfile {
         }
     }
 
-    private int getWorkspacePageSpacing() {
+    public int getWorkspacePageSpacing() {
+        Log.d("lijun222","defaultPageSpacingPx="+defaultPageSpacingPx+",getWorkspacePadding(null)="+getWorkspacePadding(null).left+","+getWorkspacePadding(null).top+","+getWorkspacePadding(null).right+","+getWorkspacePadding(null).bottom);
         if (isVerticalBarLayout() || isLargeTablet) {
             // In landscape mode the page spacing is set to the default.
             return defaultPageSpacingPx;

@@ -169,8 +169,8 @@ import java.util.List;
  */
 public class Launcher extends Activity
         implements LauncherExterns, View.OnClickListener, OnLongClickListener,
-                   LauncherModel.Callbacks, View.OnTouchListener, LauncherProviderChangeListener,
-                   AccessibilityManager.AccessibilityStateChangeListener ,ColorManager.IWallpaperChange ,LauncherBadgeProvider.BadgeChangedCallBack{//lijun add ColorManager.IWallpaperChange LauncherBadgeProvider.BadgeChangedCallBack
+        LauncherModel.Callbacks, View.OnTouchListener, LauncherProviderChangeListener,
+        AccessibilityManager.AccessibilityStateChangeListener, ColorManager.IWallpaperChange, LauncherBadgeProvider.BadgeChangedCallBack {//lijun add ColorManager.IWallpaperChange LauncherBadgeProvider.BadgeChangedCallBack
     public static final String TAG = "Launcher";
     static final boolean LOGD = true;
 
@@ -221,16 +221,22 @@ public class Launcher extends Activity
 
     static final String APPS_VIEW_SHOWN = "launcher.apps_view_shown";
 
-    /** The different states that Launcher can be in. */
-    public enum State { NONE, WORKSPACE, WORKSPACE_SPRING_LOADED, APPS, APPS_SPRING_LOADED,
-        WIDGETS, WIDGETS_SPRING_LOADED,FOLDER_IMPORT,WALLPAPER ,ICONARRANGE,SPECIALEFFECT,HIDE_APP}//lijun add UNINSTALL_NORMAL mode
+    /**
+     * The different states that Launcher can be in.
+     */
+    public enum State {
+        NONE, WORKSPACE, WORKSPACE_SPRING_LOADED, APPS, APPS_SPRING_LOADED,
+        WIDGETS, WIDGETS_SPRING_LOADED, FOLDER_IMPORT, WALLPAPER, ICONARRANGE, SPECIALEFFECT, HIDE_APP
+    }//lijun add UNINSTALL_NORMAL mode
 
     public State getState() {
         return mState;
     }
 
-    @Thunk State mState = State.WORKSPACE;
-    @Thunk LauncherStateTransitionAnimation mStateTransitionAnimation;
+    @Thunk
+    State mState = State.WORKSPACE;
+    @Thunk
+    LauncherStateTransitionAnimation mStateTransitionAnimation;
 
     private boolean mIsSafeModeEnabled;
 
@@ -242,12 +248,13 @@ public class Launcher extends Activity
     // How long to wait before the new-shortcut animation automatically pans the workspace
     private static int NEW_APPS_PAGE_MOVE_DELAY = 500;
     private static int NEW_APPS_ANIMATION_INACTIVE_TIMEOUT_SECONDS = 5;
-    @Thunk static int NEW_APPS_ANIMATION_DELAY = 500;
+    @Thunk
+    static int NEW_APPS_ANIMATION_DELAY = 500;
 
     public boolean isLandscape = false;
 
     //lijun add for permission check
-    public static String[] sAllPermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE};//,Manifest.permission.READ_SMS,Manifest.permission.READ_CALL_LOG
+    public static String[] sAllPermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};//,Manifest.permission.READ_SMS,Manifest.permission.READ_CALL_LOG
 
     private final BroadcastReceiver mUiBroadcastReceiver = new BroadcastReceiver() {
 
@@ -261,9 +268,11 @@ public class Launcher extends Activity
         }
     };
 
-    @Thunk public Workspace mWorkspace;
+    @Thunk
+    public Workspace mWorkspace;
     private View mLauncherView;
-    @Thunk DragLayer mDragLayer;
+    @Thunk
+    DragLayer mDragLayer;
     private DragController mDragController;
     private View mQsbContainer;
 
@@ -274,7 +283,8 @@ public class Launcher extends Activity
 
     private int[] mTmpAddItemCellCoordinates = new int[2];
 
-    @Thunk Hotseat mHotseat;
+    @Thunk
+    Hotseat mHotseat;
     private ViewGroup mOverviewPanel;
 
     private View mAllAppsButton;
@@ -302,7 +312,8 @@ public class Launcher extends Activity
     private DropTargetBar mDropTargetBar;
 
     // Main container view for the all apps screen.
-    @Thunk AllAppsContainerView mAppsView;
+    @Thunk
+    AllAppsContainerView mAppsView;
     AllAppsTransitionController mAllAppsController;
 
     // Main container view and the model for the widget tray screen.
@@ -312,7 +323,8 @@ public class Launcher extends Activity
     BaseWidgetsContainerView mWidgetsView;//lijun modify WidgetsContainerView to BaseWidgetsContainerView
     //lijun modify end
 
-    @Thunk WidgetsModel mWidgetsModel;
+    @Thunk
+    WidgetsModel mWidgetsModel;
 
     private Bundle mSavedState;
     // We set the state in both onCreate and then onNewIntent in some cases, which causes both
@@ -322,7 +334,8 @@ public class Launcher extends Activity
 
     private SpannableStringBuilder mDefaultKeySsb = null;
 
-    @Thunk boolean mWorkspaceLoading = true;
+    @Thunk
+    boolean mWorkspaceLoading = true;
 
     private boolean mPaused = true;
     private boolean mOnResumeNeedsLoad;
@@ -336,12 +349,15 @@ public class Launcher extends Activity
     private ExtractedColors mExtractedColors;
     private LauncherAccessibilityDelegate mAccessibilityDelegate;
     private boolean mIsResumeFromActionScreenOff;
-    @Thunk boolean mUserPresent = true;
+    @Thunk
+    boolean mUserPresent = true;
     private boolean mVisible;
     private boolean mHasFocus;
     private boolean mAttached;
 
-    /** Maps launcher activity components to their list of shortcut ids. */
+    /**
+     * Maps launcher activity components to their list of shortcut ids.
+     */
     private MultiHashMap<ComponentKey, String> mDeepShortcutMap = new MultiHashMap<>();
 
     private View.OnTouchListener mHapticFeedbackTouchListener;
@@ -356,7 +372,8 @@ public class Launcher extends Activity
     private boolean mAutoAdvanceRunning = false;
     private long mAutoAdvanceSentTime;
     private long mAutoAdvanceTimeLeft = -1;
-    @Thunk HashMap<View, AppWidgetProviderInfo> mWidgetsToAdvance = new HashMap<>();
+    @Thunk
+    HashMap<View, AppWidgetProviderInfo> mWidgetsToAdvance = new HashMap<>();
 
     // Determines how long to wait after a rotation before restoring the screen orientation to
     // match the sensor state.
@@ -370,7 +387,8 @@ public class Launcher extends Activity
 
     // Holds the page that we need to animate to, and the icon views that we need to animate up
     // when we scroll to that page on resume.
-    @Thunk ImageView mFolderIconImageView;
+    @Thunk
+    ImageView mFolderIconImageView;
     private Bitmap mFolderIconBitmap;
     private Canvas mFolderIconCanvas;
     private Rect mRectForFolderAnimation = new Rect();
@@ -420,7 +438,8 @@ public class Launcher extends Activity
     // simply unregister this runnable.
     private Runnable mExitSpringLoadedModeRunnable;
 
-    @Thunk Runnable mBuildLayersRunnable = new Runnable() {
+    @Thunk
+    Runnable mBuildLayersRunnable = new Runnable() {
         public void run() {
             if (mWorkspace != null) {
                 mWorkspace.buildPageHardwareLayers();
@@ -445,7 +464,9 @@ public class Launcher extends Activity
     //uninstallMode   add by lijun
     public boolean isUninstallMode = false;
     private boolean comfirmingUninstall;
-    @Thunk void setOrientation() {
+
+    @Thunk
+    void setOrientation() {
         if (mRotationEnabled) {
             unlockScreenOrientation(true);
         } else {
@@ -456,7 +477,7 @@ public class Launcher extends Activity
 
     private RotationPrefChangeHandler mRotationPrefChangeHandler;
 
-	private PreviewContainer mPreviewContainer; // lijun add for special effect
+    private PreviewContainer mPreviewContainer; // lijun add for special effect
 
     private BadgeController mBadgeController;//lijun add for unread
 
@@ -600,6 +621,7 @@ public class Launcher extends Activity
 
     /**
      * Sets the status bar to be light or not. Light status bar means dark icons.
+     *
      * @param activate if true, make sure the status bar is light, otherwise base on wallpaper.
      */
     public void activateLightStatusBar(boolean activate) {
@@ -695,7 +717,9 @@ public class Launcher extends Activity
         }
     }
 
-    /** To be overridden by subclasses to hint to Launcher that we have custom content */
+    /**
+     * To be overridden by subclasses to hint to Launcher that we have custom content
+     */
     protected boolean hasCustomContentToLeft() {
         if (mLauncherCallbacks != null) {
             return mLauncherCallbacks.hasCustomContentToLeft();
@@ -949,9 +973,11 @@ public class Launcher extends Activity
         //lijun add end
     }
 
-    /** @Override for MNC */
+    /**
+     * @Override for MNC
+     */
     public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            int[] grantResults) {
+                                           int[] grantResults) {
         PendingRequestArgs pendingArgs = mPendingRequestArgs;
         if (requestCode == REQUEST_PERMISSION_CALL_PHONE && pendingArgs != null
                 && pendingArgs.getRequestCode() == REQUEST_PERMISSION_CALL_PHONE) {
@@ -972,7 +998,7 @@ public class Launcher extends Activity
                 Toast.makeText(this, getString(R.string.msg_no_phone_permission,
                         getString(R.string.derived_app_name)), Toast.LENGTH_SHORT).show();
             }
-        }else if(requestCode == REQUEST_PERMISSION_ALL){//lijun add for checkAllPermission
+        } else if (requestCode == REQUEST_PERMISSION_ALL) {//lijun add for checkAllPermission
             if (grantResults.length > 0) {
 //                updateSDCache();
             }
@@ -1001,7 +1027,8 @@ public class Launcher extends Activity
         }
     }
 
-    @Thunk void completeTwoStageWidgetDrop(
+    @Thunk
+    void completeTwoStageWidgetDrop(
             final int resultCode, final int appWidgetId, final PendingRequestArgs requestArgs) {
         CellLayout cellLayout = mWorkspace.getScreenWithId(requestArgs.screenId);
         Runnable onCompleteRunnable = null;
@@ -1101,7 +1128,7 @@ public class Launcher extends Activity
         mOnResumeState = State.NONE;
 
         //lijun add for theme changed start
-        if(mModel.reloadForThemechanged && mModel.getCallback() == this){
+        if (mModel.reloadForThemechanged && mModel.getCallback() == this) {
             IconManager.getInstance(getApplicationContext());
             mModel.reloadForThemechanged = false;
             showThemeChangingDialog();
@@ -1127,7 +1154,7 @@ public class Launcher extends Activity
             mBindOnResumeCallbacks.clear();
             if (DEBUG_RESUME_TIME) {
                 Log.d(TAG, "Time spent processing callbacks in onResume: " +
-                    (System.currentTimeMillis() - startTimeCallbacks));
+                        (System.currentTimeMillis() - startTimeCallbacks));
             }
         }
         if (mOnResumeCallbacks.size() > 0) {
@@ -1189,7 +1216,7 @@ public class Launcher extends Activity
         if (mLauncherCallbacks != null) {
             mLauncherCallbacks.onResume();
         }
-		mWorkspace.setCycleSlideFlag(); // lijun add for cycle slide
+        mWorkspace.setCycleSlideFlag(); // lijun add for cycle slide
         BadgeController.sBadgeEnable = Utilities.getPrefs(this).getBoolean(BadgeController.BADGE_PREFERENCE_KEY, true);
     }
 
@@ -1214,7 +1241,7 @@ public class Launcher extends Activity
         }
         cancelToast();//lijun add
         //lijun add
-        if(mEditFolderIcon!=null&&getImportMode()) {
+        if (mEditFolderIcon != null && getImportMode()) {
             forceExitImportMode();
         }
     }
@@ -1254,6 +1281,7 @@ public class Launcher extends Activity
 
         /**
          * Called when the launcher is ready to use the overlay
+         *
          * @param callbacks A set of callbacks provided by Launcher in relation to the overlay
          */
         public void setOverlayCallbacks(LauncherOverlayCallbacks callbacks);
@@ -1298,7 +1326,7 @@ public class Launcher extends Activity
     }
 
     public void addToCustomContentPage(View customContent,
-            CustomContentCallbacks callbacks, String description) {
+                                       CustomContentCallbacks callbacks, String description) {
         mWorkspace.addToCustomContentPage(customContent, callbacks, description);
     }
 
@@ -1383,7 +1411,7 @@ public class Launcher extends Activity
 
                 // Show the overview mode if we are on the workspace
                 if (mState == State.WORKSPACE && !mWorkspace.isInOverviewMode() &&
-                        !mWorkspace.isSwitchingState() && mWorkspace.getState()!= Workspace.State.OVERVIEW_HIDDEN) {//lijun add '&& mWorkspace.getState()!= Workspace.State.OVERVIEW_HIDDEN' for bug:257
+                        !mWorkspace.isSwitchingState() && mWorkspace.getState() != Workspace.State.OVERVIEW_HIDDEN) {//lijun add '&& mWorkspace.getState()!= Workspace.State.OVERVIEW_HIDDEN' for bug:257
                     mOverviewPanel.requestFocus();
                     showOverviewMode(true, true /* requestButtonFocus */);
                 }
@@ -1457,10 +1485,10 @@ public class Launcher extends Activity
         mDragLayer = (DragLayer) findViewById(R.id.drag_layer);
         mFocusHandler = mDragLayer.getFocusIndicatorHelper();
         mWorkspace = (Workspace) mDragLayer.findViewById(R.id.workspace);
-        if(FeatureFlags.LAUNCHER3_ENABLE_QUICKSEARCHBAR){
+        if (FeatureFlags.LAUNCHER3_ENABLE_QUICKSEARCHBAR) {
             mQsbContainer = mDragLayer.findViewById(mDeviceProfile.isVerticalBarLayout()
                     ? R.id.workspace_blocked_row : R.id.qsb_container);
-        }else{
+        } else {
             mQsbContainer = mDragLayer.findViewById(mDeviceProfile.isVerticalBarLayout()
                     ? R.id.workspace_blocked_row : R.id.qsb_container);
             mDragLayer.removeView(mQsbContainer);
@@ -1495,10 +1523,10 @@ public class Launcher extends Activity
         mWorkspace.lockWallpaperToDefaultPage();
         mWorkspace.bindAndInitFirstWorkspaceScreen(null /* recycled qsb */);
         mDragController.addDragListener(mWorkspace);
-        if(FeatureFlags.LAUNCHER3_LEGACY_DELETEDROPTARGET){
+        if (FeatureFlags.LAUNCHER3_LEGACY_DELETEDROPTARGET) {
             // Get the search/delete/uninstall bar
             mDropTargetBar = (DropTargetBar) mDragLayer.findViewById(R.id.drop_target_bar);
-        }else{
+        } else {
             mDropTargetBar = (DropTargetBar) mDragLayer.findViewById(R.id.drop_target_bar);
             mDragLayer.removeView(mDropTargetBar);
         }
@@ -1509,12 +1537,14 @@ public class Launcher extends Activity
         // Setup Apps and Widgets
         mAppsView = (AllAppsContainerView) findViewById(R.id.apps_view);
         //lijun modify for WIDGETS_CONTAINER_PAGE
-        BaseWidgetsContainerView tempWidgetsPagedView = (WidgetsContainerPagedView) findViewById(R.id.widgets_paged_view);;
-        BaseWidgetsContainerView tempWidgetsdView = (WidgetsContainerView) findViewById(R.id.widgets_view);;
-        if(FeatureFlags.WIDGETS_CONTAINER_PAGE) {
+        BaseWidgetsContainerView tempWidgetsPagedView = (WidgetsContainerPagedView) findViewById(R.id.widgets_paged_view);
+        ;
+        BaseWidgetsContainerView tempWidgetsdView = (WidgetsContainerView) findViewById(R.id.widgets_view);
+        ;
+        if (FeatureFlags.WIDGETS_CONTAINER_PAGE) {
             mWidgetsView = tempWidgetsPagedView;
             tempWidgetsdView.setVisibility(View.GONE);
-        }else {
+        } else {
             mWidgetsView = tempWidgetsdView;
             tempWidgetsPagedView.setVisibility(View.GONE);
         }
@@ -1530,7 +1560,7 @@ public class Launcher extends Activity
         mDragController.setScrollView(mDragLayer);
         mDragController.setMoveTarget(mWorkspace);
         mDragController.addDropTarget(mWorkspace);
-        if(FeatureFlags.LAUNCHER3_LEGACY_DELETEDROPTARGET) {
+        if (FeatureFlags.LAUNCHER3_LEGACY_DELETEDROPTARGET) {
             mDropTargetBar.setup(mDragController);
         }
 
@@ -1544,7 +1574,7 @@ public class Launcher extends Activity
 
         //lijun add for pageIndicator
         mPageIndicatorDiagital = (PageIndicatorDiagitalImagview) findViewById(R.id.page_indicator_digital);
-        if(FeatureFlags.SHOW_PAGEINDICATOR_CUBE && mPageIndicatorDiagital != null){
+        if (FeatureFlags.SHOW_PAGEINDICATOR_CUBE && mPageIndicatorDiagital != null) {
             mPageIndicatorDiagital.setVisibility(View.GONE);
         }
         //lijun add end
@@ -1552,16 +1582,16 @@ public class Launcher extends Activity
 
         //lijun add for addIcon
         mFolderImportContainer = (LinearLayout) findViewById(R.id.folder_importmode_button_container);
-        mFolderImportButton=(Button)findViewById(R.id.folder_importmode_button);
+        mFolderImportButton = (Button) findViewById(R.id.folder_importmode_button);
         mFolderImportButton.setOnClickListener(this);
         mFolderImportButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     v.getBackground().setAlpha(127);
-                }else if(event.getAction() == MotionEvent.ACTION_UP){
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     v.getBackground().setAlpha(226);
-                }else if(event.getAction() == MotionEvent.ACTION_CANCEL){
+                } else if (event.getAction() == MotionEvent.ACTION_CANCEL) {
                     v.getBackground().setAlpha(226);
                 }
                 return false;
@@ -1571,12 +1601,12 @@ public class Launcher extends Activity
         //lijun end
         //lijun add the background of workspace when opening folder begin
         mWorkspaceBg = (ImageView) findViewById(R.id.img_workspace_bg);
-         setWallPaperBlur(null, false);
+        setWallPaperBlur(null, false);
         //lijun end
 
         //lijun add for wallpaper
         mWallpaperPicker = (WallpaperPagedViewContainer) findViewById(R.id.wallpaper_picker);
-        mVulvanClearBuuton =findViewById(R.id.valcants_clear_button);
+        mVulvanClearBuuton = findViewById(R.id.valcants_clear_button);
         mVulvanClearBuuton.setOnClickListener(buttonClickLisener);
 
         //lijun add for alinebutton
@@ -1587,9 +1617,9 @@ public class Launcher extends Activity
         mNavigationbar = (ArrangeNavigationBar) findViewById(R.id.navigationbar);
         //Icon Arrange begin
 
-     // lijun add for special effect start
-        mPreviewContainer = (PreviewContainer)findViewById(R.id.specialeffect_container);      
-	 // lijun add for special effect end
+        // lijun add for special effect start
+        mPreviewContainer = (PreviewContainer) findViewById(R.id.specialeffect_container);
+        // lijun add for special effect end
 
         mHideAppNavigationbar = (HideAppNavigationBar) findViewById(R.id.hide_app_navigationbar);
     }
@@ -1624,7 +1654,7 @@ public class Launcher extends Activity
         specialEffectButton.setOnTouchListener(getHapticFeedbackTouchListener());
 
         mSettingsButton = findViewById(R.id.settings_button);
-		 // lijun add for special effect
+        // lijun add for special effect
         boolean hasSettings = hasSettings();
         if (hasSettings) {
             mSettingsButton.setOnClickListener(buttonClickLisener);
@@ -1642,7 +1672,7 @@ public class Launcher extends Activity
         mOverviewPanel.setAlpha(0f);
     }
 
-    private View.OnClickListener buttonClickLisener = new View.OnClickListener(){
+    private View.OnClickListener buttonClickLisener = new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {
@@ -1702,8 +1732,7 @@ public class Launcher extends Activity
      * Creates a view representing a shortcut inflated from the specified resource.
      *
      * @param parent The group the shortcut belongs to.
-     * @param info The data structure describing the shortcut.
-     *
+     * @param info   The data structure describing the shortcut.
      * @return A View inflated from layoutResId.
      */
     public View createShortcut(ViewGroup parent, ShortcutInfo info) {
@@ -1725,7 +1754,7 @@ public class Launcher extends Activity
      * @param data The intent describing the shortcut.
      */
     private void completeAddShortcut(Intent data, long container, long screenId, int cellX,
-            int cellY, PendingRequestArgs args) {
+                                     int cellY, PendingRequestArgs args) {
         int[] cellXY = mTmpAddItemCellCoordinates;
         CellLayout layout = getCellLayout(container, screenId);
 
@@ -1751,7 +1780,7 @@ public class Launcher extends Activity
 
             // If appropriate, either create a folder or add to an existing folder
             if (mWorkspace.createUserFolderIfNecessary(view, container, layout, cellXY, 0,
-                    true, null,null)) {
+                    true, null, null)) {
                 return;
             }
             DragObject dragObject = new DragObject();
@@ -1780,8 +1809,9 @@ public class Launcher extends Activity
      *
      * @param appWidgetId The app widget id
      */
-    @Thunk void completeAddAppWidget(int appWidgetId, ItemInfo itemInfo,
-            AppWidgetHostView hostView, LauncherAppWidgetProviderInfo appWidgetInfo) {
+    @Thunk
+    void completeAddAppWidget(int appWidgetId, ItemInfo itemInfo,
+                              AppWidgetHostView hostView, LauncherAppWidgetProviderInfo appWidgetInfo) {
 
         if (appWidgetInfo == null) {
             appWidgetInfo = mAppWidgetManager.getLauncherAppWidgetInfo(appWidgetId);
@@ -1849,7 +1879,7 @@ public class Launcher extends Activity
             } else if (Intent.ACTION_USER_PRESENT.equals(action)) {
                 mUserPresent = true;
                 updateAutoAdvanceState();
-            }else if(Intent.ACTION_SCREEN_ON.equals(action)){
+            } else if (Intent.ACTION_SCREEN_ON.equals(action)) {
                 //updateDynamicStatus(true);
             }
         }
@@ -1904,6 +1934,7 @@ public class Launcher extends Activity
                 // apps is nice and speedy.
                 observer.addOnDrawListener(new ViewTreeObserver.OnDrawListener() {
                     private boolean mStarted = false;
+
                     public void onDraw() {
                         if (mStarted) return;
                         mStarted = true;
@@ -1931,14 +1962,16 @@ public class Launcher extends Activity
         }
     }
 
-    @Thunk void sendAdvanceMessage(long delay) {
+    @Thunk
+    void sendAdvanceMessage(long delay) {
         mHandler.removeMessages(ADVANCE_MSG);
         Message msg = mHandler.obtainMessage(ADVANCE_MSG);
         mHandler.sendMessageDelayed(msg, delay);
         mAutoAdvanceSentTime = System.currentTimeMillis();
     }
 
-    @Thunk void updateAutoAdvanceState() {
+    @Thunk
+    void updateAutoAdvanceState() {
         boolean autoAdvanceRunning = mVisible && mUserPresent && !mWidgetsToAdvance.isEmpty();
         if (autoAdvanceRunning != mAutoAdvanceRunning) {
             mAutoAdvanceRunning = autoAdvanceRunning;
@@ -1956,35 +1989,36 @@ public class Launcher extends Activity
         }
     }
 
-    @Thunk final Handler mHandler = new Handler(new Handler.Callback() {
+    @Thunk
+    final Handler mHandler = new Handler(new Handler.Callback() {
 
         @Override
         public boolean handleMessage(Message msg) {
             if (msg.what == ADVANCE_MSG) {
                 int i = 0;
-                for (View key: mWidgetsToAdvance.keySet()) {
+                for (View key : mWidgetsToAdvance.keySet()) {
                     final View v = key.findViewById(mWidgetsToAdvance.get(key).autoAdvanceViewId);
                     final int delay = ADVANCE_STAGGER * i;
                     if (v instanceof Advanceable) {
                         mHandler.postDelayed(new Runnable() {
-                           public void run() {
-                               ((Advanceable) v).advance();
-                           }
-                       }, delay);
+                            public void run() {
+                                ((Advanceable) v).advance();
+                            }
+                        }, delay);
                     }
                     i++;
                 }
                 sendAdvanceMessage(ADVANCE_INTERVAL);
             }
             //lijun add for fullscreen
-            else if(msg.what == FULLSCREEN_DELAY_MSG){
-                if(isFullScreenMode()) {
+            else if (msg.what == FULLSCREEN_DELAY_MSG) {
+                if (isFullScreenMode()) {
                     fullscreenOrNot(true);
                 }
             }
             //lijun add end
             //lijun add for fullscreen
-            else if(msg.what == THEME_CHANGED_DELAY_MSG){
+            else if (msg.what == THEME_CHANGED_DELAY_MSG) {
                 hideThemeChangingDialog();
             }
             //lijun add end
@@ -2107,7 +2141,7 @@ public class Launcher extends Activity
         //and by lijun end
 
         //lijun add for theme loading start
-        if(isShowThemeChang()) {
+        if (isShowThemeChang()) {
             mOnResumeState = State.WORKSPACE;
             return;
         }
@@ -2141,31 +2175,31 @@ public class Launcher extends Activity
             // In all these cases, only animate if we're already on home
             mWorkspace.exitWidgetResizeMode();
             //lijun add for addIcon begin
-            if(isLauncherArrangeMode()){
+            if (isLauncherArrangeMode()) {
                 Folder openFolder = mWorkspace.getOpenFolder();
-                if(openFolder!=null) {
+                if (openFolder != null) {
                     if (openFolder.isEditingName()) {
                         openFolder.dismissEditingName();
                     } else {
                         closeFolder();
                     }
-                }else{
+                } else {
                     getArrangeNavigationBar().onBackPressed();
                     showOverviewMode(true);
                     mNavigationbar.setVisibility(View.GONE);
                     getDragController().removeDropTarget(mNavigationbar);//lijun add
                 }
                 return;
-            }else if(mEditFolderIcon!=null&&getImportMode()) {
+            } else if (mEditFolderIcon != null && getImportMode()) {
                 forceExitImportMode();
                 return;
-            }else {
+            } else {
                 closeFolder();
             }
             //lijun add for addIcon end
             closeFolder(alreadyOnHome);
             //lijun add for  close worjspacebg unexpected begin
-            if(mWorkspaceBg!=null&&mAniWorkspaceBg==null&&mWorkspaceBg.getVisibility()==View.VISIBLE){
+            if (mWorkspaceBg != null && mAniWorkspaceBg == null && mWorkspaceBg.getVisibility() == View.VISIBLE) {
                 openOrCloseFolderAnimation(false);
             }
             //lijun add for  close worjspacebg unexpected end
@@ -2173,18 +2207,18 @@ public class Launcher extends Activity
             exitSpringLoadedDragMode();
 
             //lijun add start
-            if(isUnInstallMode()){
+            if (isUnInstallMode()) {
                 exitUnInstallNormalMode();
                 return;
             }
             //lijun add end
 
             // lijun add for special effect start
-			if(mState == State.SPECIALEFFECT){
-			  dismissSpecialEffectPreview();
-			}
-		   // lijun add for special effect end
-		   
+            if (mState == State.SPECIALEFFECT) {
+                dismissSpecialEffectPreview();
+            }
+            // lijun add for special effect end
+
             // If we are already on home, then just animate back to the workspace,
             // otherwise, just wait until onResume to set the state back to Workspace
             if (alreadyOnHome) {
@@ -2250,7 +2284,7 @@ public class Launcher extends Activity
     @Override
     public void onRestoreInstanceState(Bundle state) {
         super.onRestoreInstanceState(state);
-        for (int page: mSynchronouslyBoundPages) {
+        for (int page : mSynchronouslyBoundPages) {
             mWorkspace.restoreInstanceStateForChild(page);
         }
         //lijun add for wallpaper start
@@ -2274,16 +2308,16 @@ public class Launcher extends Activity
         // this state is reflected.
         // TODO: Move folderInfo.isOpened out of the model and make it a UI state.
         //UnistallMode add by lijun begin
-        if(!comfirmingUninstall&&isUninstallMode&&mWorkspace!=null){
+        if (!comfirmingUninstall && isUninstallMode && mWorkspace != null) {
 //            mWorkspace.exitUninstallMode();
             exitUnInstallNormalMode();
         }
-        if(!comfirmingUninstall) {
+        if (!comfirmingUninstall) {
             closeFolder(false);
-        }else {
-            comfirmingUninstall=false;
+        } else {
+            comfirmingUninstall = false;
         }
-         //UnistallMode add by lijun end
+        //UnistallMode add by lijun end
         closeShortcutsContainer(false);
 
         if (mPendingRequestArgs != null) {
@@ -2354,9 +2388,9 @@ public class Launcher extends Activity
         ColorManager.getInstance().removeWallpaperCallback(this);//lijun add for wallpaper change
         //lijun add start
         ArrayList<IDynamicIcon> iDynamicIcons = DynamicProvider.getInstance(this).getAllDynamicIcon();
-        for (IDynamicIcon icon:iDynamicIcons){
-             icon.clearDynamicIcon();
-            }
+        for (IDynamicIcon icon : iDynamicIcons) {
+            icon.clearDynamicIcon();
+        }
         //lijun add end
     }
 
@@ -2374,11 +2408,11 @@ public class Launcher extends Activity
     }
 
     @Override
-    public void startIntentSenderForResult (IntentSender intent, int requestCode,
-            Intent fillInIntent, int flagsMask, int flagsValues, int extraFlags, Bundle options) {
+    public void startIntentSenderForResult(IntentSender intent, int requestCode,
+                                           Intent fillInIntent, int flagsMask, int flagsValues, int extraFlags, Bundle options) {
         try {
             super.startIntentSenderForResult(intent, requestCode,
-                fillInIntent, flagsMask, flagsValues, extraFlags, options);
+                    fillInIntent, flagsMask, flagsValues, extraFlags, options);
         } catch (IntentSender.SendIntentException e) {
             throw new ActivityNotFoundException();
         }
@@ -2390,7 +2424,7 @@ public class Launcher extends Activity
      */
     @Override
     public void startSearch(String initialQuery, boolean selectInitialQuery,
-            Bundle appSearchData, boolean globalSearch) {
+                            Bundle appSearchData, boolean globalSearch) {
 
         if (initialQuery == null) {
             // Use any text typed in the launcher as the initial query
@@ -2415,9 +2449,9 @@ public class Launcher extends Activity
      * Starts the global search activity. This code is a copied from SearchManager
      */
     public void startGlobalSearch(String initialQuery,
-            boolean selectInitialQuery, Bundle appSearchData, Rect sourceBounds) {
+                                  boolean selectInitialQuery, Bundle appSearchData, Rect sourceBounds) {
         final SearchManager searchManager =
-            (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         ComponentName globalSearchActivity = searchManager.getGlobalSearchActivity();
         if (globalSearchActivity == null) {
             Log.w(TAG, "No global search activity found.");
@@ -2502,7 +2536,7 @@ public class Launcher extends Activity
     }
 
     void addAppWidgetFromDropImpl(int appWidgetId, ItemInfo info, AppWidgetHostView boundWidget,
-            LauncherAppWidgetProviderInfo appWidgetInfo) {
+                                  LauncherAppWidgetProviderInfo appWidgetInfo) {
         if (LOGD) {
             Log.d(TAG, "Adding widget from drop");
         }
@@ -2510,8 +2544,8 @@ public class Launcher extends Activity
     }
 
     void addAppWidgetImpl(int appWidgetId, ItemInfo info,
-            AppWidgetHostView boundWidget, LauncherAppWidgetProviderInfo appWidgetInfo,
-            int delay) {
+                          AppWidgetHostView boundWidget, LauncherAppWidgetProviderInfo appWidgetInfo,
+                          int delay) {
         if (appWidgetInfo.configure != null) {
             setWaitingForResult(PendingRequestArgs.forWidgetInfo(appWidgetId, appWidgetInfo, info));
 
@@ -2540,7 +2574,7 @@ public class Launcher extends Activity
     }
 
     public void addPendingItem(PendingAddItemInfo info, long container, long screenId,
-            int[] cell, int spanX, int spanY) {
+                               int[] cell, int spanX, int spanY) {
         info.container = container;
         info.screenId = screenId;
         if (cell != null) {
@@ -2560,7 +2594,7 @@ public class Launcher extends Activity
                 break;
             default:
                 throw new IllegalStateException("Unknown item type: " + info.itemType);
-            }
+        }
     }
 
     /**
@@ -2606,7 +2640,7 @@ public class Launcher extends Activity
                 intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
                 intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_PROVIDER, info.componentName);
                 mAppWidgetManager.getUser(info.info)
-                    .addToIntent(intent, AppWidgetManager.EXTRA_APPWIDGET_PROVIDER_PROFILE);
+                        .addToIntent(intent, AppWidgetManager.EXTRA_APPWIDGET_PROVIDER_PROFILE);
                 // TODO: we need to make sure that this accounts for the options bundle.
                 // intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_OPTIONS, options);
                 startActivityForResult(intent, REQUEST_BIND_APPWIDGET);
@@ -2615,7 +2649,7 @@ public class Launcher extends Activity
     }
 
     FolderIcon addFolder(CellLayout layout, long container, final long screenId, int cellX,
-            int cellY) {
+                         int cellY) {
         final FolderInfo folderInfo = new FolderInfo();
         folderInfo.title = getText(R.string.folder_name);
 
@@ -2625,15 +2659,15 @@ public class Launcher extends Activity
 
         // Create the view
         FolderIcon newFolder =
-            FolderIcon.fromXml(R.layout.folder_icon, this, layout, folderInfo, mIconCache);
-	   // lijun add for hotseat icon center start
-		if(container == LauncherSettings.Favorites.CONTAINER_HOTSEAT){
-			mWorkspace.addInHotseat(newFolder, container, screenId,cellX, cellY, 1, 1, cellX);
-		}else{
-		// lijun add for hotseat icon center end
+                FolderIcon.fromXml(R.layout.folder_icon, this, layout, folderInfo, mIconCache);
+        // lijun add for hotseat icon center start
+        if (container == LauncherSettings.Favorites.CONTAINER_HOTSEAT) {
+            mWorkspace.addInHotseat(newFolder, container, screenId, cellX, cellY, 1, 1, cellX);
+        } else {
+            // lijun add for hotseat icon center end
             mWorkspace.addInScreen(newFolder, container, screenId, cellX, cellY, 1, 1,
-                isWorkspaceLocked());
-		}
+                    isWorkspaceLocked());
+        }
         newFolder.mFolder.firstCreateAddSharePreferences();//lijun add for folder editTitle guide
         // Force measure the new folder icon
         CellLayout parent = mWorkspace.getParentCellLayoutForView(newFolder);
@@ -2644,11 +2678,11 @@ public class Launcher extends Activity
     /**
      * Unbinds the view for the specified item, and removes the item and all its children.
      *
-     * @param v the view being removed.
-     * @param itemInfo the {@link ItemInfo} for this view.
+     * @param v            the view being removed.
+     * @param itemInfo     the {@link ItemInfo} for this view.
      * @param deleteFromDb whether or not to delete this item from the db.
      */
-    public boolean  removeItem(View v, final ItemInfo itemInfo, boolean deleteFromDb) {
+    public boolean removeItem(View v, final ItemInfo itemInfo, boolean deleteFromDb) {
         if (itemInfo instanceof ShortcutInfo) {
             // Remove the shortcut from the folder before removing it from launcher
             View folderIcon = mWorkspace.getHomescreenIconByItemId(itemInfo.container);
@@ -2692,7 +2726,7 @@ public class Launcher extends Activity
             // Deleting an app widget ID is a void call but writes to disk before returning
             // to the caller...
             new AsyncTask<Void, Void, Void>() {
-                public Void doInBackground(Void ... args) {
+                public Void doInBackground(Void... args) {
                     appWidgetHost.deleteAppWidgetId(widgetInfo.appWidgetId);
                     return null;
                 }
@@ -2731,7 +2765,7 @@ public class Launcher extends Activity
         }
 
         //lijun add for theme loading start
-        if(isShowThemeChang()) {
+        if (isShowThemeChang()) {
             return;
         }
         //lijun add for theme loading end
@@ -2739,7 +2773,7 @@ public class Launcher extends Activity
         if (mDragController.isDragging()) {
             mDragController.cancelDrag();
             //lijun add start
-            if(isUnInstallMode()){
+            if (isUnInstallMode()) {
                 exitUnInstallNormalMode();
                 return;
             }
@@ -2751,38 +2785,38 @@ public class Launcher extends Activity
             closeShortcutsContainer();
         } else if (isAppsViewVisible()) {
             showWorkspace(true);
-        } else if (isWidgetsViewVisible() || isWallpaperMode()||isLauncherArrangeMode() ||isSpecialEffectMode() || isLauncherHideAppMode()) {//lijun add isWallpaperMode()
-          // lijun add for special effect :isSpecialEffectMode()
+        } else if (isWidgetsViewVisible() || isWallpaperMode() || isLauncherArrangeMode() || isSpecialEffectMode() || isLauncherHideAppMode()) {//lijun add isWallpaperMode()
+            // lijun add for special effect :isSpecialEffectMode()
             //Icon Arrange begin
-            if(isLauncherArrangeMode()){
+            if (isLauncherArrangeMode()) {
                 Folder openFolder = mWorkspace.getOpenFolder();
-                if(openFolder!=null) {
+                if (openFolder != null) {
                     if (openFolder.isEditingName()) {
                         openFolder.dismissEditingName();
                     } else {
                         closeFolder();
                     }
-                }else{
-                    ((ArrangeNavigationBar)getArrangeNavigationBar()).onBackPressed();
+                } else {
+                    ((ArrangeNavigationBar) getArrangeNavigationBar()).onBackPressed();
 
                     showOverviewMode(true);
                     //mNavigationbar.setVisibility(View.GONE);
                 }
-            }else if(isLauncherHideAppMode()) {
+            } else if (isLauncherHideAppMode()) {
                 Folder openFolder = mWorkspace.getOpenFolder();
-                if(openFolder!=null) {
+                if (openFolder != null) {
                     if (openFolder.isEditingName()) {
                         openFolder.dismissEditingName();
                     } else {
                         closeFolder();
                     }
-                }else{
-                    ((HideAppNavigationBar)getmHideAppNavigationbar()).onBackPressed();
+                } else {
+                    ((HideAppNavigationBar) getmHideAppNavigationbar()).onBackPressed();
 
                     showOverviewMode(true);
                     //mNavigationbar.setVisibility(View.GONE);
                 }
-            } else{
+            } else {
                 Folder.ICONARRANGING = false;
                 showOverviewMode(true);
             }
@@ -2808,14 +2842,14 @@ public class Launcher extends Activity
             } else {
                 closeFolder();
             }
-        }else if(mEditFolderIcon!=null&&getImportMode()){
-            if(mEditFolderIcon.getFolder()!=null&&mEditFolderIcon.getFolder().isAnimating()){
+        } else if (mEditFolderIcon != null && getImportMode()) {
+            if (mEditFolderIcon.getFolder() != null && mEditFolderIcon.getFolder().isAnimating()) {
                 return;
             }
             showFolderIcon();
-            mOpenFolder =true;
-            if(mCheckedBubbleTextViews!=null){
-                for (BubbleTextView bv:mCheckedBubbleTextViews
+            mOpenFolder = true;
+            if (mCheckedBubbleTextViews != null) {
+                for (BubbleTextView bv : mCheckedBubbleTextViews
                         ) {
                     bv.setChecked(false);
                 }
@@ -2825,16 +2859,16 @@ public class Launcher extends Activity
             mCheckedShortcutInfos.clear();
             exitEditModeAndOpenFolder();
             //UnistallMode add by lijun begin
-        }else if(isUninstallMode) {
+        } else if (isUninstallMode) {
             exitUnInstallNormalMode();//lijun add
-             //UnistallMode add by lijun end
-        }else {
+            //UnistallMode add by lijun end
+        } else {
             mWorkspace.exitWidgetResizeMode();
 
             // Back button is a no-op here, but give at least some feedback for the button press
             mWorkspace.showOutlinesTemporarily();
             //lijun add for  close worjspacebg unexpected begin
-            if(mWorkspaceBg!=null&&mWorkspaceBg.getVisibility()==View.VISIBLE){
+            if (mWorkspaceBg != null && mWorkspaceBg.getVisibility() == View.VISIBLE) {
                 openOrCloseFolderAnimation(false);
             }
             //lijun add for  close worjspacebg unexpected end
@@ -2860,20 +2894,20 @@ public class Launcher extends Activity
 
         if (v instanceof Workspace) {
             //lijun add start for WIDGETS_CONTAINER_PAGE
-            if(FeatureFlags.WIDGETS_CONTAINER_PAGE && mState == State.WIDGETS){
-                showOverviewModeFromOverviewHidenMode(State.WORKSPACE,true);
+            if (FeatureFlags.WIDGETS_CONTAINER_PAGE && mState == State.WIDGETS) {
+                showOverviewModeFromOverviewHidenMode(State.WORKSPACE, true);
                 return;
-            }else if(isWallpaperMode()){
-                showOverviewModeFromOverviewHidenMode(State.WORKSPACE,true);
+            } else if (isWallpaperMode()) {
+                showOverviewModeFromOverviewHidenMode(State.WORKSPACE, true);
                 return;
-            }else if(isUnInstallMode()){
+            } else if (isUnInstallMode()) {
                 exitUnInstallNormalMode();
                 return;
             }
             //lijun add end
             if (mWorkspace.isInOverviewMode()) {
-                if(FeatureFlags.WIDGETS_CONTAINER_PAGE){//lijun add for WIDGETS_CONTAINER_PAGE
-                    showOverviewModeFromOverviewHidenMode(State.WORKSPACE,true);
+                if (FeatureFlags.WIDGETS_CONTAINER_PAGE) {//lijun add for WIDGETS_CONTAINER_PAGE
+                    showOverviewModeFromOverviewHidenMode(State.WORKSPACE, true);
                 }
                 showWorkspace(true);
             }
@@ -2882,18 +2916,18 @@ public class Launcher extends Activity
 
         if (v instanceof CellLayout) {
             //lijun add start for WIDGETS_CONTAINER_PAGE
-            if(FeatureFlags.WIDGETS_CONTAINER_PAGE && mState == State.WIDGETS){
-                showOverviewModeFromOverviewHidenMode(State.WORKSPACE,true);
+            if (FeatureFlags.WIDGETS_CONTAINER_PAGE && mState == State.WIDGETS) {
+                showOverviewModeFromOverviewHidenMode(State.WORKSPACE, true);
                 return;
-            }else if(isWallpaperMode()){
-                showOverviewModeFromOverviewHidenMode(State.WORKSPACE,true);
+            } else if (isWallpaperMode()) {
+                showOverviewModeFromOverviewHidenMode(State.WORKSPACE, true);
                 return;
-			// lijun add for special effect start
-            }else if(mState == State.SPECIALEFFECT){
-                showOverviewModeFromOverviewHidenMode(State.WORKSPACE,true); 
+                // lijun add for special effect start
+            } else if (mState == State.SPECIALEFFECT) {
+                showOverviewModeFromOverviewHidenMode(State.WORKSPACE, true);
                 return;
-			// lijun add for special effect end
-            }else if(isUnInstallMode()) {
+                // lijun add for special effect end
+            } else if (isUnInstallMode()) {
                 CellLayout widgetView = (CellLayout) v;
                 LauncherAppWidgetHostView onClickWidgetView = widgetView.getOnClickWidgetView();
                 if (onClickWidgetView != null && onClickWidgetView.isUninstallRect() && onClickWidgetView.getTag() instanceof ItemInfo) {
@@ -2910,21 +2944,21 @@ public class Launcher extends Activity
             //lijun add end
             if (mWorkspace.isInOverviewMode()) {
                 mWorkspace.snapToPageFromOverView(mWorkspace.indexOfChild(v));
-                if(FeatureFlags.WIDGETS_CONTAINER_PAGE){//lijun add for WIDGETS_CONTAINER_PAGE
-                    showOverviewModeFromOverviewHidenMode(State.WORKSPACE,true);
+                if (FeatureFlags.WIDGETS_CONTAINER_PAGE) {//lijun add for WIDGETS_CONTAINER_PAGE
+                    showOverviewModeFromOverviewHidenMode(State.WORKSPACE, true);
                 }
                 showWorkspace(true);
-	//UninstallMode add by lijun begin
-            }else if (isUninstallMode) {
+                //UninstallMode add by lijun begin
+            } else if (isUninstallMode) {
 
                 CellLayout widgetView = (CellLayout) v;
                 LauncherAppWidgetHostView onClickWidgetView = widgetView.getOnClickWidgetView();
-                if(onClickWidgetView!=null) {
+                if (onClickWidgetView != null) {
                     Log.d(TAG, "startUninstallActivity" + onClickWidgetView.getTag());
-                }else {
-                    Log.d(TAG, "startUninstallActivity  null" );
+                } else {
+                    Log.d(TAG, "startUninstallActivity  null");
                 }
-                if (onClickWidgetView!=null&&onClickWidgetView.isUninstallRect()&&onClickWidgetView.getTag() instanceof ItemInfo) {
+                if (onClickWidgetView != null && onClickWidgetView.isUninstallRect() && onClickWidgetView.getTag() instanceof ItemInfo) {
                     Log.d(TAG, "removeWorkspaceOrFolderItem");
                     removeItem(onClickWidgetView, (ItemInfo) onClickWidgetView.getTag(), true /* deleteFromDb */);
                     widgetView.setOnClickWidgetView(null);
@@ -2936,7 +2970,7 @@ public class Launcher extends Activity
             return;
         }
 
-        if(isEditorMode()){
+        if (isEditorMode()) {
 //            if(mState == State.WIDGETS){
 //                showOverviewModeFromWidgetMode(State.WORKSPACE,true);
 //                return;
@@ -2953,21 +2987,21 @@ public class Launcher extends Activity
         }
 
         Object tag = v.getTag();
-        if(isLauncherArrangeMode()){
+        if (isLauncherArrangeMode()) {
             if (v instanceof FolderIcon) {
                 onClickFolderIcon(v);
-            }else if (tag instanceof ShortcutInfo) {
-                if(v.getParent()!=null){
+            } else if (tag instanceof ShortcutInfo) {
+                if (v.getParent() != null) {
                     getArrangeNavigationBar().addIconIntoNavigationbar(v);
                 }
             }
             return;
         }
-        if(isLauncherHideAppMode()){
+        if (isLauncherHideAppMode()) {
             if (v instanceof FolderIcon) {
                 onClickFolderIcon(v);
-            }else if (tag instanceof ShortcutInfo) {
-                if(v.getParent()!=null){
+            } else if (tag instanceof ShortcutInfo) {
+                if (v.getParent() != null) {
                     getmHideAppNavigationbar().addIconIntoNavigationbar(v);
                 }
             }
@@ -2975,42 +3009,42 @@ public class Launcher extends Activity
         }
         if (tag instanceof ShortcutInfo) {
 //UninstallMode add by lijun begin
-            if(isUninstallMode&&v instanceof UninstallRect ){
+            if (isUninstallMode && v instanceof UninstallRect) {
                 UninstallRect textView = (UninstallRect) v;
-                if(textView.isUninstallRect()){
-                    Log.d(TAG,"startUninstallActivity");
-                    if( UninstallDropTarget.getAppInfoFlags((ItemInfo) tag)!=null){
-                    UninstallDropTarget.startUninstallActivity(this, (ItemInfo) tag);
+                if (textView.isUninstallRect()) {
+                    Log.d(TAG, "startUninstallActivity");
+                    if (UninstallDropTarget.getAppInfoFlags((ItemInfo) tag) != null) {
+                        UninstallDropTarget.startUninstallActivity(this, (ItemInfo) tag);
                         comfirmingUninstall = true;
-                    }else{
-                        DeleteDropTarget.removeWorkspaceOrFolderItem(this, (ItemInfo) tag,v);
+                    } else {
+                        DeleteDropTarget.removeWorkspaceOrFolderItem(this, (ItemInfo) tag, v);
                         deleteParallelShortcut((ItemInfo) tag);
                     }
                 }
 //UninstallMode add by lijun end
 
                 //M:lijun add for addIcon begin
-            }else if(mEditFolderIcon!=null&&getImportMode()){
-                BubbleTextView bv=  (BubbleTextView)v;
-                if(bv.isChecked()){
+            } else if (mEditFolderIcon != null && getImportMode()) {
+                BubbleTextView bv = (BubbleTextView) v;
+                if (bv.isChecked()) {
                     bv.setChecked(false);
-                    mCheckedShortcutInfos.remove((ShortcutInfo)tag);
+                    mCheckedShortcutInfos.remove((ShortcutInfo) tag);
                     mCheckedBubbleTextViews.remove(bv);
                     updateImportButton();
-                }else {
+                } else {
                     bv.setChecked(true);
-                    Log.d(TAG,"info="+tag.toString());
-                    mCheckedShortcutInfos.add((ShortcutInfo)tag);
+                    Log.d(TAG, "info=" + tag.toString());
+                    mCheckedShortcutInfos.add((ShortcutInfo) tag);
                     mCheckedBubbleTextViews.add(bv);
                     updateImportButton();
                 }
-            }else {
+            } else {
                 onClickAppShortcut(v);
             }
             //M:lijun add for addIcon end
         } else if (tag instanceof FolderInfo) {
             //M:lijun add for addIcon begin
-            if(v==mEditFolderIcon)return;
+            if (v == mEditFolderIcon) return;
             //M:lijun add for addIcon end
             if (v instanceof FolderIcon) {
                 onClickFolderIcon(v);
@@ -3021,40 +3055,40 @@ public class Launcher extends Activity
         } else if (tag instanceof AppInfo) {
             startAppShortcutOrInfoActivity(v);
         } else if (tag instanceof LauncherAppWidgetInfo) {
-           //UnistallMode add by lijun begin
+            //UnistallMode add by lijun begin
             if (isUninstallMode && v instanceof UninstallRect) {
                 UninstallRect widgetView = (UninstallRect) v;
                 Log.d(TAG, "startUninstallWidget");
                 if (widgetView.isUninstallRect()) {
                     DeleteDropTarget.removeWorkspaceOrFolderItem(this, (ItemInfo) tag, v);
-		//UnistallMode add by lijun end
+                    //UnistallMode add by lijun end
                 } else if (v instanceof PendingAppWidgetHostView) {
                     onClickPendingWidget((PendingAppWidgetHostView) v);
                 }
             }
         }
         //M:lijun add the folderImportMode begin
-        else if (v==mFolderImportButton){
+        else if (v == mFolderImportButton) {
             closeFolder();
             setImportMode(false);
-            int i=0;
-            for(ShortcutInfo info :mCheckedShortcutInfos){
-                View view=mWorkspace.getParentCellLayoutForView(mCheckedBubbleTextViews.get(i));
-                Log.d(TAG,"info.screenId="+info.toString());
-                if(view instanceof CellLayout){
+            int i = 0;
+            for (ShortcutInfo info : mCheckedShortcutInfos) {
+                View view = mWorkspace.getParentCellLayoutForView(mCheckedBubbleTextViews.get(i));
+                Log.d(TAG, "info.screenId=" + info.toString());
+                if (view instanceof CellLayout) {
                     mCheckedBubbleTextViews.get(i).setChecked(false);
                     ((CellLayout) view).removeView(mCheckedBubbleTextViews.get(i));
                 }
                 i++;
             }
-            Log.d(TAG,"mCheckedFolderInfos="+mCheckedFolderInfos.toString());
+            Log.d(TAG, "mCheckedFolderInfos=" + mCheckedFolderInfos.toString());
             Iterator<FolderInfo> iterator = mCheckedFolderInfos.iterator();
-            while(iterator.hasNext()){
+            while (iterator.hasNext()) {
                 FolderInfo info = iterator.next();
                 info.removeInfo();
             }
             Iterator<FolderIcon> iteratorIcon = mCheckedFolderIcons.iterator();
-            while(iteratorIcon.hasNext()){
+            while (iteratorIcon.hasNext()) {
                 FolderIcon icon = iteratorIcon.next();
                 icon.removeInfo();
             }
@@ -3111,11 +3145,11 @@ public class Launcher extends Activity
             // The install has not been queued
             final String packageName = info.providerName.getPackageName();
             showBrokenAppInstallDialog(packageName,
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        startActivitySafely(v, LauncherModel.getMarketIntent(packageName), info);
-                    }
-                });
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            startActivitySafely(v, LauncherModel.getMarketIntent(packageName), info);
+                        }
+                    });
         } else {
             // Download has started.
             final String packageName = info.providerName.getPackageName();
@@ -3157,19 +3191,19 @@ public class Launcher extends Activity
     }
 
     private void showBrokenAppInstallDialog(final String packageName,
-            DialogInterface.OnClickListener onSearchClickListener) {
+                                            DialogInterface.OnClickListener onSearchClickListener) {
         new AlertDialog.Builder(this)
-            .setTitle(R.string.abandoned_promises_title)
-            .setMessage(R.string.abandoned_promise_explanation)
-            .setPositiveButton(R.string.abandoned_search, onSearchClickListener)
-            .setNeutralButton(R.string.abandoned_clean_this,
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        final UserHandleCompat user = UserHandleCompat.myUserHandle();
-                        mWorkspace.removeAbandonedPromise(packageName, user);
-                    }
-                })
-            .create().show();
+                .setTitle(R.string.abandoned_promises_title)
+                .setMessage(R.string.abandoned_promise_explanation)
+                .setPositiveButton(R.string.abandoned_search, onSearchClickListener)
+                .setNeutralButton(R.string.abandoned_clean_this,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                final UserHandleCompat user = UserHandleCompat.myUserHandle();
+                                mWorkspace.removeAbandonedPromise(packageName, user);
+                            }
+                        })
+                .create().show();
         return;
     }
 
@@ -3252,26 +3286,26 @@ public class Launcher extends Activity
      * @param v The view that was clicked. Must be an instance of {@link FolderIcon}.
      */
     protected void onClickFolderIcon(View v) {
-        if (LOGD) Log.d(TAG, "onClickFolder"+"  "+v.getTag());
-        if (!(v instanceof FolderIcon)){
+        if (LOGD) Log.d(TAG, "onClickFolder" + "  " + v.getTag());
+        if (!(v instanceof FolderIcon)) {
             throw new IllegalArgumentException("Input must be a FolderIcon");
         }
 
         FolderIcon folderIcon = (FolderIcon) v;
         if (/*!folderIcon.getFolderInfo().opened &&*/ !folderIcon.getFolder().isDestroyed()) {
-            if(mAniWorkspaceBg == null || !mAniWorkspaceBg.isRunning()) {//lijun add
+            if (mAniWorkspaceBg == null || !mAniWorkspaceBg.isRunning()) {//lijun add
                 // Open the requested folder
-                if(!folderIcon.getFolderInfo().opened){
+                if (!folderIcon.getFolderInfo().opened) {
                     openFolder(folderIcon);
-                }else if(mWorkspace!=null&&mWorkspace.getOpenFolder()==null){//lijun add
+                } else if (mWorkspace != null && mWorkspace.getOpenFolder() == null) {//lijun add
                     openFolder(folderIcon);
                 }
             }
         }
     }
 
-    private void onHideAppButonClick(){
-        if(!mModel.isAllAppsLoaded() || mWorkspaceLoading || mWorkspace.rejectClickOnMenuButton()){
+    private void onHideAppButonClick() {
+        if (!mModel.isAllAppsLoaded() || mWorkspaceLoading || mWorkspace.rejectClickOnMenuButton()) {
             return;
         }
         if (mIsSafeModeEnabled) {
@@ -3281,9 +3315,10 @@ public class Launcher extends Activity
         }
     }
 
-    public boolean isInVacantsClear=false;
+    public boolean isInVacantsClear = false;
+
     protected void onClickVacantsClearButton(View view) {
-        if(!mModel.isAllAppsLoaded() || mWorkspaceLoading || mWorkspace.rejectClickOnMenuButton()){
+        if (!mModel.isAllAppsLoaded() || mWorkspaceLoading || mWorkspace.rejectClickOnMenuButton()) {
             return;
         }
         if (mIsSafeModeEnabled) {
@@ -3293,54 +3328,54 @@ public class Launcher extends Activity
         }
     }
 
-    private void confirmVacantsClear(){
+    private void confirmVacantsClear() {
         int currPageIndex = getCurrentWorkspaceScreen();
-        CellLayout currCellLayout = (CellLayout)mWorkspace.getPageAt(currPageIndex);
+        CellLayout currCellLayout = (CellLayout) mWorkspace.getPageAt(currPageIndex);
         if (currCellLayout == null) return;
         LauncherAppState app = LauncherAppState.getInstance();
         InvariantDeviceProfile profile = app.getInvariantDeviceProfile();
-        final int xCount =  profile.numColumns;
-        final int yCount =  profile.numRows;
+        final int xCount = profile.numColumns;
+        final int yCount = profile.numRows;
         //boolean[][] occupied = new boolean[xCount][yCount];
-        GridOccupancy gridOccupancy = new GridOccupancy(xCount,yCount);
+        GridOccupancy gridOccupancy = new GridOccupancy(xCount, yCount);
         int[] vacant = new int[2];
         final ArrayList<ItemInfo> reorderItems = new ArrayList<>();
         final ArrayList<View> reorderViews = new ArrayList<>();
         Log.v("reorder", "onClickVacantsClearButton--------------");
-        for(int y=0; y<yCount; y++){
-            for(int x=0; x<xCount; x++){
-                if(gridOccupancy.isOcupied(x,y)){
+        for (int y = 0; y < yCount; y++) {
+            for (int x = 0; x < xCount; x++) {
+                if (gridOccupancy.isOcupied(x, y)) {
                     continue;
                 }
-                View child = currCellLayout.getChildAt(x,y);
-                if(child != null) {
+                View child = currCellLayout.getChildAt(x, y);
+                if (child != null) {
                     CellLayout.LayoutParams lp = (CellLayout.LayoutParams) child.getLayoutParams();
-                    if (child instanceof LauncherAppWidgetHostView){
-                        gridOccupancy.markCells(0,lp.cellY,xCount,lp.cellVSpan,true);
+                    if (child instanceof LauncherAppWidgetHostView) {
+                        gridOccupancy.markCells(0, lp.cellY, xCount, lp.cellVSpan, true);
                         continue;
                     }
-                    if(child.getTag() instanceof ItemInfo) {
-                        ItemInfo info = (ItemInfo)child.getTag();
-                        Log.v("reorder", "child---info.title="+info.title+", lp.x="+lp.x+", lp.y="+lp.y);
-                        gridOccupancy.findVacantCell(vacant,1,1);
-                        if(info.cellX == vacant[0] && info.cellY == vacant[1]){
-                            gridOccupancy.markCells(info.cellX,info.cellY,1,1,true);
+                    if (child.getTag() instanceof ItemInfo) {
+                        ItemInfo info = (ItemInfo) child.getTag();
+                        Log.v("reorder", "child---info.title=" + info.title + ", lp.x=" + lp.x + ", lp.y=" + lp.y);
+                        gridOccupancy.findVacantCell(vacant, 1, 1);
+                        if (info.cellX == vacant[0] && info.cellY == vacant[1]) {
+                            gridOccupancy.markCells(info.cellX, info.cellY, 1, 1, true);
                             continue;
                         }
                         lp.tmpCellX = info.cellX = vacant[0];
                         lp.tmpCellY = info.cellY = vacant[1];
                         LauncherModel.updateItemInfo(info);
-                        gridOccupancy.markCells(info.cellX,info.cellY,1,1,true);
+                        gridOccupancy.markCells(info.cellX, info.cellY, 1, 1, true);
                         reorderItems.add(info);
                         reorderViews.add(child);
                     }
                 }
             }
         }
-        if(!reorderItems.isEmpty()) {
-            Log.v("reorder", "reorderItems.size="+(reorderItems.size()));
-            for(View child : reorderViews){
-                ItemInfo info = (ItemInfo)child.getTag();
+        if (!reorderItems.isEmpty()) {
+            Log.v("reorder", "reorderItems.size=" + (reorderItems.size()));
+            for (View child : reorderViews) {
+                ItemInfo info = (ItemInfo) child.getTag();
                 currCellLayout.animateChildToPosition(child, info.cellX, info.cellY, 160, 0, true, true);
             }
             LauncherModel.sWorker.post(new Runnable() {
@@ -3350,7 +3385,7 @@ public class Launcher extends Activity
                     LauncherModel.moveItemsInDatabase(Launcher.this, reorderItems, LauncherSettings.Favorites.CONTAINER_DESKTOP, (int) screenId);
                 }
             });
-        }else {
+        } else {
             showToast(R.string.aline_toast_text);
         }
     }
@@ -3381,7 +3416,7 @@ public class Launcher extends Activity
 
         String pickerPackage = getString(R.string.wallpaper_picker_package);
         if (TextUtils.isEmpty(pickerPackage)) {
-            pickerPackage =  PackageManagerHelper.getWallpaperPickerPackage(getPackageManager());
+            pickerPackage = PackageManagerHelper.getWallpaperPickerPackage(getPackageManager());
         }
 
         int pageScroll = mWorkspace.getScrollForPage(mWorkspace.getPageNearestToCenterOfScreen());
@@ -3396,7 +3431,7 @@ public class Launcher extends Activity
     }
 
     //lijun add for wallpaper start
-    public void onClickWallpaperPickerNew(View v){
+    public void onClickWallpaperPickerNew(View v) {
         if (LOGD) Log.d(TAG, "onClickWallpaperPickerNew");
         if (mIsSafeModeEnabled) {
             Toast.makeText(this, R.string.safemode_wallpaper_error, Toast.LENGTH_SHORT).show();
@@ -3405,12 +3440,13 @@ public class Launcher extends Activity
         }
     }
 
-    private void showWallpaperPanel(boolean animated){
+    private void showWallpaperPanel(boolean animated) {
         mState = State.WALLPAPER;
-        mStateTransitionAnimation.startAnimationBetweenOverviewAndOverviewHiden(Workspace.State.OVERVIEW_HIDDEN,State.WALLPAPER, animated);
+        mStateTransitionAnimation.startAnimationBetweenOverviewAndOverviewHiden(Workspace.State.OVERVIEW_HIDDEN, State.WALLPAPER, animated);
         mWallpaperPicker.requestFocus();
     }
-    public void refreshWallPaperList(final boolean comeIn){
+
+    public void refreshWallPaperList(final boolean comeIn) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -3474,9 +3510,9 @@ public class Launcher extends Activity
     /**
      * Called when the user starts interacting with the launcher.
      * The possible interactions are:
-     *  - open all apps
-     *  - reorder an app shortcut, or a widget
-     *  - open the overview mode.
+     * - open all apps
+     * - reorder an app shortcut, or a widget
+     * - open the overview mode.
      * This is a good time to stop doing things that only make sense
      * when the user is on the homescreen and not doing housekeeping.
      */
@@ -3486,7 +3522,9 @@ public class Launcher extends Activity
         }
     }
 
-    /** Updates the interaction state. */
+    /**
+     * Updates the interaction state.
+     */
     public void updateInteraction(Workspace.State fromState, Workspace.State toState) {
         // Only update the interacting state if we are transitioning to/from a view with an
         // overlay
@@ -3595,7 +3633,7 @@ public class Launcher extends Activity
         if (v != null) {
             intent.setSourceBounds(getViewBounds(v));
         }
-        Log.i("Launcher","startActivitySafely : intent : "+intent+" , \nitem :"+item);
+        Log.i("Launcher", "startActivitySafely : intent : " + intent + " , \nitem :" + item);
         try {
             if (Utilities.ATLEAST_MARSHMALLOW && item != null
                     && (item.itemType == Favorites.ITEM_TYPE_SHORTCUT
@@ -3611,7 +3649,7 @@ public class Launcher extends Activity
                         intent.getComponent(), user, intent.getSourceBounds(), optsBundle);
             }
             return true;
-        } catch (ActivityNotFoundException|SecurityException e) {
+        } catch (ActivityNotFoundException | SecurityException e) {
             Toast.makeText(this, R.string.activity_not_found, Toast.LENGTH_SHORT).show();
             Log.e(TAG, "Unable to launch. tag=" + item + " intent=" + intent, e);
         }
@@ -3775,7 +3813,7 @@ public class Launcher extends Activity
         //lijun add the background of workspace when opening folder end
 
         //lijun add start
-        if(isLauncherArrangeMode() && mNavigationbar!=null){
+        if (isLauncherArrangeMode() && mNavigationbar != null) {
             mNavigationbar.enableAddFolder(false);
         }
         //lijun add end
@@ -3793,17 +3831,17 @@ public class Launcher extends Activity
             }
             closeFolder(folder, animate);
         }
-        if(isUnInstallMode()) {
-            if(mState != State.WORKSPACE_SPRING_LOADED) {
+        if (isUnInstallMode()) {
+            if (mState != State.WORKSPACE_SPRING_LOADED) {
                 enterSpringLoadedDragMode();
             }
-        }else {
+        } else {
             mWorkspace.getPageIndicator().setAlpha(1f);
             mWorkspace.getPageIndicator().setVisibility(View.VISIBLE);//lijun add  for hide the indicator of workspace
         }
 
         //lijun add start
-        if(isLauncherArrangeMode() && mNavigationbar!=null){
+        if (isLauncherArrangeMode() && mNavigationbar != null) {
             mNavigationbar.enableAddFolder(true);
         }
         //lijun add end
@@ -3837,16 +3875,17 @@ public class Launcher extends Activity
         openOrCloseFolderAnimation(false);
         //lijun add the background of workspace when opening folder end
         //M:lijun add the addIcon begin
-        if(getImportMode()){
+        if (getImportMode()) {
             animationCloseFolder(folder);
-        }else if(getHotseatVisible()){
+        } else if (getHotseatVisible()) {
             mWorkspace.showWorkspace();
         }
         //M:lijun add the addIcon end
     }
+
     //lijun add for visible of hotseat begin
-    private boolean getHotseatVisible(){
-        return getHotseat().getVisibility()==View.INVISIBLE||getHotseat().getAlpha()==0;
+    private boolean getHotseatVisible() {
+        return getHotseat().getVisibility() == View.INVISIBLE || getHotseat().getAlpha() == 0;
     }
 
     //lijun add for visible of hotseat end
@@ -3894,9 +3933,9 @@ public class Launcher extends Activity
         if (!isDraggingEnabled()) return false;
         if (isWorkspaceLocked()) return false;
         //lijun add begin
-        if(mDragLayer.getActiveController() instanceof  PinchToOverviewListener){
+        if (mDragLayer.getActiveController() instanceof PinchToOverviewListener) {
             PinchToOverviewListener controller = (PinchToOverviewListener) mDragLayer.getActiveController();
-            if(controller.isPinchStarted()) {
+            if (controller.isPinchStarted()) {
                 return false;
             }
         }
@@ -3941,7 +3980,7 @@ public class Launcher extends Activity
         }
 
         //lijun add start
-        if(v.getTag() instanceof ItemInfo && isEditorMode())itemUnderLongClick = null;
+        if (v.getTag() instanceof ItemInfo && isEditorMode()) itemUnderLongClick = null;
         //lijun add end
 
         // The hotseat touch handling does not go through Workspace, and we always allow long press
@@ -3979,15 +4018,15 @@ public class Launcher extends Activity
                             }
                         }
                     }
-					getHotseat().initViewCacheList(); // lijun add for hotseat icon center
+                    getHotseat().initViewCacheList(); // lijun add for hotseat icon center
 //lijun add for arrangeMode begin
-                    if(isLauncherArrangeMode()&&v.getParent().getParent() instanceof  ArrangeNavigationBar){
-                        getArrangeNavigationBar(). startDrag(v,dragOptions);
-                    }else if(isLauncherHideAppMode()&&v.getParent().getParent() instanceof  HideAppNavigationBar){
-                        getmHideAppNavigationbar().startDrag(v,dragOptions);
-                    }else if((isArrangeBarShowing()||isLauncherHideAppMode())&&(v.getTag() instanceof  FolderInfo||v.getTag() instanceof LauncherAppWidgetInfo)){
+                    if (isLauncherArrangeMode() && v.getParent().getParent() instanceof ArrangeNavigationBar) {
+                        getArrangeNavigationBar().startDrag(v, dragOptions);
+                    } else if (isLauncherHideAppMode() && v.getParent().getParent() instanceof HideAppNavigationBar) {
+                        getmHideAppNavigationbar().startDrag(v, dragOptions);
+                    } else if ((isArrangeBarShowing() || isLauncherHideAppMode()) && (v.getTag() instanceof FolderInfo || v.getTag() instanceof LauncherAppWidgetInfo)) {
                         return false;
-                    }else {
+                    } else {
 //lijun add for arrangeMode end
                         mWorkspace.startDrag(longClickCellInfo, dragOptions);
                     }
@@ -4106,26 +4145,26 @@ public class Launcher extends Activity
     void showOverviewMode(boolean animated, final boolean requestButtonFocus) {
         Runnable postAnimRunnable = null;
 
-            postAnimRunnable = new Runnable() {
-                @Override
-                public void run() {
-                    // Hitting the menu button when in touch mode does not trigger touch mode to
-                    // be disabled, so if requested, force focus on one of the overview panel
-                    // buttons.
-                    if (requestButtonFocus) {
-                        mOverviewPanel.requestFocusFromTouch();
-                    }
-                    mWorkspace.updateFoldersUnread();//lijun add for update unread in folder
+        postAnimRunnable = new Runnable() {
+            @Override
+            public void run() {
+                // Hitting the menu button when in touch mode does not trigger touch mode to
+                // be disabled, so if requested, force focus on one of the overview panel
+                // buttons.
+                if (requestButtonFocus) {
+                    mOverviewPanel.requestFocusFromTouch();
                 }
-            };
+                mWorkspace.updateFoldersUnread();//lijun add for update unread in folder
+            }
+        };
         fullscreenOrNot(true);
         mWorkspace.setDefaultScreen(mWorkspace.defaultScreenId);//lijun add for homebutton
         mWorkspace.setVisibility(View.VISIBLE);
         //lijun modify for overviewhiden start
 //        mStateTransitionAnimation.startAnimationToWorkspace(mState, mWorkspace.getState(),
 //                Workspace.State.OVERVIEW, animated, postAnimRunnable);
-      // lijun add for special effect :State.SPECIALEFFECT
-        if (mState == State.WIDGETS || mState == State.WALLPAPER||mState == State.ICONARRANGE || mState == State.SPECIALEFFECT || mState == State.HIDE_APP) {
+        // lijun add for special effect :State.SPECIALEFFECT
+        if (mState == State.WIDGETS || mState == State.WALLPAPER || mState == State.ICONARRANGE || mState == State.SPECIALEFFECT || mState == State.HIDE_APP) {
             Folder.ICONARRANGING = false;
             showOverviewModeFromOverviewHidenMode(State.WORKSPACE, true);
         } else {
@@ -4139,7 +4178,7 @@ public class Launcher extends Activity
         // layer to intercept any remaining touch.
         mWorkspace.requestDisallowInterceptTouchEvent(animated);
 //UnistallMode add by lijun begin
-        if(isUnInstallMode()) {
+        if (isUnInstallMode()) {
             exitUnInstallNormalMode();
         }
 //UnistallMode add by lijun end
@@ -4149,7 +4188,7 @@ public class Launcher extends Activity
      * Shows the apps view.
      */
     public void showAppsView(boolean animated, boolean updatePredictedApps,
-            boolean focusSearchBar) {
+                             boolean focusSearchBar) {
         markAppsViewShown();
         if (updatePredictedApps) {
             tryAndUpdatePredictedApps();
@@ -4178,15 +4217,15 @@ public class Launcher extends Activity
     /**
      * lijun add to hide Widgets PageView
      */
-    private boolean showOverviewModeFromOverviewHidenMode(State toState, boolean animated){
+    private boolean showOverviewModeFromOverviewHidenMode(State toState, boolean animated) {
         // lijun add for special effect :State.SPECIALEFFECT
-        if (mState != State.WIDGETS && mState != State.WALLPAPER&&mState!=State.ICONARRANGE && mState != State.SPECIALEFFECT && mState != State.HIDE_APP) {
+        if (mState != State.WIDGETS && mState != State.WALLPAPER && mState != State.ICONARRANGE && mState != State.SPECIALEFFECT && mState != State.HIDE_APP) {
             return false;
         }
         if (toState != State.WORKSPACE) {
             return false;
         }
-        mStateTransitionAnimation.startAnimationBetweenOverviewAndOverviewHiden(Workspace.State.OVERVIEW,mState, animated);
+        mStateTransitionAnimation.startAnimationBetweenOverviewAndOverviewHiden(Workspace.State.OVERVIEW, mState, animated);
 
         // Change the state *after* we've called all the transition code
         mState = toState;
@@ -4224,9 +4263,9 @@ public class Launcher extends Activity
         } else {
             //lijun modify start for WIDGETS_CONTAINER_PAGE
 //            mStateTransitionAnimation.startAnimationToWidgets(mWorkspace.getState(), animated);
-            if(FeatureFlags.WIDGETS_CONTAINER_PAGE) {
-                mStateTransitionAnimation.startAnimationBetweenOverviewAndOverviewHiden(Workspace.State.OVERVIEW_HIDDEN,toState, animated);
-            }else {
+            if (FeatureFlags.WIDGETS_CONTAINER_PAGE) {
+                mStateTransitionAnimation.startAnimationBetweenOverviewAndOverviewHiden(Workspace.State.OVERVIEW_HIDDEN, toState, animated);
+            } else {
                 mStateTransitionAnimation.startAnimationToWidgets(mWorkspace.getState(), animated);
             }
             //lijun modify end
@@ -4252,7 +4291,7 @@ public class Launcher extends Activity
      * new state.
      */
     public Animator startWorkspaceStateChangeAnimation(Workspace.State toState,
-            boolean animated, HashMap<View, Integer> layerViews) {
+                                                       boolean animated, HashMap<View, Integer> layerViews) {
         Workspace.State fromState = mWorkspace.getState();
         Animator anim = mWorkspace.setStateWithAnimation(toState, animated, layerViews);
         updateInteraction(fromState, toState);
@@ -4287,6 +4326,7 @@ public class Launcher extends Activity
             mState = State.WORKSPACE;
         }
     }
+
     public void enterSpringLoadedDragMode(Runnable onCompleteRunnable) {
         if (LOGD) Log.d(TAG, String.format("enterSpringLoadedDragMode [mState=%s", mState.name()));
         if (isStateSpringLoaded()) {
@@ -4315,12 +4355,13 @@ public class Launcher extends Activity
             mState = State.WORKSPACE;
         }
     }
+
     public void exitSpringLoadedDragModeDelayed(final boolean successfulDrop, int delay,
-            final Runnable onCompleteRunnable) {
+                                                final Runnable onCompleteRunnable) {
         if (!isStateSpringLoaded()) return;
 
         //lijun add for widgetmode
-        if(isWidgetsViewVisible()){
+        if (isWidgetsViewVisible()) {
             mWorkspace.setmState(Workspace.State.OVERVIEW_HIDDEN);
         }
         //lijun add end
@@ -4410,17 +4451,18 @@ public class Launcher extends Activity
     /**
      * If the activity is currently paused, signal that we need to run the passed Runnable
      * in onResume.
-     *
+     * <p>
      * This needs to be called from incoming places where resources might have been loaded
      * while the activity is paused. That is because the Configuration (e.g., rotation)  might be
      * wrong when we're not running, and if the activity comes back to what the configuration was
      * when we were paused, activity is not restarted.
-     *
+     * <p>
      * Implementation of the method from LauncherModel.Callbacks.
      *
      * @return {@code true} if we are currently paused. The caller might be able to skip some work
      */
-    @Thunk boolean waitUntilResume(Runnable run, boolean deletePreviousRunnables) {
+    @Thunk
+    boolean waitUntilResume(Runnable run, boolean deletePreviousRunnables) {
         if (mPaused) {
             if (LOGD) Log.d(TAG, "Deferring update until onResume");
             if (deletePreviousRunnables) {
@@ -4445,12 +4487,12 @@ public class Launcher extends Activity
     /**
      * If the activity is currently paused, signal that we need to re-run the loader
      * in onResume.
-     *
+     * <p>
      * This needs to be called from incoming places where resources might have been loaded
      * while we are paused.  That is becaues the Configuration might be wrong
      * when we're not running, and if it comes back to what it was when we
      * were paused, we are not restarted.
-     *
+     * <p>
      * Implementation of the method from LauncherModel.Callbacks.
      *
      * @return true if we are currently paused.  The caller might be able to
@@ -4494,7 +4536,7 @@ public class Launcher extends Activity
 
     /**
      * Refreshes the shortcuts shown on the workspace.
-     *
+     * <p>
      * Implementation of the method from LauncherModel.Callbacks.
      */
     public void startBinding() {
@@ -4593,7 +4635,7 @@ public class Launcher extends Activity
 
     /**
      * Bind the items start-end from the list.
-     *
+     * <p>
      * Implementation of the method from LauncherModel.Callbacks.
      */
     @Override
@@ -4624,7 +4666,7 @@ public class Launcher extends Activity
                 continue;
             }
 
-            if(item.isHide){
+            if (item.isHide) {
                 continue;
             }
 
@@ -4677,12 +4719,12 @@ public class Launcher extends Activity
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         super.onAnimationEnd(animation);
-                         //UnistallMode add by lijun begin
-                    if(isUninstallMode&&view instanceof UninstallMode ) {
-                        UninstallMode uninstallMode = (UninstallMode) view;
-                        uninstallMode.showUninstallApp();
-                    }
-            //UnistallMode add by lijun  end
+                        //UnistallMode add by lijun begin
+                        if (isUninstallMode && view instanceof UninstallMode) {
+                            UninstallMode uninstallMode = (UninstallMode) view;
+                            uninstallMode.showUninstallApp();
+                        }
+                        //UnistallMode add by lijun  end
                     }
                 });
                 bounceAnims.add(animation);
@@ -4705,15 +4747,15 @@ public class Launcher extends Activity
                     // We post the animation slightly delayed to prevent slowdowns
                     // when we are loading right after we return to launcher.
                     final long newShortcutsScreen = newShortcutsScreenId;
-					mWorkspace.postDelayed(new Runnable() {
+                    mWorkspace.postDelayed(new Runnable() {
                         public void run() {
-                            if (mWorkspace != null) {	
-							   // lijun add start for bug: after install apps last page not show
-								long currentScreen = mWorkspace.getScreenIdForPageIndex(mWorkspace.getNextPage());
-                                if(newShortcutsScreen != currentScreen){
-							   // lijun add end
-                                  mWorkspace.snapToPage(newScreenIndex);
-								}
+                            if (mWorkspace != null) {
+                                // lijun add start for bug: after install apps last page not show
+                                long currentScreen = mWorkspace.getScreenIdForPageIndex(mWorkspace.getNextPage());
+                                if (newShortcutsScreen != currentScreen) {
+                                    // lijun add end
+                                    mWorkspace.snapToPage(newScreenIndex);
+                                }
                                 mWorkspace.postDelayed(startBounceAnimRunnable,
                                         NEW_APPS_ANIMATION_DELAY);
                             }
@@ -4738,7 +4780,7 @@ public class Launcher extends Activity
 
     /**
      * Add the views for a widget to the workspace.
-     *
+     * <p>
      * Implementation of the method from LauncherModel.Callbacks.
      */
     public void bindAppWidget(final LauncherAppWidgetInfo item) {
@@ -4868,8 +4910,8 @@ public class Launcher extends Activity
         mWorkspace.requestLayout();
 
         if (DEBUG_WIDGETS) {
-            Log.d(TAG, "bound widget id="+item.appWidgetId+" in "
-                    + (SystemClock.uptimeMillis()-start) + "ms");
+            Log.d(TAG, "bound widget id=" + item.appWidgetId + " in "
+                    + (SystemClock.uptimeMillis() - start) + "ms");
         }
     }
 
@@ -4940,7 +4982,7 @@ public class Launcher extends Activity
 
     /**
      * Callback saying that there aren't any more items to bind.
-     *
+     * <p>
      * Implementation of the method from LauncherModel.Callbacks.
      */
     public void finishBindingItems() {
@@ -4963,11 +5005,11 @@ public class Launcher extends Activity
         if (mSavedState != null) {
             if (!mWorkspace.hasFocus()) {
                 //lijun modify for nullpointexception
-                if(mWorkspace.getPageCount() == 0){
+                if (mWorkspace.getPageCount() == 0) {
                     mWorkspace.requestFocus();
-                }else {
+                } else {
                     int indext = getCurrentWorkspaceScreen();
-                    if(indext <0 || indext >= mWorkspace.getPageCount()){
+                    if (indext < 0 || indext >= mWorkspace.getPageCount()) {
                         indext = 0;
                     }
                     mWorkspace.getChildAt(indext).requestFocus();
@@ -4981,7 +5023,7 @@ public class Launcher extends Activity
         mWorkspace.initDefaultScreen();//lijun add for homebutton
         mWorkspace.restoreInstanceStateForRemainingPages();
 
-        Log.d(TAG,"finishBindingItems");
+        Log.d(TAG, "finishBindingItems");
         setWorkspaceLoading(false);
 
         if (mPendingActivityResult != null) {
@@ -4998,7 +5040,7 @@ public class Launcher extends Activity
         if (LauncherAppState.PROFILE_STARTUP) {
             Trace.endSection();
         }
-		getHotseat().initViewCacheList(); // lijun add for hotseat icon center
+        getHotseat().initViewCacheList(); // lijun add for hotseat icon center
 
         if (FeatureFlags.UNREAD_ENABLE && BadgeController.sBadgeEnable) {
             mBadgeController.reloadBadges();//lijun add for unread
@@ -5033,7 +5075,8 @@ public class Launcher extends Activity
      * A runnable that we can dequeue and re-enqueue when all applications are bound (to prevent
      * multiple calls to bind the same list.)
      */
-    @Thunk ArrayList<AppInfo> mTmpAppsList;
+    @Thunk
+    ArrayList<AppInfo> mTmpAppsList;
     private Runnable mBindAllApplicationsRunnable = new Runnable() {
         public void run() {
             bindAllApplications(mTmpAppsList);
@@ -5043,7 +5086,7 @@ public class Launcher extends Activity
 
     /**
      * Add the icons for all apps.
-     *
+     * <p>
      * Implementation of the method from LauncherModel.Callbacks.
      */
     public void bindAllApplications(final ArrayList<AppInfo> apps) {
@@ -5068,13 +5111,15 @@ public class Launcher extends Activity
     public void bindDeepShortcutMap(MultiHashMap<ComponentKey, String> deepShortcutMapCopy) {
         mDeepShortcutMap = deepShortcutMapCopy;
         if (LOGD) Log.d(TAG, "bindDeepShortcutMap: " + mDeepShortcutMap);
-    }/**
+    }
+
+    /**
      * lijun add for  remove item of dual
      */
 
     @Override
     public void removeDualShortcut(ItemInfo itemInfo) {
-        if(mWorkspace!=null){
+        if (mWorkspace != null) {
             mWorkspace.removeDualShortcut(itemInfo);
         }
     }
@@ -5094,7 +5139,7 @@ public class Launcher extends Activity
 
     /**
      * A package was updated.
-     *
+     * <p>
      * Implementation of the method from LauncherModel.Callbacks.
      */
     public void bindAppsUpdated(final ArrayList<AppInfo> apps) {
@@ -5136,7 +5181,7 @@ public class Launcher extends Activity
      */
     @Override
     public void bindShortcutsChanged(final ArrayList<ShortcutInfo> updated,
-            final ArrayList<ShortcutInfo> removed, final UserHandleCompat user) {
+                                     final ArrayList<ShortcutInfo> removed, final UserHandleCompat user) {
         Runnable r = new Runnable() {
             public void run() {
                 bindShortcutsChanged(updated, removed, user);
@@ -5178,7 +5223,7 @@ public class Launcher extends Activity
 
     /**
      * Update the state of a package, typically related to install state.
-     *
+     * <p>
      * Implementation of the method from LauncherModel.Callbacks.
      */
     @Override
@@ -5248,10 +5293,10 @@ public class Launcher extends Activity
     }
 
     private Runnable mBindWidgetModelRunnable = new Runnable() {
-            public void run() {
-                bindWidgetsModel(mWidgetsModel);
-            }
-        };
+        public void run() {
+            bindWidgetsModel(mWidgetsModel);
+        }
+    };
 
     @Override
     public void bindWidgetsModel(WidgetsModel model) {
@@ -5277,17 +5322,17 @@ public class Launcher extends Activity
         final Display d = getWindowManager().getDefaultDisplay();
         int naturalOri = Configuration.ORIENTATION_LANDSCAPE;
         switch (d.getRotation()) {
-        case Surface.ROTATION_0:
-        case Surface.ROTATION_180:
-            // We are currently in the same basic orientation as the natural orientation
-            naturalOri = configOri;
-            break;
-        case Surface.ROTATION_90:
-        case Surface.ROTATION_270:
-            // We are currently in the other basic orientation to the natural orientation
-            naturalOri = (configOri == Configuration.ORIENTATION_LANDSCAPE) ?
-                    Configuration.ORIENTATION_PORTRAIT : Configuration.ORIENTATION_LANDSCAPE;
-            break;
+            case Surface.ROTATION_0:
+            case Surface.ROTATION_180:
+                // We are currently in the same basic orientation as the natural orientation
+                naturalOri = configOri;
+                break;
+            case Surface.ROTATION_90:
+            case Surface.ROTATION_270:
+                // We are currently in the other basic orientation to the natural orientation
+                naturalOri = (configOri == Configuration.ORIENTATION_LANDSCAPE) ?
+                        Configuration.ORIENTATION_PORTRAIT : Configuration.ORIENTATION_LANDSCAPE;
+                break;
         }
 
         int[] oriMap = {
@@ -5386,7 +5431,7 @@ public class Launcher extends Activity
 
     // TODO: This method should be a part of LauncherSearchCallback
     public ItemInfo createShortcutDragInfo(Intent shortcutIntent, CharSequence caption,
-            Bitmap icon) {
+                                           Bitmap icon) {
         return new ShortcutInfo(shortcutIntent, caption, caption, icon,
                 UserHandleCompat.myUserHandle());
     }
@@ -5509,14 +5554,15 @@ public class Launcher extends Activity
 
     //lijun add start
     AnimatorSet mPageIndicatorDiagitAnimator = null;
-    public void showPageIndicatorDiagital(int index){
-        if(FeatureFlags.SHOW_PAGEINDICATOR_CUBE && mPageIndicatorDiagital != null){
+
+    public void showPageIndicatorDiagital(int index) {
+        if (FeatureFlags.SHOW_PAGEINDICATOR_CUBE && mPageIndicatorDiagital != null) {
             mPageIndicatorDiagital.setIndicatorIndex(index);
-            if(mPageIndicatorDiagital.getAlpha()>0.01f){
+            if (mPageIndicatorDiagital.getAlpha() > 0.01f) {
                 mPageIndicatorDiagital.setVisibility(View.VISIBLE);
                 mPageIndicatorDiagital.setAlpha(1.0f);
                 mPageIndicatorDiagital.invalidate();
-                if(mPageIndicatorDiagitAnimator!=null) {
+                if (mPageIndicatorDiagitAnimator != null) {
                     mPageIndicatorDiagitAnimator.cancel();
                     mPageIndicatorDiagitAnimator = null;
                 }
@@ -5537,15 +5583,17 @@ public class Launcher extends Activity
             mPageIndicatorDiagitAnimator.start();
         }
     }
-    public void snapToPageIndicatorDiagital(int index){
-        if(FeatureFlags.SHOW_PAGEINDICATOR_CUBE && mPageIndicatorDiagital != null){
+
+    public void snapToPageIndicatorDiagital(int index) {
+        if (FeatureFlags.SHOW_PAGEINDICATOR_CUBE && mPageIndicatorDiagital != null) {
             mPageIndicatorDiagital.setIndicatorIndex(index);
             mPageIndicatorDiagital.invalidate();
         }
     }
-    public void hidePageIndicatorDiagital(){
-        if(FeatureFlags.SHOW_PAGEINDICATOR_CUBE && mPageIndicatorDiagital != null){
-            if(mPageIndicatorDiagitAnimator!=null){
+
+    public void hidePageIndicatorDiagital() {
+        if (FeatureFlags.SHOW_PAGEINDICATOR_CUBE && mPageIndicatorDiagital != null) {
+            if (mPageIndicatorDiagitAnimator != null) {
                 mPageIndicatorDiagitAnimator.cancel();
                 mPageIndicatorDiagitAnimator = null;
             }
@@ -5571,19 +5619,20 @@ public class Launcher extends Activity
     //lijun add end
 
     //lijun : add for folder addIcon begin
-    public void enterImportMode(FolderIcon icon, FolderInfo info){
+    public void enterImportMode(FolderIcon icon, FolderInfo info) {
         mEditFolderIcon = icon;
         mEditFolderInfo = info;
-        if(isUninstallMode){
-             mWorkspace.exitUninstallMode();
+        if (isUninstallMode) {
+            mWorkspace.exitUninstallMode();
         }
         showImportMode(true);
     }
 
     private void showImportMode(boolean animated) {
-        enterLauncherState(State.FOLDER_IMPORT,Workspace.State.FOLDER_IMPORT);
+        enterLauncherState(State.FOLDER_IMPORT, Workspace.State.FOLDER_IMPORT);
     }
-    private void enterLauncherState(State launcherState,Workspace.State toWorkspaceState) {
+
+    private void enterLauncherState(State launcherState, Workspace.State toWorkspaceState) {
         if (LOGD) Log.d(TAG, String.format("enterNormalDrag [mState=%s", mState.name()));
         if (mState == State.APPS || mState == State.WIDGETS || mState == State.WALLPAPER || mState == State.SPECIALEFFECT) {//lijun add WALLPAPER
             return;
@@ -5594,33 +5643,35 @@ public class Launcher extends Activity
                 null /* onCompleteRunnable */);
         mState = launcherState;
     }
+
     private void animationCloseFolder(Folder folder) {
         //mHotseat.setVisibility(View.INVISIBLE);
         //  mFolderImportHintContainer.setVisibility(View.VISIBLE);
         //mFolderImportContainer.setVisibility(View.VISIBLE);
-        if(animImportButton!=null)
+        if (animImportButton != null)
             animImportButton.cancel();
-        animImportButton= showImportButton();
+        animImportButton = showImportButton();
         animImportButton.start();
         // mFolderImportContainer.setTranslationY(mFolderImportContainer.getHeight());
-        if(mEditFolderIcon!=null)
+        if (mEditFolderIcon != null)
             mEditFolderIcon.setAlpha(0.4f);
     }
-    private void showFolderIcon(){
-        if(mEditFolderIcon != null && mEditFolderIcon.getAlpha() < 1.0f) {
+
+    private void showFolderIcon() {
+        if (mEditFolderIcon != null && mEditFolderIcon.getAlpha() < 1.0f) {
             mEditFolderIcon.setAlpha(1.0f);
         }
     }
 
     private void exitEditModeAndOpenFolder() {
         clearFolderShortcut();
-        if(mOpenFolder && mEditFolderIcon != null ){
+        if (mOpenFolder && mEditFolderIcon != null) {
             int destScreen = (int) mEditFolderIcon.getFolderInfo().screenId;
             int srcScreen = mWorkspace.getCurrentPage();
-            int screenIndex=mWorkspace.getPageIndexForScreenId(destScreen);
-            if(destScreen != srcScreen && mEditFolderIcon.getParent() != null
-                    && !isHotseatLayout((View)mEditFolderIcon.getParent().getParent())){
-                int duration =getResources().getInteger(R.integer.folder_snap_to_page_duration) ;
+            int screenIndex = mWorkspace.getPageIndexForScreenId(destScreen);
+            if (destScreen != srcScreen && mEditFolderIcon.getParent() != null
+                    && !isHotseatLayout((View) mEditFolderIcon.getParent().getParent())) {
+                int duration = getResources().getInteger(R.integer.folder_snap_to_page_duration);
                 mWorkspace.snapToPage(screenIndex, duration, new Runnable() {
                     @Override
                     public void run() {
@@ -5636,7 +5687,7 @@ public class Launcher extends Activity
                 mEditFolderIcon = null;
                 mWorkspace.stripEmptyScreens();
             }
-            mOpenFolder=false;
+            mOpenFolder = false;
         } else {
             hideImportMode();
             mEditFolderIcon = null;
@@ -5644,35 +5695,36 @@ public class Launcher extends Activity
         isSuccessAddIcon = true;
         exitImportMode(true);
     }
+
     private void exitEditModeAndCloseFolder() {
         clearFolderShortcut();
         mWorkspace.stripEmptyScreens();
-        if(mOpenFolder && mEditFolderIcon != null ){
+        if (mOpenFolder && mEditFolderIcon != null) {
             int destScreen = (int) mEditFolderIcon.getFolderInfo().screenId;
             int srcScreen = mWorkspace.getCurrentPage();
-            int screenIndex=mWorkspace.getPageIndexForScreenId(destScreen);
-            Log.d(TAG,"screenIndex="+screenIndex+" destScreen="+destScreen);
-            if(destScreen != srcScreen && mEditFolderIcon.getParent() != null
-                    && !isHotseatLayout((View)mEditFolderIcon.getParent().getParent())){
-                int duration =getResources().getInteger(R.integer.folder_snap_to_page_duration) ;
+            int screenIndex = mWorkspace.getPageIndexForScreenId(destScreen);
+            Log.d(TAG, "screenIndex=" + screenIndex + " destScreen=" + destScreen);
+            if (destScreen != srcScreen && mEditFolderIcon.getParent() != null
+                    && !isHotseatLayout((View) mEditFolderIcon.getParent().getParent())) {
+                int duration = getResources().getInteger(R.integer.folder_snap_to_page_duration);
                 mWorkspace.snapToPage(screenIndex, duration, new Runnable() {
                     @Override
                     public void run() {
                         hideImportMode();
                         closeFolder(false);
-                        if(mEditFolderIcon.mFolder!=null)
-                        mEditFolderIcon.mFolder.close(false);
+                        if (mEditFolderIcon.mFolder != null)
+                            mEditFolderIcon.mFolder.close(false);
                         mEditFolderIcon = null;
                     }
                 });
             } else {
                 hideImportMode();
                 closeFolder(false);
-                if(mEditFolderIcon!=null&&mEditFolderIcon.mFolder!=null)
-                mEditFolderIcon.mFolder.close(false);
+                if (mEditFolderIcon != null && mEditFolderIcon.mFolder != null)
+                    mEditFolderIcon.mFolder.close(false);
                 mEditFolderIcon = null;
             }
-            mOpenFolder=false;
+            mOpenFolder = false;
         } else {
             hideImportMode();
             mEditFolderIcon = null;
@@ -5680,36 +5732,38 @@ public class Launcher extends Activity
         exitImportMode(true);
 
     }
+
     public boolean isSuccessAddIcon() {
         return isSuccessAddIcon;
     }
+
     private void clearFolderShortcut() {
-        if(mCheckedBubbleTextViews != null) {
-            for(int i=0;i<mCheckedBubbleTextViews.size();i++){
+        if (mCheckedBubbleTextViews != null) {
+            for (int i = 0; i < mCheckedBubbleTextViews.size(); i++) {
                 mCheckedBubbleTextViews.get(i).setChecked(false);
             }
             mCheckedBubbleTextViews.clear();
         }
-        if (mCheckedShortcutInfos!=null)
+        if (mCheckedShortcutInfos != null)
             mCheckedShortcutInfos.clear();
         Iterator<FolderInfo> iterator = mCheckedFolderInfos.iterator();
-        while(iterator.hasNext()){
+        while (iterator.hasNext()) {
             FolderInfo info = iterator.next();
             info.clearInfo();
         }
         Iterator<FolderIcon> iteratorIcon = mCheckedFolderIcons.iterator();
-        while(iteratorIcon.hasNext()){
+        while (iteratorIcon.hasNext()) {
             FolderIcon icon = iteratorIcon.next();
             icon.onClearIconInfo();
         }
     }
 
     private void handleFolderClick(FolderIcon editFolderIcon) {
-        if(editFolderIcon==null)
+        if (editFolderIcon == null)
             return;
         final FolderInfo info = editFolderIcon.getFolderInfo();
         Folder openFolder = mWorkspace.getFolderForTag(info);
-        editFolderIcon.getFolder().mSnapToLastpage=true;
+        editFolderIcon.getFolder().mSnapToLastpage = true;
         // If the folder info reports that the associated folder is open, then
         // verify that
         // it is actually opened. There have been a few instances where this
@@ -5729,7 +5783,7 @@ public class Launcher extends Activity
             if (openFolder != null) {
                 folderScreen = mWorkspace.getPageForView(openFolder);
                 // .. and close it
-                closeFolder(openFolder,false);
+                closeFolder(openFolder, false);
                 if (folderScreen != mWorkspace.getCurrentPage()) {
                     // Close any folder open on the current screen
                     closeFolder();
@@ -5742,36 +5796,40 @@ public class Launcher extends Activity
     }
 
     private void hideImportMode() {
-        if(animImportButton!=null)
+        if (animImportButton != null)
             animImportButton.cancel();
-        animImportButton= hideImportButton();
+        animImportButton = hideImportButton();
         animImportButton.start();
         //mFolderImportContainer.setVisibility(View.INVISIBLE);
     }
+
     private void setImportMode(boolean b) {
-        if(mEditFolderIcon==null) {
-            Log.e(TAG, "Launcher setImportMode is error"+ android.util.Log.getStackTraceString(new Throwable()));
+        if (mEditFolderIcon == null) {
+            Log.e(TAG, "Launcher setImportMode is error" + android.util.Log.getStackTraceString(new Throwable()));
             return;
         }
         mEditFolderIcon.mFolder.setImportMode(b);
     }
-    public boolean getImportMode(){
-        return mEditFolderIcon!=null&&mEditFolderIcon.mFolder.isImportMode();
+
+    public boolean getImportMode() {
+        return mEditFolderIcon != null && mEditFolderIcon.mFolder.isImportMode();
     }
-    public void addCheckedFolderInfo(FolderInfo info){
+
+    public void addCheckedFolderInfo(FolderInfo info) {
         if (!mCheckedFolderInfos.contains(info)) {
             mCheckedFolderInfos.add(info);
         }
     }
-    public void addCheckedFolderIcon(FolderIcon icon){
+
+    public void addCheckedFolderIcon(FolderIcon icon) {
         if (!mCheckedFolderIcons.contains(icon)) {
             mCheckedFolderIcons.add(icon);
         }
     }
 
     public void updateImportButton() {
-        mFolderImportButton.setText(getString(R.string.folder_importmode_button,mCheckedShortcutInfos.size()));
-        if(mCheckedShortcutInfos.size() > 0){
+        mFolderImportButton.setText(getString(R.string.folder_importmode_button, mCheckedShortcutInfos.size()));
+        if (mCheckedShortcutInfos.size() > 0) {
             mFolderImportButton.getBackground().setAlpha(226);
             mFolderImportButton.setEnabled(true);
         } else {
@@ -5779,21 +5837,25 @@ public class Launcher extends Activity
             mFolderImportButton.setEnabled(false);
         }
     }
+
     private void exitImportMode(boolean animated) {
-        enterLauncherState(State.WORKSPACE,Workspace.State.NORMAL);
+        enterLauncherState(State.WORKSPACE, Workspace.State.NORMAL);
         isSuccessAddIcon = false;
     }
-    protected Folder getOpenFolder(){
-        if(mWorkspace!=null){
+
+    protected Folder getOpenFolder() {
+        if (mWorkspace != null) {
             return mWorkspace.getOpenFolder();
         }
         return null;
     }
+
     private Animator showImportButton() {
-        AnimatorSet ain= LauncherAnimUtils.createAnimatorSet();
+        AnimatorSet ain = LauncherAnimUtils.createAnimatorSet();
         ain.play(createImportButtonAnimation(mFolderImportContainer));
         return ain;
     }
+
     private Animator hideImportButton() {
         long duration = getResources().getInteger(R.integer.folder_blur_background_duration);
         Interpolator ln = new AccelerateDecelerateInterpolator();
@@ -5809,7 +5871,7 @@ public class Launcher extends Activity
             @Override
             public void onAnimationEnd(Animator animation) {
                 mFolderImportContainer.setLayerType(View.LAYER_TYPE_NONE, null);
-                if(mFolderImportContainer!=null){
+                if (mFolderImportContainer != null) {
                     //mFolderBlurBackground.setBackground(null);
                     mFolderImportContainer.setVisibility(View.INVISIBLE);
                 }
@@ -5820,7 +5882,8 @@ public class Launcher extends Activity
         oa.setStartDelay(getResources().getInteger(R.integer.folder_import_button_startdelay));
         return oa;
     }
-    private Animator createImportButtonAnimation(final View view){
+
+    private Animator createImportButtonAnimation(final View view) {
         long duration = getResources().getInteger(R.integer.folder_blur_background_duration);
         Interpolator ln = new AccelerateDecelerateInterpolator();
         PropertyValuesHolder alpha = PropertyValuesHolder.ofFloat("alpha", 0f, 1f);
@@ -5846,22 +5909,23 @@ public class Launcher extends Activity
     //lijun : add for folder addIcon end
 
     //lijun add the background of workspace when opening folder begin
-    private void openOrCloseFolderAnimation(boolean open){
-        if(mAniWorkspaceBg!=null&&mAniWorkspaceBg.isRunning()) {
+    private void openOrCloseFolderAnimation(boolean open) {
+        if (mAniWorkspaceBg != null && mAniWorkspaceBg.isRunning()) {
             mAniWorkspaceBg.end();
         }
-        if(open){
-            Log.d(TAG,"show blur");
+        if (open) {
+            Log.d(TAG, "show blur");
             mAniWorkspaceBg = animateShowWorkspaceBg();
-        }else {
-            Log.d(TAG,"close blur");
-            mAniWorkspaceBg=dismissWorkspaceBg();
+        } else {
+            Log.d(TAG, "close blur");
+            mAniWorkspaceBg = dismissWorkspaceBg();
         }
         mAniWorkspaceBg.start();
 
     }
+
     private Animator animateShowWorkspaceBg() {
-        AnimatorSet animatorSet =LauncherAnimUtils.createAnimatorSet();
+        AnimatorSet animatorSet = LauncherAnimUtils.createAnimatorSet();
         PropertyValuesHolder alpha = PropertyValuesHolder.ofFloat("alpha", 0f, 1.0f);
         long duration = getResources().getInteger(R.integer.workspace_bg_ani_duration);
 
@@ -5872,7 +5936,7 @@ public class Launcher extends Activity
         oa.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationStart(Animator animation) {
-                if(mWorkspaceBg!=null) {
+                if (mWorkspaceBg != null) {
                     mWorkspaceBg.setLayerType(View.LAYER_TYPE_HARDWARE, null);
                 }
                 showWorkspaceBackground();
@@ -5880,7 +5944,7 @@ public class Launcher extends Activity
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                if(mWorkspaceBg!=null) {
+                if (mWorkspaceBg != null) {
                     mWorkspaceBg.setLayerType(View.LAYER_TYPE_NONE, null);
                 }
                 mAniWorkspaceBg = null;
@@ -5902,28 +5966,28 @@ public class Launcher extends Activity
             if (bitmapRatio > ratio) {
                 int clipBitmapWidth = (int) (height * ratio);
                 int x = 0;
-                if (mWorkspace != null&&mWorkspace.getCurrentPage()>0) {
+                if (mWorkspace != null && mWorkspace.getCurrentPage() > 0) {
                     int pageIndex = 0;
-                    if(isLiveWallpaper){
+                    if (isLiveWallpaper) {
                         pageIndex = 1;
-                    }else {
-                        pageIndex= mWorkspace.getCurrentPage();
+                    } else {
+                        pageIndex = mWorkspace.getCurrentPage();
                     }
                     int extWidth = (int) (width * (bitmapRatio - ratio));
                     int pageWidth = extWidth / mWorkspace.getPageCount();
                     x = pageIndex * pageWidth;
                 }
                 try {
-                    if(bitmap!=null&&!bitmap.isRecycled()){
+                    if (bitmap != null && !bitmap.isRecycled()) {
                         return Bitmap.createBitmap(bitmap, x, 0, clipBitmapWidth, height);
                     }
                 } catch (Exception e) {
                     Log.e(TAG, "create  bitmap error");
                 }
-            } else if(bitmap!=null&&!bitmap.isRecycled()){
+            } else if (bitmap != null && !bitmap.isRecycled()) {
                 try {
                     return Bitmap.createBitmap(bitmap);
-                }catch (Exception e){
+                } catch (Exception e) {
                     Log.e(TAG, "create  bitmap error");
                 }
             }
@@ -5933,7 +5997,7 @@ public class Launcher extends Activity
 
     private Animator dismissWorkspaceBg() {
         long duration = getResources().getInteger(R.integer.workspace_bg_ani_duration);
-        AnimatorSet animatorSet=LauncherAnimUtils.createAnimatorSet();
+        AnimatorSet animatorSet = LauncherAnimUtils.createAnimatorSet();
         Interpolator ln = new AccelerateInterpolator(0.75f);
         PropertyValuesHolder alpha = PropertyValuesHolder.ofFloat("alpha", 1.0f, 0f);
         ObjectAnimator oa = LauncherAnimUtils.ofPropertyValuesHolder(
@@ -5947,7 +6011,7 @@ public class Launcher extends Activity
             @Override
             public void onAnimationEnd(Animator animation) {
                 mWorkspaceBg.setLayerType(View.LAYER_TYPE_NONE, null);
-                if(mWorkspaceBg!=null){
+                if (mWorkspaceBg != null) {
                     mWorkspaceBg.setVisibility(View.INVISIBLE);
                 }
                 mAniWorkspaceBg = null;
@@ -5956,7 +6020,7 @@ public class Launcher extends Activity
             @Override
             public void onAnimationCancel(Animator animation) {
                 super.onAnimationCancel(animation);
-                if(mWorkspaceBg!=null){
+                if (mWorkspaceBg != null) {
                     mWorkspaceBg.setVisibility(View.INVISIBLE);
                 }
             }
@@ -5978,11 +6042,11 @@ public class Launcher extends Activity
     /**
      * lijun add
      */
-    private void checkPermission(){
+    private void checkPermission() {
         List<String> noOkPermissions = new ArrayList<>();
 
         for (String permission : sAllPermissions) {
-            if (ActivityCompat.checkSelfPermission(this,permission) == PackageManager.PERMISSION_DENIED) {
+            if (ActivityCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_DENIED) {
                 noOkPermissions.add(permission);
             }
         }
@@ -5992,14 +6056,15 @@ public class Launcher extends Activity
 //            sRWSDCardPermission = true;
 //        }
         if (noOkPermissions.size() <= 0)
-            return ;
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(noOkPermissions.toArray(new String[noOkPermissions.size()]), REQUEST_PERMISSION_ALL);
         }
     }
 
     /**
      * lijun add for pinch
+     *
      * @param progress
      */
     public void updatePinchProgress(float progress) {
@@ -6054,13 +6119,15 @@ public class Launcher extends Activity
     public View getmAlineButton() {
         return mAlineButton;
     }
+
     Animator alineIconAnima;
+
     public void aLineButtonAnimateApha(final float apha) {
-        if(mWorkspace.getState() != Workspace.State.OVERVIEW){
+        if (mWorkspace.getState() != Workspace.State.OVERVIEW) {
             return;
         }
         if (mAlineButton != null) {
-            if(alineIconAnima!=null){
+            if (alineIconAnima != null) {
                 alineIconAnima.cancel();
                 alineIconAnima = null;
             }
@@ -6076,12 +6143,12 @@ public class Launcher extends Activity
     //lijun add for get WallPaperBlur
     private synchronized void setWallPaperBlur(Bitmap wallpaperThumb, boolean b) {
         Bitmap bm = null;
-        Bitmap clipBlur = null ;
+        Bitmap clipBlur = null;
         Boolean isLiveWallpaper = false;
         if (wallpaperThumb != null) {
             bm = wallpaperThumb;
             Log.d(TAG, "setWallPaperBlur  Wallpaper ");
-            if(b){
+            if (b) {
                 isLiveWallpaper = true;
             }
         } else {
@@ -6089,10 +6156,10 @@ public class Launcher extends Activity
             if (b) {
                 List<WallpaperPicker.WallpaperTileInfo> wallpaperInfoList = getWallpaperInfoList();
                 WallpaperInfo wallpaperInfo = wallpaperManager.getWallpaperInfo();
-                if (wallpaperInfoList != null&&wallpaperInfo!=null) {
+                if (wallpaperInfoList != null && wallpaperInfo != null) {
                     String packageName = wallpaperInfo.getServiceName();
                     for (WallpaperPicker.WallpaperTileInfo tileInfo : wallpaperInfoList) {
-                        if (tileInfo instanceof WallpaperPicker.LiveWallpaperInfo &&packageName != null && packageName.equals(
+                        if (tileInfo instanceof WallpaperPicker.LiveWallpaperInfo && packageName != null && packageName.equals(
                                 ((WallpaperPicker.LiveWallpaperInfo) tileInfo).mInfo
                                         .getServiceName())) {
                             bm = ((BitmapDrawable) tileInfo.mThumb).getBitmap();
@@ -6104,15 +6171,15 @@ public class Launcher extends Activity
                 }
             }
             Drawable d = wallpaperManager.getDrawable();
-            if (!isLiveWallpaper&&d instanceof BitmapDrawable) {
+            if (!isLiveWallpaper && d instanceof BitmapDrawable) {
                 Log.d(TAG, "setWallPaperBlur from wallpaperManager");
                 bm = ((BitmapDrawable) d).getBitmap();
                 isLiveWallpaper = false;
             }
         }
 
-        clipBlur = clipBlur(bm,isLiveWallpaper);
-        if(clipBlur==null||clipBlur.isRecycled()){
+        clipBlur = clipBlur(bm, isLiveWallpaper);
+        if (clipBlur == null || clipBlur.isRecycled()) {
             return;
         }
         if (mBlur != null) {
@@ -6124,27 +6191,28 @@ public class Launcher extends Activity
         } else {
             scale = 0.1f;
         }
-        if(clipBlur!=null&&!clipBlur.isRecycled()){
-        mBlur = BlurFactory.blur(this, clipBlur, scale, 10);// radius 1~25
-        //mBlur = Bitmap.createBitmap(clipBlur);
-        if (mBlur != null&&mWorkspaceBg!=null)
-            mWorkspaceBg.setImageBitmap(mBlur);
-        Log.d(TAG, "setWallPaperBlur  image scale = "+scale);
+        if (clipBlur != null && !clipBlur.isRecycled()) {
+            mBlur = BlurFactory.blur(this, clipBlur, scale, 10);// radius 1~25
+            //mBlur = Bitmap.createBitmap(clipBlur);
+            if (mBlur != null && mWorkspaceBg != null)
+                mWorkspaceBg.setImageBitmap(mBlur);
+            Log.d(TAG, "setWallPaperBlur  image scale = " + scale);
         }
     }
 
     /**
      * lijun add for hide statusbar
+     *
      * @param gotoFullscreen
      */
     public void fullscreenOrNot(boolean gotoFullscreen) {
-        Log.d("LauncherDebug","fullscreenOrNot gotoFullscreen : "+gotoFullscreen+"\n" + Log.getStackTraceString(new Throwable()));
+        Log.d("LauncherDebug", "fullscreenOrNot gotoFullscreen : " + gotoFullscreen + "\n" + Log.getStackTraceString(new Throwable()));
         int flags;
         if (gotoFullscreen) {
             windowChangeListener(true);
             if (ColorManager.getInstance().isBlackText()) {
                 flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | 0x00000008|0x00004000 | View.INVISIBLE;
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | 0x00000008 | 0x00004000 | View.INVISIBLE;
             } else {
                 flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.INVISIBLE;
@@ -6153,7 +6221,7 @@ public class Launcher extends Activity
         } else {
             if (ColorManager.getInstance().isBlackText()) {
                 flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | 0x00000008 |0x00004000| View.SYSTEM_UI_FLAG_VISIBLE;
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | 0x00000008 | 0x00004000 | View.SYSTEM_UI_FLAG_VISIBLE;
             } else {
                 flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_VISIBLE;
@@ -6175,8 +6243,8 @@ public class Launcher extends Activity
                             if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
                                 // TODO: The system bars are visible. Make any desired
                                 mHandler.removeMessages(FULLSCREEN_DELAY_MSG);
-                                if(isFullScreenMode()){
-                                    mHandler.sendEmptyMessageDelayed(FULLSCREEN_DELAY_MSG,2000);
+                                if (isFullScreenMode()) {
+                                    mHandler.sendEmptyMessageDelayed(FULLSCREEN_DELAY_MSG, 2000);
                                 }
                             } else {
                                 // TODO: The system bars are NOT visible. Make any desired
@@ -6231,24 +6299,24 @@ public class Launcher extends Activity
     //lijun add for wallpaper change start
     @Override
     public void onWallpaperChange(Bitmap wallpaperThumb, boolean b) {
-        setWallPaperBlur(wallpaperThumb,b);
+        setWallPaperBlur(wallpaperThumb, b);
     }
 
     @Override
     public void onColorChange(int[] colors) {
         int flags;
-        if(mWorkspace.getState() == Workspace.State.OVERVIEW || mWorkspace.getState() == Workspace.State.OVERVIEW_HIDDEN){
+        if (mWorkspace.getState() == Workspace.State.OVERVIEW || mWorkspace.getState() == Workspace.State.OVERVIEW_HIDDEN) {
             if (ColorManager.getInstance().isBlackText()) {
                 flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | 0x00000008 |0x00004000 | View.INVISIBLE;
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | 0x00000008 | 0x00004000 | View.INVISIBLE;
             } else {
                 flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.INVISIBLE;
             }
-        }else {
+        } else {
             if (ColorManager.getInstance().isBlackText()) {
                 flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | 0x00000008 |0x00004000 | View.SYSTEM_UI_FLAG_VISIBLE;
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | 0x00000008 | 0x00004000 | View.SYSTEM_UI_FLAG_VISIBLE;
             } else {
                 flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_VISIBLE;
@@ -6264,9 +6332,11 @@ public class Launcher extends Activity
 
     //Icon Arrange begin
     public ArrangeNavigationBar mNavigationbar;
-    public ArrangeNavigationBar getArrangeNavigationBar(){
+
+    public ArrangeNavigationBar getArrangeNavigationBar() {
         return mNavigationbar;
     }
+
     public boolean isLauncherArrangeMode() {
         return (mState == State.ICONARRANGE);
     }
@@ -6276,14 +6346,16 @@ public class Launcher extends Activity
     public HideAppNavigationBar getmHideAppNavigationbar() {
         return mHideAppNavigationbar;
     }
+
     public boolean isLauncherHideAppMode() {
         return (mState == State.HIDE_APP);
     }
-    private void showArrangeNavigationBar(boolean animated){
-        if(mNavigationbar!=null){
+
+    private void showArrangeNavigationBar(boolean animated) {
+        if (mNavigationbar != null) {
             Folder.ICONARRANGING = true;
             mState = State.ICONARRANGE;
-            mStateTransitionAnimation.startAnimationBetweenOverviewAndOverviewHiden(Workspace.State.OVERVIEW_HIDDEN,State.ICONARRANGE, animated);
+            mStateTransitionAnimation.startAnimationBetweenOverviewAndOverviewHiden(Workspace.State.OVERVIEW_HIDDEN, State.ICONARRANGE, animated);
             getDragController().addDropTarget(mNavigationbar);//lijun add
         }
     }
@@ -6300,8 +6372,9 @@ public class Launcher extends Activity
 
     //lijun add start
     private Toast mToast;
+
     public void showToast(int textId) {
-        if(mToast == null) {
+        if (mToast == null) {
             mToast = Toast.makeText(this, textId, Toast.LENGTH_SHORT);
         } else {
             mToast.setText(textId);
@@ -6321,25 +6394,25 @@ public class Launcher extends Activity
     //lijun add for dynamic
     private void updateDynamicStatus(Boolean status) {
         ArrayList<IDynamicIcon> iDynamicIcons = DynamicProvider.getInstance(this).getAllDynamicIcon();
-        for (IDynamicIcon icon:iDynamicIcons){
-            if(status){
-                if(!Utilities.isScreenOn(this)){
+        for (IDynamicIcon icon : iDynamicIcons) {
+            if (status) {
+                if (!Utilities.isScreenOn(this)) {
 
-                }else {
+                } else {
                     icon.updateDynamicIcon(false);
                 }
-            }else {
+            } else {
                 icon.removeDynamicReceiver();
             }
         }
-        Log.d(TAG,"status="+status+"  iDynamicIcons.size="+iDynamicIcons.size());
-}
+        Log.d(TAG, "status=" + status + "  iDynamicIcons.size=" + iDynamicIcons.size());
+    }
 
     //lijun add
-    public void exitUnInstallNormalMode(){
-        exitSpringLoadedDragModeDelayed(true,0,mWorkspace.getmDelayedResizeRunnable());
+    public void exitUnInstallNormalMode() {
+        exitSpringLoadedDragModeDelayed(true, 0, mWorkspace.getmDelayedResizeRunnable());
         mWorkspace.setmDelayedResizeRunnable(null);
-        if(mWorkspace!=null) {
+        if (mWorkspace != null) {
             mWorkspace.exitUninstallMode();
             mWorkspace.resetPageIndicatorCube();
             hidePageIndicatorDiagital();
@@ -6350,6 +6423,7 @@ public class Launcher extends Activity
     public boolean isUnInstallMode() {
         return isUninstallMode;
     }
+
     public boolean isExitImportModeInHomeKey() {
         return exitImportModeInHomeKey;
     }
@@ -6358,6 +6432,7 @@ public class Launcher extends Activity
     //lijun add for theme changed start
     private long startShowProgressTime = 0;
     private long MIN_SHOW_PROGRESS_TIME = 1200;
+
     public void showThemeChangingDialog() {
         if (mThemeChangedLoadingView == null || mThemeChangedLoadingView.isThemeLoading()) return;
         startShowProgressTime = System.currentTimeMillis();
@@ -6367,63 +6442,64 @@ public class Launcher extends Activity
     public void hideThemeChangingDialog() {
         if (mThemeChangedLoadingView == null || !mThemeChangedLoadingView.isThemeLoading()) return;
         long delay = MIN_SHOW_PROGRESS_TIME - (System.currentTimeMillis() - startShowProgressTime);
-        if(delay>0){
-            mHandler.sendEmptyMessageDelayed(THEME_CHANGED_DELAY_MSG,delay);
-        }else {
+        if (delay > 0) {
+            mHandler.sendEmptyMessageDelayed(THEME_CHANGED_DELAY_MSG, delay);
+        } else {
             mThemeChangedLoadingView.hideLoading();
         }
     }
-    public boolean isShowThemeChang(){
-        if(mThemeChangedLoadingView == null)return false;
+
+    public boolean isShowThemeChang() {
+        if (mThemeChangedLoadingView == null) return false;
         return mThemeChangedLoadingView.isThemeLoading();
     }
     //lijun add for theme changed end
 
     //lijun add
     public void checkAndResetForState(State launcherState) {
-        Log.d(TAG,"checkAndResetForState");
+        Log.d(TAG, "checkAndResetForState");
         boolean needHideWidgets;
         boolean needHideWallpaper;
         boolean needHideIconarrange;
         boolean needHideSpecialEffect;
         boolean needHideHideApp;
-		
+
         if (launcherState == State.WIDGETS) {
             needHideWidgets = false;
             needHideWallpaper = isWallpaperPanelShowing();
             needHideIconarrange = isArrangeBarShowing();
-			needHideSpecialEffect = isSpecialEffectShowing();
-            needHideHideApp =isHideAppShowing();
+            needHideSpecialEffect = isSpecialEffectShowing();
+            needHideHideApp = isHideAppShowing();
         } else if (launcherState == State.WALLPAPER) {
             needHideWidgets = isWidgetsPanelShowing();
             needHideWallpaper = false;
             needHideIconarrange = isArrangeBarShowing();
-			needHideSpecialEffect = isSpecialEffectShowing();
-            needHideHideApp =isHideAppShowing();
+            needHideSpecialEffect = isSpecialEffectShowing();
+            needHideHideApp = isHideAppShowing();
         } else if (launcherState == State.ICONARRANGE) {
             needHideWidgets = isWidgetsPanelShowing();
             needHideWallpaper = isWallpaperPanelShowing();
             needHideIconarrange = false;
-			needHideSpecialEffect = isSpecialEffectShowing();
-            needHideHideApp =isHideAppShowing();
+            needHideSpecialEffect = isSpecialEffectShowing();
+            needHideHideApp = isHideAppShowing();
         } else if (launcherState == State.HIDE_APP) {
             needHideWidgets = isWidgetsPanelShowing();
             needHideWallpaper = isWallpaperPanelShowing();
             needHideIconarrange = isArrangeBarShowing();
             needHideSpecialEffect = isSpecialEffectShowing();
-            needHideHideApp =false;
+            needHideHideApp = false;
         } else if (launcherState == State.SPECIALEFFECT) {
             needHideWidgets = isWidgetsPanelShowing();
             needHideWallpaper = isWallpaperPanelShowing();
             needHideIconarrange = isArrangeBarShowing();
-			needHideSpecialEffect = false;
-            needHideHideApp =isHideAppShowing();
+            needHideSpecialEffect = false;
+            needHideHideApp = isHideAppShowing();
         } else if (launcherState == State.WORKSPACE) {
             needHideWidgets = isWidgetsPanelShowing();
             needHideWallpaper = isWallpaperPanelShowing();
             needHideIconarrange = isArrangeBarShowing();
-			needHideSpecialEffect = isSpecialEffectShowing();
-            needHideHideApp =isHideAppShowing();
+            needHideSpecialEffect = isSpecialEffectShowing();
+            needHideHideApp = isHideAppShowing();
         } else {
             return;
         }
@@ -6451,18 +6527,18 @@ public class Launcher extends Activity
             mHideAppNavigationbar.onBackPressed(false);
             Folder.ICONARRANGING = false;
         }
-        if(getOpenFolder()!=null&&mAniWorkspaceBg==null&&mWorkspaceBg.getVisibility()==View.VISIBLE){
+        if (getOpenFolder() != null && mAniWorkspaceBg == null && mWorkspaceBg.getVisibility() == View.VISIBLE) {
             openOrCloseFolderAnimation(false);
         }
     }
 
     //lijun add
-    private void forceExitImportMode(){
-        isMoveToDefaultScreen=false;
+    private void forceExitImportMode() {
+        isMoveToDefaultScreen = false;
         showFolderIcon();
-        mOpenFolder =true;
-        if(mCheckedBubbleTextViews!=null){
-            for (BubbleTextView bv:mCheckedBubbleTextViews
+        mOpenFolder = true;
+        if (mCheckedBubbleTextViews != null) {
+            for (BubbleTextView bv : mCheckedBubbleTextViews
                     ) {
                 bv.setChecked(false);
             }
@@ -6470,30 +6546,30 @@ public class Launcher extends Activity
         mEditFolderIcon.mFolder.setImportMode(false);
         mCheckedBubbleTextViews.clear();
         mCheckedShortcutInfos.clear();
-        exitImportModeInHomeKey=true;
+        exitImportModeInHomeKey = true;
         exitEditModeAndCloseFolder();
-        exitImportModeInHomeKey=false;
+        exitImportModeInHomeKey = false;
     }
 
     // lijun add for special effect  start
-	public Handler getHandler(){
-	   return mHandler;
+    public Handler getHandler() {
+        return mHandler;
     }
 
-    private void dismissSpecialEffectPreview(){
-		mPreviewContainer.setVisibility(View.GONE);
+    private void dismissSpecialEffectPreview() {
+        mPreviewContainer.setVisibility(View.GONE);
     }
 
-    private void onClickSpecialEffectPreview(boolean animated){
-		mPreviewContainer.initPagedView();
+    private void onClickSpecialEffectPreview(boolean animated) {
+        mPreviewContainer.initPagedView();
         mState = State.SPECIALEFFECT;
-        mStateTransitionAnimation.startAnimationBetweenOverviewAndOverviewHiden(Workspace.State.OVERVIEW_HIDDEN,State.SPECIALEFFECT, animated);
+        mStateTransitionAnimation.startAnimationBetweenOverviewAndOverviewHiden(Workspace.State.OVERVIEW_HIDDEN, State.SPECIALEFFECT, animated);
         mPreviewContainer.requestFocus();
     }
 
-   public PreviewContainer getSpecialEffectPreview(){
-   	  return mPreviewContainer;
-   	}
+    public PreviewContainer getSpecialEffectPreview() {
+        return mPreviewContainer;
+    }
 
     public boolean isSpecialEffectMode() {
         return (mState == State.SPECIALEFFECT);
@@ -6504,8 +6580,8 @@ public class Launcher extends Activity
             return true;
         }
         return false;
-    }	
-   // lijun add for special effect  end
+    }
+    // lijun add for special effect  end
 
 
     /**
@@ -6537,7 +6613,7 @@ public class Launcher extends Activity
         });
     }
 
-    public ArrayList<BadgeInfo> getUnreadApps(){
+    public ArrayList<BadgeInfo> getUnreadApps() {
         return mBadgeController.getBadges();
     }
 
@@ -6548,35 +6624,37 @@ public class Launcher extends Activity
     /**
      * lijun add  for unread
      */
-    public boolean isShowUnread(){
-        return !(getWorkspace().getState()==Workspace.State.OVERVIEW||getWorkspace().getState()==Workspace.State.OVERVIEW_HIDDEN||isLauncherArrangeMode());
+    public boolean isShowUnread() {
+        return !(getWorkspace().getState() == Workspace.State.OVERVIEW || getWorkspace().getState() == Workspace.State.OVERVIEW_HIDDEN || isLauncherArrangeMode());
     }
+
     /**
      * lijun add  for Application of the double open
      */
     private void deleteParallelShortcut(ItemInfo info) {
         if (info != null && info.itemType == LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT) {
-                Intent i = info.getIntent();
-                if (i != null && "com.lbe.parallel.ACTION_LAUNCH_PACKAGE".equals(i.getAction())) {
-                    Log.i(TAG, "tzf isParallelShortcut intent = " + i);
-                    Intent intent = new Intent("com.vapp.shortcut.deleted");
-                    String packageName = i.getStringExtra("EXTRA_LAUNCH_PACKAGE");
-                    intent.putExtra("packageName", packageName);
-                    this.sendBroadcast(intent);
-                }
+            Intent i = info.getIntent();
+            if (i != null && "com.lbe.parallel.ACTION_LAUNCH_PACKAGE".equals(i.getAction())) {
+                Log.i(TAG, "tzf isParallelShortcut intent = " + i);
+                Intent intent = new Intent("com.vapp.shortcut.deleted");
+                String packageName = i.getStringExtra("EXTRA_LAUNCH_PACKAGE");
+                intent.putExtra("packageName", packageName);
+                this.sendBroadcast(intent);
             }
+        }
     }
 
     /**
      * lijun add for get WallpaperInfos
+     *
      * @return WallpaperInfos
      */
-    private List<WallpaperPicker.WallpaperTileInfo> getWallpaperInfoList(){
-        if(mWallpaperPicker!=null){
+    private List<WallpaperPicker.WallpaperTileInfo> getWallpaperInfoList() {
+        if (mWallpaperPicker != null) {
 
             return mWallpaperPicker.getWallpaperInfoList();
-        }else {
-            return  null ;
+        } else {
+            return null;
         }
     }
 }

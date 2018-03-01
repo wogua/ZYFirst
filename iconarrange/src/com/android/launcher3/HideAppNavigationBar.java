@@ -923,7 +923,6 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
                 if("".equals(a))continue;
                 stringBuilder.append(a + "%");
             }
-            Log.d("lijun22","getPreferenceValue : " + stringBuilder);
             return stringBuilder.toString();
         }
         return "";
@@ -933,7 +932,6 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
         sHideApps.clear();
         sHideApps = null;
         String a = Utilities.getPrefs(context).getString(KEY_PREFERENCE_HIDE_APPS, "");
-        Log.d("lijun22","loadHideAppsFromPrf : " + a);
         sHideApps = getArrList(a.split("%"));
     }
 

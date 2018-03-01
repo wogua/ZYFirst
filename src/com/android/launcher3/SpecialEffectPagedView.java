@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.Camera;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -45,6 +46,7 @@ public class SpecialEffectPagedView extends SlidePagedView {
     protected Launcher mLauncher;
     private int screenWidth = 1080;
     private int screenHight = 1788;
+    private Rect workspacePadding;
     /**
      * When scroll started, we save view's drawing cache in mIconBitmapCache.
      * Every time {@link #dispatchDraw} was called, get Bitmap from it to avoid
@@ -84,6 +86,9 @@ public class SpecialEffectPagedView extends SlidePagedView {
         WindowManager wm1 = mLauncher.getWindowManager();
         screenWidth = wm1.getDefaultDisplay().getWidth();
         screenHight = 1920;//wm1.getDefaultDisplay().getHeight();
+
+        DeviceProfile deviceProfile = mLauncher.getDeviceProfile();
+        workspacePadding = deviceProfile.getWorkspacePadding(workspacePadding);
         Resources res = getResources();
         //EDIT_SCALE = res.getInteger(R.integer.config_workspaceOverviewShrinkPercentage) / 100f; 
         mIconBitmapCache = new HashMap<String, Bitmap>();
@@ -211,7 +216,7 @@ public class SpecialEffectPagedView extends SlidePagedView {
         }
     }
 
-    private double getPercentage(View child, int screen) {
+    private float getPercentage(View child, int screen) {
         /*  CellLayout related size
          *                       current content
          *                       ***************
@@ -231,10 +236,13 @@ public class SpecialEffectPagedView extends SlidePagedView {
          */
 
         // the gap between two CellLayouts
-        double gapOfCellLayouts = (screenWidth - child.getWidth()) / 2;
-        double molecular = getScrollX() - (getChildOffset(screen) - gapOfCellLayouts);
-
-        double denominator;
+        float gapOfCellLayouts = (screenWidth - child.getWidth()) / 2;
+        float molecular = getScrollX() - (getChildOffset(screen) - gapOfCellLayouts);
+        if(mLauncher.isLandscape){
+            gapOfCellLayouts=mPageSpacing;
+            molecular = getScrollX() - (getChildOffset(screen) - workspacePadding.left);
+        }
+        float denominator;
         if (mLauncher.getWorkspace().inScaleState()) {
 
             denominator = getScaledMeasuredWidth(getPageAt(screen)) + mPageSpacing;
@@ -242,7 +250,7 @@ public class SpecialEffectPagedView extends SlidePagedView {
             denominator = child.getWidth() + gapOfCellLayouts;
         }
 
-        double percentage = molecular / denominator;
+        float percentage = molecular / denominator;
 
         if (percentage < -1 || percentage > 1) {
             // for the scroll between first and last screen
@@ -257,14 +265,15 @@ public class SpecialEffectPagedView extends SlidePagedView {
                 }
             }
         }
-
+//        Log.d("lijun22","scrollX="+getScrollX()+",getChildOffset="+getChildOffset(screen)+",gapOfCellLayouts="+gapOfCellLayouts
+//                +",child.getWidth="+child.getWidth()+",molecular="+molecular+",denominator="+denominator+",percentage="+percentage);
         return percentage;
     }
 
 
     protected void drawScreen(Canvas canvas, int screen, long drawingTime) {
         if (mLauncher.getDragController().isDragging()
-                || (!isPageMoving()) || reordering || mLauncher.isLandscape) {
+                || (!isPageMoving()) || reordering /*|| mLauncher.isLandscape*/) {
             super.drawScreen(canvas, screen, drawingTime);
             return;
         }
@@ -274,7 +283,8 @@ public class SpecialEffectPagedView extends SlidePagedView {
         boolean drawChild = true;
         View child = getChildAt(screen);
 
-        double percentage = getPercentage(child, screen);
+        float percentage = getPercentage(child, screen);
+//        Log.d("lijun22"," percentage : " + percentage);
 
         if (percentage <= -1 || percentage >= 1) {
             super.drawScreen(canvas, screen, drawingTime);
@@ -343,17 +353,19 @@ public class SpecialEffectPagedView extends SlidePagedView {
 
     private boolean depthFocus(View v, int i, float scrollProgress) {
         float scale;
+        float alpha = (1 + scrollProgress);
+
         if (scrollProgress >= 0) {
             scale = 0.5f + 0.5f * (float) (1 - scrollProgress);
+            alpha = 1-scrollProgress;
             v.setScaleX(scale);
             v.setScaleY(scale);
-            v.setAlpha(1);
             v.setTranslationX(0);
+            v.setAlpha(alpha);
             return true;
         }
 
         scale = 0.5f + 0.5f * (float) (1 + scrollProgress);
-        float alpha = (1 + scrollProgress);
         v.setPivotX(v.getWidth() / 2);
         v.setPivotY(v.getHeight() / 2);
         v.setScaleX(scale);
@@ -364,20 +376,22 @@ public class SpecialEffectPagedView extends SlidePagedView {
 
     private boolean depthFocusEditMode(View v, int i, float scrollProgress) {
         float scale;
+        float alpha = (1 + scrollProgress);
         if (scrollProgress >= 0) {
             scale = 0.5f + 0.5f * (float) (1 - scrollProgress) * EDIT_SCALE;
+            alpha = 1-scrollProgress;
             v.setPivotX(v.getWidth() / 2);
             // v.setPivotY(0);
             v.setScaleX(scale);
             v.setScaleY(scale);
-            v.setAlpha(1);
+            v.setAlpha(alpha);
             v.setTranslationX(0);
             return true;
         }
 
         float scaleFactor = EDIT_SCALE / 2.0f;
         scale = scaleFactor + scaleFactor * (float) (1 + scrollProgress);
-        float alpha = (1 + scrollProgress);
+
 
         v.setPivotX(v.getWidth() / 2);
         v.setScaleX(scale);
@@ -416,7 +430,7 @@ public class SpecialEffectPagedView extends SlidePagedView {
     /*
      * Scroll like looking from outsize of a box
      */
-    private boolean boxOut(Canvas canvas, int screen, double percentage) {
+    private boolean boxOut(Canvas canvas, int screen, float percentage) {
         float angle = 90 * (float) percentage;
         float centerX, centerY;
 
@@ -458,7 +472,7 @@ public class SpecialEffectPagedView extends SlidePagedView {
     /*
      * Scroll like looking from inside of a box
      */
-    private boolean boxIn(Canvas canvas, int screen, double percentage) {
+    private boolean boxIn(Canvas canvas, int screen, float percentage) {
         float angle = 90 * (float) percentage;
         float centerX, centerY, changeZ;
 
@@ -521,7 +535,7 @@ public class SpecialEffectPagedView extends SlidePagedView {
     /*
      * Rotate around the top of the screen
      */
-    private boolean rollUp(Canvas canvas, int screen, double percentage) {
+    private boolean rollUp(Canvas canvas, int screen, float percentage) {
         float angle = 90 * (float) percentage;
         float baseAngle = angle * 0.35f; // Maximum Angle 30
         float centerX, centerY;
@@ -556,7 +570,7 @@ public class SpecialEffectPagedView extends SlidePagedView {
     /*
      * Rotate around the bottom of the screen
      */
-    private boolean rollDown(Canvas canvas, int screen, double percentage) {
+    private boolean rollDown(Canvas canvas, int screen, float percentage) {
         float angle = 90 * (float) percentage;
         float baseAngle = -angle * 0.333f; // Maximum Angle 30
         float centerX, centerY;
@@ -675,7 +689,7 @@ public class SpecialEffectPagedView extends SlidePagedView {
     /*
      * Squash and Stretch
      */
-    private boolean scaleInOut(Canvas canvas, int screen, double percentage) {
+    private boolean scaleInOut(Canvas canvas, int screen, float percentage) {
         float angle = 90f * (float) percentage;
         View child = getChildAt(screen);
         int pageOffsetX = getChildOffset(screen);

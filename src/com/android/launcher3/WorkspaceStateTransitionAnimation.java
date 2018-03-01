@@ -223,12 +223,12 @@ public class WorkspaceStateTransitionAnimation {
         mSpringLoadedTransitionTime = mOverlayTransitionTime / 2;
         mSpringLoadedShrinkFactor = mLauncher.getDeviceProfile().workspaceSpringLoadShrinkFactor;
 
-        if(mLauncher.isLandscape){
-            mOverviewModeShrinkFactor = 0.75f;
-        }else {
+//        if(mLauncher.isLandscape){
+//            mOverviewModeShrinkFactor = 0.77f;
+//        }else {
             mOverviewModeShrinkFactor =
                     res.getInteger(R.integer.config_workspaceOverviewShrinkPercentage) / 100f;
-        }
+//        }
         mWorkspaceScrimAlpha = res.getInteger(R.integer.config_workspaceScrimAlpha) / 100f;
         mWorkspaceFadeInAdjacentScreens = grid.shouldFadeAdjacentWorkspaceScreens();
     }
