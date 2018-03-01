@@ -11,7 +11,8 @@
         <item>上下浮動</item>
         <item>層疊</item> 
         <item>向上翻轉</item>
-        <item>向下翻轉</item> 
+        <item>向下翻轉</item>
+        <item>景深</item>
     </string-array>
 <!-- lijun add for special effect  end -->
 </resources>

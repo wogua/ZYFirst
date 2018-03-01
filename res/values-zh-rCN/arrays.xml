@@ -12,6 +12,7 @@
         <item>层叠</item>  
         <item>向上翻转</item>
         <item>向下翻转</item>
+        <item>景深</item>
     </string-array>
  <!-- lijun add for special effect  end -->
 </resources>

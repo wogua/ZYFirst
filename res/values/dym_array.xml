@@ -72,18 +72,19 @@
         <item>com.moji.daling</item>
     </string-array>
 
-<!-- lijun add for special effect  start -->
+    <!-- lijun add for special effect  start -->
     <string-array name="entries_effect_preference">
         <item>Classic</item>
         <item>Cube</item>
-        <item>Box</item> 
-        <item>Shutter</item>  
-        <item>Roll Over</item> 
+        <item>Box</item>
+        <item>Shutter</item>
+        <item>Roll Over</item>
         <item>Sliding door</item>
         <item>Floating</item>
-        <item>Cascade</item>  
+        <item>Cascade</item>
         <item>Roll Up</item>
         <item>Roll Down</item>
+        <item>Depth Focus</item>
     </string-array>
 
     <array name="effect_choose_img">
@@ -102,15 +103,16 @@
     <string-array name="entryvalues_effect_preference">
         <item>0</item>
         <item>1</item>
-        <item>2</item> 
+        <item>2</item>
         <item>3</item>
         <item>4</item>
-        <item>5</item>  
-        <item>6</item> 
+        <item>5</item>
+        <item>6</item>
         <item>7</item>
         <item>8</item>
-        <item>9</item>  
-    </string-array>  
+        <item>9</item>
+        <item>10</item>
+    </string-array>
 
     <array name="editmode_effect_choose_img">
         <item>@drawable/ic_effects_classic</item>
@@ -123,8 +125,9 @@
         <item>@drawable/ic_effects_fading</item>
         <item>@drawable/ic_effects_flip_up</item>
         <item>@drawable/ic_effects_flip_down</item>
+        <item>@drawable/ic_effects_flip_down</item>
     </array>
-<!-- lijun add for special effect  end -->
+    <!-- lijun add for special effect  end -->
 
 
     <string-array name="layout_selection">

@@ -11,6 +11,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.android.launcher3.InvariantDeviceProfile;
 import com.android.launcher3.Launcher;
 import com.android.launcher3.LauncherAppState;
@@ -26,10 +28,11 @@ import com.android.launcher3.PagedView;
 import com.android.launcher3.R;
 import com.android.launcher3.SpecialEffectPagedView;
 import com.android.launcher3.pageindicators.PageIndicatorUnderline;
+
 import java.util.ArrayList;
 
 
-public class EffectPreviewPagedView extends PagedView implements View.OnLongClickListener, View.OnClickListener{
+public class EffectPreviewPagedView extends PagedView implements View.OnLongClickListener, View.OnClickListener {
     private static final String TAG = "EffectPreviewPagedView";
     private static final boolean DEBUG = false;
 
@@ -46,15 +49,15 @@ public class EffectPreviewPagedView extends PagedView implements View.OnLongClic
     private String mCurrentChoosedEffectValue;
     private SharedPreferences mSharedPref;
     private SharedPreferences.OnSharedPreferenceChangeListener mSharedPrefListener;
-	private final int cellLayoutSize = 3;
-	
+    private final int cellLayoutSize = 3;
+
     class ViewHolder {
         public int position;
         public ImageView previewImgView;
         public TextView titleTextView;
         public ImageView previewChecked;
     }
-	
+
 
     public EffectPreviewPagedView(Context context) {
         this(context, null);
@@ -78,8 +81,9 @@ public class EffectPreviewPagedView extends PagedView implements View.OnLongClic
         mSharedPref = context.getSharedPreferences(LauncherFiles.SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE);
         mCurrentChoosedEffectValue = mSharedPref.getString(SpecialEffectPagedView.SPECIAL_EFFECT_STYLE, SpecialEffectPagedView.DEFAULT_SPECIAL_EFFECT_TYPE);
         //addEffectViews();
-		
+
     }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -103,18 +107,15 @@ public class EffectPreviewPagedView extends PagedView implements View.OnLongClic
             for (int i = 0; i < count; i++) {
                 getChildAt(i).measure(childWidthMeasureSpec, childHeightMeasureSpec);
             }
-        }else{
+        } else {
             for (int i = 0; i < count; i++) {
                 getChildAt(i).measure(widthMeasureSpec, heightMeasureSpec);
             }
         }
         mViewport.set(0, 0, widthSize, heightSize);
-        // 给每一个子view给予相同的空间
-
-        /** 滚动到目标坐标 */
-//        scrollTo(mCurScreen * widthSize, 0);
-        this.setMeasuredDimension(widthSize,heightSize);
+        this.setMeasuredDimension(widthSize, heightSize);
     }
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -123,12 +124,13 @@ public class EffectPreviewPagedView extends PagedView implements View.OnLongClic
     @Override
     protected void overScroll(float amount) {
         boolean shouldOverScroll = (amount <= 0 && mIsRtl) ||
-                (amount >= 0 &&  !mIsRtl);
+                (amount >= 0 && !mIsRtl);
 
-        if(shouldOverScroll) {
+        if (shouldOverScroll) {
             dampedOverScroll(amount);
         }
     }
+
     @Override
     protected void getEdgeVerticalPostion(int[] pos) {
         View child = getChildAt(getPageCount() - 1);
@@ -140,15 +142,16 @@ public class EffectPreviewPagedView extends PagedView implements View.OnLongClic
 //        snapToPage(0);
     }
 
-    public void addEffectViews(){
-        if(getChildCount() < cellLayoutSize) {
-            GradientDrawable  bg= getBg();
+    public void addEffectViews() {
+        if (getChildCount() < cellLayoutSize) {
+            GradientDrawable bg = getBg();
             int position = 0;
             removeAllViews();
-            for (int i = 0; i < cellLayoutSize && position <= SpecialEffectPagedView.Type.ROLL_DOWN; i++) {
+            int childCount = mImgTypeArray.length();
+            for (int i = 0; i < cellLayoutSize && position < childCount; i++) {
                 LinearLayout cellLayout = (LinearLayout) mLayoutInflater.inflate(R.layout.buttom_pageview_celllayout, this, false);
 
-                for (int j = 0; j < rowSize && position <= SpecialEffectPagedView.Type.ROLL_DOWN; j++) {
+                for (int j = 0; j < rowSize && position < childCount; j++) {
                     ViewHolder vh = new ViewHolder();
                     View convertView = mLayoutInflater.inflate(R.layout.preview_effects_item, this, false);
 
@@ -174,12 +177,12 @@ public class EffectPreviewPagedView extends PagedView implements View.OnLongClic
                     convertView.setOnLongClickListener(this);
 
                     FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) previewEffect.getLayoutParams();
-                    if(lp.width > 230) {
-                        lp.leftMargin  /= 2;
+                    if (lp.width > 230) {
+                        lp.leftMargin /= 2;
                         lp.rightMargin /= 2;
-                    }else if(lp.width < 200){
-                        lp.leftMargin = (int)(lp.leftMargin * 1.75f);
-                        lp.rightMargin = (int)(lp.rightMargin * 1.75f);
+                    } else if (lp.width < 200) {
+                        lp.leftMargin = (int) (lp.leftMargin * 1.75f);
+                        lp.rightMargin = (int) (lp.rightMargin * 1.75f);
                     }
 
                     cellLayout.addView(convertView);
@@ -191,13 +194,13 @@ public class EffectPreviewPagedView extends PagedView implements View.OnLongClic
         }
     }
 
-    private GradientDrawable  getBg(){
+    private GradientDrawable getBg() {
         float bgRectRadius = 8;
         RectF mDstRectF = new RectF();
         Rect rect = new Rect();
         int aaa = 20;
-        rect.left = (int) (mDstRectF.left -aaa);
-        rect.right = (int) (mDstRectF.right +aaa);
+        rect.left = (int) (mDstRectF.left - aaa);
+        rect.right = (int) (mDstRectF.right + aaa);
         rect.top = (int) (mDstRectF.top);
         rect.bottom = (int) (mDstRectF.bottom);
 
@@ -206,22 +209,22 @@ public class EffectPreviewPagedView extends PagedView implements View.OnLongClic
         bgDrawable.setCornerRadius(bgRectRadius);
         bgDrawable.setStroke(2, Color.parseColor("#1Affffff"));
         bgDrawable.setBounds(rect);
-         return bgDrawable;
+        return bgDrawable;
     }
 
 
     @Override
     public void onClick(View v) {
         if (!mLauncher.getWorkspace().isPageMoving() && v.getTag() instanceof ViewHolder) {
-            ViewHolder vh = (ViewHolder) v.getTag();			  
-			if (!isChecked(vh.position)) {
-				restCheckedState();
+            ViewHolder vh = (ViewHolder) v.getTag();
+            if (!isChecked(vh.position)) {
+                restCheckedState();
                 vh.previewChecked.setVisibility(View.VISIBLE);
-				setEffectValue(vh.position);
-				mLauncher.getWorkspace().setCycleSlideFlag();
-            }			
-			mLauncher.getWorkspace().animateScrollEffect(true);
-			 
+                setEffectValue(vh.position);
+                mLauncher.getWorkspace().setCycleSlideFlag();
+            }
+            mLauncher.getWorkspace().animateScrollEffect(true);
+
         }
     }
 
@@ -235,7 +238,7 @@ public class EffectPreviewPagedView extends PagedView implements View.OnLongClic
     @Override
     protected void snapToPage(int whichPage, int delta, int duration, boolean immediate, TimeInterpolator interpolator) {
         if (mPageIndicator != null) {
-            ((PageIndicatorUnderline)mPageIndicator).animateToAlpha(0f);
+            ((PageIndicatorUnderline) mPageIndicator).animateToAlpha(0f);
         }
         super.snapToPage(whichPage, delta, duration, immediate, interpolator);
     }
@@ -246,7 +249,7 @@ public class EffectPreviewPagedView extends PagedView implements View.OnLongClic
         super.scrollTo(x, y);
     }
 
-   // public void updateWidgetsPageIndicator(){
+    // public void updateWidgetsPageIndicator(){
     //    boolean isBlacktext = ColorManager.getInstance().isBlackText();
 //        if(isBlacktext){
 //            leftIndicator.setImageResource(R.drawable.ic_widgets_left_indicator_black);
@@ -255,8 +258,7 @@ public class EffectPreviewPagedView extends PagedView implements View.OnLongClic
 //            leftIndicator.setImageResource(R.drawable.ic_widgets_left_indicator);
 //            rightIndicator.setImageResource(R.drawable.ic_widgets_right_indicator);
 //        }
-   // }
-
+    // }
 
 
     @Override
@@ -270,8 +272,8 @@ public class EffectPreviewPagedView extends PagedView implements View.OnLongClic
     @Override
     protected void determineScrollingStart(MotionEvent ev, float touchSlopScale) {
         super.determineScrollingStart(ev, touchSlopScale);
-        if(mTouchState != TOUCH_STATE_SCROLLING){
-            ((PageIndicatorUnderline)mPageIndicator).animateToAlpha(1.0f);
+        if (mTouchState != TOUCH_STATE_SCROLLING) {
+            ((PageIndicatorUnderline) mPageIndicator).animateToAlpha(1.0f);
         }
     }
 
@@ -293,26 +295,26 @@ public class EffectPreviewPagedView extends PagedView implements View.OnLongClic
         mSharedPref.edit().putString(SpecialEffectPagedView.SPECIAL_EFFECT_STYLE, mCurrentChoosedEffectValue).commit();
     }
 
-    public void restCheckedState(){
-	  int position = 0;
-      boolean found = false;
-      for(int i = 0; i < cellLayoutSize; i++){
-           LinearLayout cellLayout = (LinearLayout) getChildAt(i);
-           int childCont = cellLayout.getChildCount();
-           for(int j = 0; j < childCont; j++){
-               View child = (View) cellLayout.getChildAt(j);
-               if(child != null && child.getTag() instanceof ViewHolder) {
-                   ViewHolder vh = (ViewHolder) child.getTag();
-                   if (isChecked(vh.position)) {
-                       vh.previewChecked.setVisibility(View.GONE);
-                       found = true;
-                       break;
-                   }
-               }
-           }
-           if(found){
-               break;
-           }
-      }
+    public void restCheckedState() {
+        int position = 0;
+        boolean found = false;
+        for (int i = 0; i < cellLayoutSize; i++) {
+            LinearLayout cellLayout = (LinearLayout) getChildAt(i);
+            int childCont = cellLayout.getChildCount();
+            for (int j = 0; j < childCont; j++) {
+                View child = (View) cellLayout.getChildAt(j);
+                if (child != null && child.getTag() instanceof ViewHolder) {
+                    ViewHolder vh = (ViewHolder) child.getTag();
+                    if (isChecked(vh.position)) {
+                        vh.previewChecked.setVisibility(View.GONE);
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            if (found) {
+                break;
+            }
+        }
     }
 }

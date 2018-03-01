@@ -78,7 +78,6 @@ import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -1663,7 +1662,7 @@ public class Launcher extends Activity
                 }
             } else if (specialEffectButton == v) {
                 if (!mWorkspace.rejectClickOnMenuButton()) {
-                    showSpecialEffectPreview(true);
+                    onClickSpecialEffectPreview(true);
                 }
             } else if (mAlineButton == v) {
                 confirmVacantsClear();
@@ -6485,7 +6484,7 @@ public class Launcher extends Activity
 		mPreviewContainer.setVisibility(View.GONE);
     }
 
-    private void showSpecialEffectPreview(boolean animated){
+    private void onClickSpecialEffectPreview(boolean animated){
 		mPreviewContainer.initPagedView();
         mState = State.SPECIALEFFECT;
         mStateTransitionAnimation.startAnimationBetweenOverviewAndOverviewHiden(Workspace.State.OVERVIEW_HIDDEN,State.SPECIALEFFECT, animated);
