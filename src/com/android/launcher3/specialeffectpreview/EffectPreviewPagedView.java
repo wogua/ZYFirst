@@ -29,18 +29,13 @@ import com.android.launcher3.R;
 import com.android.launcher3.SpecialEffectPagedView;
 import com.android.launcher3.pageindicators.PageIndicatorUnderline;
 
-import java.util.ArrayList;
 
-
-public class EffectPreviewPagedView extends PagedView implements View.OnLongClickListener, View.OnClickListener {
+public class EffectPreviewPagedView extends PagedView implements View.OnClickListener {
     private static final String TAG = "EffectPreviewPagedView";
-    private static final boolean DEBUG = false;
 
     Launcher mLauncher;
-
     private int rowSize = 4;
 
-    ArrayList<Object> mWidgetsInfos;
     private LayoutInflater mLayoutInflater;
 
     private TypedArray mImgTypeArray;
@@ -49,7 +44,7 @@ public class EffectPreviewPagedView extends PagedView implements View.OnLongClic
     private String mCurrentChoosedEffectValue;
     private SharedPreferences mSharedPref;
     private SharedPreferences.OnSharedPreferenceChangeListener mSharedPrefListener;
-    private final int cellLayoutSize = 3;
+    private int cellLayoutSize = 3;
 
     class ViewHolder {
         public int position;
@@ -71,11 +66,10 @@ public class EffectPreviewPagedView extends PagedView implements View.OnLongClic
         super(context, attrs, defStyleAttr);
         mLauncher = (Launcher) context;
         final Resources res = getResources();
-        mWidgetsInfos = new ArrayList<Object>();
         mLayoutInflater = LayoutInflater.from(context);
-        //rowSize = res.getInteger(R.integer.config_widegtscontainerpageview_cells_count);
-
+        rowSize = res.getInteger(R.integer.config_widegtscontainerpageview_cells_count);
         mImgTypeArray = res.obtainTypedArray(R.array.editmode_effect_choose_img);
+        cellLayoutSize = mImgTypeArray.length() / rowSize + ((mImgTypeArray.length() % rowSize > 0) ? 1 : 0);
         mEffectTitle = res.getStringArray(R.array.entries_effect_preference);
         mEffectValue = res.getStringArray(R.array.entryvalues_effect_preference);
         mSharedPref = context.getSharedPreferences(LauncherFiles.SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE);
@@ -150,7 +144,6 @@ public class EffectPreviewPagedView extends PagedView implements View.OnLongClic
             int childCount = mImgTypeArray.length();
             for (int i = 0; i < cellLayoutSize && position < childCount; i++) {
                 LinearLayout cellLayout = (LinearLayout) mLayoutInflater.inflate(R.layout.buttom_pageview_celllayout, this, false);
-
                 for (int j = 0; j < rowSize && position < childCount; j++) {
                     ViewHolder vh = new ViewHolder();
                     View convertView = mLayoutInflater.inflate(R.layout.preview_effects_item, this, false);
@@ -172,9 +165,7 @@ public class EffectPreviewPagedView extends PagedView implements View.OnLongClic
                     convertView.setTag(vh);
                     LinearLayout previewEffect = (LinearLayout) convertView.findViewById(R.id.preview_effects_linearLayout);
                     previewEffect.setBackground(bg);
-                    //convertView.setVisibility(View.VISIBLE);
                     convertView.setOnClickListener(this);
-                    convertView.setOnLongClickListener(this);
 
                     FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) previewEffect.getLayoutParams();
                     if (lp.width > 230) {
@@ -184,7 +175,8 @@ public class EffectPreviewPagedView extends PagedView implements View.OnLongClic
                         lp.leftMargin = (int) (lp.leftMargin * 1.75f);
                         lp.rightMargin = (int) (lp.rightMargin * 1.75f);
                     }
-
+                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, 1.0f);
+                    convertView.setLayoutParams(layoutParams);
                     cellLayout.addView(convertView);
                     position++;
                 }
@@ -229,13 +221,6 @@ public class EffectPreviewPagedView extends PagedView implements View.OnLongClic
     }
 
     @Override
-    public boolean onLongClick(View v) {
-        // Log.d("lijun", "onLongClick");
-        return false;
-    }
-
-
-    @Override
     protected void snapToPage(int whichPage, int delta, int duration, boolean immediate, TimeInterpolator interpolator) {
         if (mPageIndicator != null) {
             ((PageIndicatorUnderline) mPageIndicator).animateToAlpha(0f);
@@ -248,18 +233,6 @@ public class EffectPreviewPagedView extends PagedView implements View.OnLongClic
     public void scrollTo(int x, int y) {
         super.scrollTo(x, y);
     }
-
-    // public void updateWidgetsPageIndicator(){
-    //    boolean isBlacktext = ColorManager.getInstance().isBlackText();
-//        if(isBlacktext){
-//            leftIndicator.setImageResource(R.drawable.ic_widgets_left_indicator_black);
-//            rightIndicator.setImageResource(R.drawable.ic_widgets_right_indicator_black);
-//        }else{
-//            leftIndicator.setImageResource(R.drawable.ic_widgets_left_indicator);
-//            rightIndicator.setImageResource(R.drawable.ic_widgets_right_indicator);
-//        }
-    // }
-
 
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {

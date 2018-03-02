@@ -207,7 +207,6 @@
             android:clipChildren="false"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:background="#28ffffff"
             android:visibility="gone">
             <com.android.launcher3.ArrangeNavLinearLayout
                 android:id="@+id/hide_app_nav_linear"
@@ -227,15 +226,15 @@
             </com.android.launcher3.ArrangeNavLinearLayout>
         </com.android.launcher3.HideAppNavigationBar>
 
-   <!-- lijun add for special effect start -->
-	    <include
-          android:id="@+id/specialeffect_container"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center_horizontal|bottom"
-          layout="@layout/specialeffect_layout"
-          android:visibility="gone" />
-   <!--  lijun add for special effect  end -->
+        <!-- lijun add for special effect start -->
+        <include
+            android:id="@+id/specialeffect_container"
+            layout="@layout/specialeffect_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:visibility="gone" />
+        <!--  lijun add for special effect  end -->
    
     </com.android.launcher3.dragndrop.DragLayer>
 

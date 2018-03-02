@@ -175,18 +175,19 @@ public class WallpaperPagedView extends PagedView {
             updateTempName();
         }
 
-        AsyncTask<Void, Void, Void> as = new AsyncTask<Void, Void, Void>(){
-            ArrayList<WallpaperTileInfo> liveWallpapers= null;
+        AsyncTask<Void, Void, Void> as = new AsyncTask<Void, Void, Void>() {
+            ArrayList<WallpaperTileInfo> liveWallpapers = null;
+
             @Override
             protected Void doInBackground(Void... params) {
-                 liveWallpapers = WallpaperPicker.findLiveWallpapers(context);
+                liveWallpapers = WallpaperPicker.findLiveWallpapers(context);
                 return null;
             }
 
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                if(liveWallpapers!=null) {
+                if (liveWallpapers != null) {
                     mWallpaperInfoList.addAll(liveWallpapers);
                     initView();
                 }
@@ -229,7 +230,7 @@ public class WallpaperPagedView extends PagedView {
     }
 
     private void selectTile(View v) {
-        if(v==null)
+        if (v == null)
             return;
         if (mSelectedTile != null) {
             mSelectedTile.setSelected(false);
@@ -319,20 +320,20 @@ public class WallpaperPagedView extends PagedView {
             if (data != null && data.getData() != null) {
                 Uri uri = data.getData();
                 File file = new File(uri.getPath());
-                if(file.exists()){
+                if (file.exists()) {
                     addTempWallpaperTile(getTempUri(mTempName));
                     updateTempName();
                     success = true;
                 }
             }
-            if(!success){
+            if (!success) {
                 Toast.makeText(getContext(), R.string.setwallpaper_failed, Toast.LENGTH_SHORT).show();
             }
         } else if (requestCode == WallpaperPicker.PICK_WALLPAPER_THIRD_PARTY_ACTIVITY
                 && resultCode == Activity.RESULT_OK) {
             selectTile(mTempTile);
-            if (Build.MODEL != null && (Build.MODEL.contains("V11S") ||Build.MODEL.contains("V10S"))) {
-            }else {
+            if (Build.MODEL != null && (Build.MODEL.contains("V11S") || Build.MODEL.contains("V10S"))) {
+            } else {
                 ColorManager.getInstance().dealWallpaperForLauncher(LauncherAppState.getInstance().getContext());//lijun add
             }
         }
@@ -386,7 +387,7 @@ public class WallpaperPagedView extends PagedView {
     }
 
     private boolean refreshLiveWallpapers() {
-        if(!mFinishInitDate){
+        if (!mFinishInitDate) {
             return false;
         }
         ArrayList<String> existPackageNames = new ArrayList<>();
@@ -491,6 +492,7 @@ public class WallpaperPagedView extends PagedView {
 
     /**
      * lijun add  for get wallpaperTileInfos
+     *
      * @return WallpaperTileInfo
      */
     public List<WallpaperTileInfo> getWallpaperInfoList() {

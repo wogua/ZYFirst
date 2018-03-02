@@ -272,9 +272,11 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     <dimen name="preview_effects_item_text_size">10sp</dimen>
     <dimen name="preview_effects_item_width">70dp</dimen>
     <dimen name="preview_effects_item_height">70dp</dimen>
-    <dimen name="preview_effects_item_check_margin_bottom">26dp</dimen>
     <dimen name="preview_effects_item_check_margin_right">9dp</dimen>
     <dimen name="preview_item_title_margin_top">9.0dip</dimen>
    <dimen name="preview_indication_width">266dp</dimen>
  <!-- lijun Add for special effect end    -->
+
+    <dimen name="overview_pagedview_height">78dp</dimen>
+    <dimen name="preview_effects_top_margin">0dp</dimen>
 </resources>

@@ -938,10 +938,8 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
                 // when they are not the current page.
                 if (lp.isFullScreenPage) {
                     pageGap = getPaddingLeft();
-                    Log.d("lijun222","isFullScreenPage -- getPaddingLeft()="+getPaddingLeft());
                 } else if (nextLp != null && nextLp.isFullScreenPage) {
                     pageGap = getPaddingRight();
-                    Log.d("lijun222","else isFullScreenPage -- getPaddingRight()="+getPaddingRight());
                 }
 
                 childLeft += childWidth + pageGap + getChildGap();

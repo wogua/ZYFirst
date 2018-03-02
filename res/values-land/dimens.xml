@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2009 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2009 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,6 +14,15 @@
 -->
 
 <resources>
-<!-- Container -->
-     <item name="container_margin" format="fraction" type="fraction">12%</item>
+    <!-- Container -->
+    <item name="container_margin" format="fraction" type="fraction">12%</item>
+    <dimen name="widget_img_top_padding">10dp</dimen>
+    <dimen name="widgets_paged_imageview_height">50dp</dimen>
+    <dimen name="wallpaper_containterbar_height">75dp</dimen>
+
+    <dimen name="preview_effects_item_width">70dp</dimen>
+    <dimen name="preview_effects_item_height">70dp</dimen>
+    <dimen name="preview_effects_top_margin">10dp</dimen>
+    <dimen name="preview_effects_item_check_margin_right">29dp</dimen>
+
 </resources>

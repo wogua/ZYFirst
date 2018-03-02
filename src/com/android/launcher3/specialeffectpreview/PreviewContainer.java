@@ -15,13 +15,9 @@ import com.android.launcher3.pageindicators.PageIndicatorUnderline;
 
 public class PreviewContainer extends LinearLayout {
     private static final String TAG = "PreviewContainer";
-    
-
-    private PageIndicatorUnderline mPageIndicator;
 
     EffectPreviewPagedView mPagedView;
-	private View mContent;
-	
+
     @SuppressLint("NewApi")
     public PreviewContainer(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -39,9 +35,8 @@ public class PreviewContainer extends LinearLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-	    mContent = findViewById(R.id.special_effect__content);;
-		mPagedView = (EffectPreviewPagedView) mContent.findViewById(R.id.special_effect_paged_view_content);
-		mPagedView.initParentViews(mContent);
+		mPagedView = (EffectPreviewPagedView) this.findViewById(R.id.special_effect_paged_view_content);
+		mPagedView.initParentViews(this);
 
     }
 
