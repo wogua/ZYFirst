@@ -286,6 +286,7 @@ public class Launcher extends Activity
     @Thunk
     Hotseat mHotseat;
     private ViewGroup mOverviewPanel;
+    OverviewPagedView overviewPagedView;
 
     private View mAllAppsButton;
     private View mWidgetsButton;
@@ -1626,7 +1627,10 @@ public class Launcher extends Activity
 
     private void setupOverviewPanel() {
         mOverviewPanel = (ViewGroup) findViewById(R.id.overview_panel);
-
+        ImageView overviewIndicatorLeft = (ImageView) findViewById(R.id.overview_container_left_indicator);
+        ImageView overviewIndicatorRight= (ImageView) findViewById(R.id.overview_container_right_indicator);
+        overviewPagedView = (OverviewPagedView) findViewById(R.id.overview_pagedview);
+        overviewPagedView.setIndicator(overviewIndicatorLeft,overviewIndicatorRight);
         // Long-clicking buttons in the overview panel does the same thing as clicking them.
         OnLongClickListener performClickOnLongClick = new OnLongClickListener() {
             @Override
@@ -6326,6 +6330,7 @@ public class Launcher extends Activity
         mWorkspace.onColorChanged(colors);
         mNavigationbar.onColorChanged(colors);
         mHotseat.getLayout().onColorChanged(colors);
+        overviewPagedView.updateWidgetsPageIndicator();
         sendBroadcast(new Intent(LauncherClock.UPDATECOLOR));
     }
     //lijun add end

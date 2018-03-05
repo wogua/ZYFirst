@@ -39,7 +39,7 @@ public class OverviewPagedContainer extends FrameLayout {
     }
 
     private void initView() {
-        mPagedView = (OverviewPagedView) findViewById(R.id.overview_pagedview);
-        mPagedView.initParentViews(this);
+//        mPagedView = (OverviewPagedView) findViewById(R.id.overview_pagedview);
+//        mPagedView.initParentViews(this);
     }
 }

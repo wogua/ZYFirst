@@ -106,7 +106,7 @@
 
 </LinearLayout>-->
 
-<com.android.launcher3.OverviewPagedContainer
+<!--<com.android.launcher3.OverviewPagedContainer
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:launcher="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -251,4 +251,163 @@
         </LinearLayout>
     </com.android.launcher3.OverviewPagedView>
 
-</com.android.launcher3.OverviewPagedContainer>
+</com.android.launcher3.OverviewPagedContainer>-->
+
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widgets_container_panel"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal|bottom"
+    android:layout_marginBottom="@dimen/widgets_panel_bottom_margin"
+    android:gravity="center_vertical"
+    android:visibility="gone">
+
+    <ImageView
+        android:id="@+id/overview_container_left_indicator"
+        android:layout_width="@dimen/widgets_panel_left_indicator_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|left"
+        android:layout_marginRight="@dimen/widget_indicator_padding"
+        android:layout_marginTop="@dimen/widget_indicator_top_padding"
+        android:src="@drawable/ic_widgets_left_indicator" />
+
+    <com.android.launcher3.OverviewPagedView
+        android:id="@+id/overview_pagedview"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/overview_pagedview_height"
+        android:layout_gravity="top">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingEnd="6dp"
+            android:paddingStart="6dp"
+            android:weightSum="4">
+
+            <com.android.launcher3.colors.ChameleonTextView
+                android:id="@+id/valcants_clear_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="4dp"
+                android:drawableTop="@drawable/ic_valcants_clear"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center_horizontal"
+                android:maxLines="1"
+                android:stateListAnimator="@animator/overview_button_anim"
+                android:text="@string/arrange_button_text"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
+
+            <com.android.launcher3.colors.ChameleonTextView
+                android:id="@+id/wallpaper_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="4dp"
+                android:drawableTop="@drawable/ic_wallpaper"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center_horizontal"
+                android:maxLines="1"
+                android:stateListAnimator="@animator/overview_button_anim"
+                android:text="@string/wallpaper_button_text"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
+
+            <com.android.launcher3.colors.ChameleonTextView
+                android:id="@+id/widget_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="4dp"
+                android:drawableTop="@drawable/ic_widget"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center_horizontal"
+                android:maxLines="1"
+                android:stateListAnimator="@animator/overview_button_anim"
+                android:text="@string/widget_button_text"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
+
+            <com.android.launcher3.colors.ChameleonTextView
+                android:id="@+id/special_effect_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="4dp"
+                android:drawableTop="@drawable/ic_special_effect"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center_horizontal"
+                android:maxLines="1"
+                android:stateListAnimator="@animator/overview_button_anim"
+                android:text="@string/special_effect_setting"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingEnd="6dp"
+            android:paddingStart="6dp"
+            android:weightSum="4">
+
+
+            <com.android.launcher3.colors.ChameleonTextView
+                android:id="@+id/hide_app_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="4dp"
+                android:drawableTop="@drawable/ic_hide_app"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center_horizontal"
+                android:maxLines="1"
+                android:stateListAnimator="@animator/overview_button_anim"
+                android:text="@string/hide_app_title"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
+
+            <com.android.launcher3.colors.ChameleonTextView
+                android:id="@+id/settings_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="4dp"
+                android:drawableTop="@drawable/ic_setting"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center_horizontal"
+                android:maxLines="1"
+                android:stateListAnimator="@animator/overview_button_anim"
+                android:text="@string/settings_button_text"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </com.android.launcher3.OverviewPagedView>
+
+    <ImageView
+        android:id="@+id/overview_container_right_indicator"
+        android:layout_width="@dimen/widgets_panel_left_indicator_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|right"
+        android:layout_marginLeft="@dimen/widget_indicator_padding"
+        android:layout_marginTop="@dimen/widget_indicator_top_padding"
+        android:src="@drawable/ic_widgets_right_indicator" />
+</FrameLayout>
