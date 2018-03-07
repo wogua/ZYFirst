@@ -2194,6 +2194,20 @@ public class Launcher extends Activity
                     getDragController().removeDropTarget(mNavigationbar);//lijun add
                 }
                 return;
+            }else if (isLauncherHideAppMode()) {
+                Folder openFolder = mWorkspace.getOpenFolder();
+                if (openFolder != null) {
+                    if (openFolder.isEditingName()) {
+                        openFolder.dismissEditingName();
+                    } else {
+                        closeFolder();
+                    }
+                } else {
+                    getmHideAppNavigationbar().onBackPressed();
+                    showOverviewMode(true);
+                    mHideAppNavigationbar.setVisibility(View.GONE);
+                }
+                return;
             } else if (mEditFolderIcon != null && getImportMode()) {
                 forceExitImportMode();
                 return;
