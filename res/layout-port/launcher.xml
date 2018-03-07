@@ -189,6 +189,7 @@
                     android:text="@string/add_empty_folder"
                     launcher:centerVertically="true"
                     android:includeFontPadding="false"
+                    android:textSize="12sp"
                     android:drawableTop="@drawable/ic_add_folder"/>
             </com.android.launcher3.ArrangeNavLinearLayout>
         </com.android.launcher3.ArrangeNavigationBar>

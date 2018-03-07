@@ -2564,7 +2564,7 @@ public class Workspace extends SpecialEffectPagedView
         int workspaceBottom = getViewportHeight() - mInsets.bottom;
         Resources res = mLauncher.getResources();
         float a = 1- (res.getInteger(R.integer.config_workspaceOverviewShrinkPercentage)/100f);
-        int temp = mLauncher.isLandscape?-35:0;
+        int temp = mLauncher.isLandscape?-25:0;
         return (int) (( workspaceTop - workspaceBottom)*a*0.3) + temp;
     }
 

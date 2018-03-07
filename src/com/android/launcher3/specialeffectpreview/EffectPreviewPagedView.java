@@ -175,7 +175,7 @@ public class EffectPreviewPagedView extends PagedView implements View.OnClickLis
                         lp.leftMargin = (int) (lp.leftMargin * 1.75f);
                         lp.rightMargin = (int) (lp.rightMargin * 1.75f);
                     }
-                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, 1.0f);
+                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 1.0f);
                     convertView.setLayoutParams(layoutParams);
                     cellLayout.addView(convertView);
                     position++;

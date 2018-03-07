@@ -172,35 +172,33 @@
         <!--Icon Arrange-->
         <com.android.launcher3.ArrangeNavigationBar
             android:id="@+id/navigationbar"
+            android:scrollbars="horizontal"
+            android:scrollbarThumbHorizontal="@drawable/indicator_thumbnail"
+            android:scrollbarSize="3dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
+            android:layoutDirection="ltr"
+            android:gravity="center"
+            android:clipChildren="false"
             android:layout_marginLeft="45dp"
             android:layout_marginRight="8dp"
-            android:clipChildren="false"
-            android:gravity="center"
-            android:layoutDirection="ltr"
-            android:scrollbarSize="3dp"
-            android:scrollbarThumbHorizontal="@drawable/indicator_thumbnail"
-            android:scrollbars="horizontal"
             android:visibility="gone">
-
             <com.android.launcher3.ArrangeNavLinearLayout
                 android:id="@+id/nav_linear"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:animateLayoutChanges="true"
+                android:gravity="center"
                 android:clipChildren="false"
-                android:gravity="center">
-
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
                 <com.android.launcher3.BubbleTextView
-                    android:id="@+id/add_folder"
                     style="@style/Icon"
-                    android:drawableTop="@drawable/ic_add_folder"
                     android:focusable="true"
-                    android:includeFontPadding="false"
+                    android:id="@+id/add_folder"
                     android:text="@string/add_empty_folder"
-                    launcher:centerVertically="true" />
+                    launcher:centerVertically="true"
+                    android:includeFontPadding="false"
+                    android:drawableTop="@drawable/ic_add_folder"/>
             </com.android.launcher3.ArrangeNavLinearLayout>
         </com.android.launcher3.ArrangeNavigationBar>
 
