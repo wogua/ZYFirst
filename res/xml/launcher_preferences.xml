@@ -33,18 +33,20 @@
         android:entryValues="@array/layout_selection_value">
     </com.android.launcher3.PreferenceWithTip>
 
-    <SwitchPreference
+    <com.android.launcher3.MySwitchPreference
         android:key="special_effect_cycle_slide"
         android:title="@string/cycle_slide"
         android:defaultValue="@bool/cycle_slide_flag"
         android:persistent="true"
+        android:widgetLayout="@layout/layout_checkbox_switchbtn"
         />
 
-    <SwitchPreference
+    <com.android.launcher3.MySwitchPreference
         android:key="launcher_badge_key"
         android:title="@string/badge_text"
         android:defaultValue="@bool/badge_flag"
         android:persistent="true"
+        android:widgetLayout="@layout/layout_checkbox_switchbtn"
         />
 
 </PreferenceScreen>

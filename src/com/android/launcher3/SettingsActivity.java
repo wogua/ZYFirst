@@ -16,11 +16,16 @@
 
 package com.android.launcher3;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.SwitchPreference;
+import android.util.Log;
+
+import com.android.zylauncher.badge.BadgeController;
 
 /**
  * Settings activity for Launcher. Currently implements the following setting: Allow rotation
@@ -37,6 +42,8 @@ public class SettingsActivity extends Activity {
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new LauncherSettingsFragment())
                 .commit();
+        ActionBar actionBar=getActionBar();
+        actionBar.setDisplayShowHomeEnabled(false);
     }
 
     /**
@@ -54,6 +61,7 @@ public class SettingsActivity extends Activity {
 
             lp=(PreferenceWithTip)findPreference(KEY_LAYOUT);
             lp.setOnPreferenceChangeListener(onPreferenceChangeListener);
+
         }
 
         Preference.OnPreferenceChangeListener onPreferenceChangeListener = new Preference.OnPreferenceChangeListener(){

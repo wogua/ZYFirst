@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_centerVertical="true"
+    android:orientation="horizontal">
+
+    <Switch
+        android:id="@+id/switch_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:switchMinWidth="20dp"
+        android:layout_gravity="center_vertical"
+        android:textOn="  "
+        android:textOff="  "
+        android:thumb="@drawable/switch_thumb"
+        android:track="@drawable/switch_track" />
+</LinearLayout>

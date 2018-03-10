@@ -1218,7 +1218,7 @@ public class Launcher extends Activity
             mLauncherCallbacks.onResume();
         }
         mWorkspace.setCycleSlideFlag(); // lijun add for cycle slide
-        BadgeController.sBadgeEnable = Utilities.getPrefs(this).getBoolean(BadgeController.BADGE_PREFERENCE_KEY, true);
+        BadgeController.sBadgeEnable = Utilities.getPrefs(this).getBoolean(BadgeController.BADGE_PREFERENCE_KEY, false);
     }
 
     @Override
@@ -3976,7 +3976,7 @@ public class Launcher extends Activity
         if (v instanceof Workspace) {
             if (!mWorkspace.isInOverviewMode()) {
                 if (!mWorkspace.isTouchActive()) {
-                    //showOverviewMode(true);
+                    showOverviewMode(true);
                     //mWorkspace.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS,
                     //        HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
                     return true;
@@ -4017,7 +4017,7 @@ public class Launcher extends Activity
                     //lijun add end
                     mWorkspace.startReordering(parentView);
                 } else {
-                    //showOverviewMode(true);
+                    showOverviewMode(true);
                 }
             } else {
                 final boolean isAllAppsButton =
