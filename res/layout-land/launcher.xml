@@ -229,7 +229,7 @@
                 <com.android.launcher3.BubbleTextView
                     android:id="@+id/hide_app_temp"
                     style="@style/Icon"
-                    android:drawableTop="@drawable/ic_hide_app"
+                    android:drawableTop="@drawable/ic_hideapp_menu_zy"
                     android:focusable="false"
                     android:includeFontPadding="false"
                     android:text="@string/hide_app_title"
