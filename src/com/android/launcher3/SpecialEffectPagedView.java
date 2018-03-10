@@ -461,8 +461,9 @@ public class SpecialEffectPagedView extends SlidePagedView {
 
         mMatrix.preScale(1.0f - (Math.abs((float) percentage) * 0.3f), 1.0f);
         if (mInsets.bottom <= 0) {
-            centerX -= 154; //getMeasuredWidth()
+            centerX -= (mLauncher.isLandscape?490:154); //getMeasuredWidth()
         }
+        Log.d("lijun22","centerX=" + centerX + ", centerY="+centerY);
         mMatrix.preTranslate(-centerX, -centerY);
         mMatrix.postTranslate(centerX, centerY);
         canvas.concat(mMatrix);
@@ -519,7 +520,7 @@ public class SpecialEffectPagedView extends SlidePagedView {
             }
         }
         if (mInsets.bottom <= 0) {
-            centerX -= 154; //getMeasuredWidth()
+            centerX -= (mLauncher.isLandscape?490:154); //getMeasuredWidth()
         }
         mCamera.rotateY(angle);
         mCamera.setLocation(0, 0, -12 * mDensity);
@@ -705,7 +706,7 @@ public class SpecialEffectPagedView extends SlidePagedView {
                 centerX -= mPageSpacing;
             float centerY = pageOffsetY;
             if (mInsets.bottom <= 0)
-                centerX -= 154; //getMeasuredWidth()
+                centerX -= (mLauncher.isLandscape?490:154); //getMeasuredWidth()
             canvas.translate(centerX, centerY);
             canvas.scale((90.0f - angle) / 90.0f, 1.0f);
             canvas.translate(-centerX, -centerY);
@@ -715,7 +716,7 @@ public class SpecialEffectPagedView extends SlidePagedView {
                 centerX += mPageSpacing;
             float centerY = pageOffsetY;
             if (mInsets.bottom <= 0) {
-                centerX -= 154; //getMeasuredWidth()
+                centerX -= (mLauncher.isLandscape?490:154); //getMeasuredWidth()
             }
             canvas.translate(centerX, centerY);
             canvas.scale((90.0f + angle) / 90.0f, 1.0f);

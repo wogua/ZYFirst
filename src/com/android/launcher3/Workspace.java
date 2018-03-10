@@ -2148,14 +2148,14 @@ public class Workspace extends SpecialEffectPagedView
                 if (child != null) {
                     float scrollProgress = getScrollProgress(screenCenter, child, i);
                     float alpha = 1 - Math.abs(scrollProgress);
-//                    if(mLauncher.isLandscape ){
-//                        if(mState == State.OVERVIEW || mState == State.OVERVIEW_HIDDEN){
-//                            child.getShortcutsAndWidgets().setAlpha(1.0f);
-//                        }else {
-//                            child.getShortcutsAndWidgets().setAlpha(alpha);
-//                        }
-//                        continue;
-//                    }
+                    if(mLauncher.isLandscape ){
+                        if(mState == State.OVERVIEW || mState == State.OVERVIEW_HIDDEN){
+                            child.getShortcutsAndWidgets().setAlpha(1.0f);
+                        }else {
+                            child.getShortcutsAndWidgets().setAlpha(alpha);
+                        }
+                        continue;
+                    }
 					float childAlpha = child.getShortcutsAndWidgets().getAlpha();
 					if(mPrepareUninstallMode || mLauncher.isUninstallMode){
 						if(alpha > 0){
