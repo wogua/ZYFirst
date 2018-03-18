@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:drawablePadding="4dp"
-        android:drawableTop="@drawable/ic_valcants_clear"
+        android:drawableTop="@drawable/ic_arrange"
         android:fontFamily="sans-serif-condensed"
         android:gravity="center_horizontal"
         android:stateListAnimator="@animator/overview_button_anim"
@@ -142,7 +142,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawablePadding="4dp"
-                android:drawableTop="@drawable/ic_valcants_clear"
+                android:drawableTop="@drawable/ic_arrange"
                 android:ellipsize="end"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center_horizontal"
@@ -253,6 +253,7 @@
 
 </com.android.launcher3.OverviewPagedContainer>-->
 
+<!--
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/widgets_container_panel"
@@ -262,6 +263,48 @@
     android:layout_marginBottom="@dimen/overview_panel_bottom_margin"
     android:gravity="center_vertical"
     android:visibility="gone">
+
+    <com.android.launcher3.overviewtab.MTabLayout
+        android:id="@+id/overview_panel_tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:orientation="horizontal"
+        android:background="@color/overview_panel_tabview_bg"
+        android:weightSum="4">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:text="@string/overview_tab_personalise"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:text="@string/overview_tab_widget"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:text="@string/overview_tab_hide_app"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:text="@string/overview_tab_ohter"/>
+    </com.android.launcher3.overviewtab.MTabLayout>
 
     <ImageView
         android:id="@+id/overview_container_left_indicator"
@@ -276,7 +319,7 @@
         android:id="@+id/overview_pagedview"
         android:layout_width="match_parent"
         android:layout_height="@dimen/overview_pagedview_height"
-        android:layout_gravity="top">
+        android:layout_gravity="bottom">
 
 
         <LinearLayout
@@ -293,7 +336,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawablePadding="4dp"
-                android:drawableTop="@drawable/ic_arrange_menu_zy"
+                android:drawableTop="@drawable/ic_arrange"
                 android:ellipsize="end"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center_horizontal"
@@ -310,7 +353,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawablePadding="4dp"
-                android:drawableTop="@drawable/ic_wallpaper_menu_zy"
+                android:drawableTop="@drawable/ic_wallpaper"
                 android:ellipsize="end"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center_horizontal"
@@ -327,7 +370,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawablePadding="4dp"
-                android:drawableTop="@drawable/ic_widgets_menu_zy"
+                android:drawableTop="@drawable/ic_widget"
                 android:ellipsize="end"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center_horizontal"
@@ -344,7 +387,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawablePadding="4dp"
-                android:drawableTop="@drawable/ic_special_effect_menu_zy"
+                android:drawableTop="@drawable/ic_special_effect"
                 android:ellipsize="end"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center_horizontal"
@@ -410,4 +453,81 @@
         android:layout_marginLeft="@dimen/widget_indicator_padding"
         android:layout_marginTop="@dimen/widget_indicator_top_padding"
         android:src="@drawable/ic_widgets_right_indicator" />
-</FrameLayout>
+</FrameLayout>-->
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widgets_container_panel"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal|bottom"
+    android:layout_marginBottom="@dimen/overview_panel_bottom_margin"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+    <com.android.launcher3.overviewtab.MTabLayout
+        android:id="@+id/overview_panel_tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:background="@color/overview_panel_tabview_bg"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <TextView
+            android:id="@+id/overview_tab_button_personalise"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/overview_tab_personalise"
+            android:textColor="@android:color/white"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/overview_tab_button_widget"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/overview_tab_widget"
+            android:textColor="@android:color/white"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/overview_tab_button_hide_app"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/overview_tab_hide_app"
+            android:textColor="@android:color/white"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/overview_tab_button_ohter"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/overview_tab_ohter"
+            android:textColor="@android:color/white"
+            android:textSize="13sp" />
+    </com.android.launcher3.overviewtab.MTabLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/overview_pagedview_height">
+
+        <include
+            android:id="@+id/overview_tab_personalise"
+            layout="@layout/overview_tab_content_personalise"/>
+
+        <include
+            android:id="@+id/overview_tab_ohters"
+            layout="@layout/overview_tab_content_ohters"
+            android:visibility="gone"/>
+
+    </FrameLayout>
+</LinearLayout>

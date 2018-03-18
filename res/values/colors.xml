@@ -91,4 +91,6 @@
   <!-- lijun add for special effect -->
   <color name="preview_effects_item_title_textcolor">#FFFFFFFF</color>
 
+    <color name="overview_panel_tabview_bg">#44808080</color>
+
 </resources>

@@ -286,7 +286,7 @@ public class Launcher extends Activity
     @Thunk
     Hotseat mHotseat;
     private ViewGroup mOverviewPanel;
-    OverviewPagedView overviewPagedView;
+//    OverviewPagedView overviewPagedView;
 
     private View mAllAppsButton;
     private View mWidgetsButton;
@@ -297,6 +297,11 @@ public class Launcher extends Activity
     private View mHideAppButton;
     private View mSettingsButton;
     private View specialEffectButton;
+
+    private View tabButtonPersonalise;
+    private View tabButtonWidget;
+    private View tabButtonHideApp;
+    private View tabButtonOthers;
 
     //lijun add the background of workspace when opening folder
     ImageView mWorkspaceBg;
@@ -1626,11 +1631,13 @@ public class Launcher extends Activity
     }
 
     private void setupOverviewPanel() {
+
+
         mOverviewPanel = (ViewGroup) findViewById(R.id.overview_panel);
-        ImageView overviewIndicatorLeft = (ImageView) findViewById(R.id.overview_container_left_indicator);
-        ImageView overviewIndicatorRight= (ImageView) findViewById(R.id.overview_container_right_indicator);
-        overviewPagedView = (OverviewPagedView) findViewById(R.id.overview_pagedview);
-        overviewPagedView.setIndicator(overviewIndicatorLeft,overviewIndicatorRight);
+//        ImageView overviewIndicatorLeft = (ImageView) findViewById(R.id.overview_container_left_indicator);
+//        ImageView overviewIndicatorRight= (ImageView) findViewById(R.id.overview_container_right_indicator);
+//        overviewPagedView = (OverviewPagedView) findViewById(R.id.overview_pagedview);
+//        overviewPagedView.setIndicator(overviewIndicatorLeft,overviewIndicatorRight);
         // Long-clicking buttons in the overview panel does the same thing as clicking them.
         OnLongClickListener performClickOnLongClick = new OnLongClickListener() {
             @Override
@@ -1647,10 +1654,10 @@ public class Launcher extends Activity
         mWallpaperButton.setOnTouchListener(getHapticFeedbackTouchListener());
 
         // Bind widget button actions
-        mWidgetsButton = findViewById(R.id.widget_button);
-        mWidgetsButton.setOnClickListener(buttonClickLisener);
-        mWidgetsButton.setOnLongClickListener(performClickOnLongClick);
-        mWidgetsButton.setOnTouchListener(getHapticFeedbackTouchListener());
+//        mWidgetsButton = findViewById(R.id.widget_button);
+//        mWidgetsButton.setOnClickListener(buttonClickLisener);
+//        mWidgetsButton.setOnLongClickListener(performClickOnLongClick);
+//        mWidgetsButton.setOnTouchListener(getHapticFeedbackTouchListener());
 
         specialEffectButton = findViewById(R.id.special_effect_button);
         specialEffectButton.setOnClickListener(buttonClickLisener);
@@ -1668,12 +1675,21 @@ public class Launcher extends Activity
             mSettingsButton.setVisibility(View.GONE);
         }
 
-        mHideAppButton = findViewById(R.id.hide_app_button);
-        mHideAppButton.setOnClickListener(buttonClickLisener);
-        mHideAppButton.setOnLongClickListener(performClickOnLongClick);
-        mHideAppButton.setOnTouchListener(getHapticFeedbackTouchListener());
+//        mHideAppButton = findViewById(R.id.hide_app_button);
+//        mHideAppButton.setOnClickListener(buttonClickLisener);
+//        mHideAppButton.setOnLongClickListener(performClickOnLongClick);
+//        mHideAppButton.setOnTouchListener(getHapticFeedbackTouchListener());
 
         mOverviewPanel.setAlpha(0f);
+
+        tabButtonPersonalise = findViewById(R.id.overview_tab_button_personalise);
+        tabButtonWidget = findViewById(R.id.overview_tab_button_widget);
+        tabButtonHideApp = findViewById(R.id.overview_tab_button_hide_app);
+        tabButtonOthers = findViewById(R.id.overview_tab_button_ohter);
+        tabButtonPersonalise.setOnClickListener(buttonClickLisener);
+        tabButtonWidget.setOnClickListener(buttonClickLisener);
+        tabButtonHideApp.setOnClickListener(buttonClickLisener);
+        tabButtonOthers.setOnClickListener(buttonClickLisener);
     }
 
     private View.OnClickListener buttonClickLisener = new View.OnClickListener() {
@@ -1702,8 +1718,15 @@ public class Launcher extends Activity
                 confirmVacantsClear();
             } else if (mVulvanClearBuuton == v) {
                 onClickVacantsClearButton(v);
+            } else if (tabButtonPersonalise == v) {
+                onClickVacantsClearButton(v);
+            } else if (tabButtonWidget == v) {
+                onClickVacantsClearButton(v);
+            } else if (tabButtonHideApp == v) {
+                onClickVacantsClearButton(v);
+            } else if (tabButtonOthers == v) {
+                onClickVacantsClearButton(v);
             }
-
         }
     };
 
@@ -2194,7 +2217,7 @@ public class Launcher extends Activity
                     getDragController().removeDropTarget(mNavigationbar);//lijun add
                 }
                 return;
-            }else if (isLauncherHideAppMode()) {
+            } else if (isLauncherHideAppMode()) {
                 Folder openFolder = mWorkspace.getOpenFolder();
                 if (openFolder != null) {
                     if (openFolder.isEditingName()) {
@@ -6344,7 +6367,7 @@ public class Launcher extends Activity
         mWorkspace.onColorChanged(colors);
         mNavigationbar.onColorChanged(colors);
         mHotseat.getLayout().onColorChanged(colors);
-        overviewPagedView.updateWidgetsPageIndicator();
+//        overviewPagedView.updateWidgetsPageIndicator();
         sendBroadcast(new Intent(LauncherClock.UPDATECOLOR));
     }
     //lijun add end

@@ -134,4 +134,8 @@
 
     <string name="layout">桌面佈局</string>
     <string name="hide_app_title">隱藏圖標</string>
+    <string name="overview_tab_personalise">個性化</string>
+    <string name="overview_tab_widget">控件</string>
+    <string name="overview_tab_hide_app">隱藏圖標</string>
+    <string name="overview_tab_ohter">其他</string>
 </resources>
