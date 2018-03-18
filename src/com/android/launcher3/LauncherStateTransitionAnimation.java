@@ -1161,6 +1161,161 @@ public class LauncherStateTransitionAnimation {
         }
     }
 
+    public AnimatorSet startAnimationBetweenOverviewTabs(final Workspace.State toWorkspaceState,final Launcher.State launcherState,View fromView,View toView, final boolean animated){
+        mLauncher.mWorkspace.setmState(toWorkspaceState);
+        final AnimatorSet animation = LauncherAnimUtils.createAnimatorSet();
+        final boolean toOverview = (toWorkspaceState == Workspace.State.OVERVIEW);
+
+        mLauncher.checkAndResetForState(launcherState);
+
+        final HashMap<View, Integer> layerViews = new HashMap<>();
+        final int finalFromViewTranslationY = fromView.getHeight() / 2;
+        // If for some reason our views aren't initialized, don't animate
+        boolean initialized;
+        if(launcherState == Launcher.State.WIDGETS){
+            initialized =  mLauncher.getWidgetsTabButton() != null;
+        }else if(launcherState == Launcher.State.WALLPAPER){
+            initialized =  mLauncher.getmWallpaperButton() != null;
+        }else if(launcherState == Launcher.State.ICONARRANGE){
+            initialized =  mLauncher.getArrangeNavigationBar() != null;
+        }else if(launcherState == Launcher.State.HIDE_APP){
+            initialized =  mLauncher.getmHideAppNavigationbar() != null;
+        }else if(launcherState == Launcher.State.SPECIALEFFECT){ // lijun add for special effect
+            initialized =  mLauncher.getSpecialEffectPreview() != null;
+        }else{
+            initialized = true;
+        }
+
+        int duration = 170;
+        // Cancel the current animation
+        cancelAnimation();
+
+        LauncherViewPropertyAnimator toViewAnima = new LauncherViewPropertyAnimator(toView).alpha(1.0f);
+        LauncherViewPropertyAnimator fromViewAnima = new LauncherViewPropertyAnimator(fromView).alpha(0.0f);
+
+        fromViewAnima.translationY(finalFromViewTranslationY);
+        toViewAnima.translationY(0.0f);
+
+        fromViewAnima.addListener(new AlphaUpdateListener(fromView, true));
+        toViewAnima.addListener(new AlphaUpdateListener(toView, true));
+
+        fromViewAnima.setInterpolator(new DecelerateInterpolator(0.4f));
+        toViewAnima.setInterpolator(new AccelerateInterpolator(0.4f));
+        fromViewAnima.setDuration(duration);
+        toViewAnima.setDuration(duration);
+        if (animated && initialized) {
+            beingAnimaBetweenOverViewAndWidgets = true;
+            if (toOverview) {
+                fromView.setTranslationY(0);
+            } else {
+                InvariantDeviceProfile idp = LauncherAppState.getInstance().getInvariantDeviceProfile();
+                if(mLauncher.mState == Launcher.State.WALLPAPER){
+                    toView.setTranslationY(idp.portraitProfile.wallpaperContainerBarHeightPx * 0.5f);
+                } else {
+                    toView.setTranslationY(idp.portraitProfile.widgetsContainerBarHeightPx * 0.5f);
+                }
+                toView.setAlpha(0.0f);
+            }
+
+            if (layerViews != null) {
+                // If layerViews is not null, we add these views, and indicate that
+                // the caller can manage layer state.
+                layerViews.put(fromView, LauncherStateTransitionAnimation.BUILD_AND_SET_LAYER);
+                layerViews.put(toView, LauncherStateTransitionAnimation.BUILD_AND_SET_LAYER);
+            }
+
+            animation.play(fromViewAnima);
+            animation.play(toViewAnima).after((long) (duration * 0.7));
+            final View fromView1 = fromView;
+            final View toView1 = toView;
+            animation.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+
+                    for (View v : layerViews.keySet()) {
+                        if (layerViews.get(v) == BUILD_AND_SET_LAYER) {
+                            v.setLayerType(View.LAYER_TYPE_NONE, null);
+                        }
+                    }
+
+                    fromView1.setVisibility(View.INVISIBLE);
+                    toView1.setVisibility(View.VISIBLE);
+
+                    fromView1.setAlpha(0.0f);
+                    toView1.setAlpha(1.0f);
+                    beingAnimaBetweenOverViewAndWidgets = false;
+                }
+
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    super.onAnimationStart(animation);
+                    fromView1.setVisibility(View.VISIBLE);
+                    toView1.setVisibility(View.VISIBLE);
+                    fromView1.setAlpha(1.0f);
+                    toView1.setAlpha(0.0f);
+                }
+            });
+
+            // Dispatch the prepare transition signal
+            dispatchOnLauncherTransitionPrepare(fromView, animated, false);
+            dispatchOnLauncherTransitionPrepare(toView, animated, false);
+
+
+            final AnimatorSet stateAnimation = animation;
+            final Runnable startAnimRunnable = new Runnable() {
+                public void run() {
+                    // Check that mCurrentAnimation hasn't changed while
+                    // we waited for a layout/draw pass
+                    if (mCurrentAnimation != stateAnimation)
+                        return;
+                    dispatchOnLauncherTransitionStart(fromView1, animated, false);
+                    dispatchOnLauncherTransitionStart(toView1, animated, false);
+
+                    // Enable all necessary layers
+                    for (View v : layerViews.keySet()) {
+                        if (layerViews.get(v) == BUILD_AND_SET_LAYER) {
+                            v.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+                        }
+                        if (Utilities.ATLEAST_LOLLIPOP && v.isAttachedToWindow()) {
+                            v.buildLayer();
+                        }
+                    }
+
+                    // Focus the new view
+                    toView1.requestFocus();
+
+                    stateAnimation.start();
+                }
+            };
+            toView.bringToFront();
+            toView.setVisibility(View.VISIBLE);
+            toView.post(startAnimRunnable);
+            mCurrentAnimation = animation;
+            return animation;
+        } else {
+            toView.setTranslationX(0.0f);
+            toView.setTranslationY(0.0f);
+            toView.setScaleX(1.0f);
+            toView.setScaleY(1.0f);
+            toView.setVisibility(View.VISIBLE);
+            toView.bringToFront();
+
+            fromView.setTranslationY(finalFromViewTranslationY);
+            fromView.setAlpha(0f);
+            fromView.setVisibility(View.INVISIBLE);
+
+            dispatchOnLauncherTransitionPrepare(fromView, animated, false);
+            dispatchOnLauncherTransitionStart(fromView, animated, false);
+            dispatchOnLauncherTransitionEnd(fromView, animated, false);
+            dispatchOnLauncherTransitionPrepare(toView, animated, false);
+            dispatchOnLauncherTransitionStart(toView, animated, false);
+            dispatchOnLauncherTransitionEnd(toView, animated, false);
+//            pCb.onTransitionComplete();
+            return null;
+        }
+    }
+
     /**
      * Dispatches the prepare-transition event to suitable views.
      */

@@ -61,9 +61,6 @@ import android.view.animation.Interpolator;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.android.zylauncher.badge.BadgeController;
-import com.android.zylauncher.badge.BadgeInfo;
-import com.android.zylauncher.badge.LauncherBadgeProvider;
 import com.android.launcher3.Launcher.CustomContentCallbacks;
 import com.android.launcher3.Launcher.LauncherOverlay;
 import com.android.launcher3.UninstallDropTarget.DropTargetSource;
@@ -101,6 +98,9 @@ import com.android.launcher3.util.WallpaperOffsetInterpolator;
 import com.android.launcher3.widget.PendingAddShortcutInfo;
 import com.android.launcher3.widget.PendingAddWidgetInfo;
 import com.android.launcher3.widget.WidgetCell;
+import com.android.zylauncher.badge.BadgeController;
+import com.android.zylauncher.badge.BadgeInfo;
+import com.android.zylauncher.badge.LauncherBadgeProvider;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -1488,6 +1488,7 @@ public class Workspace extends SpecialEffectPagedView
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+        Log.d("lijun22","sss = " + shouldConsumeTouch(v)+", "+isOutHomeButtonAreas(event,v));
         return shouldConsumeTouch(v)||isOutHomeButtonAreas(event,v);
     }
 
@@ -6541,5 +6542,15 @@ public class Workspace extends SpecialEffectPagedView
             mLauncher.getHotseat().removeHotseatEmptyItem();
         }
         // lijun add for hotseat icon center end
+    }
+
+    public void resetPages(){
+        View child;
+        for(int i = 0 ; i < getChildCount() ; i ++){
+            child = getChildAt(i);
+            child.setAlpha(1.0f);
+            child.setScaleX(1.0f);
+            child.setScaleY(1.0f);
+        }
     }
 }

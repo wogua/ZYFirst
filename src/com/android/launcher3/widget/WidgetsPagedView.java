@@ -49,7 +49,7 @@ import java.util.List;
 /**
  * Created by lijun on 17-3-7.
  */
-public class WidgetsPagedView extends PagedView implements View.OnLongClickListener, View.OnClickListener, DragSource,DropTarget,DragController.DragListener {
+public class WidgetsPagedView extends PagedView implements View.OnLongClickListener, View.OnClickListener, DragSource, DropTarget, DragController.DragListener {
     private static final String TAG = "WidgetsContainerPageView";
     private static final boolean DEBUG = false;
 
@@ -94,6 +94,7 @@ public class WidgetsPagedView extends PagedView implements View.OnLongClickListe
         mIconCache = (LauncherAppState.getInstance()).getIconCache();
         rowSize = res.getInteger(R.integer.config_widegtscontainerpageview_cells_count);
     }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -117,18 +118,15 @@ public class WidgetsPagedView extends PagedView implements View.OnLongClickListe
             for (int i = 0; i < count; i++) {
                 getChildAt(i).measure(childWidthMeasureSpec, childHeightMeasureSpec);
             }
-        }else{
+        } else {
             for (int i = 0; i < count; i++) {
                 getChildAt(i).measure(widthMeasureSpec, heightMeasureSpec);
             }
         }
         mViewport.set(0, 0, widthSize, heightSize);
-        // 给每一个子view给予相同的空间
-
-        /** 滚动到目标坐标 */
-//        scrollTo(mCurScreen * widthSize, 0);
-        this.setMeasuredDimension(widthSize,heightSize);
+        this.setMeasuredDimension(widthSize, heightSize);
     }
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -137,12 +135,13 @@ public class WidgetsPagedView extends PagedView implements View.OnLongClickListe
     @Override
     protected void overScroll(float amount) {
         boolean shouldOverScroll = (amount <= 0 && mIsRtl) ||
-                (amount >= 0 &&  !mIsRtl);
+                (amount >= 0 && !mIsRtl);
 
-        if(shouldOverScroll) {
+        if (shouldOverScroll) {
             dampedOverScroll(amount);
         }
     }
+
     @Override
     protected void getEdgeVerticalPostion(int[] pos) {
         View child = getChildAt(getPageCount() - 1);
@@ -153,6 +152,7 @@ public class WidgetsPagedView extends PagedView implements View.OnLongClickListe
     public void scrollToTop() {
 //        snapToPage(0);
     }
+
     final public void setSearchBarBounds(Rect bounds) {
         //here need consider
     }
@@ -163,7 +163,7 @@ public class WidgetsPagedView extends PagedView implements View.OnLongClickListe
     public void addWidgets(WidgetsModel model) {
         mWidgetsInfos.clear();
         final int size = model.getPackageSize();
-        for(int i = 0 ; i < size ; i ++){
+        for (int i = 0; i < size; i++) {
             List<WidgetItem> infoList = model.getSortedWidgets(i);
             mWidgetsInfos.addAll(infoList);
         }
@@ -181,9 +181,9 @@ public class WidgetsPagedView extends PagedView implements View.OnLongClickListe
             for (Iterator it = mWidgetsInfos.iterator(); it.hasNext(); ) {
                 Object info = it.next();
                 if (info instanceof LauncherAppWidgetProviderInfo) {
-                    isSystemApp = Utilities.isSystemApp(((LauncherAppWidgetProviderInfo) info).provider.getPackageName(),getContext());
+                    isSystemApp = Utilities.isSystemApp(((LauncherAppWidgetProviderInfo) info).provider.getPackageName(), getContext());
                 } else if (info instanceof ResolveInfo) {
-                    isSystemApp = Utilities.isSystemApp(((ResolveInfo) info).activityInfo.packageName,getContext());
+                    isSystemApp = Utilities.isSystemApp(((ResolveInfo) info).activityInfo.packageName, getContext());
                 }
                 if (!isSystemApp) {
                     tempThirdpartWidgets.add(info);
@@ -196,23 +196,23 @@ public class WidgetsPagedView extends PagedView implements View.OnLongClickListe
         }
     }
 
-    public void updateViews(){
-        if(mWidgetsInfos == null || mWidgetsInfos.size() <= 0)return;
+    public void updateViews() {
+        if (mWidgetsInfos == null || mWidgetsInfos.size() <= 0) return;
         getWidgetPreviewLoader();
         final int infoSize = mWidgetsInfos.size();
-        final int cellLayoutSize = infoSize/rowSize + ((infoSize%rowSize>0)?1:0);
+        final int cellLayoutSize = infoSize / rowSize + ((infoSize % rowSize > 0) ? 1 : 0);
         removeAllViews();
-        for(int i = 0 ; i < cellLayoutSize ; i ++){
-            LinearLayout widgetCellLayout = (LinearLayout)mLayoutInflater.inflate(R.layout.buttom_pageview_celllayout,this,false);
+        for (int i = 0; i < cellLayoutSize; i++) {
+            LinearLayout widgetCellLayout = (LinearLayout) mLayoutInflater.inflate(R.layout.buttom_pageview_celllayout, this, false);
             finish:
-            for(int j = 0 ; j < rowSize ; j ++){
-                final int index = i*rowSize + j;
+            for (int j = 0; j < rowSize; j++) {
+                final int index = i * rowSize + j;
 
-                if(index >= infoSize)break finish;
+                if (index >= infoSize) break finish;
                 Object info = mWidgetsInfos.get(index);
                 WidgetCell widget = (WidgetCell) mLayoutInflater.inflate(
                         R.layout.widget_cell_forpageview, widgetCellLayout, false);
-                widget.applyFromCellItem((WidgetItem) info,mWidgetPreviewLoader);
+                widget.applyFromCellItem((WidgetItem) info, mWidgetPreviewLoader);
                 widget.ensurePreview();
                 widget.setVisibility(View.VISIBLE);
                 widget.setOnClickListener(this);
@@ -222,12 +222,14 @@ public class WidgetsPagedView extends PagedView implements View.OnLongClickListe
             addView(widgetCellLayout);
         }
     }
+
     private WidgetPreviewLoader getWidgetPreviewLoader() {
         if (mWidgetPreviewLoader == null) {
             mWidgetPreviewLoader = LauncherAppState.getInstance().getWidgetCache();
         }
         return mWidgetPreviewLoader;
     }
+
     @Override
     public boolean supportsFlingToDelete() {
         return false;
@@ -295,7 +297,7 @@ public class WidgetsPagedView extends PagedView implements View.OnLongClickListe
 
         if (v.getTag() instanceof ItemInfo) {
             ItemInfo info = (ItemInfo) v.getTag();
-            mLauncher.getWorkspace().onWidgetCellClick(info,(WidgetCell)v);
+            mLauncher.getWorkspace().onWidgetCellClick(info, (WidgetCell) v);
         }
     }
 
@@ -304,7 +306,8 @@ public class WidgetsPagedView extends PagedView implements View.OnLongClickListe
         if (!v.isInTouchMode()) return false;
         // When we have exited all apps or are in transition, disregard long clicks
         if (!mLauncher.isWidgetsViewVisible() ||
-                mLauncher.getWorkspace().isSwitchingState() || !(v instanceof WidgetCell)) return false;
+                mLauncher.getWorkspace().isSwitchingState() || !(v instanceof WidgetCell))
+            return false;
         // Return if global dragging is not enabled
         Log.d(TAG, String.format("onLonglick dragging enabled?.", v));
         if (!mLauncher.isDraggingEnabled()) return false;
@@ -449,7 +452,7 @@ public class WidgetsPagedView extends PagedView implements View.OnLongClickListe
 
     @Override
     public void getHitRectRelativeToDragLayer(Rect outRect) {
-        if(mLauncher!=null){
+        if (mLauncher != null) {
             mLauncher.getDragLayer().getDescendantRectRelativeToSelf(this, outRect);
         }
     }
@@ -457,7 +460,7 @@ public class WidgetsPagedView extends PagedView implements View.OnLongClickListe
     @Override
     protected void snapToPage(int whichPage, int delta, int duration, boolean immediate, TimeInterpolator interpolator) {
         if (mPageIndicator != null) {
-            ((PageIndicatorUnderline)mPageIndicator).animateToAlpha(0f);
+            ((PageIndicatorUnderline) mPageIndicator).animateToAlpha(0f);
         }
         super.snapToPage(whichPage, delta, duration, immediate, interpolator);
     }
@@ -501,7 +504,7 @@ public class WidgetsPagedView extends PagedView implements View.OnLongClickListe
         }
     }
 
-    public void updateWidgetsPageIndicator(){
+    public void updateWidgetsPageIndicator() {
         boolean isBlacktext = ColorManager.getInstance().isBlackText();
 //        if(isBlacktext){
 //            leftIndicator.setImageResource(R.drawable.ic_widgets_left_indicator_black);
@@ -517,8 +520,8 @@ public class WidgetsPagedView extends PagedView implements View.OnLongClickListe
         targetParent.containerType = LauncherLogProto.WIDGETS;
     }
 
-    public boolean isEmpty(){
-        return !(mWidgetsInfos!=null && mWidgetsInfos.size()>0);
+    public boolean isEmpty() {
+        return !(mWidgetsInfos != null && mWidgetsInfos.size() > 0);
     }
 
     @Override
@@ -532,8 +535,8 @@ public class WidgetsPagedView extends PagedView implements View.OnLongClickListe
     @Override
     protected void determineScrollingStart(MotionEvent ev, float touchSlopScale) {
         super.determineScrollingStart(ev, touchSlopScale);
-        if(mTouchState != TOUCH_STATE_SCROLLING){
-            ((PageIndicatorUnderline)mPageIndicator).animateToAlpha(1.0f);
+        if (mTouchState != TOUCH_STATE_SCROLLING) {
+            ((PageIndicatorUnderline) mPageIndicator).animateToAlpha(1.0f);
         }
     }
 

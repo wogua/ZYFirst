@@ -215,8 +215,8 @@ public class EffectPreviewPagedView extends PagedView implements View.OnClickLis
                 setEffectValue(vh.position);
                 mLauncher.getWorkspace().setCycleSlideFlag();
             }
+            mLauncher.getWorkspace().resetPages();
             mLauncher.getWorkspace().animateScrollEffect(true);
-
         }
     }
 

@@ -1191,7 +1191,6 @@ public class DragLayer extends InsettableFrameLayout {
             coord[0] = lp.x + (int) (child.getMeasuredWidth() * (1 - childScale) / 2);
             coord[1] = lp.y + (int) (child.getMeasuredHeight() * (1 - childScale) / 2);
         }else{
-
             Log.i("YYYY","view parent = "+child.getParent()+"childScale = "+childScale+" , dragView.getMeasuredWidth() = "+dragView.getMeasuredWidth());
             coord[0] = child.getMeasuredWidth() + (int)(child.getMeasuredWidth() * (1 - childScale) / 2);
             coord[1] = (int) (child.getMeasuredHeight() * (1 - childScale) / 2);
@@ -1215,7 +1214,12 @@ public class DragLayer extends InsettableFrameLayout {
             // The child may be scaled (always about the center of the view) so to account for it,
             // we have to offset the position by the scaled size.  Once we do that, we can center
             // the drag view about the scaled child view.
-            toY += Math.round(toScale * tv.getPaddingTop());
+            int parentPaddingTop = 0;
+            if(tv.getParent()!=null && tv.getParent()instanceof ViewGroup){
+                ViewGroup parent = (ViewGroup) tv.getParent();
+                parentPaddingTop = parent.getPaddingTop();
+            }
+            toY += Math.round(toScale * (tv.getPaddingTop() + parentPaddingTop));
             toY -= dragView.getMeasuredHeight() * (1 - toScale) / 2;
             if (dragView.getDragVisualizeOffset() != null) {
                 toY -=  Math.round(toScale * dragView.getDragVisualizeOffset().y);

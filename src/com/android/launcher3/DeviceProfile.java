@@ -604,12 +604,12 @@ public class DeviceProfile {
                     lp.leftMargin = pageIndicatorLandGutterRightNavBarPx - lp.width -
                             pageIndicatorLandWorkspaceOffsetPx;
                 }
-                lp.bottomMargin = workspacePadding.bottom;
+                lp.bottomMargin = workspacePadding.bottom + 38;
             } else {
                 // Put the page indicators above the hotseat
                 lp.gravity = Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM;
                 lp.height = pageIndicatorHeightPx;
-                lp.bottomMargin = hotseatBarHeightPx + mInsets.bottom - 25;//lijun add -25
+                lp.bottomMargin = hotseatBarHeightPx + mInsets.bottom - 25 + 38;//lijun add -25
             }
             pageIndicator.setLayoutParams(lp);
         }

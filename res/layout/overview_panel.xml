@@ -462,16 +462,16 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal|bottom"
     android:layout_marginBottom="@dimen/overview_panel_bottom_margin"
-    android:gravity="center_vertical"
+    android:background="@color/overview_panel_tabview_bg"
+    android:gravity="bottom"
     android:orientation="vertical"
     android:visibility="gone">
 
     <com.android.launcher3.overviewtab.MTabLayout
         android:id="@+id/overview_panel_tab"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_gravity="top"
-        android:background="@color/overview_panel_tabview_bg"
         android:orientation="horizontal"
         android:weightSum="4">
 
@@ -516,18 +516,49 @@
             android:textSize="13sp" />
     </com.android.launcher3.overviewtab.MTabLayout>
 
-    <FrameLayout
+    <View
+        android:layout_width="match_parent"
+        android:background="#aa808080"
+        android:layout_height="2dp"/>
+
+    <com.android.launcher3.overviewtab.TabContent
+        android:id="@+id/overview_tab_content"
         android:layout_width="match_parent"
         android:layout_height="@dimen/overview_pagedview_height">
 
         <include
             android:id="@+id/overview_tab_personalise"
-            layout="@layout/overview_tab_content_personalise"/>
+            layout="@layout/overview_tab_content_personalise" />
 
         <include
             android:id="@+id/overview_tab_ohters"
             layout="@layout/overview_tab_content_ohters"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/navigationbar"
+            layout="@layout/arrange_bar"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/hide_app_navigationbar"
+            layout="@layout/hide_app_bar"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/specialeffect_container"
+            layout="@layout/specialeffect_layout"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/widgets_paged_view"
+            layout="@layout/widgets_paged_view_for_underline_indicator"
             android:visibility="gone"/>
 
-    </FrameLayout>
+        <include
+            android:id="@+id/wallpaper_picker"
+            layout="@layout/wallpaperpicker_bar"
+            android:visibility="gone" />
+
+    </com.android.launcher3.overviewtab.TabContent>
 </LinearLayout>

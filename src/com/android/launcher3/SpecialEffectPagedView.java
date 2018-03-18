@@ -463,7 +463,6 @@ public class SpecialEffectPagedView extends SlidePagedView {
         if (mInsets.bottom <= 0) {
             centerX -= (mLauncher.isLandscape?490:154); //getMeasuredWidth()
         }
-        Log.d("lijun22","centerX=" + centerX + ", centerY="+centerY);
         mMatrix.preTranslate(-centerX, -centerY);
         mMatrix.postTranslate(centerX, centerY);
         canvas.concat(mMatrix);

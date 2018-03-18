@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.launcher3.ArrangeNavigationBar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:launcher="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|center"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:clipChildren="false"
+    android:gravity="center"
+    android:layoutDirection="ltr"
+    android:scrollbarSize="3dp"
+    android:scrollbarThumbHorizontal="@drawable/indicator_thumbnail"
+    android:scrollbars="horizontal"
+    android:visibility="gone">
+
+    <com.android.launcher3.ArrangeNavLinearLayout
+        android:id="@+id/nav_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:clipChildren="false"
+        android:paddingTop="27dp"
+        android:gravity="center">
+
+        <com.android.launcher3.BubbleTextView
+            android:id="@+id/add_folder"
+            style="@style/Icon"
+            android:drawableTop="@drawable/ic_add_folder"
+            android:focusable="true"
+            android:includeFontPadding="false"
+            android:text="@string/add_empty_folder"
+            android:textSize="12sp"
+            launcher:centerVertically="true" />
+    </com.android.launcher3.ArrangeNavLinearLayout>
+</com.android.launcher3.ArrangeNavigationBar>

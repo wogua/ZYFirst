@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.launcher3.wallpaperpicker.WallpaperPagedViewContainer
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/wallpaper_picker"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/wallpaper_containterbar_height"
+    android:layout_gravity="center_horizontal|bottom"
+    android:layout_marginLeft="@dimen/overview_panel_left_margin"
+     />

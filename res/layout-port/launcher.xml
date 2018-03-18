@@ -105,14 +105,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="invisible" />
-        <!-- lijun add for Widgets Container begin -->
-        <include layout="@layout/widgets_paged_view_for_underline_indicator"
-            android:id="@+id/widgets_paged_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|bottom"
-            android:visibility="gone" />
-        <!-- lijun add for Widgets Container end -->
 
         <include layout="@layout/all_apps"
             android:id="@+id/apps_view"
@@ -160,83 +152,7 @@
             android:layout_height="@dimen/wallpaper_containterbar_height"
             android:layout_gravity="center_horizontal|bottom"
             android:visibility="gone"/>
-        <!--Icon Arrange-->
-        <com.android.launcher3.ArrangeNavigationBar
-            android:id="@+id/navigationbar"
-            android:scrollbars="horizontal"
-            android:scrollbarThumbHorizontal="@drawable/indicator_thumbnail"
-            android:scrollbarSize="3dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
-            android:layoutDirection="ltr"
-            android:gravity="center"
-            android:clipChildren="false"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:visibility="gone">
-            <com.android.launcher3.ArrangeNavLinearLayout
-                android:id="@+id/nav_linear"
-                android:animateLayoutChanges="true"
-                android:gravity="center"
-                android:clipChildren="false"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <com.android.launcher3.BubbleTextView
-                    style="@style/Icon"
-                    android:focusable="true"
-                    android:id="@+id/add_folder"
-                    android:text="@string/add_empty_folder"
-                    launcher:centerVertically="true"
-                    android:includeFontPadding="false"
-                    android:textSize="12sp"
-                    android:drawableTop="@drawable/ic_add_folder"/>
-            </com.android.launcher3.ArrangeNavLinearLayout>
-        </com.android.launcher3.ArrangeNavigationBar>
 
-        <!-- lijun add hide app bar -->
-        <com.android.launcher3.HideAppNavigationBar
-            android:id="@+id/hide_app_navigationbar"
-            android:scrollbars="horizontal"
-            android:scrollbarThumbHorizontal="@drawable/indicator_thumbnail"
-            android:scrollbarSize="3dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
-            android:layoutDirection="ltr"
-            android:gravity="center"
-            android:clipChildren="false"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:visibility="gone">
-            <com.android.launcher3.ArrangeNavLinearLayout
-                android:id="@+id/hide_app_nav_linear"
-                android:animateLayoutChanges="true"
-                android:gravity="center"
-                android:clipChildren="false"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <com.android.launcher3.BubbleTextView
-                    style="@style/Icon"
-                    android:id="@+id/hide_app_temp"
-                    android:focusable="false"
-                    android:text="@string/hide_app_title"
-                    launcher:centerVertically="true"
-                    android:includeFontPadding="false"
-                    android:drawableTop="@drawable/ic_hideapp_menu_zy"/>
-            </com.android.launcher3.ArrangeNavLinearLayout>
-        </com.android.launcher3.HideAppNavigationBar>
-
-        <!-- lijun add for special effect start -->
-        <include
-            android:id="@+id/specialeffect_container"
-            layout="@layout/specialeffect_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|bottom"
-            android:visibility="gone" />
-        <!--  lijun add for special effect  end -->
-   
     </com.android.launcher3.dragndrop.DragLayer>
 
     <!-- lijun add for theme changed -->

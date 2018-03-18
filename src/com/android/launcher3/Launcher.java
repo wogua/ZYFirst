@@ -96,6 +96,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.launcher3.overviewtab.MTabLayout;
+import com.android.launcher3.overviewtab.TabContent;
 import com.android.zylauncher.badge.BadgeController;
 import com.android.zylauncher.badge.BadgeInfo;
 import com.android.zylauncher.badge.LauncherBadgeProvider;
@@ -286,7 +288,10 @@ public class Launcher extends Activity
     @Thunk
     Hotseat mHotseat;
     private ViewGroup mOverviewPanel;
-//    OverviewPagedView overviewPagedView;
+    MTabLayout mTabLayout;
+    TabContent mTabConten;
+    View mPersonaliseBar;
+    View mOhersBar;
 
     private View mAllAppsButton;
     private View mWidgetsButton;
@@ -1638,6 +1643,11 @@ public class Launcher extends Activity
 //        ImageView overviewIndicatorRight= (ImageView) findViewById(R.id.overview_container_right_indicator);
 //        overviewPagedView = (OverviewPagedView) findViewById(R.id.overview_pagedview);
 //        overviewPagedView.setIndicator(overviewIndicatorLeft,overviewIndicatorRight);
+        mTabLayout = (MTabLayout) findViewById(R.id.overview_panel_tab);
+        mTabConten = (TabContent) findViewById(R.id.overview_tab_content);
+        mPersonaliseBar = findViewById(R.id.overview_tab_personalise);
+        mOhersBar = findViewById(R.id.overview_tab_ohters);
+        mTabConten.init(mPersonaliseBar);
         // Long-clicking buttons in the overview panel does the same thing as clicking them.
         OnLongClickListener performClickOnLongClick = new OnLongClickListener() {
             @Override
@@ -1719,13 +1729,13 @@ public class Launcher extends Activity
             } else if (mVulvanClearBuuton == v) {
                 onClickVacantsClearButton(v);
             } else if (tabButtonPersonalise == v) {
-                onClickVacantsClearButton(v);
+                onTabClick(v);
             } else if (tabButtonWidget == v) {
-                onClickVacantsClearButton(v);
+                onTabClick(v);
             } else if (tabButtonHideApp == v) {
-                onClickVacantsClearButton(v);
+                onTabClick(v);
             } else if (tabButtonOthers == v) {
-                onClickVacantsClearButton(v);
+                onTabClick(v);
             }
         }
     };
@@ -1744,6 +1754,10 @@ public class Launcher extends Activity
 
     public View getWidgetsButton() {
         return mWidgetsButton;
+    }
+
+    public View getWidgetsTabButton(){
+        return tabButtonWidget;
     }
 
     /**
@@ -2857,6 +2871,9 @@ public class Launcher extends Activity
                     showOverviewMode(true);
                     //mNavigationbar.setVisibility(View.GONE);
                 }
+            }else if(isWidgetsViewVisible()){
+                mState = State.WORKSPACE;
+                showWorkspace(true);
             } else {
                 Folder.ICONARRANGING = false;
                 showOverviewMode(true);
@@ -2934,7 +2951,6 @@ public class Launcher extends Activity
         }
 
         if (v instanceof Workspace) {
-            //lijun add start for WIDGETS_CONTAINER_PAGE
             if (FeatureFlags.WIDGETS_CONTAINER_PAGE && mState == State.WIDGETS) {
                 showOverviewModeFromOverviewHidenMode(State.WORKSPACE, true);
                 return;
@@ -2945,7 +2961,6 @@ public class Launcher extends Activity
                 exitUnInstallNormalMode();
                 return;
             }
-            //lijun add end
             if (mWorkspace.isInOverviewMode()) {
                 if (FeatureFlags.WIDGETS_CONTAINER_PAGE) {//lijun add for WIDGETS_CONTAINER_PAGE
                     showOverviewModeFromOverviewHidenMode(State.WORKSPACE, true);
@@ -2958,7 +2973,8 @@ public class Launcher extends Activity
         if (v instanceof CellLayout) {
             //lijun add start for WIDGETS_CONTAINER_PAGE
             if (FeatureFlags.WIDGETS_CONTAINER_PAGE && mState == State.WIDGETS) {
-                showOverviewModeFromOverviewHidenMode(State.WORKSPACE, true);
+                mState = State.WORKSPACE;
+                showWorkspace(true);
                 return;
             } else if (isWallpaperMode()) {
                 showOverviewModeFromOverviewHidenMode(State.WORKSPACE, true);
@@ -2983,7 +2999,8 @@ public class Launcher extends Activity
                 return;
             }
             //lijun add end
-            if (mWorkspace.isInOverviewMode()) {
+            if (mWorkspace.isInOverviewMode() ) {
+                if(mState == State.HIDE_APP)return;
                 mWorkspace.snapToPageFromOverView(mWorkspace.indexOfChild(v));
                 if (FeatureFlags.WIDGETS_CONTAINER_PAGE) {//lijun add for WIDGETS_CONTAINER_PAGE
                     showOverviewModeFromOverviewHidenMode(State.WORKSPACE, true);
@@ -3483,7 +3500,8 @@ public class Launcher extends Activity
 
     private void showWallpaperPanel(boolean animated) {
         mState = State.WALLPAPER;
-        mStateTransitionAnimation.startAnimationBetweenOverviewAndOverviewHiden(Workspace.State.OVERVIEW_HIDDEN, State.WALLPAPER, animated);
+//        mStateTransitionAnimation.startAnimationBetweenOverviewAndOverviewHiden(Workspace.State.OVERVIEW_HIDDEN, State.WALLPAPER, animated);
+        mTabConten.showTabContent(getmWallpaperPicker(),animated);
         mWallpaperPicker.requestFocus();
     }
 
@@ -4212,6 +4230,8 @@ public class Launcher extends Activity
             mStateTransitionAnimation.startAnimationToWorkspace(mState, mWorkspace.getState(),
                     Workspace.State.OVERVIEW, animated, postAnimRunnable);
             mWorkspace.exitWidgetResizeMode();//lijun add for hide apphostview in the wrong situation
+            mTabLayout.onTabChanged(0);
+            mTabConten.reset(mPersonaliseBar);
         }
         //lijun modify end
         mState = State.WORKSPACE;
@@ -4266,8 +4286,8 @@ public class Launcher extends Activity
         if (toState != State.WORKSPACE) {
             return false;
         }
-        mStateTransitionAnimation.startAnimationBetweenOverviewAndOverviewHiden(Workspace.State.OVERVIEW, mState, animated);
-
+//        mStateTransitionAnimation.startAnimationBetweenOverviewAndOverviewHiden(Workspace.State.OVERVIEW, mState, animated);
+        mTabConten.showTabContent(getCurrentTabBar(),animated);
         // Change the state *after* we've called all the transition code
         mState = toState;
 
@@ -4305,7 +4325,8 @@ public class Launcher extends Activity
             //lijun modify start for WIDGETS_CONTAINER_PAGE
 //            mStateTransitionAnimation.startAnimationToWidgets(mWorkspace.getState(), animated);
             if (FeatureFlags.WIDGETS_CONTAINER_PAGE) {
-                mStateTransitionAnimation.startAnimationBetweenOverviewAndOverviewHiden(Workspace.State.OVERVIEW_HIDDEN, toState, animated);
+//                mStateTransitionAnimation.startAnimationBetweenOverviewAndOverviewHiden(Workspace.State.OVERVIEW_HIDDEN, toState, animated);
+                mTabConten.showTabContent(getWidgetsPanel(),animated);
             } else {
                 mStateTransitionAnimation.startAnimationToWidgets(mWorkspace.getState(), animated);
             }
@@ -6397,7 +6418,8 @@ public class Launcher extends Activity
         if (mNavigationbar != null) {
             Folder.ICONARRANGING = true;
             mState = State.ICONARRANGE;
-            mStateTransitionAnimation.startAnimationBetweenOverviewAndOverviewHiden(Workspace.State.OVERVIEW_HIDDEN, State.ICONARRANGE, animated);
+//            mStateTransitionAnimation.startAnimationBetweenOverviewAndOverviewHiden(Workspace.State.OVERVIEW_HIDDEN, State.ICONARRANGE, animated);
+            mTabConten.showTabContent(getArrangeNavigationBar(),animated);
             getDragController().addDropTarget(mNavigationbar);//lijun add
         }
     }
@@ -6407,7 +6429,8 @@ public class Launcher extends Activity
         if (mHideAppNavigationbar != null) {
             Folder.ICONARRANGING = true;
             mState = State.HIDE_APP;
-            mStateTransitionAnimation.startAnimationBetweenOverviewAndOverviewHiden(Workspace.State.OVERVIEW_HIDDEN, State.HIDE_APP, animated);
+//            mStateTransitionAnimation.startAnimationBetweenOverviewAndOverviewHiden(Workspace.State.OVERVIEW_HIDDEN, State.HIDE_APP, animated);
+            mTabConten.showTabContent(getmHideAppNavigationbar(),animated);
             getDragController().addDropTarget(mHideAppNavigationbar);//lijun add
         }
     }
@@ -6545,10 +6568,10 @@ public class Launcher extends Activity
         } else {
             return;
         }
-        if (needHideWidgets) {
-            getWidgetsPanel().setVisibility(View.INVISIBLE);
-            getWidgetsPanel().setAlpha(0);
-        }
+//        if (needHideWidgets) {
+//            getWidgetsPanel().setVisibility(View.INVISIBLE);
+//            getWidgetsPanel().setAlpha(0);
+//        }
         if (needHideWallpaper) {
             getmWallpaperPicker().setVisibility(View.INVISIBLE);
             getmWallpaperPicker().setAlpha(0);
@@ -6605,7 +6628,8 @@ public class Launcher extends Activity
     private void onClickSpecialEffectPreview(boolean animated) {
         mPreviewContainer.initPagedView();
         mState = State.SPECIALEFFECT;
-        mStateTransitionAnimation.startAnimationBetweenOverviewAndOverviewHiden(Workspace.State.OVERVIEW_HIDDEN, State.SPECIALEFFECT, animated);
+//        mStateTransitionAnimation.startAnimationBetweenOverviewAndOverviewHiden(Workspace.State.OVERVIEW_HIDDEN, State.SPECIALEFFECT, animated);
+        mTabConten.showTabContent(getSpecialEffectPreview(),animated);
         mPreviewContainer.requestFocus();
     }
 
@@ -6696,6 +6720,73 @@ public class Launcher extends Activity
 
             return mWallpaperPicker.getWallpaperInfoList();
         } else {
+            return null;
+        }
+    }
+
+    private void onTabClick(View v){
+        if (mWorkspace.rejectClickOnMenuButton()) {
+            return;
+        }
+        if(mTabLayout.isSelect(v)){
+            return;
+        }
+        View tabContent = null;
+        if (tabButtonPersonalise == v) {
+            tabContent = mPersonaliseBar;
+        } else if (tabButtonWidget == v) {
+            tabContent = getWidgetsPanel();
+        } else if (tabButtonHideApp == v) {
+            tabContent = getmHideAppNavigationbar();
+        } else if (tabButtonOthers == v) {
+            tabContent = mOhersBar;
+        }
+        mTabConten.showTabContent(tabContent,true);
+        mTabLayout.onTabChanged(v);
+    }
+
+    public void animateBettenTabs(View fromView, View toView) {
+        Workspace.State toWorkspaceState = Workspace.State.OVERVIEW;
+        State launcherState = State.WORKSPACE;
+        if (toView == mPersonaliseBar) {
+            toWorkspaceState = Workspace.State.OVERVIEW;
+            launcherState = State.WORKSPACE;
+        } else if (toView == mOhersBar) {
+            toWorkspaceState = Workspace.State.OVERVIEW;
+        } else if (toView == mNavigationbar) {
+            toWorkspaceState = Workspace.State.OVERVIEW_HIDDEN;
+            launcherState = State.ICONARRANGE;
+        } else if (toView == mHideAppNavigationbar) {
+            toWorkspaceState = Workspace.State.OVERVIEW;
+            launcherState = State.HIDE_APP;
+        } else if (toView == mPreviewContainer) {
+            toWorkspaceState = Workspace.State.OVERVIEW_HIDDEN;
+            launcherState = State.SPECIALEFFECT;
+        } else if (toView == mWidgetsView) {
+            toWorkspaceState = Workspace.State.OVERVIEW;
+            launcherState = State.WIDGETS;
+        } else if (toView == mWallpaperPicker) {
+            toWorkspaceState = Workspace.State.OVERVIEW_HIDDEN;
+            launcherState = State.WALLPAPER;
+        }
+        mState = launcherState;
+        mStateTransitionAnimation.startAnimationBetweenOverviewTabs(toWorkspaceState,launcherState,fromView,toView,true);
+    }
+
+    public View getmPersonaliseBar() {
+        return mPersonaliseBar;
+    }
+
+    public View getmOhersBar() {
+        return mOhersBar;
+    }
+
+    public View getCurrentTabBar(){
+        if(mTabLayout.getCurrentTab() == tabButtonPersonalise){
+            return mPersonaliseBar;
+        }else if(mTabLayout.getCurrentTab() == tabButtonOthers){
+            return mOhersBar;
+        }else {
             return null;
         }
     }
