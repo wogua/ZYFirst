@@ -136,4 +136,5 @@
 
     <string name="layout">桌面布局</string>
     <string name="hide_app_title">隐藏图标</string>
+    <string name="overview_tab_hide_app_empty">点击屏幕添加图标</string>
 </resources>

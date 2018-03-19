@@ -302,5 +302,6 @@
     <string name="layout">Layout</string>
 
     <string name="hide_app_title">Hide apps</string>
+    <string name="overview_tab_hide_app_empty">Touch screen to add icons</string>
 
 </resources>

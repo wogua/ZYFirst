@@ -226,14 +226,14 @@
                 android:clipChildren="false"
                 android:gravity="center">
 
-                <com.android.launcher3.BubbleTextView
+                <!--<com.android.launcher3.BubbleTextView
                     android:id="@+id/hide_app_temp"
                     style="@style/Icon"
                     android:drawableTop="@drawable/ic_hideapp_menu_zy"
                     android:focusable="false"
                     android:includeFontPadding="false"
                     android:text="@string/hide_app_title"
-                    launcher:centerVertically="true" />
+                    launcher:centerVertically="true" />-->
             </com.android.launcher3.ArrangeNavLinearLayout>
         </com.android.launcher3.HideAppNavigationBar>
         <!-- lijun add for special effect start -->
@@ -248,6 +248,16 @@
             android:visibility="gone" />
         <!--  lijun add for special effect  end -->
 
+        <TextView
+            android:id="@+id/hide_app_empty_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="35dp"
+            android:gravity="center"
+            android:visibility="gone"
+            android:textColor="#FFFFFFFF"
+            android:text="@string/overview_tab_hide_app_empty"/>
     </com.android.launcher3.dragndrop.DragLayer>
 
     <!-- lijun add for theme changed -->

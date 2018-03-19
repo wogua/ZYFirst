@@ -288,6 +288,8 @@ public class Launcher extends Activity
     private ViewGroup mOverviewPanel;
 //    OverviewPagedView overviewPagedView;
 
+    View mHideAppEmptyHint;
+
     private View mAllAppsButton;
     private View mWidgetsButton;
     private View mWallpaperButton;//lijun add for wallpaper
@@ -1639,6 +1641,8 @@ public class Launcher extends Activity
 //        ImageView overviewIndicatorRight= (ImageView) findViewById(R.id.overview_container_right_indicator);
 //        overviewPagedView = (OverviewPagedView) findViewById(R.id.overview_pagedview);
 //        overviewPagedView.setIndicator(overviewIndicatorLeft,overviewIndicatorRight);
+        mHideAppEmptyHint = findViewById(R.id.hide_app_empty_hint);
+
         // Long-clicking buttons in the overview panel does the same thing as clicking them.
         OnLongClickListener performClickOnLongClick = new OnLongClickListener() {
             @Override
@@ -3337,6 +3341,7 @@ public class Launcher extends Activity
         if (mIsSafeModeEnabled) {
             Toast.makeText(this, R.string.safemode_wallpaper_error, Toast.LENGTH_SHORT).show();
         } else {
+            mHideAppNavigationbar.initForEmpty(false);
             showHideAppNavigationBar(true);
         }
     }
@@ -6682,6 +6687,17 @@ public class Launcher extends Activity
             return mWallpaperPicker.getWallpaperInfoList();
         } else {
             return null;
+        }
+    }
+
+    public void showHideAppEmptyHint(boolean show) {
+        if (mHideAppEmptyHint == null) return;
+        if (show) {
+            mHideAppEmptyHint.setVisibility(View.VISIBLE);
+            mHideAppEmptyHint.setAlpha(1.0f);
+        } else {
+            mHideAppEmptyHint.setVisibility(View.GONE);
+            mHideAppEmptyHint.setAlpha(0.0f);
         }
     }
 }

@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
  * Created by lijun on 17-3-31.
  */
 public class ArrangeNavLinearLayout extends LinearLayout {
+    Launcher mLauncher;
+    boolean isHideApp = false;
     private LayoutTransition mLayoutTransition;
     public ArrangeNavLinearLayout(Context context) {
         this(context,null);
@@ -21,6 +23,7 @@ public class ArrangeNavLinearLayout extends LinearLayout {
 
     public ArrangeNavLinearLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         this(context, attrs, defStyleAttr,0);
+        mLauncher = (Launcher) context;
     }
 
     public ArrangeNavLinearLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -60,5 +63,25 @@ public class ArrangeNavLinearLayout extends LinearLayout {
                 }
             }
         }
+    }
+
+    @Override
+    public void onViewRemoved(View child) {
+        super.onViewRemoved(child);
+        if(isHideApp && getChildCount() == 0){
+            mLauncher.showHideAppEmptyHint(true);
+        }
+    }
+
+    @Override
+    public void onViewAdded(View child) {
+        super.onViewAdded(child);
+        if(isHideApp && getChildCount() > 0){
+            mLauncher.showHideAppEmptyHint(false);
+        }
+    }
+
+    public void initEmptyHint(boolean tabHided) {
+        mLauncher.showHideAppEmptyHint(!tabHided && getChildCount() <= 0);
     }
 }
