@@ -505,13 +505,23 @@
             android:textColor="@android:color/white"
             android:textSize="13sp" />
 
-        <TextView
+        <!--<TextView
             android:id="@+id/overview_tab_button_ohter"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/overview_tab_ohter"
+            android:textColor="@android:color/white"
+            android:textSize="13sp" />-->
+
+        <TextView
+            android:id="@+id/overview_tab_button_arrange"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/arrange_button_text"
             android:textColor="@android:color/white"
             android:textSize="13sp" />
     </com.android.launcher3.overviewtab.MTabLayout>
@@ -530,10 +540,10 @@
             android:id="@+id/overview_tab_personalise"
             layout="@layout/overview_tab_content_personalise" />
 
-        <include
+        <!--<include
             android:id="@+id/overview_tab_ohters"
             layout="@layout/overview_tab_content_ohters"
-            android:visibility="gone" />
+            android:visibility="gone" />-->
 
         <include
             android:id="@+id/navigationbar"

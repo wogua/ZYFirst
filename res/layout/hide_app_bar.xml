@@ -19,12 +19,12 @@
         android:id="@+id/hide_app_nav_linear"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="27dp"
+        android:paddingTop="5dp"
         android:animateLayoutChanges="true"
         android:clipChildren="false"
         android:gravity="center">
 
-        <com.android.launcher3.BubbleTextView
+        <!--<com.android.launcher3.BubbleTextView
             android:id="@+id/hide_app_temp"
             style="@style/Icon"
             android:drawableTop="@drawable/ic_hideapp_menu_zy"
@@ -32,6 +32,6 @@
             android:includeFontPadding="false"
             android:text="@string/hide_app_title"
             launcher:centerVertically="true"
-            />
+            />-->
     </com.android.launcher3.ArrangeNavLinearLayout>
 </com.android.launcher3.HideAppNavigationBar>

@@ -140,4 +140,5 @@
     <string name="overview_tab_widget">控件</string>
     <string name="overview_tab_hide_app">隱藏圖標</string>
     <string name="overview_tab_ohter">其他</string>
+    <string name="overview_tab_hide_app_empty">点击屏幕添加图标</string>
 </resources>

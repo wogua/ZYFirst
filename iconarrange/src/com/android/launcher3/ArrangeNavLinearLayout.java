@@ -2,7 +2,11 @@ package com.android.launcher3;
 
 import android.animation.LayoutTransition;
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -10,6 +14,8 @@ import android.widget.LinearLayout;
  * Created by lijun on 17-3-31.
  */
 public class ArrangeNavLinearLayout extends LinearLayout {
+    Paint paint = new Paint(Color.WHITE);
+    Launcher mLauncher;
     private LayoutTransition mLayoutTransition;
     public ArrangeNavLinearLayout(Context context) {
         this(context,null);
@@ -25,6 +31,7 @@ public class ArrangeNavLinearLayout extends LinearLayout {
 
     public ArrangeNavLinearLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        mLauncher = (Launcher) context;
     }
     public void enableLayoutTransitions() {
         LayoutTransition transition = getLayoutTransition();
@@ -44,6 +51,7 @@ public class ArrangeNavLinearLayout extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        paint.setTextSize(50);
     }
 
     public void measureChlid() {
@@ -60,5 +68,25 @@ public class ArrangeNavLinearLayout extends LinearLayout {
                 }
             }
         }
+    }
+
+    @Override
+    public void onViewRemoved(View child) {
+        super.onViewRemoved(child);
+        if(getChildCount() == 0){
+            mLauncher.showHideAppEmptyHint(true);
+        }
+    }
+
+    @Override
+    public void onViewAdded(View child) {
+        super.onViewAdded(child);
+        if(getChildCount() > 0){
+            mLauncher.showHideAppEmptyHint(false);
+        }
+    }
+
+    public void initEmptyHint(boolean tabHided) {
+        mLauncher.showHideAppEmptyHint(!tabHided && getChildCount() <= 0);
     }
 }

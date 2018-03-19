@@ -307,4 +307,5 @@
     <string name="overview_tab_widget">Widgets</string>
     <string name="overview_tab_hide_app">Hide app</string>
     <string name="overview_tab_ohter">Others</string>
+    <string name="overview_tab_hide_app_empty">Touch screen to add icons</string>
 </resources>

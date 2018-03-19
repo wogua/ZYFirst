@@ -61,7 +61,7 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
     private float mDownMotionY;
     private ArrangeInfo mCurrentDragArrangeInfo;
 
-    private BubbleTextView mHideAppTemp;
+//    private BubbleTextView mHideAppTemp;
 
     private int mTargetRank = 1;
 
@@ -88,6 +88,7 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
     }
 
     public boolean onBackPressed() {
+        mNav.initEmptyHint(true);
         return onBackPressed(true);
     }
 
@@ -107,31 +108,33 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
         mNav = (ArrangeNavLinearLayout) findViewById(R.id.hide_app_nav_linear);
         mIconCatch = LauncherAppState.getInstance().getIconCache();
         mNav.enableLayoutTransitions();
-        mHideAppTemp = (BubbleTextView) findViewById(R.id.hide_app_temp);
+//        mHideAppTemp = (BubbleTextView) findViewById(R.id.hide_app_temp);
 //        ViewGroup.LayoutParams lp = mHideAppTemp.getLayoutParams();
 //        lp.width=mIconWidth;
 //        lp.height = LayoutParams.MATCH_PARENT;
-        float fontScale = getResources().getConfiguration().fontScale;
-        if (fontScale >= 1.3f) {
-            mHideAppTemp.setPadding(getPaddingLeft(),
-                    getResources().getDimensionPixelSize(R.dimen.add_folder_padding_top_large),
-                    getPaddingRight(),
-                    getPaddingBottom());
-        }
-        mHideAppTemp.setCompoundDrawablePadding(mDeviceProfile.iconDrawablePaddingPx);
-        Drawable[] drawable = mHideAppTemp.getCompoundDrawables();
-        if (drawable != null && drawable[1] != null) {
-            mHideAppTemp.setIcon(drawable[1]);
-        }
-        //mHideAppTemp.setLayoutParams(lp);
-        mHideAppTemp.setTextColor(ColorManager.getInstance().getColors()[0]);
+//        float fontScale = getResources().getConfiguration().fontScale;
+//        if (fontScale >= 1.3f) {
+//            mHideAppTemp.setPadding(getPaddingLeft(),
+//                    getResources().getDimensionPixelSize(R.dimen.add_folder_padding_top_large),
+//                    getPaddingRight(),
+//                    getPaddingBottom());
+//        }
+//        mHideAppTemp.setCompoundDrawablePadding(mDeviceProfile.iconDrawablePaddingPx);
+//        Drawable[] drawable = mHideAppTemp.getCompoundDrawables();
+//        if (drawable != null && drawable[1] != null) {
+//            mHideAppTemp.setIcon(drawable[1]);
+//        }
+//        //mHideAppTemp.setLayoutParams(lp);
+//        mHideAppTemp.setTextColor(ColorManager.getInstance().getColors()[0]);
     }
 
     public void reloadHideApps(){
         if(mArrangeItemMap != null && mArrangeItemMap.size()!=0){
             return;
         }
-        if(sHideApps.size()==0)return;
+        if(sHideApps.size()==0){
+            return;
+        }
         LauncherModel model = mLauncher.getModel();
         ArrayList<View> viewList = new ArrayList<>();
         for(String a : sHideApps){
@@ -141,6 +144,7 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
                 viewList.add(view);
             }
         }
+        sHideApps.clear();
         for(View view:viewList){
             addIconIntoNavigationbarRaw(view);
         }
@@ -148,15 +152,15 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
 
     public void setItemWidth(int width) {
         mIconWidth = width;
-        ViewGroup.LayoutParams lp = mHideAppTemp.getLayoutParams();
-        lp.width = mIconWidth;
-        lp.height = LayoutParams.MATCH_PARENT;
-        mHideAppTemp.setCompoundDrawablePadding(mDeviceProfile.iconDrawablePaddingPx);
-        mHideAppTemp.setLayoutParams(lp);
+//        ViewGroup.LayoutParams lp = mHideAppTemp.getLayoutParams();
+//        lp.width = mIconWidth;
+//        lp.height = LayoutParams.MATCH_PARENT;
+//        mHideAppTemp.setCompoundDrawablePadding(mDeviceProfile.iconDrawablePaddingPx);
+//        mHideAppTemp.setLayoutParams(lp);
     }
 
     public void onColorChanged(int[] colors) {
-        mHideAppTemp.setTextColor(colors[0]);
+//        mHideAppTemp.setTextColor(colors[0]);
     }
 
     public void addViewToTheFirstPage(View view, ShortcutInfo info) {
@@ -168,7 +172,7 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
             Log.i(Launcher.TAG, "addViewToTheFirstPage :Something may be wrong here.view = " + view);
             ((ViewGroup) (view.getParent())).removeView(view);
         }
-        mNav.addView(view, 1);
+        mNav.addView(view, 0);
         view.setOnClickListener(this);
         view.setOnLongClickListener(this);
     }
@@ -401,7 +405,7 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
             post(new Runnable() {
                 @Override
                 public void run() {
-                    mLauncher.getDragLayer().animateViewIntoPosition2(dragView, v, null, null);
+                    mLauncher.getDragLayer().animateViewIntoPosition4(dragView, v, null, null);
                 }
             });
 
@@ -627,6 +631,12 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
     @Override
     public boolean onLongClick(View v) {
         return mLauncher.onLongClick(v);
+    }
+
+    public void initForEmpty(boolean tabHided) {
+        if(mNav!=null){
+            mNav.initEmptyHint(tabHided);
+        }
     }
 
     class AnimationObject implements Comparable<AnimationObject> {
@@ -933,6 +943,7 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
         sHideApps = null;
         String a = Utilities.getPrefs(context).getString(KEY_PREFERENCE_HIDE_APPS, "");
         sHideApps = getArrList(a.split("%"));
+        Log.d("lijun22","sHideApps = " + sHideApps.toString());
     }
 
     private static ArrayList<String> getArrList(String[] arr) {

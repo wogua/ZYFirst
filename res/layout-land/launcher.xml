@@ -176,6 +176,16 @@
             android:paddingTop="75dp"
             android:text="@string/theme_loding_text"
             android:textColor="#ffffffff" />
-
     </com.android.launcher3.ThemeChangedLoadingView>
+
+    <TextView
+        android:id="@+id/hide_app_empty_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="35dp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textColor="#FFFFFFFF"
+        android:text="@string/overview_tab_hide_app_empty"/>
 </com.android.launcher3.LauncherRootView>

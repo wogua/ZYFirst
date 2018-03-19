@@ -6213,7 +6213,7 @@ public class Workspace extends SpecialEffectPagedView
 
   // lijun add for cycle slide start
    public void setCycleSlideFlag(){
-     cycleSlideFlag  = Utilities.getPrefs(mLauncher).getBoolean(SpecialEffectPagedView.SPECIAL_EFFECT_CYCLE_SLIDE, true);
+     cycleSlideFlag  = Utilities.getPrefs(mLauncher).getBoolean(SpecialEffectPagedView.SPECIAL_EFFECT_CYCLE_SLIDE, false);
    }
    
   protected boolean isNormalState(){

@@ -291,12 +291,13 @@ public class Launcher extends Activity
     MTabLayout mTabLayout;
     TabContent mTabConten;
     View mPersonaliseBar;
-    View mOhersBar;
+//    View mOhersBar;
+    View mHideAppEmptyHint;
 
     private View mAllAppsButton;
     private View mWidgetsButton;
     private View mWallpaperButton;//lijun add for wallpaper
-    private View mVulvanClearBuuton;
+//    private View mVulvanClearBuuton;
     private WallpaperPagedViewContainer mWallpaperPicker;//lijun add for wallpaper
     private View mAlineButton;
     private View mHideAppButton;
@@ -306,7 +307,8 @@ public class Launcher extends Activity
     private View tabButtonPersonalise;
     private View tabButtonWidget;
     private View tabButtonHideApp;
-    private View tabButtonOthers;
+//    private View tabButtonOthers;
+    private View tabButtonArrange;
 
     //lijun add the background of workspace when opening folder
     ImageView mWorkspaceBg;
@@ -1332,7 +1334,7 @@ public class Launcher extends Activity
             // setting.
             return !getResources().getBoolean(R.bool.allow_rotation);
         }*/
-        return true;
+        return false;
         //lijun modify end
     }
 
@@ -1617,8 +1619,8 @@ public class Launcher extends Activity
 
         //lijun add for wallpaper
         mWallpaperPicker = (WallpaperPagedViewContainer) findViewById(R.id.wallpaper_picker);
-        mVulvanClearBuuton = findViewById(R.id.valcants_clear_button);
-        mVulvanClearBuuton.setOnClickListener(buttonClickLisener);
+//        mVulvanClearBuuton = findViewById(R.id.valcants_clear_button);
+//        mVulvanClearBuuton.setOnClickListener(buttonClickLisener);
 
         //lijun add for alinebutton
         mAlineButton = findViewById(R.id.aline);
@@ -1646,7 +1648,8 @@ public class Launcher extends Activity
         mTabLayout = (MTabLayout) findViewById(R.id.overview_panel_tab);
         mTabConten = (TabContent) findViewById(R.id.overview_tab_content);
         mPersonaliseBar = findViewById(R.id.overview_tab_personalise);
-        mOhersBar = findViewById(R.id.overview_tab_ohters);
+//        mOhersBar = findViewById(R.id.overview_tab_ohters);
+        mHideAppEmptyHint = findViewById(R.id.hide_app_empty_hint);
         mTabConten.init(mPersonaliseBar);
         // Long-clicking buttons in the overview panel does the same thing as clicking them.
         OnLongClickListener performClickOnLongClick = new OnLongClickListener() {
@@ -1677,12 +1680,14 @@ public class Launcher extends Activity
         mSettingsButton = findViewById(R.id.settings_button);
         // lijun add for special effect
         boolean hasSettings = hasSettings();
-        if (hasSettings) {
-            mSettingsButton.setOnClickListener(buttonClickLisener);
-            mSettingsButton.setOnLongClickListener(performClickOnLongClick);
-            mSettingsButton.setOnTouchListener(getHapticFeedbackTouchListener());
-        } else {
-            mSettingsButton.setVisibility(View.GONE);
+        if (mSettingsButton != null) {
+            if (hasSettings) {
+                mSettingsButton.setOnClickListener(buttonClickLisener);
+                mSettingsButton.setOnLongClickListener(performClickOnLongClick);
+                mSettingsButton.setOnTouchListener(getHapticFeedbackTouchListener());
+            } else {
+                mSettingsButton.setVisibility(View.GONE);
+            }
         }
 
 //        mHideAppButton = findViewById(R.id.hide_app_button);
@@ -1695,11 +1700,13 @@ public class Launcher extends Activity
         tabButtonPersonalise = findViewById(R.id.overview_tab_button_personalise);
         tabButtonWidget = findViewById(R.id.overview_tab_button_widget);
         tabButtonHideApp = findViewById(R.id.overview_tab_button_hide_app);
-        tabButtonOthers = findViewById(R.id.overview_tab_button_ohter);
+//        tabButtonOthers = findViewById(R.id.overview_tab_button_ohter);
+        tabButtonArrange = findViewById(R.id.overview_tab_button_arrange);
         tabButtonPersonalise.setOnClickListener(buttonClickLisener);
         tabButtonWidget.setOnClickListener(buttonClickLisener);
         tabButtonHideApp.setOnClickListener(buttonClickLisener);
-        tabButtonOthers.setOnClickListener(buttonClickLisener);
+//        tabButtonOthers.setOnClickListener(buttonClickLisener);
+        tabButtonArrange.setOnClickListener(buttonClickLisener);
     }
 
     private View.OnClickListener buttonClickLisener = new View.OnClickListener() {
@@ -1726,15 +1733,9 @@ public class Launcher extends Activity
                 }
             } else if (mAlineButton == v) {
                 confirmVacantsClear();
-            } else if (mVulvanClearBuuton == v) {
+            } /*else if (mVulvanClearBuuton == v) {
                 onClickVacantsClearButton(v);
-            } else if (tabButtonPersonalise == v) {
-                onTabClick(v);
-            } else if (tabButtonWidget == v) {
-                onTabClick(v);
-            } else if (tabButtonHideApp == v) {
-                onTabClick(v);
-            } else if (tabButtonOthers == v) {
+            }*/ else if (tabButtonPersonalise == v || tabButtonWidget == v || tabButtonHideApp == v/*||tabButtonOthers == v*/ || tabButtonArrange == v) {
                 onTabClick(v);
             }
         }
@@ -2241,7 +2242,8 @@ public class Launcher extends Activity
                     }
                 } else {
                     getmHideAppNavigationbar().onBackPressed();
-                    showOverviewMode(true);
+//                    showOverviewMode(true);
+                    showWorkspace(true);
                     mHideAppNavigationbar.setVisibility(View.GONE);
                 }
                 return;
@@ -2868,7 +2870,8 @@ public class Launcher extends Activity
                 } else {
                     ((HideAppNavigationBar) getmHideAppNavigationbar()).onBackPressed();
 
-                    showOverviewMode(true);
+//                    showOverviewMode(false);
+                    showWorkspace(true);
                     //mNavigationbar.setVisibility(View.GONE);
                 }
             }else if(isWidgetsViewVisible()){
@@ -4172,6 +4175,9 @@ public class Launcher extends Activity
             }
         }
 
+        mTabConten.reset(mPersonaliseBar);
+        mTabLayout.onTabChanged(0);
+
         checkAndResetForState(State.WORKSPACE);//lijun add
 
         // Change the state *after* we've called all the transition code
@@ -4227,11 +4233,11 @@ public class Launcher extends Activity
             Folder.ICONARRANGING = false;
             showOverviewModeFromOverviewHidenMode(State.WORKSPACE, true);
         } else {
+            mTabConten.reset(mPersonaliseBar);
+            mTabLayout.onTabChanged(0);
             mStateTransitionAnimation.startAnimationToWorkspace(mState, mWorkspace.getState(),
                     Workspace.State.OVERVIEW, animated, postAnimRunnable);
             mWorkspace.exitWidgetResizeMode();//lijun add for hide apphostview in the wrong situation
-            mTabLayout.onTabChanged(0);
-            mTabConten.reset(mPersonaliseBar);
         }
         //lijun modify end
         mState = State.WORKSPACE;
@@ -6738,9 +6744,17 @@ public class Launcher extends Activity
             tabContent = getWidgetsPanel();
         } else if (tabButtonHideApp == v) {
             tabContent = getmHideAppNavigationbar();
-        } else if (tabButtonOthers == v) {
+        } /*else if (tabButtonOthers == v) {
             tabContent = mOhersBar;
+        }*/
+        else if (tabButtonArrange == v) {
+            tabContent = getArrangeNavigationBar();
+            showArrangeNavigationBar(true);
+            mTabLayout.onTabChanged(v);
+            mHideAppNavigationbar.initForEmpty(tabButtonHideApp != v);
+            return;
         }
+        mHideAppNavigationbar.initForEmpty(tabButtonHideApp != v);
         mTabConten.showTabContent(tabContent,true);
         mTabLayout.onTabChanged(v);
     }
@@ -6751,9 +6765,9 @@ public class Launcher extends Activity
         if (toView == mPersonaliseBar) {
             toWorkspaceState = Workspace.State.OVERVIEW;
             launcherState = State.WORKSPACE;
-        } else if (toView == mOhersBar) {
+        } /*else if (toView == mOhersBar) {
             toWorkspaceState = Workspace.State.OVERVIEW;
-        } else if (toView == mNavigationbar) {
+        }*/ else if (toView == mNavigationbar) {
             toWorkspaceState = Workspace.State.OVERVIEW_HIDDEN;
             launcherState = State.ICONARRANGE;
         } else if (toView == mHideAppNavigationbar) {
@@ -6777,17 +6791,28 @@ public class Launcher extends Activity
         return mPersonaliseBar;
     }
 
-    public View getmOhersBar() {
-        return mOhersBar;
-    }
+//    public View getmOhersBar() {
+//        return mOhersBar;
+//    }
 
     public View getCurrentTabBar(){
         if(mTabLayout.getCurrentTab() == tabButtonPersonalise){
             return mPersonaliseBar;
-        }else if(mTabLayout.getCurrentTab() == tabButtonOthers){
+        }/*else if(mTabLayout.getCurrentTab() == tabButtonOthers){
             return mOhersBar;
-        }else {
+        }*/else {
             return null;
+        }
+    }
+
+    public void showHideAppEmptyHint(boolean show) {
+        if (mHideAppEmptyHint == null) return;
+        if (show) {
+            mHideAppEmptyHint.setVisibility(View.VISIBLE);
+            mHideAppEmptyHint.setAlpha(1.0f);
+        } else {
+            mHideAppEmptyHint.setVisibility(View.GONE);
+            mHideAppEmptyHint.setAlpha(0.0f);
         }
     }
 }
