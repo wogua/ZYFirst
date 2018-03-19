@@ -141,6 +141,7 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
                 viewList.add(view);
             }
         }
+        sHideApps.clear();
         for(View view:viewList){
             addIconIntoNavigationbarRaw(view);
         }
