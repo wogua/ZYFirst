@@ -6542,4 +6542,14 @@ public class Workspace extends SpecialEffectPagedView
         }
         // lijun add for hotseat icon center end
     }
+
+    public void resetPages(){
+        View child;
+        for(int i = 0 ; i < getChildCount() ; i ++){
+            child = getChildAt(i);
+            child.setAlpha(1.0f);
+            child.setScaleX(1.0f);
+            child.setScaleY(1.0f);
+        }
+    }
 }

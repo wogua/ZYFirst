@@ -286,7 +286,7 @@ public class Launcher extends Activity
     @Thunk
     Hotseat mHotseat;
     private ViewGroup mOverviewPanel;
-    OverviewPagedView overviewPagedView;
+//    OverviewPagedView overviewPagedView;
 
     private View mAllAppsButton;
     private View mWidgetsButton;
@@ -1322,7 +1322,7 @@ public class Launcher extends Activity
             // setting.
             return !getResources().getBoolean(R.bool.allow_rotation);
         }*/
-        return true;
+        return false;
         //lijun modify end
     }
 
@@ -1608,7 +1608,11 @@ public class Launcher extends Activity
         //lijun add for wallpaper
         mWallpaperPicker = (WallpaperPagedViewContainer) findViewById(R.id.wallpaper_picker);
         mVulvanClearBuuton = findViewById(R.id.valcants_clear_button);
-        mVulvanClearBuuton.setOnClickListener(buttonClickLisener);
+        if(hasArrangeIcons()) {
+            mVulvanClearBuuton.setOnClickListener(buttonClickLisener);
+        }else {
+            mVulvanClearBuuton.setVisibility(View.GONE);
+        }
 
         //lijun add for alinebutton
         mAlineButton = findViewById(R.id.aline);
@@ -1625,12 +1629,16 @@ public class Launcher extends Activity
         mHideAppNavigationbar = (HideAppNavigationBar) findViewById(R.id.hide_app_navigationbar);
     }
 
+    private boolean hasArrangeIcons() {
+        return false;
+    }
+
     private void setupOverviewPanel() {
         mOverviewPanel = (ViewGroup) findViewById(R.id.overview_panel);
-        ImageView overviewIndicatorLeft = (ImageView) findViewById(R.id.overview_container_left_indicator);
-        ImageView overviewIndicatorRight= (ImageView) findViewById(R.id.overview_container_right_indicator);
-        overviewPagedView = (OverviewPagedView) findViewById(R.id.overview_pagedview);
-        overviewPagedView.setIndicator(overviewIndicatorLeft,overviewIndicatorRight);
+//        ImageView overviewIndicatorLeft = (ImageView) findViewById(R.id.overview_container_left_indicator);
+//        ImageView overviewIndicatorRight= (ImageView) findViewById(R.id.overview_container_right_indicator);
+//        overviewPagedView = (OverviewPagedView) findViewById(R.id.overview_pagedview);
+//        overviewPagedView.setIndicator(overviewIndicatorLeft,overviewIndicatorRight);
         // Long-clicking buttons in the overview panel does the same thing as clicking them.
         OnLongClickListener performClickOnLongClick = new OnLongClickListener() {
             @Override
@@ -6344,7 +6352,7 @@ public class Launcher extends Activity
         mWorkspace.onColorChanged(colors);
         mNavigationbar.onColorChanged(colors);
         mHotseat.getLayout().onColorChanged(colors);
-        overviewPagedView.updateWidgetsPageIndicator();
+//        overviewPagedView.updateWidgetsPageIndicator();
         sendBroadcast(new Intent(LauncherClock.UPDATECOLOR));
     }
     //lijun add end

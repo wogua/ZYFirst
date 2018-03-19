@@ -98,6 +98,7 @@
         <item>@drawable/effect_right_fade</item>
         <item>@drawable/effect_roll_down</item>
         <item>@drawable/effect_roll_up</item>
+        <item>@drawable/effect_roll_up</item>
     </array>
 
     <string-array name="entryvalues_effect_preference">

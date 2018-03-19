@@ -100,24 +100,24 @@ public class OverviewPagedView extends PagedView{
     @Override
     public void scrollTo(int x, int y) {
         super.scrollTo(x, y);
-        if (getWidth() > 0) {
-            curScrollXRate = x / (float) getWidth();
-            if (curScrollXRate < 0) {
-                leftIndicator.setAlpha(0.0f);
-            } else if (curScrollXRate < 1.0) {
-                leftIndicator.setAlpha(1.0f * curScrollXRate);
-            } else {
-                leftIndicator.setAlpha(1.0f);
-            }
-
-            if (curScrollXRate > getPageCount() - 1) {
-                rightIndicator.setAlpha(0.0f);
-            } else if (curScrollXRate > getPageCount() - 2) {
-                rightIndicator.setAlpha(1.0f * (getPageCount() - 1 - curScrollXRate));
-            } else {
-                rightIndicator.setAlpha(1.0f);
-            }
-        }
+//        if (getWidth() > 0) {
+//            curScrollXRate = x / (float) getWidth();
+//            if (curScrollXRate < 0) {
+//                leftIndicator.setAlpha(0.0f);
+//            } else if (curScrollXRate < 1.0) {
+//                leftIndicator.setAlpha(1.0f * curScrollXRate);
+//            } else {
+//                leftIndicator.setAlpha(1.0f);
+//            }
+//
+//            if (curScrollXRate > getPageCount() - 1) {
+//                rightIndicator.setAlpha(0.0f);
+//            } else if (curScrollXRate > getPageCount() - 2) {
+//                rightIndicator.setAlpha(1.0f * (getPageCount() - 1 - curScrollXRate));
+//            } else {
+//                rightIndicator.setAlpha(1.0f);
+//            }
+//        }
     }
 
     public void updateWidgetsPageIndicator(){

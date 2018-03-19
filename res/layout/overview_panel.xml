@@ -12,7 +12,8 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
---><!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_gravity="center_horizontal|bottom"
@@ -88,6 +89,23 @@
         android:textSize="12sp" />
 
     <com.android.launcher3.colors.ChameleonTextView
+        android:id="@+id/hide_app_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawablePadding="4dp"
+        android:drawableTop="@drawable/ic_hide_app"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center_horizontal"
+        android:maxLines="1"
+        android:stateListAnimator="@animator/overview_button_anim"
+        android:text="@string/hide_app_title"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="12sp" />
+
+    <com.android.launcher3.colors.ChameleonTextView
         android:id="@+id/settings_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -103,8 +121,7 @@
         android:ellipsize="end"
         android:textColor="@android:color/white"
         android:textSize="12sp" />
-
-</LinearLayout>-->
+</LinearLayout>
 
 <!--<com.android.launcher3.OverviewPagedContainer
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -254,6 +271,7 @@
 </com.android.launcher3.OverviewPagedContainer>-->
 
 
+<!--
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/widgets_container_panel"
     android:layout_width="match_parent"
@@ -410,4 +428,4 @@
         android:layout_marginLeft="@dimen/widget_indicator_padding"
         android:layout_marginTop="@dimen/widget_indicator_top_padding"
         android:src="@drawable/ic_widgets_right_indicator" />
-</FrameLayout>
+</FrameLayout>-->
