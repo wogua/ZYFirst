@@ -63,7 +63,7 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
 
 //    private BubbleTextView mHideAppTemp;
 
-    private int mTargetRank = 1;
+    private int mTargetRank = 0;
 
     public HideAppNavigationBar(Context context) {
         this(context, null);
@@ -468,7 +468,7 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
             addViewToThePage(v, info, mTargetRank);
             measureChlid();
             mNav.invalidate();
-            mLauncher.getDragLayer().animateViewIntoPosition3(dragObject.dragView, v, null, null);
+            mLauncher.getDragLayer().animateViewIntoPosition5(dragObject.dragView, v, null, null);
 
         } else if (mCurrentDragArrangeInfo != null) {
             ArrangeInfo arrangeInfo = mCurrentDragArrangeInfo;
@@ -486,7 +486,7 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
             addViewToThePage(v, info, mTargetRank);
             measureChlid();
             mNav.invalidate();
-            mLauncher.getDragLayer().animateViewIntoPosition3(dragObject.dragView, v, null, null);
+            mLauncher.getDragLayer().animateViewIntoPosition5(dragObject.dragView, v, null, null);
 
         }
     }
@@ -525,7 +525,7 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
         }
         mCurrentDragView = null;
         mCurrentDragArrangeInfo = null;
-        mTargetRank = 1;
+        mTargetRank = 0;
     }
 
     @Override
@@ -535,7 +535,7 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
 
     @Override
     public boolean isDropEnabled() {
-        return mLauncher.isArrangeBarShowing() && mLauncher.isLauncherArrangeMode();
+        return mLauncher.isHideAppShowing() && mLauncher.isLauncherHideAppMode();
     }
 
     @Override
@@ -573,7 +573,7 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
 
         int round = Math.round(x / viewWidth);
         if (round == 0) {
-            return 1;
+            return 0;
         }/*else if( round>4){
             return childCount<round?childCount:round;
         }*/ else {
