@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 public class ArrangeNavLinearLayout extends LinearLayout {
     Launcher mLauncher;
     boolean isHideApp = false;
+    public boolean isDraging = false;
     private LayoutTransition mLayoutTransition;
     public ArrangeNavLinearLayout(Context context) {
         this(context,null);
@@ -68,7 +69,7 @@ public class ArrangeNavLinearLayout extends LinearLayout {
     @Override
     public void onViewRemoved(View child) {
         super.onViewRemoved(child);
-        if(isHideApp && getChildCount() == 0){
+        if (!isDraging && isHideApp && getChildCount() == 0) {
             mLauncher.showHideAppEmptyHint(true);
         }
     }
@@ -76,7 +77,7 @@ public class ArrangeNavLinearLayout extends LinearLayout {
     @Override
     public void onViewAdded(View child) {
         super.onViewAdded(child);
-        if(isHideApp && getChildCount() > 0){
+        if (!isDraging && isHideApp && getChildCount() > 0) {
             mLauncher.showHideAppEmptyHint(false);
         }
     }

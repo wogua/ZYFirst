@@ -2876,7 +2876,7 @@ public class Workspace extends SpecialEffectPagedView
     public boolean transitionStateShouldAllowDrop() {
         return ((!isSwitchingState() || mTransitionProgress > 0.5f) &&
                 (mState == State.NORMAL || mState == State.SPRING_LOADED
-||mLauncher.isLauncherArrangeMode()));//lijun add
+                        || mLauncher.isLauncherArrangeMode() || mLauncher.isLauncherHideAppMode()));//lijun add
     }
 
     /**

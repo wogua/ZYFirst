@@ -569,7 +569,7 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
         int childCount = mNav.getChildCount();
         int width = mLauncher.getDeviceProfile().widthPx - getPaddingLeft() - getPaddingRight();
         float x = recycle[0] - getPaddingLeft() - 1;
-        int viewWidth = mNav.getChildAt(0).getMeasuredWidth();
+        int viewWidth = mIconWidth;
 
         int round = Math.round(x / viewWidth);
         if (round == 0) {
@@ -613,6 +613,7 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
     @Override
     public void onDragStart(DragObject dragObject, DragOptions options) {
         Log.d(TAG, "onDragStart");
+        mNav.isDraging = true;
         if (mCurrentDragView instanceof BubbleTextView) {
             ShortcutInfo info = (ShortcutInfo) mCurrentDragView.getTag();
             mNav.removeView(mCurrentDragView);
@@ -624,6 +625,7 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
     @Override
     public void onDragEnd() {
         Log.d(TAG, "onDragEnd");
+        mNav.isDraging = false;
         mLauncher.getDragController().removeDragListener(this);
     }
 
