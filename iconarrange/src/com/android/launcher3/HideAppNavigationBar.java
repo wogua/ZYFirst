@@ -80,9 +80,9 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
     }
 
     public boolean onBackPressed(boolean animate) {
-        if (mArrangeItemMap.isEmpty()) {
+//        if (mArrangeItemMap.isEmpty()) {
             finishRestoreItemsCallback.run();
-        }
+//        }
         mLauncher.getDragController().removeDropTarget(this);
         return restoreHideApps();//restoreItems(animate);
     }

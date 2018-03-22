@@ -594,7 +594,7 @@ public class Workspace extends SpecialEffectPagedView
             enfoceDragParity("onDragEnd", 0, 0);
         }
 
-        if (!mDeferRemoveExtraEmptyScreen && (!mLauncher.isUnInstallMode()&& !mPrepareUninstallMode&&!mLauncher.isLauncherArrangeMode())) {
+        if (!mDeferRemoveExtraEmptyScreen && (!mLauncher.isUnInstallMode() && !mPrepareUninstallMode && !mLauncher.isLauncherArrangeMode() && !mLauncher.isLauncherHideAppMode())) {
             removeExtraEmptyScreen(true, mDragSourceInternal != null);
         }
         mPrepareUninstallMode = false; // lijun fix bug5057
@@ -2824,7 +2824,7 @@ public class Workspace extends SpecialEffectPagedView
         boolean showUnread = mLauncher.isShowUnread();//lijun add
         final Bitmap b = previewProvider.createDragBitmap(mCanvas,showUnread);
         //lijun add begin
-        if(!mLauncher.isLauncherArrangeMode()) {
+        if (!mLauncher.isLauncherArrangeMode() && !mLauncher.isLauncherHideAppMode()) {
             mCanvas.setBitmap(b);
             previewProvider.drawDragViewUninstallDrawable(mCanvas);
             mCanvas.setBitmap(null);
@@ -5963,8 +5963,9 @@ public class Workspace extends SpecialEffectPagedView
             }
 
         }
-        addEmptyScreenAsArrange();
-
+        if(mLauncher.isLauncherArrangeMode()){
+            addEmptyScreenAsArrange();
+        }
     }
 
     public void addViewAndUpdateData(int[] position,final View view,DragView dragView,View startView){

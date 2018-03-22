@@ -374,10 +374,10 @@ public class BubbleTextView extends TextView
                 }
 
                 mLongPressHelper.cancelLongPress();
-		//UninstallMode add by lijun begin
+                //UninstallMode add by lijun begin
                 mLastTouchX = (int) event.getX();
                 mLastTouchY = (int) event.getY();
-                 //UninstallMode add by lijun end
+                //UninstallMode add by lijun end
                 break;
             case MotionEvent.ACTION_MOVE:
                 if (!Utilities.pointInView(this, event.getX(), event.getY(), mSlop)) {
