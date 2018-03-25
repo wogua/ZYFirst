@@ -92,9 +92,15 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
         return onBackPressed(true);
     }
 
-    private boolean restoreHideApps() {
+    public void onActivityDestroyed(){
+        mLauncher.mWorkspace.cleanEmptyScreensAndFolders();
+        mLauncher.getDragController().removeDropTarget(this);
+    }
+
+    public boolean restoreHideApps() {
         SharedPreferences sp = Utilities.getPrefs(mLauncher);
         sp.edit().putString(KEY_PREFERENCE_HIDE_APPS, getPreferenceValue()).apply();
+
         return true;
     }
 
@@ -208,90 +214,6 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
         String a = parseItemInfo(info);
         if(!"".equals(a)){
             sHideApps.add(parseItemInfo(info));
-        }
-    }
-
-    public boolean mutilpleAdd2Other() {
-//        if(mLauncher.mWorkspace.isAddScreen()){
-//            Toast.makeText(mLauncher, "此页无法操作.", Toast.LENGTH_SHORT).show();
-//            return false;
-//        }
-        Log.i(TAG, "mutilpleAdd2Other");
-        Folder folder = mLauncher.getOpenFolder();
-        if (folder == null) {
-            Set<View> keyset = mArrangeItemMap.keySet();
-            ArrayList<View> views = new ArrayList<>();
-            views.addAll(keyset);
-            for (View startView : views) {
-                ShortcutInfo info = (ShortcutInfo) startView.getTag();
-                final int[] position = {info.cellX, info.cellY};
-                Log.i("YYYYYYY", "goback : " + info + " ,  ");
-                boolean founded = mLauncher.getWorkspace().findCellForSpanInCurrentPage(position, info);
-                Log.i("YYYYYYY", "goback : " + info + " ,  " + founded);
-                if (founded) {
-                    View newView = mLauncher.createShortcut(info);
-                    Bitmap b = getDragView(startView, info);
-                    final DragView dragView = new DragView(mLauncher, b, 0, 0, 1.0f, 0.0f);
-                    removeArrangeItem(info, startView);
-                    mAnimationObjects.add(new AnimationObject(dragView, newView, startView, info));
-                    mLauncher.getWorkspace().addViewAndUpdateData(position, newView, dragView, startView, false, false);
-                    newView.setVisibility(View.INVISIBLE);
-                }
-            }
-            int delay = -80;
-            Collections.sort(mAnimationObjects);
-            for (final AnimationObject object : mAnimationObjects) {
-                delay += 80;
-                postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        object.startAnimation();
-                    }
-                }, delay);
-            }
-            mAnimationObjects.clear();
-            views.clear();
-
-        } else {
-            int childCountBefore = folder.getItemCount();
-            Set<View> keyset = mArrangeItemMap.keySet();
-            ArrayList<View> views = new ArrayList<>();
-            views.addAll(keyset);
-            for (View startView : views) {
-                ShortcutInfo info = (ShortcutInfo) startView.getTag();
-                ArrangeInfo rInfo = mArrangeInfoMap.get(info);
-                info.container = folder.mInfo.id;
-                Bitmap b = getDragView(startView, info);
-                DragView dragView = new DragView(mLauncher, b, 0, 0, 1.0f, 0.0f);
-                removeArrangeItem(info, startView);
-                View newView = folder.addIcon(dragView, info, 0, false);
-                newView.setVisibility(View.INVISIBLE);
-                AnimationObject aInfo = new AnimationObject(dragView, newView, startView, info);
-                ((ViewGroup) (startView.getParent())).removeView(startView);
-                aInfo.folderItemIndex = childCountBefore;
-                mAnimationObjects.add(aInfo);
-            }
-            int childCountCurrent = folder.getItemCount();
-            int lastPageIconCount = folder.getContent().getLastPageIconCount();
-            int delay = -80;
-            int i = mAnimationObjects.size();
-            for (final AnimationObject object : mAnimationObjects) {
-                delay += 80;
-                postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        object.startAnimation();
-                    }
-                }, delay);
-            }
-            mAnimationObjects.clear();
-            views.clear();
-        }
-
-        if (mArrangeItemMap.isEmpty()) {
-            return true;
-        } else {
-            return false;
         }
     }
 
@@ -413,14 +335,6 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
 
     public void addIconIntoNavigationbarRaw(final View v) {
         ShortcutInfo info = (ShortcutInfo) v.getTag();
-        int[] cord1 = new int[]{0, 0};
-        Bitmap b = getDragView(v, info);
-        float scale = mLauncher.getDragLayer().getLocationInDragLayer(v, cord1);
-        cord1[0] = Math.round(cord1[0] - (b.getWidth() - scale * v.getWidth()) / 2);
-        final DeviceProfile grid = mLauncher.getDeviceProfile();
-        cord1[1] = Math.round(cord1[1] + scale * (190 - grid.cellHeightPx) / 2 - ((1 - scale) * b.getWidth()) / 2);
-        final DragView dragView = new DragView(mLauncher, b, 0, 0, scale, 0);
-        dragView.show((int) (cord1[0]), (int) (cord1[1]));
         ViewGroup root = null;
         if (root != null) {
             mArrangeInfoMap.put(info, new ArrangeInfo(root, info));
@@ -653,7 +567,7 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
         }
 
         public void startAnimation() {
-            Log.i("xxxxx", "position[0] = " + position[0] + " , position[1] = " + position[1] + " info.rank = " + info.rank);
+//            Log.i("xxxxx", "position[0] = " + position[0] + " , position[1] = " + position[1] + " info.rank = " + info.rank);
             dragView.show(position[0], position[1]);
 
             float scaleRelativeToDragLayer = 1.0f;

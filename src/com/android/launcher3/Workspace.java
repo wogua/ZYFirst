@@ -3164,6 +3164,9 @@ public class Workspace extends SpecialEffectPagedView
             final int[] touchXY = new int[] { (int) mDragViewVisualCenter[0],
                     (int) mDragViewVisualCenter[1] };
             onDropExternal(touchXY, d.dragInfo, dropTargetLayout, false, d);
+            if(d.dragSource == mLauncher.getmHideAppNavigationbar()){
+                mLauncher.getmHideAppNavigationbar().initForEmpty(false);
+            }
         } else if (mDragInfo != null) {
             final View cell = mDragInfo.cell;
 

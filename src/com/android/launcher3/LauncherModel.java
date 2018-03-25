@@ -4291,4 +4291,39 @@ public class LauncherModel extends BroadcastReceiver
         }
         return null;
     }
+
+    public void addHideAppItemBg(ItemInfo item) {
+        boolean exist = false;
+        String a = HideAppNavigationBar.parseItemInfo(item);
+        for (ItemInfo info : sHideAppItems) {
+            if (HideAppNavigationBar.parseItemInfo(info).equals(a)) {
+                exist = true;
+                break;
+            }
+        }
+
+        ItemInfo modeItem = sBgItemsIdMap.get(item.id);
+        if (modeItem != null) {
+            modeItem.isHide = true;
+        }
+
+        if (!exist) {
+            sHideAppItems.add(item);
+        }
+    }
+
+    public void removeHideAppBg(ItemInfo item) {
+        String a = HideAppNavigationBar.parseItemInfo(item);
+        for (ItemInfo info : sHideAppItems) {
+            if (HideAppNavigationBar.parseItemInfo(info).equals(a)) {
+                sHideAppItems.remove(info);
+                break;
+            }
+        }
+
+        ItemInfo modeItem = sBgItemsIdMap.get(item.id);
+        if (modeItem != null) {
+            modeItem.isHide = false;
+        }
+    }
 }

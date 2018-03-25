@@ -96,9 +96,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.zylauncher.badge.BadgeController;
-import com.android.zylauncher.badge.BadgeInfo;
-import com.android.zylauncher.badge.LauncherBadgeProvider;
 import com.android.launcher3.DropTarget.DragObject;
 import com.android.launcher3.LauncherSettings.Favorites;
 import com.android.launcher3.accessibility.LauncherAccessibilityDelegate;
@@ -153,6 +150,9 @@ import com.android.launcher3.widget.PendingAddWidgetInfo;
 import com.android.launcher3.widget.WidgetHostViewLoader;
 import com.android.launcher3.widget.WidgetsContainerPagedView;
 import com.android.launcher3.widget.WidgetsContainerView;
+import com.android.zylauncher.badge.BadgeController;
+import com.android.zylauncher.badge.BadgeInfo;
+import com.android.zylauncher.badge.LauncherBadgeProvider;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -2374,6 +2374,10 @@ public class Launcher extends Activity
         hideThemeChangingDialog();
         mModel.reloadForThemechanged = false;
         //lijun add for themechanged end
+
+        if(isLauncherHideAppMode()){
+            getmHideAppNavigationbar().onBackPressed();
+        }
 
         // Remove all pending runnables
         mHandler.removeMessages(ADVANCE_MSG);

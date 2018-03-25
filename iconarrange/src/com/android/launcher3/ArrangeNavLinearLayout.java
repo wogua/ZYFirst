@@ -14,6 +14,7 @@ public class ArrangeNavLinearLayout extends LinearLayout {
     boolean isHideApp = false;
     public boolean isDraging = false;
     private LayoutTransition mLayoutTransition;
+
     public ArrangeNavLinearLayout(Context context) {
         this(context,null);
     }
@@ -72,6 +73,13 @@ public class ArrangeNavLinearLayout extends LinearLayout {
         if (!isDraging && isHideApp && getChildCount() == 0) {
             mLauncher.showHideAppEmptyHint(true);
         }
+        if(isHideApp){
+            mLauncher.getmHideAppNavigationbar().restoreHideApps();
+            Object tag = child.getTag();
+            if(tag instanceof ItemInfo){
+                mLauncher.getModel().removeHideAppBg((ItemInfo)tag);
+            }
+        }
     }
 
     @Override
@@ -79,6 +87,13 @@ public class ArrangeNavLinearLayout extends LinearLayout {
         super.onViewAdded(child);
         if (!isDraging && isHideApp && getChildCount() > 0) {
             mLauncher.showHideAppEmptyHint(false);
+        }
+        if(isHideApp){
+            mLauncher.getmHideAppNavigationbar().restoreHideApps();
+            Object tag = child.getTag();
+            if(tag instanceof ItemInfo){
+                mLauncher.getModel().addHideAppItemBg((ItemInfo)tag);
+            }
         }
     }
 
