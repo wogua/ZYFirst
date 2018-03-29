@@ -48,7 +48,7 @@
 
     <!-- lijun add for unread start -->
     <permission
-        android:name="com.android.zylauncher.badge.permission.READ_BADGE"
+        android:name="com.android.zylauncher.badge.permission.WRITE_BADGE"
         android:permissionGroup="android.permission-group.SYSTEM_TOOLS"
         android:protectionLevel="normal"
         android:label="@string/badge_read_setting"
@@ -99,7 +99,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.HOME" />
-                <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.MONKEY" />
             </intent-filter>
@@ -204,7 +203,7 @@
         <provider
             android:name="com.android.zylauncher.badge.LauncherBadgeProvider"
             android:authorities="com.android.zylauncher.badge"
-            android:permission="com.android.zylauncher.badge.permission.READ_BADGE"
+            android:permission="com.android.zylauncher.badge.permission.WRITE_BADGE"
             android:exported="true" />
         <!-- lijun add for unread end -->
     </application>

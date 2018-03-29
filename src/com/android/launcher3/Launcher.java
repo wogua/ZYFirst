@@ -1220,7 +1220,7 @@ public class Launcher extends Activity
             mLauncherCallbacks.onResume();
         }
         mWorkspace.setCycleSlideFlag(); // lijun add for cycle slide
-        BadgeController.sBadgeEnable = Utilities.getPrefs(this).getBoolean(BadgeController.BADGE_PREFERENCE_KEY, false);
+        BadgeController.sBadgeEnable = Utilities.getPrefs(this).getBoolean(BadgeController.BADGE_PREFERENCE_KEY, true);
     }
 
     @Override
