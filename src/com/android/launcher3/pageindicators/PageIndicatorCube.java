@@ -646,7 +646,7 @@ public class PageIndicatorCube extends LinearLayout implements DropTarget {
                         mWorkspace.refreshviewCache(mWorkspace.getPageIndexForScreenId(screenId), target, null, false);
                         // lijun add for hotseat icon center start
                         if (mWorkspace.dragFromHotseat(dragObject.dragInfo)) {
-                            mLauncher.getHotseat().onDrop(true, dragObject.x, null, cell, false);
+                            mLauncher.getHotseat().onDrop(true, dragObject.x,dragObject.y, null, cell, false);
                         }
                         // lijun add for hotseat icon center end
                     }
@@ -1306,7 +1306,7 @@ public class PageIndicatorCube extends LinearLayout implements DropTarget {
             }
             mWorkspace.addInHotseat(cell, info.container, info.cellX,
                     info.cellX, info.cellY, info.spanX, info.spanY, info.cellX);
-			mLauncher.getHotseat().onDrop(false, 0, dragObject.dragView, cell, true);
+			mLauncher.getHotseat().onDrop(false, 0,0, dragObject.dragView, cell, true);
         }
         
     }

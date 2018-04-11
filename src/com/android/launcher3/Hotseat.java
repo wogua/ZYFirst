@@ -30,6 +30,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.ColorUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -82,7 +83,7 @@ public class Hotseat extends FrameLayout
     private int mXOffset;
     private ArrayList<View> mViewCacheList = null;
 	private int workspaceCountX;
-	private int mWGap;
+	private int mWGap,mHGap;
     public static final int MAX_COUNT_X = 4;
     // lijun add for hotseat icon center end
 
@@ -263,7 +264,7 @@ public class Hotseat extends FrameLayout
         mInvisibleView = (BubbleTextView)
                 inflater.inflate(R.layout.app_icon, mContent, false);
         mInvisibleView.setAlpha(0);
-        int x = 0;
+        int x = getCellXFromOrder(allAppsButtonRank);
         int y = getCellYFromOrder(allAppsButtonRank);
         CellLayout.LayoutParams lp = new CellLayout.LayoutParams(x,y,1,1);
         lp.canReorder = false;
@@ -307,7 +308,7 @@ public class Hotseat extends FrameLayout
             return;
         }
         //drag one item from workspace or folder
-        int index = getAppropriateIndex(touchX);
+        int index = getAppropriateIndex(mLauncher.isLandscape?touchY:touchX);
         if(mCurrentInvisibleIndex != index || mDragState == HotseatDragState.NONE) {
             mInvisibleViewAdded = false;
           
@@ -335,21 +336,40 @@ public class Hotseat extends FrameLayout
                 //View view = container.getChildAt(index);
                 View view = mViewCacheList.get(index);
                 CellLayout.LayoutParams lp = (CellLayout.LayoutParams) view.getLayoutParams();
-                int correctedX = getCorrectedX(lp.x, mMoveDireciton == 0);
+                if(mLauncher.isLandscape){
+                    int correctedY = getCorrectedX(lp.y, mMoveDireciton == 0);
 
-                if(touchX < correctedX) {
-                    addToCacheList(index, mInvisibleView);
-                    mCurrentInvisibleIndex = index;
-                } else {
-                    if(mMoveDireciton == 0) {
+                    if(touchY < correctedY) {
                         addToCacheList(index, mInvisibleView);
                         mCurrentInvisibleIndex = index;
                     } else {
-                        addToCacheList(-1, mInvisibleView);
-                        //container.addView(mInvisibleView);
-                        mCurrentInvisibleIndex = index + 1;
+                        if(mMoveDireciton == 0) {
+                            addToCacheList(index, mInvisibleView);
+                            mCurrentInvisibleIndex = index;
+                        } else {
+                            addToCacheList(-1, mInvisibleView);
+                            //container.addView(mInvisibleView);
+                            mCurrentInvisibleIndex = index + 1;
+                        }
+                    }
+                }else {
+                    int correctedX = getCorrectedX(lp.x, mMoveDireciton == 0);
+
+                    if(touchX < correctedX) {
+                        addToCacheList(index, mInvisibleView);
+                        mCurrentInvisibleIndex = index;
+                    } else {
+                        if(mMoveDireciton == 0) {
+                            addToCacheList(index, mInvisibleView);
+                            mCurrentInvisibleIndex = index;
+                        } else {
+                            addToCacheList(-1, mInvisibleView);
+                            //container.addView(mInvisibleView);
+                            mCurrentInvisibleIndex = index + 1;
+                        }
                     }
                 }
+
             } else {
 
                 addToCacheList(index, mInvisibleView);
@@ -358,14 +378,25 @@ public class Hotseat extends FrameLayout
             mInvisibleViewAdded = true;
             //reLayout();
             mDragState = HotseatDragState.DRAG_IN;
-            animateOnEnter(false);
+            if (mLauncher.isLandscape) {
+                animateOnEnterLand(false);
+            } else {
+                animateOnEnter(false);
+            }
         }
     }
     
     private int getCorrectedX (int leftX, boolean leftOrRight) {
-        int cellW = mContent.getCellWidth();
-        int centerX = leftX + cellW / 2;
-        return leftOrRight ? centerX + mXOffset : centerX - mXOffset;
+        if(mLauncher.isLandscape){
+            int cellH = mContent.getCellHeight();
+            int centerY = leftX + cellH / 2;
+            return leftOrRight ? centerY + mXOffset : centerY - mXOffset;
+        }else {
+            int cellW = mContent.getCellWidth();
+            int centerX = leftX + cellW / 2;
+            return leftOrRight ? centerX + mXOffset : centerX - mXOffset;
+        }
+
     }
     
     private void animateBackToHotseat(int childCount, int touchX, int touchY, ShortcutAndWidgetContainer container) {
@@ -487,7 +518,91 @@ public class Hotseat extends FrameLayout
             }
         }
     }
-    
+
+    private void animateOnEnterLand(boolean fromHotseat) {
+        int count = mViewCacheList.size();
+        if(mAnimLeftRunning && mAnimatorSet != null) {
+            mAnimatorSet.end();
+        }
+
+        if(fromHotseat) {
+
+        } else {
+            int right = getBottom();
+            int left = getTop();
+
+            Resources res = getResources();
+            int width = right - left;
+            width = width - getPaddingTop() - getPaddingBottom()
+                    - mContent.getPaddingTop() - mContent.getPaddingBottom();
+
+            int cellW = mContent.getCellHeight();
+            int l = 0;
+            int wGap = 0;
+            int space = width - count * cellW;
+
+            if (count >= workspaceCountX) {
+                wGap = (int) (space / (float) (count - 1));
+            } else {
+                wGap = (int) (space / (float) (count + 1));
+                l = wGap;
+            }
+
+            if(mAnimatorSet == null) {
+                mAnimatorSet = new AnimatorSet();
+            } else {
+                mAnimatorSet.removeAllListeners();
+                if(mAnimatorSet.isRunning()) {
+                    mAnimatorSet.end();
+                }
+                clearAnimFlags();
+            }
+
+            ArrayList<Animator> items = new ArrayList<Animator>();
+            int srcX = 0;
+            int destX = 0;
+            for (int i = 0; i < count; i++) {
+                //View v = container.getChildAt(i);
+                View v = mViewCacheList.get(i);
+                if(v == null) {
+                    continue;
+                }
+                CellLayout.LayoutParams lp = (CellLayout.LayoutParams) v.getLayoutParams();
+                srcX = lp.y;
+                destX = l + lp.topMargin;
+                l += (cellW + wGap);
+                if(v == mInvisibleView || srcX == destX) {
+                    continue;
+                }
+//                ItemInfo info = (ItemInfo) v.getTag();
+                if (mLauncher.isUninstallMode && (v instanceof UninstallMode.UninstallAnimation)) {
+                    UninstallMode.UninstallAnimation uninstallAnimation = (UninstallMode.UninstallAnimation) v;
+                    uninstallAnimation.stopShakeAnimation();
+                }
+
+                items.add(createAnimator(v, srcX, destX, null, null, true));
+            }
+            if(!items.isEmpty()) {
+                mAnimatorSet.playTogether(items);
+
+                mAnimatorSet.addListener(new AnimatorListenerAdapter() {
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mAnimatorSet = null;
+                        mAnimEnterRunning = false;
+                        fillViewsFromCache();
+                    }
+
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        mAnimEnterRunning = true;
+                    }
+                });
+                mAnimatorSet.start();
+            }
+        }
+    }
     private void clearAnimFlags() {
         mAnimEnterRunning = false;
         mAnimLeftRunning = false;
@@ -505,16 +620,23 @@ public class Hotseat extends FrameLayout
             }
         }
 
-        int right = getRight();
-        int left = getLeft();
+        boolean isLandscape = mLauncher.isLandscape;
+        int right = isLandscape?getBottom():getRight();
+        int left = isLandscape?getTop():getLeft();
         int visibleCount = visibleChild.size();
         if (visibleCount > 0) {
             Resources res = getResources();
             int width = right - left;
-            width = width - getPaddingLeft() - getPaddingRight()
-                    - mContent.getPaddingLeft() - mContent.getPaddingRight();
+            if(isLandscape){
+                width = width - getPaddingTop() - getPaddingBottom()
+                        - mContent.getPaddingTop() - mContent.getPaddingBottom();
+            }else {
+                width = width - getPaddingLeft() - getPaddingRight()
+                        - mContent.getPaddingLeft() - mContent.getPaddingRight();
+            }
 
-            int cellW = mContent.getCellWidth();
+
+            int cellW = isLandscape?mContent.getCellHeight():mContent.getCellWidth();
             int l = 0;
             int wGap = 0;
             int space = width - visibleCount * cellW;
@@ -542,9 +664,16 @@ public class Hotseat extends FrameLayout
                 View v = visibleChild.get(i);
                 CellLayout.LayoutParams lp = (CellLayout.LayoutParams) v
                         .getLayoutParams();
-                srcX = (int)v.getX();
-                destX = l + lp.leftMargin;
-                items.add(createAnimator(v, srcX, destX, null, null, true));
+                if(isLandscape){
+                    srcX = (int)v.getY();
+                    destX = l + lp.topMargin;
+                    items.add(createAnimator(v, srcX, destX, null, null, true));
+                }else {
+                    srcX = (int)v.getX();
+                    destX = l + lp.leftMargin;
+                    items.add(createAnimator(v, srcX, destX, null, null, true));
+                }
+
                 l += (cellW + wGap);
             }
             mAnimatorSet.playTogether(items);
@@ -566,7 +695,7 @@ public class Hotseat extends FrameLayout
     }
     
     private void animateLeftItems() {
-        
+
         final ShortcutAndWidgetContainer container = mContent.getShortcutsAndWidgets();
         int count = container.getChildCount();
         ArrayList<View> leftChild = new ArrayList<View>();
@@ -607,7 +736,7 @@ public class Hotseat extends FrameLayout
                 }
                 clearAnimFlags();
             }
-            
+
             ArrayList<Animator> items = new ArrayList<Animator>();
             int srcX = 0;
             for (int i = 0; i < leftCount; i++) {
@@ -631,19 +760,19 @@ public class Hotseat extends FrameLayout
             }
             mAnimatorSet.playTogether(items);
             mAnimatorSet.addListener(new AnimatorListenerAdapter() {
-                
+
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     if(mAnimLeftRunning) {
-                         if (mLauncher.isUninstallMode && (mDragedItemView instanceof UninstallMode.UninstallAnimation)) {
-                             UninstallMode.UninstallAnimation uninstallAnimation = (UninstallMode.UninstallAnimation) mDragedItemView;
-                             uninstallAnimation.stopShakeAnimation();
-                         }	
-						stopShakeAnim(mDragedItemView);
+                        if (mLauncher.isUninstallMode && (mDragedItemView instanceof UninstallMode.UninstallAnimation)) {
+                            UninstallMode.UninstallAnimation uninstallAnimation = (UninstallMode.UninstallAnimation) mDragedItemView;
+                            uninstallAnimation.stopShakeAnimation();
+                        }
+                        stopShakeAnim(mDragedItemView);
                         container.removeView(mDragedItemView);
                         mViewCacheList.remove(mDragedItemView);
                         if(mInvisibleViewAdded && mDragState == HotseatDragState.DRAG_OUT) {
-							stopShakeAnim(mInvisibleView);
+                            stopShakeAnim(mInvisibleView);
                             container.removeView(mInvisibleView);
                             mViewCacheList.remove(mInvisibleView);
                             mInvisibleView = null;
@@ -658,20 +787,131 @@ public class Hotseat extends FrameLayout
                         fillViewsFromCache();
                     }
                 }
-                
+
                 @Override
                 public void onAnimationStart(Animator animation) {
                     mAnimLeftRunning = true;
 
                 }
-                
+
                 @Override
                 public void onAnimationCancel(Animator animation) {
                     mAnimLeftRunning = false;
                 }
             });
             mAnimatorSet.start();
-        } 
+        }
+    }
+
+    private void animateLeftItemsForLand() {
+
+        final ShortcutAndWidgetContainer container = mContent.getShortcutsAndWidgets();
+        int count = container.getChildCount();
+        ArrayList<View> leftChild = new ArrayList<View>();
+        for (int i = 0; i < count; i++) {
+            final View child = container.getChildAt(i);
+            if (child != mDragedItemView && child != mInvisibleView) {
+                leftChild.add(child);
+            }
+        }
+
+        int right = getBottom();
+        int left = getTop();
+        int leftCount = leftChild.size();
+        if (leftCount > 0) {
+            Resources res = getResources();
+            int width = right - left;
+            width = width - getPaddingTop() - getPaddingBottom()
+                    - mContent.getPaddingTop() - mContent.getPaddingBottom();
+
+            int cellW = mContent.getCellHeight();
+            int l = 0;
+            int wGap = 0;
+            int space = width - leftCount * cellW;
+
+            if (leftCount >= workspaceCountX) {
+                wGap = (int) (space / (float) (leftCount - 1));
+            } else {
+                wGap = (int) (space / (float) (leftCount + 1));
+                l = wGap;
+            }
+
+            if (mAnimatorSet == null) {
+                mAnimatorSet = new AnimatorSet();
+            } else {
+                mAnimatorSet.removeAllListeners();
+                if (mAnimatorSet.isRunning()) {
+                    mAnimatorSet.end();
+                }
+                clearAnimFlags();
+            }
+
+            ArrayList<Animator> items = new ArrayList<Animator>();
+            int srcX = 0;
+            int destX = 0;
+            for (int i = 0; i < leftCount; i++) {
+                final View v = leftChild.get(i);
+                CellLayout.LayoutParams lp = (CellLayout.LayoutParams) v
+                        .getLayoutParams();
+
+                srcX = (int) v.getY();
+                destX = l + lp.topMargin;
+                final int dx = destX;
+                Runnable r = new Runnable() {
+                    @Override
+                    public void run() {
+                        v.setX(dx);
+                    }
+                };
+                l += (cellW + wGap);
+                if (srcX == destX) {
+                    continue;
+                }
+                items.add(createAnimator(v, srcX, destX, null, r, true));
+            }
+            mAnimatorSet.playTogether(items);
+            mAnimatorSet.addListener(new AnimatorListenerAdapter() {
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    if (mAnimLeftRunning) {
+                        if (mLauncher.isUninstallMode && (mDragedItemView instanceof UninstallMode.UninstallAnimation)) {
+                            UninstallMode.UninstallAnimation uninstallAnimation = (UninstallMode.UninstallAnimation) mDragedItemView;
+                            uninstallAnimation.stopShakeAnimation();
+                        }
+                        stopShakeAnim(mDragedItemView);
+                        container.removeView(mDragedItemView);
+                        mViewCacheList.remove(mDragedItemView);
+                        if (mInvisibleViewAdded && mDragState == HotseatDragState.DRAG_OUT) {
+                            stopShakeAnim(mInvisibleView);
+                            container.removeView(mInvisibleView);
+                            mViewCacheList.remove(mInvisibleView);
+                            mInvisibleView = null;
+                            mInvisibleViewAdded = false;
+                            mCurrentInvisibleIndex = -1;
+                        }
+                    }
+                    mAnimatorSet = null;
+                    mAnimLeftRunning = false;
+
+                    if (container.getChildCount() <= mViewCacheList.size()) {
+                        fillViewsFromCache();
+                    }
+                }
+
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    mAnimLeftRunning = true;
+
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+                    mAnimLeftRunning = false;
+                }
+            });
+            mAnimatorSet.start();
+        }
     }
     
     /**
@@ -688,7 +928,11 @@ public class Hotseat extends FrameLayout
         
         if(fromHotseat && mDragedItemView != null) {
             //drag one item belongs to hotseat to workspace
-            animateLeftItems();
+            if(mLauncher.isLandscape) {
+                animateLeftItemsForLand();
+            }else {
+                animateLeftItems();
+            }
             return;
         }
         
@@ -724,13 +968,20 @@ public class Hotseat extends FrameLayout
         reLayout();
         updateItemInDatabase();
     }
-    
+    private int getStatusBarHeight(Context context) {
+        int result = 0;
+        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = context.getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
     /**
      * drop dragItem in hotseat
      * @param success
      * @return
      */
-    public int onDrop(boolean success, int touchX, final DragView dragView, final View cell,
+    public int onDrop(boolean success, int touchX,int touchY, final DragView dragView, final View cell,
                       final boolean removeDragView) {
 
         if(mDragState == HotseatDragState.NONE && !mInvisibleViewAdded){
@@ -781,7 +1032,11 @@ public class Hotseat extends FrameLayout
             if(mInvisibleViewAdded && mCurrentInvisibleIndex != -1) {
                 CellLayout.LayoutParams lp = (CellLayout.LayoutParams)mInvisibleView.getLayoutParams();
                 int destX = lp.x;
-                int destY = getLocationY(); 
+                int destY = getLocationY();
+                if(mLauncher.isLandscape){
+                    destX = getLocationX();
+                    destY = lp.y + mLauncher.getDragLayer().getInsets().top;
+                }
 
                 ItemInfo item = (ItemInfo)cell.getTag();
 //                int order = getAppropriateIndex(lp.x);
@@ -849,8 +1104,11 @@ public class Hotseat extends FrameLayout
                    // ItemInfo item = (ItemInfo)cell.getTag();
 //                    int order = mLauncher.getHotseat().getAppropriateIndex(lp.x);
 //                    int tmpindex = getOrderInHotseat(order, 0);
-
-                    a = createDropAnimator(dragView, srcX, srcY, lp.x + getDropOffsetX(), getLocationY()+ getDropOffsetY(), onDropEndRunnable);
+                    if(mLauncher.isLandscape){
+                        a = createDropAnimator(dragView, srcX, srcY, getLocationX() + getDropOffsetX(), lp.y + getDropOffsetY()+ mLauncher.getDragLayer().getInsets().top, onDropEndRunnable);
+                    }else {
+                        a = createDropAnimator(dragView, srcX, srcY, lp.x + getDropOffsetX(), getLocationY() + getDropOffsetY(), onDropEndRunnable);
+                    }
                 } else {
                     onDropEndRunnable.run();
                 }
@@ -867,7 +1125,7 @@ public class Hotseat extends FrameLayout
     private Animator createAnimator(final View v, final int srcX, final int destX, 
             final Runnable onStartRunnable,final Runnable onEndRunnable, final boolean cleanTransX) {
         ObjectAnimator a = ObjectAnimator.ofPropertyValuesHolder(v,
-                PropertyValuesHolder.ofFloat(ViewHidePropertyName.X, srcX, destX));
+                PropertyValuesHolder.ofFloat(mLauncher.isLandscape?ViewHidePropertyName.Y:ViewHidePropertyName.X, srcX, destX));
         a.setDuration(200);
         a.setInterpolator(new LinearInterpolator());
         a.addListener(new AnimatorListenerAdapter(){
@@ -877,7 +1135,12 @@ public class Hotseat extends FrameLayout
                 if(onEndRunnable != null) {
                     onEndRunnable.run();
                 }
-                v.setTranslationX(0);
+                if(mLauncher.isLandscape){
+                    v.setTranslationY(0);
+                    v.setTranslationX(0);
+                }else {
+                    v.setTranslationX(0);
+                }
             }
         });
         return a;
@@ -911,14 +1174,22 @@ public class Hotseat extends FrameLayout
     //override onLayout to resize all children view in hotseat when drag icon in or out
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        reLayout(left, right, false);
         mAnimStartY = getTop();
         mAnimEndY = getBottom();
+        if(mLauncher.isLandscape){
+            reLayoutForLand(top,bottom,false);
+        }else {
+            reLayout(left, right, false);
+        }
         super.onLayout(changed, left, top, right, bottom);
     }
 
     private void reLayout() {
-        reLayout(getLeft(), getRight(), false);
+        if(mLauncher.isLandscape) {
+            reLayoutForLand(getTop(), getBottom(), false);
+        }else {
+            reLayout(getLeft(), getRight(), false);
+        }
     }
 
     private void reLayout(int left, int right, boolean unvisibleCount) {
@@ -1016,6 +1287,98 @@ public class Hotseat extends FrameLayout
         }
     }
 
+    private void reLayoutForLand(int top, int bottom, boolean unvisibleCount) {
+        ShortcutAndWidgetContainer container = mContent.getShortcutsAndWidgets();
+        int count = container.getChildCount();
+        ArrayList<View> visibleChild = new ArrayList<View>();
+        boolean flag = false;
+        for (int i = 0; i < count; i++) {
+            final View child = container.getChildAt(i);
+            if (!mLauncher.getDragController().isDragging()
+                    && child == mInvisibleView) {
+                flag = true;
+                continue;
+            }
+            if (!unvisibleCount && child.getVisibility() != GONE) {
+                visibleChild.add(child);
+            }
+        }
+        if(flag) {
+            updateItemCell();
+        }
+
+        int visibleCount = visibleChild.size();
+        if (visibleCount > 0) {
+            int height = bottom - top;
+            height = height - getPaddingTop() - getPaddingBottom()
+                    - mContent.getPaddingTop() - mContent.getPaddingBottom();
+
+            int cellH = mContent.getCellHeight();
+            mXOffset = 0;
+            int t = 0;
+            int space = height - visibleCount * cellH;
+
+            // for 3*3 layout
+            if (visibleCount >= workspaceCountX) {
+                mHGap = (int) (space / (float) (visibleCount - 1));
+            } else {
+                mHGap = (int) (space / (float) (visibleCount + 1));
+                t = mHGap;
+            }
+
+            boolean rtl = Utilities.isRtl(mLauncher.getResources());
+
+            boolean textViewNeedPadding = false;
+            if (visibleCount > workspaceCountX && mHGap < 0) {
+                textViewNeedPadding = true;
+            }
+
+            for (int i = 0; i < visibleCount; i++) {
+                View v = visibleChild.get(!rtl ? i : visibleCount - i - 1);
+                //!!important, in some case, the view's TranslationX is not 0 on animation ended
+                v.setTranslationY(0);
+                v.setLeft(0);
+                v.setRight(mContent.getCellWidth());
+
+                BubbleTextView btv;
+                if (textViewNeedPadding) {
+                    Context context = getContext();
+                    int paddingLeftAndRight = (-mHGap + (int) context.getResources().getDimension(
+                            R.dimen.dynamic_grid_workspace_hotseat_gap_offset)) / 2;
+                    //R.dimen.textview_padding_in_hotseat)) / 2;
+                    if (v instanceof BubbleTextView) {
+                        btv = (BubbleTextView) v;
+                        // btv.setTempPadding(paddingLeftAndRight); lijun del
+                    } else if (v instanceof FolderIcon) {
+                        FolderIcon fi = (FolderIcon) v;
+                        // fi.setTempPadding(paddingLeftAndRight); lijun del
+                    }
+                } else {
+                    if (v instanceof BubbleTextView) {
+                        btv = (BubbleTextView) v;
+                        // btv.resetTempPadding(); lijun del
+                    } else if (v instanceof FolderIcon) {
+                        // ((FolderIcon) v).resetTempPadding(); lijun del
+                    }
+                }
+
+                CellLayout.LayoutParams lp = (CellLayout.LayoutParams) v
+                        .getLayoutParams();
+                lp.cellX = i;
+                lp.y = t + lp.topMargin;
+                lp.x = 0;
+                //ItemInfo info = (ItemInfo)v.getTag();
+                t += (cellH + mHGap);
+                //lp.startWithGap = (visibleCount < workspaceCountX); lijun del
+            }
+            mContent.setGridSize(mContent.getCellWidth(), cellH, mContent.getWidthGap(), mHGap);
+        }
+
+        if(count > 0) {
+            mContent.getShortcutsAndWidgets().invalidate();
+        }
+    }
+
 
     public int getAppropriateIndex(int dx) {
         int dockChildCount = mViewCacheList.size();
@@ -1032,8 +1395,14 @@ public class Hotseat extends FrameLayout
                 return 0;
             }
             CellLayout.LayoutParams lp = (CellLayout.LayoutParams) v.getLayoutParams();
-            int centerX = lp.x + cellWidth / 2;
-            return dx > centerX ? 1 : 0;
+            if(mLauncher.isLandscape){
+                int centerY = lp.y + mContent.getCellHeight() / 2;
+                return dx > centerY ? 1 : 0;
+            }else {
+                int centerX = lp.x + cellWidth / 2;
+                return dx > centerX ? 1 : 0;
+            }
+
         }
 
         int minResult = Integer.MAX_VALUE;
@@ -1042,13 +1411,25 @@ public class Hotseat extends FrameLayout
         int correctedX = 0;
         CellLayout.LayoutParams lp = null; 
 //        ItemInfo info = null;
-        for (int i = 0; i < dockChildCount; i++) {
-            child = mViewCacheList.get(i);
-            lp = (CellLayout.LayoutParams) child.getLayoutParams();
-            correctedX = getCorrectedX(lp.x, mMoveDireciton == 0);
-            if (minResult > Math.abs(correctedX - dx)) {
-                minResult = Math.abs(correctedX - dx);
-                minIndex = i;
+        if(mLauncher.isLandscape){
+            for (int i = 0; i < dockChildCount; i++) {
+                child = mViewCacheList.get(i);
+                lp = (CellLayout.LayoutParams) child.getLayoutParams();
+                correctedX = getCorrectedX(lp.y, mMoveDireciton == 0);
+                if (minResult > Math.abs(correctedX - dx)) {
+                    minResult = Math.abs(correctedX - dx);
+                    minIndex = i;
+                }
+            }
+        }else {
+            for (int i = 0; i < dockChildCount; i++) {
+                child = mViewCacheList.get(i);
+                lp = (CellLayout.LayoutParams) child.getLayoutParams();
+                correctedX = getCorrectedX(lp.x, mMoveDireciton == 0);
+                if (minResult > Math.abs(correctedX - dx)) {
+                    minResult = Math.abs(correctedX - dx);
+                    minIndex = i;
+                }
             }
         }
         return minIndex;
@@ -1196,35 +1577,67 @@ public class Hotseat extends FrameLayout
     private void relayoutViewCacheList() {
         int visibleCount = mViewCacheList.size();
         if (visibleCount > 0) {
-            Resources res = getResources();
-            int width = getRight() - getLeft();
-            width = width - getPaddingLeft() - getPaddingRight()
-                    - mContent.getPaddingLeft() - mContent.getPaddingRight();
+            if(mLauncher.isLandscape) {
+                int height = getBottom() - getTop();
+                height = height - getPaddingTop() - getPaddingBottom()
+                        - mContent.getPaddingTop() - mContent.getPaddingBottom();
 
-            int wGap = 0;
-            int cellW = mContent.getCellWidth();
-            int l = 0;
-            //int wGap = 0;
-            int space = width - visibleCount * cellW;
+                int hGap = 0;
+                int cellH = mContent.getCellHeight();
+                int t = 0;
+                //int wGap = 0;
+                int space = height - visibleCount * cellH;
 
-            if (visibleCount >= workspaceCountX) {
-                wGap = (int) (space / (float) (visibleCount - 1));
-            } else {
-                wGap = (int) (space / (float) (visibleCount + 1));
-                l = wGap;
-            }
-
-            boolean rtl = Utilities.isRtl(mLauncher.getResources());
-            for (int i = 0; i < visibleCount; i++) {
-                View v = mViewCacheList.get(!rtl ? i : visibleCount - i - 1);
-                if (v != mInvisibleView) {
-                    l += (cellW + wGap);
-                    continue;
+                if (visibleCount >= workspaceCountX) {
+                    hGap = (int) (space / (float) (visibleCount - 1));
                 } else {
-                    CellLayout.LayoutParams lp = (CellLayout.LayoutParams) v
-                            .getLayoutParams();
-                    lp.x = l + lp.leftMargin;
-                    return;
+                    hGap = (int) (space / (float) (visibleCount + 1));
+                    t = hGap;
+                }
+
+                boolean rtl = Utilities.isRtl(mLauncher.getResources());
+                for (int i = 0; i < visibleCount; i++) {
+                    View v = mViewCacheList.get(!rtl ? i : visibleCount - i - 1);
+                    if (v != mInvisibleView) {
+                        t += (cellH + hGap);
+                        continue;
+                    } else {
+                        CellLayout.LayoutParams lp = (CellLayout.LayoutParams) v
+                                .getLayoutParams();
+                        lp.y = t + lp.topMargin;
+                        return;
+                    }
+                }
+            }else {
+                int width = getRight() - getLeft();
+                width = width - getPaddingLeft() - getPaddingRight()
+                        - mContent.getPaddingLeft() - mContent.getPaddingRight();
+
+                int wGap = 0;
+                int cellW = mContent.getCellWidth();
+                int l = 0;
+                //int wGap = 0;
+                int space = width - visibleCount * cellW;
+
+                if (visibleCount >= workspaceCountX) {
+                    wGap = (int) (space / (float) (visibleCount - 1));
+                } else {
+                    wGap = (int) (space / (float) (visibleCount + 1));
+                    l = wGap;
+                }
+
+                boolean rtl = Utilities.isRtl(mLauncher.getResources());
+                for (int i = 0; i < visibleCount; i++) {
+                    View v = mViewCacheList.get(!rtl ? i : visibleCount - i - 1);
+                    if (v != mInvisibleView) {
+                        l += (cellW + wGap);
+                        continue;
+                    } else {
+                        CellLayout.LayoutParams lp = (CellLayout.LayoutParams) v
+                                .getLayoutParams();
+                        lp.x = l + lp.leftMargin;
+                        return;
+                    }
                 }
             }
         }
@@ -1235,7 +1648,11 @@ public class Hotseat extends FrameLayout
         mContent.getLocationOnScreen(location);
         return location[1];
     }
-
+    private int getLocationX() {
+        int[] location = new int[2];
+        mContent.getLocationOnScreen(location);
+        return location[0];
+    }
 
     public void removeViewByItemInfo(ItemInfo info) {
         ShortcutAndWidgetContainer container = mContent.getShortcutsAndWidgets();

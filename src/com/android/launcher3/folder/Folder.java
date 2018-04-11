@@ -1607,7 +1607,7 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
                             int index = mInfo.cellX;                            
                             mLauncher.getWorkspace().addInHotseat(newIcon, mInfo.container, index,
                                     index, 0, mInfo.spanX, mInfo.spanY, index);
-							mLauncher.getHotseat().onDrop(true,-1,  null, newIcon, true);
+							mLauncher.getHotseat().onDrop(true,0,-1,  null, newIcon, true);
                         } else {
                          // lijun add for hotseat icon center end
                             mLauncher.getWorkspace().addInScreenFromBind(newIcon, mInfo.container,
@@ -1789,7 +1789,7 @@ public class Folder extends LinearLayout implements DragSource, View.OnClickList
 
        // lijun add for hotseat icon center start
 		if(refreshHotseat){
-			mLauncher.getHotseat().onDrop(true, d.x, null, null, false);
+			mLauncher.getHotseat().onDrop(true, d.x,d.y, null, null, false);
 		}
 	   // lijun add for hotseat icon center end
 	   
