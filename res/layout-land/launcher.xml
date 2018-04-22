@@ -134,8 +134,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@color/workspace_bg_color"
-            android:visibility="gone"
-            launcher:layout_ignoreInsets="true" />
+            launcher:layout_ignoreInsets="true"
+            android:scaleType="fitXY"
+            android:visibility="gone" />
         <!--lijun end -->
         <!--lijun add  for addIcon begin  -->
         <LinearLayout
