@@ -1364,7 +1364,8 @@ public class Hotseat extends FrameLayout
 
                 CellLayout.LayoutParams lp = (CellLayout.LayoutParams) v
                         .getLayoutParams();
-                lp.cellX = i;
+                lp.cellX = 0;
+                lp.cellY = i;
                 lp.y = t + lp.topMargin;
                 lp.x = 0;
                 //ItemInfo info = (ItemInfo)v.getTag();
@@ -1525,8 +1526,13 @@ public class Hotseat extends FrameLayout
             View v = mViewCacheList.get(i);
             ItemInfo info = (ItemInfo) v.getTag();
             if (info == null) continue;
-            info.cellX = i;
-            info.cellY = 0;
+            if(mLauncher.isLandscape){
+                info.cellX = 0;
+                info.cellY = i;
+            }else {
+                info.cellX = i;
+                info.cellY = 0;
+            }
             info.screenId  = i;
             info.container = LauncherSettings.Favorites.CONTAINER_HOTSEAT;
         }

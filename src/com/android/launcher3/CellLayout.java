@@ -1503,7 +1503,7 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler ,Un
         setOnClickWidgetView(null);
     }
 
-    private void showOrHideUnstallMark(Boolean show) {
+    private void showOrHideUnstallMark(boolean show) {
         boolean[][] occupied = new boolean[getCountX()][getCountY()];
         LauncherAppWidgetHostView lastHostView=null;
         for (int y = 0; y < getCountY(); y++) {

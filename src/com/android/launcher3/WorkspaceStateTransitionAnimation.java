@@ -357,7 +357,7 @@ public class WorkspaceStateTransitionAnimation {
             float initialScale = cl.getShortcutsAndWidgets().getScaleY();
             float finalScale = 1;
             float finalHomebuttonAlpa = 0;
-            if (states.stateIsOverview || states.stateIsOverviewHidden) {
+            if (mLauncher.isLandscape && (states.stateIsOverview || states.stateIsOverviewHidden)) {
                 finalTranslationY = cl.getContentTranslationY();
                 finalScale = CellLayout.CELLLAYOUT_CONTENT_SCALE;
                 finalHomebuttonAlpa = 1;
