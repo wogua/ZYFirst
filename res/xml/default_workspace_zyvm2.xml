@@ -14,185 +14,185 @@
 -->
 <favorites xmlns:launcher="http://schemas.android.com/apk/res-auto/com.android.launcher3">
     <appwidget
-        launcher:className="com.android.launcher3.appwidget.LauncherClock"
-        launcher:packageName="com.android.zylauncher"
+        launcher:className="com.android.alarmclock.AnalogAppWidgetProvider"
+        launcher:packageName="com.android.deskclock"
         launcher:screen="0"
-        launcher:spanX="4"
+        launcher:spanX="2"
         launcher:spanY="2"
-        launcher:x="0"
-        launcher:y="0"></appwidget>
-    <favorite
-        launcher:className="com.tencent.pangu.link.SplashActivity"
-        launcher:packageName="com.tencent.android.qqdownloader"
-        launcher:screen="0"
-        launcher:x="0"
-        launcher:y="0" />
-    <favorite
-        launcher:className="com.moji.mjweather.LauncherActivity"
-        launcher:packageName="com.moji.mjweather"
-        launcher:screen="0"
         launcher:x="1"
-        launcher:y="0" />
-    <favorite
-        launcher:className="cn.wps.moffice.documentmanager.PreStartActivity"
-        launcher:packageName="cn.wps.moffice_eng"
-        launcher:screen="0"
-        launcher:x="2"
-        launcher:y="0" />
-    <favorite
-        launcher:className="com.UCMobile.main.UCMobile"
-        launcher:packageName="com.UCMobile"
-        launcher:screen="0"
-        launcher:x="0"
-        launcher:y="1" />
-    <favorite
-        launcher:className="com.tencent.mm.ui.LauncherUI"
-        launcher:packageName="com.tencent.mm"
-        launcher:screen="0"
-        launcher:x="1"
-        launcher:y="1" />
+        launcher:y="0">
+    </appwidget>
+
+    <include launcher:workspace="@xml/dw_phone_hotseat" />
+
+    <!-- 1 screen-->
     <favorite
         launcher:className="com.android.settings.Settings"
         launcher:packageName="com.android.settings"
-        launcher:screen="1"
+        launcher:screen="0"
         launcher:x="0"
-        launcher:y="3" />
+        launcher:y="4" />
     <favorite
-        launcher:className="com.android.browser.BrowserActivity"
-        launcher:packageName="com.android.browser"
-        launcher:screen="1"
+        launcher:className="com.android.contacts.activities.PeopleActivity"
+        launcher:packageName="com.android.contacts"
+        launcher:screen="0"
         launcher:x="1"
-        launcher:y="3" />
+        launcher:y="4" />
     <favorite
-        launcher:className="com.android.mms.ui.BootActivity"
-        launcher:packageName="com.android.mms"
-        launcher:screen="1"
+        launcher:className="com.android.settings.Settings$HdmiSettingsActivity"
+        launcher:packageName="com.android.settings"
+        launcher:screen="0"
         launcher:x="2"
-        launcher:y="3" />
+        launcher:y="4" />
     <favorite
-        launcher:className="com.android.music.MusicBrowserActivity"
-        launcher:packageName="com.android.music"
-        launcher:screen="1"
+        launcher:className="com.mediatek.filemanager.FileManagerOperationActivity"
+        launcher:packageName="com.mediatek.filemanager"
+        launcher:screen="0"
         launcher:x="3"
-        launcher:y="3" />
+        launcher:y="4" />
+    <!-- 2 screen -->
     <favorite
         launcher:className="com.mediatek.datatransfer.BootActivity"
         launcher:packageName="com.mediatek.datatransfer"
-        launcher:screen="2"
+        launcher:screen="1"
         launcher:x="0"
         launcher:y="0" />
     <favorite
         launcher:className="com.android.stk.StkMain"
         launcher:packageName="com.android.stk"
-        launcher:screen="2"
+        launcher:screen="1"
         launcher:x="1"
         launcher:y="0" />
     <favorite
         launcher:className="com.android.calculator2.Calculator"
         launcher:packageName="com.android.calculator2"
-        launcher:screen="2"
+        launcher:screen="1"
         launcher:x="2"
         launcher:y="0" />
     <favorite
         launcher:className="com.android.soundrecorder.SoundRecorder"
         launcher:packageName="com.android.soundrecorder"
-        launcher:screen="2"
+        launcher:screen="1"
         launcher:x="3"
         launcher:y="0" />
     <favorite
         launcher:className="com.android.calendar.AllInOneActivity"
         launcher:packageName="com.android.calendar"
-        launcher:screen="2"
+        launcher:screen="1"
         launcher:x="0"
         launcher:y="1" />
     <favorite
         launcher:className="com.android.deskclock.DeskClock"
         launcher:packageName="com.android.deskclock"
-        launcher:screen="2"
+        launcher:screen="1"
         launcher:x="1"
         launcher:y="1" />
     <favorite
         launcher:className="com.android.quicksearchbox.SearchActivity"
         launcher:packageName="com.android.quicksearchbox"
-        launcher:screen="2"
+        launcher:screen="1"
         launcher:x="2"
         launcher:y="1" />
     <favorite
         launcher:className="com.android.gallery3d.app.GalleryActivity"
         launcher:packageName="com.android.gallery3d"
-        launcher:screen="2"
+        launcher:screen="1"
         launcher:x="3"
         launcher:y="1" />
     <favorite
-        launcher:className="com.mediatek.filemanager.FileManagerOperationActivity"
-        launcher:packageName="com.mediatek.filemanager"
-        launcher:screen="2"
+        launcher:className="com.android.email.activity.Welcome"
+        launcher:packageName="com.android.email"
+        launcher:screen="1"
         launcher:x="0"
         launcher:y="2" />
     <favorite
         launcher:className="com.android.providers.downloads.ui.DownloadList"
         launcher:packageName="com.android.providers.downloads.ui"
-        launcher:screen="2"
+        launcher:screen="1"
         launcher:x="1"
         launcher:y="2" />
     <favorite
         launcher:className="com.android.fmradio.FmMainActivity"
         launcher:packageName="com.android.fmradio"
-        launcher:screen="2"
+        launcher:screen="1"
         launcher:x="2"
+        launcher:y="2" />
+    <favorite
+        launcher:className="com.android.music.MusicBrowserActivity"
+        launcher:packageName="com.android.music"
+        launcher:screen="1"
+        launcher:x="3"
         launcher:y="2" />
     <favorite
         launcher:className="com.android.camera.CameraLauncher"
         launcher:packageName="com.mediatek.camera"
-        launcher:screen="2"
-        launcher:x="3"
-        launcher:y="2" />
+        launcher:screen="1"
+        launcher:x="0"
+        launcher:y="3" />
     <favorite
         launcher:className="com.vvelink.yiqilai.launch.LaunchActivity"
         launcher:packageName="com.vvelink.yiqilai"
-        launcher:screen="2"
+        launcher:screen="1"
         launcher:x="1"
         launcher:y="3" />
     <favorite
         launcher:className="com.iflytek.inputmethod.LauncherActivity"
         launcher:packageName="com.iflytek.inputmethod"
-        launcher:screen="2"
+        launcher:screen="1"
         launcher:x="2"
         launcher:y="3" />
     <favorite
         launcher:className="com.vve.account.MainActivity"
         launcher:packageName="com.vve.account"
-        launcher:screen="2"
+        launcher:screen="1"
         launcher:x="3"
         launcher:y="3" />
     <favorite
-        launcher:className="com.ss.android.ugc.live.splash.LiveSplashActivity"
-        launcher:packageName="com.ss.android.ugc.live"
-        launcher:screen="18"
+        launcher:className="com.redstone.ota.ui.activity.RsMainActivity"
+        launcher:packageName="com.redstone.ota.ui"
+        launcher:screen="1"
+        launcher:x="0"
+        launcher:y="4" />
+
+    <!-- 3 screen -->
+    <!--<favorite
+        launcher:className="com.tencent.pangu.link.SplashActivity"
+        launcher:packageName="com.tencent.android.qqdownloader"
+        launcher:screen="2"
         launcher:x="0"
         launcher:y="0" />
     <favorite
-        launcher:className="com.lijun.androidstudy.welcomeViewPager.GuideActivity"
-        launcher:packageName="com.lijun.androidstudy"
-        launcher:screen="18"
+        launcher:className="com.moji.mjweather.LauncherActivity"
+        launcher:packageName="com.moji.mjweather"
+        launcher:screen="2"
+        launcher:x="1"
+        launcher:y="0" />
+    <favorite
+        launcher:className="cn.wps.moffice.documentmanager.PreStartActivity"
+        launcher:packageName="cn.wps.moffice_eng"
+        launcher:screen="2"
         launcher:x="2"
         launcher:y="0" />
     <favorite
-        launcher:className="org.rajawali3d.examples.LauncherActivity"
-        launcher:packageName="org.rajawali3d.examples"
-        launcher:screen="18"
-        launcher:x="3"
-        launcher:y="0" />
-    <favorite
-        launcher:className="org.rajawali3d.examples.wallpaper.PreviewActivity"
-        launcher:packageName="org.rajawali3d.examples"
-        launcher:screen="18"
+        launcher:className="com.UCMobile.main.UCMobile"
+        launcher:packageName="com.UCMobile"
+        launcher:screen="2"
         launcher:x="0"
         launcher:y="1" />
     <favorite
-        launcher:className="com.tencent.assistant.activity.DesktopGameShortActivity"
-        launcher:packageName="com.tencent.android.qqdownloader"
-        launcher:screen="18"
+        launcher:className="com.tencent.mm.ui.LauncherUI"
+        launcher:packageName="com.tencent.mm"
+        launcher:screen="2"
         launcher:x="1"
         launcher:y="1" />
+
+
+
+    <favorite
+        launcher:className="com.ss.android.ugc.live.splash.LiveSplashActivity"
+        launcher:packageName="com.ss.android.ugc.live"
+        launcher:screen="3"
+        launcher:x="0"
+        launcher:y="0" />-->
+
 </favorites>

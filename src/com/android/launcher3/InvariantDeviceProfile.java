@@ -368,7 +368,7 @@ public class InvariantDeviceProfile {
     }
 
     private int getDefaultLayoutId(InvariantDeviceProfile closestProfile) {
-        if (Build.MODEL.contains("V10S")) {
+        /*if (Build.MODEL.contains("V10S")) {
             if (Build.DISPLAY.contains("T")) {
                 return R.xml.default_workspace_v10s_ct;
             }
@@ -377,6 +377,8 @@ public class InvariantDeviceProfile {
             return R.xml.default_workspace_v10;
         } else if (Build.MODEL.contains("V11S")) {
             return R.xml.default_workspace_v11s;
+        } else */if(Build.MODEL.contains("ZYVM2")){
+            return R.xml.default_workspace_zyvm2;
         }
         return closestProfile.defaultLayoutId;
     }
