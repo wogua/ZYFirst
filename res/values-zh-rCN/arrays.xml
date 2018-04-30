@@ -3,6 +3,7 @@
   <!-- lijun add for special effect  start -->
     <string-array name="entries_effect_preference">
         <item>经典</item>
+        <item>景深</item>
         <item>立方体</item>
         <item>盒子</item> 
         <item>百叶窗</item>  
@@ -12,7 +13,6 @@
         <item>层叠</item>  
         <item>向上翻转</item>
         <item>向下翻转</item>
-        <item>景深</item>
     </string-array>
  <!-- lijun add for special effect  end -->
 </resources>

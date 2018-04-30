@@ -29,7 +29,7 @@ public class SpecialEffectPagedView extends SlidePagedView {
     public float EDIT_SCALE = 1.0f;
     public static final String SPECIAL_EFFECT_CYCLE_SLIDE = "special_effect_cycle_slide";
     public static final String SPECIAL_EFFECT_STYLE = "special_effect_style";
-    public static final String DEFAULT_SPECIAL_EFFECT_TYPE = "0";
+    public static final String DEFAULT_SPECIAL_EFFECT_TYPE = "1";
     public static final float CAMERA_DISTANCE = 6500;
     public static String TAG = "SpecialEffectPagedView";
 
@@ -56,16 +56,16 @@ public class SpecialEffectPagedView extends SlidePagedView {
 
     public static class Type {
         public final static int HORIZONTAL = 0;
-        public final static int BOX_OUT = 1;
-        public final static int BOX_IN = 2;
-        public final static int ROLL_WINDOW = 3;
-        public final static int ROLL_OVER = 4;
-        public final static int SCALE_IN_OUT = 5;
-        public final static int RANDOM_SWITCH = 6;
-        public final static int CASCADE = 7;
-        public final static int ROLL_UP = 8;
-        public final static int ROLL_DOWN = 9;
-        public final static int DEPTH_FOCUS = 10;
+        public final static int DEPTH_FOCUS = 1;
+        public final static int BOX_OUT = 2;
+        public final static int BOX_IN = 3;
+        public final static int ROLL_WINDOW = 4;
+        public final static int ROLL_OVER = 5;
+        public final static int SCALE_IN_OUT = 6;
+        public final static int RANDOM_SWITCH = 7;
+        public final static int CASCADE = 8;
+        public final static int ROLL_UP = 9;
+        public final static int ROLL_DOWN = 10;
     }
 
     public SpecialEffectPagedView(Context context, AttributeSet attrs) {

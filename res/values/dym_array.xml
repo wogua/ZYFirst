@@ -75,6 +75,7 @@
     <!-- lijun add for special effect  start -->
     <string-array name="entries_effect_preference">
         <item>Classic</item>
+        <item>Depth Focus</item>
         <item>Cube</item>
         <item>Box</item>
         <item>Shutter</item>
@@ -84,22 +85,7 @@
         <item>Cascade</item>
         <item>Roll Up</item>
         <item>Roll Down</item>
-        <item>Depth Focus</item>
     </string-array>
-
-    <array name="effect_choose_img">
-        <item>@drawable/effect_horizontal</item>
-        <item>@drawable/effect_box_out</item>
-        <item>@drawable/effect_box_in</item>
-        <item>@drawable/effect_roll_window</item>
-        <item>@drawable/effect_roll_over</item>
-        <item>@drawable/effect_scale_int_out</item>
-        <item>@drawable/effect_random_switch</item>
-        <item>@drawable/effect_right_fade</item>
-        <item>@drawable/effect_roll_down</item>
-        <item>@drawable/effect_roll_up</item>
-        <item>@drawable/effect_roll_up</item>
-    </array>
 
     <string-array name="entryvalues_effect_preference">
         <item>0</item>
@@ -117,6 +103,7 @@
 
     <array name="editmode_effect_choose_img">
         <item>@drawable/ic_effects_classic</item>
+        <item>@drawable/ic_effects_depth_focus</item>
         <item>@drawable/ic_effects_outside_box</item>
         <item>@drawable/ic_effects_inside_box</item>
         <item>@drawable/ic_effects_ishutters</item>
@@ -126,7 +113,6 @@
         <item>@drawable/ic_effects_fading</item>
         <item>@drawable/ic_effects_flip_up</item>
         <item>@drawable/ic_effects_flip_down</item>
-        <item>@drawable/ic_effects_depth_focus</item>
     </array>
     <!-- lijun add for special effect  end -->
 
