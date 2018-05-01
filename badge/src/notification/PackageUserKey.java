@@ -1,4 +1,4 @@
-package com.android.launcher3.notification;
+package notification;
 
 import android.os.UserHandle;
 import android.service.notification.StatusBarNotification;

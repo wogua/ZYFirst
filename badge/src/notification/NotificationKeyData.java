@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.launcher3.notification;
+package notification;
 
 import android.app.Notification;
 import android.service.notification.StatusBarNotification;

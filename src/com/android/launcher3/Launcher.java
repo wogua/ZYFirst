@@ -164,6 +164,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
+import notification.NotificationController;
+import notification.NotificationListener;
+
 /**
  * Default launcher application.
  */
@@ -483,6 +486,7 @@ public class Launcher extends Activity
     private PreviewContainer mPreviewContainer; // lijun add for special effect
 
     private BadgeController mBadgeController;//lijun add for unread
+    private NotificationController mNotificationController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -519,6 +523,7 @@ public class Launcher extends Activity
         super.onCreate(savedInstanceState);
 
         checkPermission();//lijun add for checkAllPermission
+        mNotificationController = new NotificationController(this);
 
         LauncherAppState app = LauncherAppState.getInstance();
         ColorManager.getInstance().addWallpaperCallback(this);//lijun add for wallpaper change
@@ -1093,6 +1098,9 @@ public class Launcher extends Activity
             mAppWidgetHost.startListening();
         }
         updateDynamicStatus(true);//lijun add
+        if (!isWorkspaceLoading()) {
+            NotificationListener.setNotificationsChangedListener(mNotificationController);
+        }
     }
 
     @Override
@@ -2374,6 +2382,8 @@ public class Launcher extends Activity
         hideThemeChangingDialog();
         mModel.reloadForThemechanged = false;
         //lijun add for themechanged end
+
+        NotificationListener.removeNotificationsChangedListener();
 
         if(isLauncherHideAppMode()){
             getmHideAppNavigationbar().onBackPressed();
@@ -5069,6 +5079,8 @@ public class Launcher extends Activity
 
         InstallShortcutReceiver.disableAndFlushInstallQueue(this);
 
+        NotificationListener.setNotificationsChangedListener(mNotificationController);
+
         if (mLauncherCallbacks != null) {
             mLauncherCallbacks.finishBindingItems(false);
         }
@@ -6078,6 +6090,17 @@ public class Launcher extends Activity
      * lijun add
      */
     private void checkPermission() {
+        boolean isNotificationAccessed = Utilities.isUnreadNotificationAccessed(this);
+        if(!isNotificationAccessed){
+            final Context context = getApplicationContext();
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Utilities.gotoNotificationAccessSetting(context);
+                }
+            },2000);
+        }
+
         List<String> noOkPermissions = new ArrayList<>();
 
         for (String permission : sAllPermissions) {

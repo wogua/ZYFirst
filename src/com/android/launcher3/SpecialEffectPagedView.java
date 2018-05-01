@@ -265,8 +265,6 @@ public class SpecialEffectPagedView extends SlidePagedView {
                 }
             }
         }
-//        Log.d("lijun22","scrollX="+getScrollX()+",getChildOffset="+getChildOffset(screen)+",gapOfCellLayouts="+gapOfCellLayouts
-//                +",child.getWidth="+child.getWidth()+",molecular="+molecular+",denominator="+denominator+",percentage="+percentage);
         return percentage;
     }
 
@@ -284,7 +282,6 @@ public class SpecialEffectPagedView extends SlidePagedView {
         View child = getChildAt(screen);
 
         float percentage = getPercentage(child, screen);
-//        Log.d("lijun22"," percentage : " + percentage);
 
         if (percentage <= -1 || percentage >= 1) {
             super.drawScreen(canvas, screen, drawingTime);

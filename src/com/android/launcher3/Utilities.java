@@ -47,6 +47,7 @@ import android.graphics.drawable.PaintDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.provider.Settings;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -74,6 +75,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.Executor;
@@ -82,6 +84,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import notification.PackageUserKey;
 
 /**
  * Various utilities shared amongst the Launcher's classes.
@@ -960,5 +964,41 @@ public final class Utilities {
             values = null;
         }
         return values;
+    }
+
+    public static <T> HashSet<T> singletonHashSet(T elem) {
+        HashSet<T> hashSet = new HashSet<>(1);
+        hashSet.add(elem);
+        return hashSet;
+    }
+
+    public static boolean isUnreadNotificationAccessed(Context context){
+        final String flat = Settings.Secure.getString(context.getContentResolver(), "enabled_notification_listeners");
+        if (!TextUtils.isEmpty(flat) && flat.contains("com.android.zylauncher/notification.NotificationListener")) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean gotoNotificationAccessSetting(Context context) {
+        try {
+            Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+            return true;
+        } catch (ActivityNotFoundException e) {
+            try {
+                Intent intent = new Intent();
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                ComponentName cn = new ComponentName("com.android.settings", "com.android.settings.Settings$NotificationAccessSettingsActivity");
+                intent.setComponent(cn);
+                intent.putExtra(":settings:show_fragment", "NotificationAccessSettings");
+                context.startActivity(intent);
+                return true;
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            return false;
+        }
     }
 }

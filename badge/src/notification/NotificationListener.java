@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.launcher3.notification;
+package notification;
 
 import android.annotation.TargetApi;
 import android.app.Notification;
@@ -145,6 +145,7 @@ public class NotificationListener extends NotificationListenerService {
     }
 
     public static void setNotificationsChangedListener(NotificationsChangedListener listener) {
+        if (sNotificationsChangedListener == listener && listener != null) return;
         sNotificationsChangedListener = listener;
 
         NotificationListener notificationListener = getInstanceIfConnected();
