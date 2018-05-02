@@ -183,7 +183,7 @@
             </intent-filter>
         </activity>-->
 
-        <receiver android:name=".appwidget.LauncherClock"
+        <!--<receiver android:name=".appwidget.LauncherClock"
         android:label="@string/clock_launcher_label">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
@@ -197,7 +197,7 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/launcher_clock_info"/>
-        </receiver>
+        </receiver>-->
 
         <!--  add for unread start -->
         <provider
