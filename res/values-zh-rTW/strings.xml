@@ -110,28 +110,28 @@
     <string name="confirm_action">是</string>
     <string name="valcants_button_text">點擊此處對齊圖標</string>
     <string name="arrange_button_text">整理圖標</string>
-    <!--lijun add-->
+    <!-- add-->
     <string name="folder_import_addicon">添加</string>
     <string name="clock_launcher_label">"桌面時鐘"</string>
     <string name="folder_importmode_button">添加到資料夾(<xliff:g id="count">%d</xliff:g>) </string>
     <string name="add_empty_folder">添加資料夾</string>
     <string name="launcher_clock_time_format">"MM月dd日/HH:mm/EEEE/aa"</string>
-    <!-- lijun add for aline button -->
+    <!--  add for aline button -->
     <string name="aline_toast_text">圖標已對齊</string>
     <string name="pick_image">選擇圖片</string>
     <string name="new_folder_text">新建文件夾</string>
     <string name="default_folder">保千里應用</string>
     <string name="default_folder_tools">系統工具</string>
     <string name="other_folder">其他</string>
-    <!--lijun add for dym-->
+    <!-- add for dym-->
     <string name="dym_calendar_week_format">EEEE</string>
 
-    <!--lijun add for theme change-->
+    <!-- add for theme change-->
     <string name="theme_loding_text">主題加載中...</string>
-    <!--lijun add for special effect-->
+    <!-- add for special effect-->
     <string name="special_effect_setting">特效設置</string>
     <string name="cycle_slide">迴圈案頭</string>
-    <!-- lijun add for uninstall shortcut -->
+    <!--  add for uninstall shortcut -->
     <string name="shortcut_uninstalled">"已移除「<xliff:g id="NAME">%s</xliff:g>」捷徑。"</string>
 
     <string name="layout">桌面佈局</string>

@@ -11,7 +11,7 @@ import com.android.launcher3.dragndrop.DragController;
 import com.android.launcher3.model.WidgetsModel;
 
 /**
- * Created by lijun on 17-3-7.
+ * Created by  on 17-3-7.
  */
 
 public abstract class BaseWidgetsContainerView extends BaseContainerView {

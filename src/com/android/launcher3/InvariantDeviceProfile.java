@@ -142,7 +142,7 @@ public class InvariantDeviceProfile {
                 invDistWeightedInterpolate(minWidthDps,  minHeightDps, closestProfiles);
 
         InvariantDeviceProfile closestProfile = closestProfiles.get(0);
-        //lijun add for layout change
+        // add for layout change
         int[] layouts = Utilities.getLayoutValues(context);
         if(layouts != null){
             numRows = layouts[0];

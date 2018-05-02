@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 
 /**
- * Created by lijun on 16-8-17.
+ * Created by  on 16-8-17.
  */
 public interface IBlur {
      Bitmap blur(Context context, Bitmap source, float scaleFactor, int radius);

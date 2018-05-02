@@ -38,7 +38,7 @@ import java.util.LinkedHashMap;
 import java.util.Set;
 
 /**
- * Created by lijun on 17-3-31.
+ * Created by  on 17-3-31.
  */
 public class HideAppNavigationBar extends HorizontalScrollView implements DragSource, DropTarget, DragController.DragListener, View.OnLongClickListener, View.OnClickListener {
     private static final String TAG = "HideAppNavigationBar";
@@ -751,7 +751,7 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
         if (view instanceof BubbleTextView) {
             BubbleTextView textView = (BubbleTextView) view;
             if (textView.hasIDynamicIcon()) {
-                //boolean showUnread = mLauncher.isShowUnread();//lijun add
+                //boolean showUnread = mLauncher.isShowUnread();// add
 
                 return PhotoUtils.drawable2bitmap(textView.getIcon());//new DragPreviewProvider(view).createDragBitmap(mCanvas,showUnread)
             }
@@ -790,7 +790,7 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
             }
 
             mLauncher.getWorkspace().beginDragShared(v, this, options);
-            //lijun add for pageindicator start
+            // add for pageindicator start
             CellLayout.CellInfo longClickCellInfo = null;
             if (v.getTag() instanceof ItemInfo) {
                 ItemInfo info = (ItemInfo) v.getTag();
@@ -800,7 +800,7 @@ public class HideAppNavigationBar extends HorizontalScrollView implements DragSo
             if (mLauncher.getOpenFolder() != null) {
                 mLauncher.getOpenFolder().beginExternalDrag();
             }
-            //lijun add for pageindicator end
+            // add for pageindicator end
         }
         return true;
     }

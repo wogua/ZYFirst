@@ -11,7 +11,7 @@ import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
 /**
- * Created by lijun on 17-4-21.
+ * Created by  on 17-4-21.
  */
 
 public class BitmapCacheDelegate {

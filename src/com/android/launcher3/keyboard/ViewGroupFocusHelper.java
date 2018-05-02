@@ -51,10 +51,10 @@ public class ViewGroupFocusHelper extends FocusIndicatorHelper {
     }
 
     private void computeLocationRelativeToContainer(View child, Rect outRect) {
-        //lijun add to fixed nullpointException
+        // add to fixed nullpointException
         if(child == null)return;
         if(!(child.getParent() instanceof View))return;
-        //lijun add end
+        // add end
         View parent = (View) child.getParent();
         outRect.left += child.getLeft();
         outRect.top += child.getTop();

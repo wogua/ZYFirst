@@ -53,7 +53,7 @@ import com.android.launcher3.util.TransformingTouchDelegate;
  * The widgets list view container.
  */
 public class WidgetsContainerView extends BaseWidgetsContainerView
-        implements View.OnLongClickListener, View.OnClickListener, DragSource {//lijun modify BaseContainerView to BaseWidgetsContainerView
+        implements View.OnLongClickListener, View.OnClickListener, DragSource {// modify BaseContainerView to BaseWidgetsContainerView
     private static final String TAG = "WidgetsContainerView";
     private static final boolean LOGD = false;
 

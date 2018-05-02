@@ -33,7 +33,7 @@ import com.android.launcher3.R;
 import com.android.launcher3.colors.ColorManager;
 
 /**
- * created by lijun 2017.3.30
+ * created by  2017.3.30
  */
 public class PageIndicatorUnderline extends PageIndicator implements ColorManager.IWallpaperChange {
 
@@ -70,7 +70,7 @@ public class PageIndicatorUnderline extends PageIndicator implements ColorManage
 
     public PageIndicatorUnderline(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        setCaretDrawable(new CaretDrawable(context));//lijun add for pageindicator
+        setCaretDrawable(new CaretDrawable(context));// add for pageindicator
         mPaint = new Paint();
         mPaint.setAlpha(127);
     }

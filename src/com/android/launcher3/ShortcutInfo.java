@@ -93,7 +93,7 @@ public class ShortcutInfo extends ItemInfo {
      */
     public Intent.ShortcutIconResource iconResource;
 
-    public String shortcutCustomId = Badge.DEFAULT_SHORTCUT_CUSTOM_ID;;//lijun add for unread
+    public String shortcutCustomId = Badge.DEFAULT_SHORTCUT_CUSTOM_ID;;// add for unread
 
     /**
      * The application icon.
@@ -270,12 +270,12 @@ public class ShortcutInfo extends ItemInfo {
             values.put(LauncherSettings.BaseLauncherColumns.ICON_RESOURCE,
                     iconResource.resourceName);
         }
-        //lijun add for unread start
+        // add for unread start
         if(shortcutCustomId == null){
             shortcutCustomId = Badge.DEFAULT_SHORTCUT_CUSTOM_ID;
         }
         values.put(LauncherSettings.Favorites.SHORTCUT_CUSTOM_ID,shortcutCustomId);
-        //lijun add end
+        // add end
     }
 
     public ComponentName getTargetComponent() {

@@ -14,7 +14,7 @@
 -->
 
 <resources>
-    <!-- lijun Add for unread events feature. -->
+    <!--  Add for unread events feature. -->
     <dimen name="unread_bg_circle_radius">10dp</dimen>
     <dimen name="unread_inner_circle_radius">1.1dp</dimen>
     <dimen name="unread_minWidth">18dp</dimen>

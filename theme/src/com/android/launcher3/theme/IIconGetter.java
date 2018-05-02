@@ -7,7 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 
 /**
- * Created by lijun on 17-3-14.
+ * Created by  on 17-3-14.
  */
 public interface IIconGetter {
     Drawable getIconDrawable(ResolveInfo info,UserHandle user);

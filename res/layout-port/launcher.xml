@@ -41,10 +41,10 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             launcher:pageIndicator="@+id/page_indicator"
-            launcher:pageIndicator_cube="@+id/page_indicator_cube"><!-- lijun add page_indicator_cube -->
+            launcher:pageIndicator_cube="@+id/page_indicator_cube"><!--  add page_indicator_cube -->
         </com.android.launcher3.Workspace>
 
-        <!-- lijun add for aline icons start -->
+        <!--  add for aline icons start -->
         <com.android.launcher3.colors.ChameleonTextView
             android:id="@+id/aline"
             android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
             android:text="@string/valcants_button_text"
             android:visibility="gone"
             />
-        <!-- lijun add for aline icons end -->
+        <!--  add for aline icons end -->
 
         <!-- DO NOT CHANGE THE ID -->
         <include layout="@layout/hotseat"
@@ -75,7 +75,7 @@
 
         <include layout="@layout/page_indicator"
             android:id="@+id/page_indicator" />
-        <!--lijun add start for cube pageindicator -->
+        <!-- add start for cube pageindicator -->
         <include layout="@layout/page_indicator_dots"
             android:id="@+id/page_indicator_dots" />
         <include
@@ -90,7 +90,7 @@
             android:layout_height="@dimen/pageIndicator_diagital_imagview_size"
             android:clickable="false"
             android:layout_gravity="center" />
-        <!-- lijun add end -->
+        <!--  add end -->
 
         <include
             android:id="@+id/drop_target_bar"
@@ -105,14 +105,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="invisible" />
-        <!-- lijun add for Widgets Container begin -->
+        <!--  add for Widgets Container begin -->
         <include layout="@layout/widgets_paged_view_for_underline_indicator"
             android:id="@+id/widgets_paged_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|bottom"
             android:visibility="gone" />
-        <!-- lijun add for Widgets Container end -->
+        <!--  add for Widgets Container end -->
 
         <include layout="@layout/all_apps"
             android:id="@+id/apps_view"
@@ -120,7 +120,7 @@
             android:layout_height="match_parent"
             android:visibility="invisible"
             launcher:layout_ignoreInsets="true" />
-        <!--lijun add the background of workspace when opening folder begin  -->
+        <!-- add the background of workspace when opening folder begin  -->
         <ImageView android:id="@+id/img_workspace_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -128,8 +128,8 @@
             launcher:layout_ignoreInsets="true"
             android:scaleType="fitXY"
             android:visibility="gone" />
-        <!--lijun end -->
-        <!--lijun add  for addIcon begin  -->
+        <!-- end -->
+        <!-- add  for addIcon begin  -->
         <LinearLayout
             android:id="@+id/folder_importmode_button_container"
             android:layout_width="fill_parent"
@@ -151,9 +151,9 @@
                 style="?android:attr/borderlessButtonStyle"
                 />
         </LinearLayout>
-        <!--lijun :add  for addIcon  end -->
+        <!-- :add  for addIcon  end -->
 
-        <!-- lijun add for wallpaper -->
+        <!--  add for wallpaper -->
         <com.android.launcher3.wallpaperpicker.WallpaperPagedViewContainer
             android:id="@+id/wallpaper_picker"
             android:layout_width="match_parent"
@@ -194,7 +194,7 @@
             </com.android.launcher3.ArrangeNavLinearLayout>
         </com.android.launcher3.ArrangeNavigationBar>
 
-        <!-- lijun add hide app bar -->
+        <!--  add hide app bar -->
         <com.android.launcher3.HideAppNavigationBar
             android:id="@+id/hide_app_navigationbar"
             android:scrollbars="horizontal"
@@ -227,7 +227,7 @@
             </com.android.launcher3.ArrangeNavLinearLayout>
         </com.android.launcher3.HideAppNavigationBar>
 
-        <!-- lijun add for special effect start -->
+        <!--  add for special effect start -->
         <include
             android:id="@+id/specialeffect_container"
             layout="@layout/specialeffect_layout"
@@ -235,7 +235,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|bottom"
             android:visibility="gone" />
-        <!--  lijun add for special effect  end -->
+        <!--   add for special effect  end -->
 
         <TextView
             android:id="@+id/hide_app_empty_hint"
@@ -250,7 +250,7 @@
    
     </com.android.launcher3.dragndrop.DragLayer>
 
-    <!-- lijun add for theme changed -->
+    <!--  add for theme changed -->
     <com.android.launcher3.ThemeChangedLoadingView
         android:id="@+id/theme_changed_view"
         android:layout_width="match_parent"

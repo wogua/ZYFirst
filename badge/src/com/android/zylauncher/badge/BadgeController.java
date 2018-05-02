@@ -31,7 +31,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 /**
- * Created by lijun on 17-8-3.
+ * Created by  on 17-8-3.
  */
 
 public class BadgeController extends BroadcastReceiver {

@@ -1,7 +1,7 @@
 <resources>
-    <integer name="config_workspaceSpringLoadShrinkPercentage">93</integer><!--lijun modify 90 to 93 -->
+    <integer name="config_workspaceSpringLoadShrinkPercentage">93</integer><!-- modify 90 to 93 -->
     <!-- Out of 100, the percent to shrink the workspace during overview mode. -->
-    <integer name="config_workspaceOverviewShrinkPercentage">77</integer><!--lijun modify 70 to 93 -->
+    <integer name="config_workspaceOverviewShrinkPercentage">77</integer><!-- modify 70 to 93 -->
 
     <integer name="config_widegtscontainerpageview_cells_count">5</integer>
 </resources>

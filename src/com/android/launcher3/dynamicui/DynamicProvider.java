@@ -14,7 +14,7 @@ import com.android.launcher3.util.Thunk;
 import java.util.ArrayList;
 
 /**
- * Created by lijun on 17-4-1.
+ * Created by  on 17-4-1.
  */
 
 public class DynamicProvider {

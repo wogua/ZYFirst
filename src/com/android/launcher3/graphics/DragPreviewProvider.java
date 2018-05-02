@@ -73,7 +73,7 @@ public class DragPreviewProvider {
         mView = view;
 
         if (mView instanceof TextView) {
-            //lijun add begin
+            // add begin
             if (view instanceof BubbleTextView) {
                 int unreadWidth = getUnreadWidth();
                 int uninstallWidth = getUninstallDrawable().getIntrinsicWidth();
@@ -82,7 +82,7 @@ public class DragPreviewProvider {
                     mUninstallDrawableSize = 0;
                 }*/
             }
-            //lijun add end
+            // add end
             Drawable d = Workspace.getTextViewIcon((TextView) mView);
             Rect bounds = getDrawableBounds(d);
             previewPadding = DRAG_BITMAP_PADDING - bounds.left - bounds.top;
@@ -151,7 +151,7 @@ public class DragPreviewProvider {
                 int height = bounds.height()-mUninstallDrawableSize-DRAG_BITMAP_PADDING;
 
                 float scaleAndPosition = getScaleAndPosition(ints);
-                Log.d("lijun","x="+ints[0]+"        y= "+ints[1]+"    scaleAndPosition="+scaleAndPosition+"   getX="+mView.getX()+"  getY="+mView.getY());
+                Log.d("","x="+ints[0]+"        y= "+ints[1]+"    scaleAndPosition="+scaleAndPosition+"   getX="+mView.getX()+"  getY="+mView.getY());
                 offsetX = (ints[0]-mView.getX())/2-width*(1-scaleAndPosition)/2;
                 offsetY = (ints[1]-mView.getY())/2-height*(1-scaleAndPosition)/2;
             }
@@ -184,7 +184,7 @@ public class DragPreviewProvider {
             }
         }
         if(mIsUnread) {
-            drawUnreadForDragView(destCanvas, mView);//lijun add for unread
+            drawUnreadForDragView(destCanvas, mView);// add for unread
         }
         destCanvas.restore();
     }
@@ -230,7 +230,7 @@ public class DragPreviewProvider {
      */
     public Bitmap createDragOutline(Canvas canvas) {
         final Bitmap b = Bitmap.createBitmap(mView.getWidth() + DRAG_BITMAP_PADDING,
-                mView.getHeight() + DRAG_BITMAP_PADDING, Bitmap.Config.ARGB_8888);//lijun ARGB_8888 >> ALPHA_8
+                mView.getHeight() + DRAG_BITMAP_PADDING, Bitmap.Config.ARGB_8888);// ARGB_8888 >> ALPHA_8
         canvas.setBitmap(b);
         drawDragView(canvas);
         HolographicOutlineHelper.obtain(mView.getContext())
@@ -251,12 +251,12 @@ public class DragPreviewProvider {
             int inset = -((PreloadIconDrawable) d).getOutset();
             bounds.inset(inset, inset);
         }
-        //lijun add begin
+        // add begin
         bounds.left += -mUninstallDrawableSize /2;
         bounds.top += -mUninstallDrawableSize /2;
         bounds.bottom+= mUninstallDrawableSize /2;
         bounds.right+= mUninstallDrawableSize /2;
-        //lijun add end
+        // add end
         return bounds;
     }
 
@@ -327,7 +327,7 @@ public class DragPreviewProvider {
     }
 
     /**
-     * lijun add for unread
+     *  add for unread
      */
     private void drawUnreadForDragView(Canvas destCanvas, View icon) {
         if (!FeatureFlags.UNREAD_ENABLE) return;
@@ -380,7 +380,7 @@ public class DragPreviewProvider {
             if (unreadBgHeight < textHeight) {
                 unreadBgHeight = textHeight;
             }
-            Log.d("lijun", "unreadBgWidth : " + unreadBgWidth + ", unreadBgHeight" + unreadBgHeight);
+            Log.d("", "unreadBgWidth : " + unreadBgWidth + ", unreadBgHeight" + unreadBgHeight);
             Rect unreadBgBounds = new Rect(0, 0, unreadBgWidth, unreadBgHeight);
             unreadBgNinePatchDrawable.setBounds(unreadBgBounds);
 
@@ -426,7 +426,7 @@ public class DragPreviewProvider {
 
 
 
-            Log.d("lijun", "unreadBgPosX : " + unreadBgPosX + ", unreadBgPosY : " + unreadBgPosY);
+            Log.d("", "unreadBgPosX : " + unreadBgPosX + ", unreadBgPosY : " + unreadBgPosY);
             destCanvas.save();
             destCanvas.translate(unreadBgPosX, unreadBgPosY);
 
@@ -444,7 +444,7 @@ public class DragPreviewProvider {
                 return;
             }
 
-//            Log.d("lijun", "DragView drawUnread : " + unreadTextNumber + ", " + info.getTargetComponent());
+//            Log.d("", "DragView drawUnread : " + unreadTextNumber + ", " + info.getTargetComponent());
             /// M: Draw unread text.
             Paint.FontMetrics fontMetrics = unreadTextNumberPaint.getFontMetrics();
             if (info.unreadNum > BadgeController.MAX_UNREAD_COUNT) {
@@ -462,7 +462,7 @@ public class DragPreviewProvider {
                         (unreadBgHeight + textHeight) / 2,
                         unreadTextNumberPaint);
             }
-            Log.d("lijun", "drawUnreadForDragView canvas: " + destCanvas.getWidth() + "," + destCanvas.getHeight());
+            Log.d("", "drawUnreadForDragView canvas: " + destCanvas.getWidth() + "," + destCanvas.getHeight());
             destCanvas.restore();
         }
     }

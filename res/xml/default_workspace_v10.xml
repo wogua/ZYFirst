@@ -172,8 +172,8 @@
         launcher:x="0"
         launcher:y="0" />
     <favorite
-        launcher:className="com.lijun.androidstudy.welcomeViewPager.GuideActivity"
-        launcher:packageName="com.lijun.androidstudy"
+        launcher:className="com..androidstudy.welcomeViewPager.GuideActivity"
+        launcher:packageName="com..androidstudy"
         launcher:screen="18"
         launcher:x="2"
         launcher:y="0" />

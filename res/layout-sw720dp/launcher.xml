@@ -78,15 +78,15 @@
             android:layout_height="match_parent"
             android:visibility="invisible"
            launcher:layout_ignoreInsets="true" />
-        <!--lijun add the background of workspace when opening folder begin  -->
+        <!-- add the background of workspace when opening folder begin  -->
         <ImageView android:id="@+id/img_workspace_bg"
                    android:layout_width="match_parent"
                    android:layout_height="match_parent"
                    android:src="@color/workspace_bg_color"
                    launcher:layout_ignoreInsets="true"
                    android:visibility="gone" />
-        <!--lijun end -->
-        <!--lijun add  for addIcon begin  -->
+        <!-- end -->
+        <!-- add  for addIcon begin  -->
         <LinearLayout
             android:id="@+id/folder_importmode_button_container"
             android:layout_width="fill_parent"
@@ -107,7 +107,7 @@
                 style="?android:attr/borderlessButtonStyle"
                 />
         </LinearLayout>
-        <!--lijun :add  for addIcon  end -->
+        <!-- :add  for addIcon  end -->
 
     </com.android.launcher3.dragndrop.DragLayer>
 

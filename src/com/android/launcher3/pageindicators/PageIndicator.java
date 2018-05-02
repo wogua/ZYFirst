@@ -36,12 +36,12 @@ public abstract class PageIndicator extends FrameLayout {
         setWillNotDraw(false);
     }
 
-    //lijun add start
+    // add start
     protected PagedView mPagedView;
     public void setpagedView(PagedView pagedView) {
         this.mPagedView = pagedView;
     }
-    //lijun add end
+    // add end
 
     public void setScroll(int currentScroll, int totalScroll) {}
 

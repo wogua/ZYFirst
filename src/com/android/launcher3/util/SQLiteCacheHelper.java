@@ -29,7 +29,7 @@ public abstract class SQLiteCacheHelper {
     }
 
     /**
-     * lijun add to clear icon database as theme thanged
+     *  add to clear icon database as theme thanged
      */
     public void clearDatas(){
         mOpenHelper.clearDB(mOpenHelper.getReadableDatabase());

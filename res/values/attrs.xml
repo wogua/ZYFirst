@@ -38,7 +38,7 @@
     <declare-styleable name="PagedView">
         <!-- The page indicator for this workspace -->
         <attr name="pageIndicator" format="reference" />
-        <attr name="pageIndicator_cube" format="reference" /><!-- lijun add for pageIndicator -->
+        <attr name="pageIndicator_cube" format="reference" /><!--  add for pageIndicator -->
     </declare-styleable>
 
     <!-- BaseContainerView specific attributes. These attributes are used to customize
@@ -112,15 +112,15 @@
         <attr name="defaultLayoutId" format="reference" />
     </declare-styleable>
 
-    <!--lijun add for colormanager start-->
+    <!-- add for colormanager start-->
     <declare-styleable name="ChameleonTextView">
         <!-- The page indicator for this workspace -->
         <attr name="dark_color" format="reference" />
         <attr name="light_color" format="reference" />
     </declare-styleable>
-    <!--lijun add for colormanager end-->
+    <!-- add for colormanager end-->
 
-<!-- lijun add for special effect  start -->
+<!--  add for special effect  start -->
     <declare-styleable name="HorizontalListView">
         <attr name="dividerWidth" format="dimension" />
         <attr name="alignStartPosition" format="boolean"/>
@@ -128,7 +128,7 @@
         <attr name="android:requiresFadingEdge" />
         <attr name="android:fadingEdgeLength" />
     </declare-styleable>
-<!-- lijun add for special effect  end -->
+<!--  add for special effect  end -->
 
 
     <declare-styleable name="PreferenceWithTip">

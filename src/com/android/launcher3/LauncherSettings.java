@@ -241,7 +241,7 @@ public class LauncherSettings {
          */
         public static final String RANK = "rank";
 
-        public static final String SHORTCUT_CUSTOM_ID = "shortcutCustomId";//lijun add for unread
+        public static final String SHORTCUT_CUSTOM_ID = "shortcutCustomId";// add for unread
 
         /**
          * Stores general flag based options for {@link ItemInfo}s.
@@ -274,7 +274,7 @@ public class LauncherSettings {
                     "rank INTEGER NOT NULL DEFAULT 0," +
                     "options INTEGER NOT NULL DEFAULT 0," +
                     "shortcutCustomId TEXT NOT NULL DEFAULT ''" +
-                    ");");//lijun add shortcutCustomId for unread
+                    ");");// add shortcutCustomId for unread
         }
     }
 

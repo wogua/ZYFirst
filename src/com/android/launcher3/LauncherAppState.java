@@ -57,7 +57,7 @@ public class LauncherAppState {
     @Thunk boolean mWallpaperChangedSinceLastCheck;
 
     private static WeakReference<LauncherProvider> sLauncherProvider;
-    private final BadgeController mBadgeController;//lijun add for unread
+    private final BadgeController mBadgeController;// add for unread
     private static Context sContext;
 
     private static LauncherAppState INSTANCE;
@@ -138,7 +138,7 @@ public class LauncherAppState {
 
         sContext.registerReceiver(mModel, filter);
 
-        //lijun add for unread start
+        // add for unread start
         mBadgeController = new BadgeController();
         IntentFilter filter1 = new IntentFilter();
         filter1.addDataScheme("package");
@@ -146,7 +146,7 @@ public class LauncherAppState {
         filter1.addAction(Intent.ACTION_PACKAGE_REMOVED);
         filter1.addAction("com.mediatek.intent.action.SETTINGS_PACKAGE_DATA_CLEARED");
         sContext.registerReceiver(mBadgeController, filter1);
-        //lijun add for unread end
+        // add for unread end
 
         UserManagerCompat.getInstance(sContext).enableAndResetCache();
         if (Utilities.ATLEAST_KITKAT) {
@@ -158,7 +158,7 @@ public class LauncherAppState {
                 public void onReceive(Context context, Intent intent) {
                     mWallpaperChangedSinceLastCheck = true;
                     if(Intent.ACTION_WALLPAPER_CHANGED.equals(intent.getAction())){
-                        ColorManager.getInstance().dealWallpaperForLauncher(sContext);//lijun add for wallpaper changed
+                        ColorManager.getInstance().dealWallpaperForLauncher(sContext);// add for wallpaper changed
                     }
                 }
             }, intentFilter);
@@ -167,9 +167,9 @@ public class LauncherAppState {
         getColorFromSharedPreferences(sContext);
 
         ExtractionUtils.startColorExtractionServiceIfNecessary(sContext);
-        ColorManager.getInstance().dealWallpaperForLauncher(sContext);//lijun add for wallpaper changed
+        ColorManager.getInstance().dealWallpaperForLauncher(sContext);// add for wallpaper changed
 
-        //lijun add for unistall shortcut
+        // add for unistall shortcut
         ContentResolver resolver = sContext.getContentResolver();
         resolver.registerContentObserver(LauncherSettings.Favorites.CONTENT_URI, true,
                 mFavoritesObserver);
@@ -185,11 +185,11 @@ public class LauncherAppState {
      */
     public void onTerminate() {
         sContext.unregisterReceiver(mModel);
-        sContext.unregisterReceiver(mBadgeController);//lijun add for unread
-        //lijun add for uninstall shortcut start
+        sContext.unregisterReceiver(mBadgeController);// add for unread
+        // add for uninstall shortcut start
         ContentResolver resolver = sContext.getContentResolver();
         resolver.unregisterContentObserver(mFavoritesObserver);
-        //lijun add for uninstall shortcut end
+        // add for uninstall shortcut end
         final LauncherAppsCompat launcherApps = LauncherAppsCompat.getInstance(sContext);
         launcherApps.removeOnAppsChangedCallback(mModel);
         PackageInstallerCompat.getInstance(sContext).onStop();
@@ -211,7 +211,7 @@ public class LauncherAppState {
     }
 
     /**
-     * lijun add for unread
+     *  add for unread
      */
     public BadgeController initBadgeProvider(Launcher launcher) {
         mBadgeController.initialize(launcher);
@@ -245,14 +245,14 @@ public class LauncherAppState {
     }
 
     /**
-     * lijun add for clear icon database as theme thanged
+     *  add for clear icon database as theme thanged
      */
     public void clearIcons(){
         mIconCache.clearIcons();
         mWidgetCache.clearIcons();
     }
 
-    //lijun add for uninstall shortcut
+    // add for uninstall shortcut
     private final ContentObserver mFavoritesObserver = new ContentObserver(new Handler()) {
         @Override
         public void onChange(boolean selfChange) {

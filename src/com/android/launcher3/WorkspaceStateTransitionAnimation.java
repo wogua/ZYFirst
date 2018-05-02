@@ -286,22 +286,22 @@ public class WorkspaceStateTransitionAnimation {
 
         // Update the workspace state
         float finalBackgroundAlpha = (states.stateIsOverview) ?
-                1.0f : 0f;//lijun remove states.stateIsSpringLoaded ||
+                1.0f : 0f;// remove states.stateIsSpringLoaded ||
         float finalHotseatAlpha = (states.stateIsNormal || states.stateIsSpringLoaded ||
                 (FeatureFlags.LAUNCHER3_ALL_APPS_PULL_UP && states.stateIsNormalHidden)) ? 1f : 0f;
         float finalOverviewPanelAlpha = states.stateIsOverview ? 1f : 0f;
-        float finalOverviewPanelTranslationY = (states.stateIsOverviewHidden) ? (float) overviewPanel.getHeight()/2 : 0f;//lijun add for overviewPanel anima
+        float finalOverviewPanelTranslationY = (states.stateIsOverviewHidden) ? (float) overviewPanel.getHeight()/2 : 0f;// add for overviewPanel anima
         float finalQsbAlpha = (states.stateIsNormal ||
                 (FeatureFlags.LAUNCHER3_ALL_APPS_PULL_UP && states.stateIsNormalHidden)) ? 1f : 0f;
 
         float finalWorkspaceTranslationY = 0;
         if (states.stateIsOverview || states.stateIsOverviewHidden) {
-            finalWorkspaceTranslationY = mWorkspace.getOverviewModeTranslationYNew();//lijun modify getOverviewModeTranslationY to getOverviewModeTranslationYNew
+            finalWorkspaceTranslationY = mWorkspace.getOverviewModeTranslationYNew();// modify getOverviewModeTranslationY to getOverviewModeTranslationYNew
         } else if (states.stateIsSpringLoaded) {
-            finalWorkspaceTranslationY = mWorkspace.getOverviewModeTranslationYNew();//lijun modify getSpringLoadedTranslationY to getOverviewModeTranslationYNew
+            finalWorkspaceTranslationY = mWorkspace.getOverviewModeTranslationYNew();// modify getSpringLoadedTranslationY to getOverviewModeTranslationYNew
         }
 
-        //lijun add for pageIndicatorCube
+        // add for pageIndicatorCube
         float finalPageIndicatorCubeAlpha = (states.stateIsSpringLoaded) ? 1f : 0f;
         float finalPageIndicatorCubeScale = (states.stateIsSpringLoaded) ? 1f : 0.4f;
         float finalPageIndicatorAlpha = ((states.stateIsNormal && !states.oldStateIsFolderImport) || states.stateIsOverviewHidden || states.stateIsOverview
@@ -317,7 +317,7 @@ public class WorkspaceStateTransitionAnimation {
             overviewPanel.setTranslationY(ty);
         }
         float finalAlineButtonAlpa = (states.stateIsOverview || states.stateIsOverviewHidden)?1:0;
-//        lijun add end
+//         add end
 
         final int childCount = mWorkspace.getChildCount();
         final int customPageCount = mWorkspace.numCustomPages();
@@ -337,21 +337,21 @@ public class WorkspaceStateTransitionAnimation {
                 mNewScale = mOverviewModeShrinkFactor;
             }
         }
-        //M:lijun begin
+        //M: begin
 /*        if (toPage == SCROLL_TO_CURRENT_PAGE) {
             toPage = mWorkspace.getPageNearestToCenterOfScreen();
         }*/
 
        /* if(!states.oldStateIsFolderImport)
             mWorkspace.snapToPage(-1, duration, mZoomInInterpolator);*/
-        //M:lijun end
+        //M: end
         int toPage = mWorkspace.getPageNearestToCenterOfScreen();
         // TODO: Animate the celllayout alpha instead of the pages.
         for (int i = 0; i < childCount; i++) {
             final CellLayout cl = (CellLayout) mWorkspace.getChildAt(i);
             float initialAlpha = cl.getShortcutsAndWidgets().getAlpha();
             float finalAlpha;
-            //lijun add start
+            // add start
             float initialTranslationY = cl.getShortcutsAndWidgets().getTranslationY();
             float finalTranslationY = 0;
             float initialScale = cl.getShortcutsAndWidgets().getScaleY();
@@ -362,10 +362,10 @@ public class WorkspaceStateTransitionAnimation {
                 finalScale = CellLayout.CELLLAYOUT_CONTENT_SCALE;
                 finalHomebuttonAlpa = 1;
             }
-            //lijun add end
+            // add end
 
             if (states.stateIsOverviewHidden) {
-                finalAlpha = 1f;//lijun modify 0 to 1
+                finalAlpha = 1f;// modify 0 to 1
             } else if(states.stateIsNormalHidden) {
                 finalAlpha = (FeatureFlags.LAUNCHER3_ALL_APPS_PULL_UP &&
                         i == mWorkspace.getNextPage()) ? 1 : 0;
@@ -394,21 +394,21 @@ public class WorkspaceStateTransitionAnimation {
                 if (initialAlpha != finalAlpha || initialTranslationY != finalTranslationY || initialScale != finalScale) {
                     LauncherViewPropertyAnimator alphaAnim =
                             new LauncherViewPropertyAnimator(cl.getShortcutsAndWidgets());
-     					// lijun modify for bug2696 start
+     					//  modify for bug2696 start
      					 if(!states.oldStateIsSpringLoaded && !states.stateIsSpringLoaded){
                            alphaAnim.alpha(finalAlpha);
      					  }
 						 //alphaAnim.alpha(finalAlpha)
-     					// lijun modify for bug2696 end
-                      alphaAnim.translationY(finalTranslationY)//lijun add for celllayout topbar
-                            .scaleY(finalScale)//lijun add for celllayout topbar
-                            .scaleX(finalScale)//lijun add for celllayout topbar
+     					//  modify for bug2696 end
+                      alphaAnim.translationY(finalTranslationY)// add for celllayout topbar
+                            .scaleY(finalScale)// add for celllayout topbar
+                            .scaleX(finalScale)// add for celllayout topbar
                             .setDuration(duration)
                             .setInterpolator(mZoomInInterpolator);
 
                     mStateAnimator.play(alphaAnim);
                 }
-                //lijun add for celllayout topbar
+                // add for celllayout topbar
                 LauncherViewPropertyAnimator homebuttonAnima =
                         new LauncherViewPropertyAnimator(cl.getmHomeButton());
                 homebuttonAnima.alpha(finalHomebuttonAlpa)
@@ -417,7 +417,7 @@ public class WorkspaceStateTransitionAnimation {
                 homebuttonAnima.addListener(new AlphaUpdateListener(cl.getmHomeButton(),
                         true));
                 mStateAnimator.play(homebuttonAnima);
-                //lijun add end
+                // add end
                 if (oldBackgroundAlpha != 0 || finalBackgroundAlpha != 0) {
                     ValueAnimator bgAnim = ObjectAnimator.ofFloat(cl, "backgroundAlpha",
                             oldBackgroundAlpha, finalBackgroundAlpha);
@@ -428,14 +428,14 @@ public class WorkspaceStateTransitionAnimation {
             } else {
                 cl.setBackgroundAlpha(finalBackgroundAlpha);
                 cl.setShortcutAndWidgetAlpha(finalAlpha);
-                //lijun add for celllayout topbar
+                // add for celllayout topbar
                 cl.getShortcutsAndWidgets().setTranslationY(finalTranslationY);
                 cl.getShortcutsAndWidgets().setScaleY(finalScale);
                 cl.getShortcutsAndWidgets().setScaleX(finalScale);
                 cl.getmHomeButton().setTranslationY(finalTranslationY);
                 cl.getmHomeButton().setAlpha(finalHomebuttonAlpa);
                 cl.getmHomeButton().setVisibility(finalHomebuttonAlpa == 0f ? View.GONE : View.VISIBLE);
-                //lijun add end
+                // add end
             }
 
             if (Workspace.isQsbContainerPage(i)) {
@@ -453,10 +453,10 @@ public class WorkspaceStateTransitionAnimation {
         }
 
         final View qsbContainer = mLauncher.getQsbContainer();
-        //lijun add for pageindicator animal
+        // add for pageindicator animal
         final View pageIndicatorOrig = mWorkspace.getPageIndicator();
         final View pageIndicatorCube = mWorkspace.getmPageIndicatorCube();
-        //lijun add end
+        // add end
 
         Animator qsbAlphaAnimation = mWorkspace.mQsbAlphaController
                 .animateAlphaAtIndex(finalQsbAlpha, Workspace.QSB_ALPHA_INDEX_STATE_CHANGE);
@@ -473,7 +473,7 @@ public class WorkspaceStateTransitionAnimation {
 
             LauncherViewPropertyAnimator overviewPanelAlpha =
                     new LauncherViewPropertyAnimator(overviewPanel).alpha(finalOverviewPanelAlpha)
-                            .translationY(finalOverviewPanelTranslationY);//lijun add translationY for overview anima
+                            .translationY(finalOverviewPanelTranslationY);// add translationY for overview anima
             overviewPanelAlpha.addListener(new AlphaUpdateListener(overviewPanel,
                     accessibilityEnabled));
 
@@ -494,14 +494,14 @@ public class WorkspaceStateTransitionAnimation {
                 overviewPanelAlpha.setInterpolator(new DecelerateInterpolator(2));
             }
 
-            //lijun add deal page indicator
+            // add deal page indicator
             Animator pageIndicatorOrigAnima = null;
             if (pageIndicatorOrig != null) {
                 pageIndicatorOrigAnima = new LauncherViewPropertyAnimator(pageIndicatorOrig)
                         .alpha(finalPageIndicatorAlpha)
                         .translationY(finalPageIndicatorTranslationY).withLayer();
                 pageIndicatorOrigAnima.addListener(new AlphaUpdateListener(pageIndicatorOrig,
-                        accessibilityEnabled));  //lijun remove
+                        accessibilityEnabled));  // remove
             } else {
                 // create a dummy animation so we don't need to do null checks later
                 pageIndicatorOrigAnima = ValueAnimator.ofFloat(0, 0);
@@ -519,9 +519,9 @@ public class WorkspaceStateTransitionAnimation {
                 // create a dummy animation so we don't need to do null checks later
                 pageIndicatorCubeAnima = ValueAnimator.ofFloat(0, 0);
             }
-            //lijun add end
+            // add end
 
-            //lijun add for aline icon
+            // add for aline icon
             Animator alineIconAnima;
             View alineIcon = mLauncher.getmAlineButton();
             if(alineIcon != null ) {
@@ -532,31 +532,31 @@ public class WorkspaceStateTransitionAnimation {
                 alineIconAnima.setDuration(duration);
                 mStateAnimator.play(alineIconAnima);
             }
-            //lijun add end
+            // add end
 
             overviewPanelAlpha.setDuration(duration);
             hotseatAlpha.setDuration(duration);
             qsbAlphaAnimation.setDuration(duration);
 
-            //lijun add for pageIndicator anima
+            // add for pageIndicator anima
             mStateAnimator.play(pageIndicatorOrigAnima);
             mStateAnimator.play(pageIndicatorCubeAnima);
-            //lijun add end
+            // add end
 
-            //lijun modify to play overviewPanelAlpha after 0.3*duration
+            // modify to play overviewPanelAlpha after 0.3*duration
             //mPageIndicatorDiagitAnimator.play(overviewPanelAlpha);
             if (states.stateIsOverview) {
                 mStateAnimator.play(overviewPanelAlpha).after((long) (duration * 0.3));
             } else {
                 mStateAnimator.play(overviewPanelAlpha);
             }
-            //lijun modify end
+            // modify end
 
-            //lijun add for invisiable hotseat in  special situation
+            // add for invisiable hotseat in  special situation
             if(!mLauncher.isSuccessAddIcon()) {
                 mStateAnimator.play(hotseatAlpha);
             }
-            //lijun modify end
+            // modify end
             mStateAnimator.play(qsbAlphaAnimation);
             mStateAnimator.addListener(new AnimatorListenerAdapter() {
                 boolean canceled = false;
@@ -592,12 +592,12 @@ public class WorkspaceStateTransitionAnimation {
             }
 
             View alineIcon = mLauncher.getmAlineButton();
-            //lijun add start
+            // add start
             if (alineIcon != null) {
                 alineIcon.setAlpha(finalAlineButtonAlpa);
                 alineIcon.setVisibility(finalAlineButtonAlpa == 0f ? View.GONE : View.VISIBLE);
             }
-            //lijun add end
+            // add end
         }
     }
 

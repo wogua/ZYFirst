@@ -3,7 +3,7 @@ package com.android.zylauncher.badge;
 import android.net.Uri;
 
 /**
- * Created by lijun on 17-7-27.
+ * Created by  on 17-7-27.
  */
 
 public class Badge {

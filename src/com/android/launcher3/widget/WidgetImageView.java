@@ -38,10 +38,10 @@ public class WidgetImageView extends View {
     private final RectF mDstRectF = new RectF();
     private Bitmap mBitmap;
 
-    //lijun add start
+    // add start
     private float bgRectRadius = 6;
     private final Paint mBackgroundPaint = new Paint();
-    //lijun add end
+    // add end
     public WidgetImageView(Context context) {
         super(context);
     }
@@ -67,13 +67,13 @@ public class WidgetImageView extends View {
     protected void onDraw(Canvas canvas) {
         if (mBitmap != null) {
             updateDstRectF();
-            drawBg(canvas);//lijun add
+            drawBg(canvas);// add
             canvas.drawBitmap(mBitmap, null, mDstRectF, mPaint);
         }
     }
 
     /**
-     * lijun add
+     *  add
      * @param canvas
      */
     private void drawBg(Canvas canvas){
@@ -102,11 +102,11 @@ public class WidgetImageView extends View {
 
     private void updateDstRectF() {
         if (mBitmap.getWidth() > getWidth()) {
-            //lijun modify start
+            // modify start
 //            float scale = ((float) getWidth()) / mBitmap.getWidth();
 //            mDstRectF.set(0, 0, getWidth(), scale * mBitmap.getHeight());
             mDstRectF.set(0, 0, getWidth(), mBitmap.getHeight());
-            //lijun modify end
+            // modify end
         } else {
             mDstRectF.set(
                     (getWidth() - mBitmap.getWidth()) * 0.5f,

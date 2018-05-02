@@ -902,7 +902,7 @@ public class IconCache {
     }
 
     /**
-     * lijun add for clear icon database as theme thanged
+     *  add for clear icon database as theme thanged
      */
     public void clearIcons() {
         if (mCache != null) {
@@ -911,7 +911,7 @@ public class IconCache {
         mIconDb.clearDatas();
     }
     /**
-     * lijun add for getIconProvider
+     *  add for getIconProvider
      */
     public IconProvider getIconProvider() {
         return mIconProvider;

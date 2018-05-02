@@ -47,19 +47,19 @@ public final class FeatureFlags {
     public static boolean LAUNCHER3_LEGACY_DELETEDROPTARGET = false;
     public static boolean SHOW_ALL_APPS_ON_WORKSPACE = true;
 
-    //lijun add for pageindicator cube
+    // add for pageindicator cube
     public static boolean SHOW_PAGEINDICATOR_CUBE = true;
 
-    //lijun add to enable WidgetsContainerPage
+    // add to enable WidgetsContainerPage
     public static boolean WIDGETS_CONTAINER_PAGE = true;
 
     // Feature flag to enable uninstalling the app by clicking icons;
     public static final boolean UNINSTALL_MODE = true;
 
-    //lijun add for overscroll
+    // add for overscroll
     public static final boolean OVERSCROLL_SPRINGBACK = true;
 
-      // lijun add for cycle slide
+      //  add for cycle slide
 	public static final boolean CYCLE_SLIDE = true;
 
     public static final boolean UNREAD_ENABLE = true;

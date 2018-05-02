@@ -12,7 +12,7 @@ import android.net.Uri;
 import android.util.Log;
 
 /**
- * Created by lijun on 16-11-9.
+ * Created by  on 16-11-9.
  */
 public class ResUtils {
     public static int  getDimen(Context context, String resPkg, String resName, int defaultValue){
@@ -119,7 +119,7 @@ public class ResUtils {
         return result;
     }
 
-    //lijun add
+    // add
     public static Uri getIconUri(String packageName, String resourceName, Context context, int iconDpi) {
         Drawable drawable = null;
         Resources resources = context.getResources();

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
 <resources>
     <!--主题名字-->
-    <string name="theme_name">Monster Theme</string>
+    <string name="theme_name">ZY Theme</string>
     <!--主题版本号-->
     <string name="theme_version">v1.1</string>
     <!--主题类型是否为异型-->

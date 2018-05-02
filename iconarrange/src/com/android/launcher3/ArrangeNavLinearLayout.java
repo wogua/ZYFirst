@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 /**
- * Created by lijun on 17-3-31.
+ * Created by  on 17-3-31.
  */
 public class ArrangeNavLinearLayout extends LinearLayout {
     Launcher mLauncher;

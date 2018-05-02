@@ -146,12 +146,12 @@ public class InstallShortcutReceiver extends BroadcastReceiver {
             return;
         }
         PendingInstallShortcutInfo info = createPendingInfo(context, data);
-        //lijun add for unread start
+        // add for unread start
         String shorcutCustomId = data.getStringExtra("app_shortcut_custom_id");
         if (shorcutCustomId != null) {
             info.shorcutCustomId = shorcutCustomId;
         }
-        //lijun add for unread end
+        // add for unread end
         if (info != null) {
             if (!info.isLauncherActivity()) {
                 // Since its a custom shortcut, verify that it is safe to launch.
@@ -277,7 +277,7 @@ public class InstallShortcutReceiver extends BroadcastReceiver {
         final Intent launchIntent;
         final String label;
         final UserHandleCompat user;
-        String shorcutCustomId = null;//lijun add for unread
+        String shorcutCustomId = null;// add for unread
 
         /**
          * Initializes a PendingInstallShortcutInfo received from a different app.
@@ -370,11 +370,11 @@ public class InstallShortcutReceiver extends BroadcastReceiver {
             } else {
                 shortcutInfo = LauncherAppState.getInstance().getModel().infoFromShortcutIntent(mContext, data);
             }
-            //lijun add for unread
+            // add for unread
             if(shorcutCustomId !=null){
                 shortcutInfo.shortcutCustomId = shorcutCustomId;
             }
-            //lijun add end
+            // add end
             return shortcutInfo;
         }
 

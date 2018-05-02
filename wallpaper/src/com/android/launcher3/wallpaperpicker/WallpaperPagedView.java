@@ -334,7 +334,7 @@ public class WallpaperPagedView extends PagedView {
             selectTile(mTempTile);
             if (Build.MODEL != null && (Build.MODEL.contains("V11S") || Build.MODEL.contains("V10S"))) {
             } else {
-                ColorManager.getInstance().dealWallpaperForLauncher(LauncherAppState.getInstance().getContext());//lijun add
+                ColorManager.getInstance().dealWallpaperForLauncher(LauncherAppState.getInstance().getContext());// add
             }
         }
     }
@@ -491,7 +491,7 @@ public class WallpaperPagedView extends PagedView {
     }
 
     /**
-     * lijun add  for get wallpaperTileInfos
+     *  add  for get wallpaperTileInfos
      *
      * @return WallpaperTileInfo
      */

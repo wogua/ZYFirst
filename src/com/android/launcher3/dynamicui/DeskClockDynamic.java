@@ -23,7 +23,7 @@ import com.android.launcher3.appwidget.LauncherClock;
 import com.android.launcher3.theme.IconProvider;
 
 /**
- * Created by lijun on 17-5-22.
+ * Created by  on 17-5-22.
  */
 
 public class DeskClockDynamic implements IDynamicIcon {

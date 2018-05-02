@@ -37,7 +37,7 @@
         android:label="@string/permlab_install_shortcut"
         android:description="@string/permdesc_install_shortcut" />
 
-    <!-- lijun add for uninstall shortcut -->
+    <!--  add for uninstall shortcut -->
     <permission
         android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT"
         android:permissionGroup="android.permission-group.SYSTEM_TOOLS"
@@ -73,7 +73,7 @@
             </intent-filter>
         </receiver>
 
-        <!-- lijun add for uninstall shortcut -->
+        <!--  add for uninstall shortcut -->
         <receiver
             android:name="com.android.launcher3.UninstallShortcutReceiver"
             android:permission="com.android.launcher.permission.UNINSTALL_SHORTCUT">

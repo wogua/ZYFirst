@@ -58,7 +58,7 @@ public class LauncherAppWidgetHostView extends AppWidgetHostView implements Touc
 
     protected int mErrorViewId = R.layout.appwidget_error;
 
-    //uninstallMode: add by lijun
+    //uninstallMode: add by
     private boolean isUninstallMode;
     private Drawable mMarkDrawable;
     private Rect mUninstallMarkRect;
@@ -73,11 +73,11 @@ public class LauncherAppWidgetHostView extends AppWidgetHostView implements Touc
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         setAccessibilityDelegate(Launcher.getLauncher(context).getAccessibilityDelegate());
         setBackgroundResource(R.drawable.widget_internal_focus_bg);
-        //UnistallMode add by lijun begin
+        //UnistallMode add by  begin
         if(Launcher.getLauncher(getContext()).isUninstallMode) {
             isUninstallMode = true;
         }
-        //UnistallMode add by lijun end
+        //UnistallMode add by  end
     }
 
     @Override
@@ -125,9 +125,9 @@ public class LauncherAppWidgetHostView extends AppWidgetHostView implements Touc
             return true;
         }
 
-        //UnistallMode add by lijun
+        //UnistallMode add by
 //        if(isUninstallMode){
-//            Log.d("lijun55","onInterceptTouchEvent ="+ev.getAction());
+//            Log.d("55","onInterceptTouchEvent ="+ev.getAction());
 //            if(ev.getAction()== MotionEvent.ACTION_DOWN) {
 //                mLastTouchX = (int) ev.getX();
 //                mLastTouchY = (int) ev.getY();
@@ -150,7 +150,7 @@ public class LauncherAppWidgetHostView extends AppWidgetHostView implements Touc
                     mLongPressHelper.postCheckForLongPress();
                 }
                 Launcher.getLauncher(getContext()).getDragLayer().setTouchCompleteListener(this);
-//UnistallMode add by lijun begin
+//UnistallMode add by  begin
                 if(isUninstallMode) {
                     mLastTouchX = (int) ev.getX();
                     mLastTouchY = (int) ev.getY();
@@ -162,14 +162,14 @@ public class LauncherAppWidgetHostView extends AppWidgetHostView implements Touc
                         }
                     }
                 }
-//UnistallMode add by lijun end
+//UnistallMode add by  end
                 break;
             }
 
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
                 mLongPressHelper.cancelLongPress();
-//UnistallMode add by lijun begin
+//UnistallMode add by  begin
                 if(isUninstallMode){
                     mLastTouchX = (int) ev.getX();
                     mLastTouchY = (int) ev.getY();
@@ -180,7 +180,7 @@ public class LauncherAppWidgetHostView extends AppWidgetHostView implements Touc
 
                     return true;
                 }
-//UnistallMode add by lijun end
+//UnistallMode add by  end
                 break;
             case MotionEvent.ACTION_MOVE:
                 if (!Utilities.pointInView(this, ev.getX(), ev.getY(), mSlop)) {
@@ -357,7 +357,7 @@ public class LauncherAppWidgetHostView extends AppWidgetHostView implements Touc
         super.onInitializeAccessibilityNodeInfo(info);
         info.setClassName(getClass().getName());
     }
-    //UninstallMode add by lijun begin
+    //UninstallMode add by  begin
     @Override
     public void showUninstallApp() {
         if(!isUninstallMode) {
@@ -446,5 +446,5 @@ public class LauncherAppWidgetHostView extends AppWidgetHostView implements Touc
 
     }
 
-    //UninstallMode add by lijun end
+    //UninstallMode add by  end
 }

@@ -306,7 +306,7 @@ public class FocusHelper {
                 workspace.snapToPage(pageIndex - 1);
                 // If the page we are going to is fullscreen, have it take the focus from hotseat.
                 CellLayout prevPage = (CellLayout) workspace.getPageAt(pageIndex - 1);
-                //lijun modify for the nullpointException for bug:257
+                // modify for the nullpointException for bug:257
 //                boolean isPrevPageFullscreen = ((CellLayout.LayoutParams) prevPage
 //                        .getShortcutsAndWidgets().getChildAt(0).getLayoutParams()).isFullscreen;
                 boolean isPrevPageFullscreen;
@@ -316,7 +316,7 @@ public class FocusHelper {
                     isPrevPageFullscreen = ((CellLayout.LayoutParams) prevPage
                             .getShortcutsAndWidgets().getChildAt(0).getLayoutParams()).isFullscreen;
                 }
-                //lijun modify end
+                // modify end
                 if (isPrevPageFullscreen) {
                     workspace.getPageAt(pageIndex - 1).requestFocus();
                 }
@@ -327,7 +327,7 @@ public class FocusHelper {
                 workspace.snapToPage(pageIndex + 1);
                 // If the page we are going to is fullscreen, have it take the focus from hotseat.
                 CellLayout nextPage = (CellLayout) workspace.getPageAt(pageIndex + 1);
-                //lijun modify for the nullpointException for bug:257
+                // modify for the nullpointException for bug:257
 //                boolean isNextPageFullscreen = ((CellLayout.LayoutParams) nextPage
 //                        .getShortcutsAndWidgets().getChildAt(0).getLayoutParams()).isFullscreen;
                 boolean isNextPageFullscreen;
@@ -337,7 +337,7 @@ public class FocusHelper {
                     isNextPageFullscreen = ((CellLayout.LayoutParams) nextPage
                             .getShortcutsAndWidgets().getChildAt(0).getLayoutParams()).isFullscreen;
                 }
-                //lijun modify end
+                // modify end
                 if (isNextPageFullscreen) {
                     workspace.getPageAt(pageIndex + 1).requestFocus();
                 }

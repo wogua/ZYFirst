@@ -107,7 +107,7 @@ public class BubbleTextView extends TextView
     private boolean mIgnorePressedStateChange;
     @ViewDebug.ExportedProperty(category = "launcher")
     private boolean mDisableRelayout = false;
-//uninstallMode: add by lijun
+//uninstallMode: add by
     private boolean isUninstallMode;
     private Drawable mMarkDrawable;
     private Rect mUninstallMarkRect;
@@ -116,16 +116,16 @@ public class BubbleTextView extends TextView
     private boolean isShakeAnimation;
 
 
-    //M:lijun add for addIcon begin
+    //M: add for addIcon begin
     private boolean isChecked;
 
     private boolean isShowingUnread;
     private Drawable mCheckDrawable;
-    //M:lijun add for addIcon end
+    //M: add for addIcon end
 
-    //M:lijun add for dynamic begin
+    //M: add for dynamic begin
     private IDynamicIcon mIDynamicIcon;
-    //M:lijun add for dynamic end
+    //M: add for dynamic end
     private IconLoadRequest mIconLoadRequest;
 
     public BubbleTextView(Context context) {
@@ -234,7 +234,7 @@ public class BubbleTextView extends TextView
         if (info.isDisabled()) {
             iconDrawable.setState(FastBitmapDrawable.State.DISABLED);
         }
-        //lijun add for dynamic icon begin
+        // add for dynamic icon begin
         boolean isDynamicSuccess = false;
         if(mIDynamicIcon==null){
             mIDynamicIcon = DynamicProvider.getInstance(getContext().getApplicationContext()).createDynamicIcon(info);
@@ -249,7 +249,7 @@ public class BubbleTextView extends TextView
                     setIcon(iconDrawable);
         }
 
-        //lijun add for dynamic icon end
+        // add for dynamic icon end
 
         setText(info.title);
         if (info.contentDescription != null) {
@@ -374,10 +374,10 @@ public class BubbleTextView extends TextView
                 }
 
                 mLongPressHelper.cancelLongPress();
-                //UninstallMode add by lijun begin
+                //UninstallMode add by  begin
                 mLastTouchX = (int) event.getX();
                 mLastTouchY = (int) event.getY();
-                //UninstallMode add by lijun end
+                //UninstallMode add by  end
                 break;
             case MotionEvent.ACTION_MOVE:
                 if (!Utilities.pointInView(this, event.getX(), event.getY(), mSlop)) {
@@ -446,14 +446,14 @@ public class BubbleTextView extends TextView
         isShowingUnread = false;
         if (!mCustomShadowsEnabled) {
             super.draw(canvas);
-            drawUninstallDrawable(getUninstallDrawable(),canvas); //lijun add
-            drawCheckDrawable(getCheckDrawable(),canvas);//lijun : add for addIcon begin
+            drawUninstallDrawable(getUninstallDrawable(),canvas); // add
+            drawCheckDrawable(getCheckDrawable(),canvas);// : add for addIcon begin
 
-            drawUnreadEvent(canvas);//lijun add for unread
+            drawUnreadEvent(canvas);// add for unread
 
             return;
         }
-//lijun : add for addIcon begin
+// : add for addIcon begin
         final Drawable background = mBackground;
         if (background != null) {
             final int scrollX = getScrollX();
@@ -477,13 +477,13 @@ public class BubbleTextView extends TextView
         if (getCurrentTextColor() == getResources().getColor(android.R.color.transparent)) {
             getPaint().clearShadowLayer();
             super.draw(canvas);
-            drawUninstallDrawable(getUninstallDrawable(),canvas); //lijun add
-            drawCheckDrawable(getCheckDrawable(),canvas);//lijun : add for addIcon begin
+            drawUninstallDrawable(getUninstallDrawable(),canvas); // add
+            drawCheckDrawable(getCheckDrawable(),canvas);// : add for addIcon begin
             return;
         }
 
         // We enhance the shadow by drawing the shadow twice
-//UninstallMode remove by lijun begin
+//UninstallMode remove by  begin
 //        float density = getResources().getDisplayMetrics().density;
 //        getPaint().setShadowLayer(density * AMBIENT_SHADOW_RADIUS, 0, 0, AMBIENT_SHADOW_COLOR);
 //        super.draw(canvas);
@@ -493,10 +493,10 @@ public class BubbleTextView extends TextView
 //                getScrollY() + getHeight(), Region.Op.INTERSECT);
 //        getPaint().setShadowLayer(
 //                density * KEY_SHADOW_RADIUS, 0.0f, density * KEY_SHADOW_OFFSET, KEY_SHADOW_COLOR);
-//UninstallMode remove by lijun end
+//UninstallMode remove by  end
         super.draw(canvas);
-        drawUninstallDrawable(getUninstallDrawable(),canvas); //lijun add
-        drawCheckDrawable(getCheckDrawable(),canvas);//lijun : add for addIcon begin
+        drawUninstallDrawable(getUninstallDrawable(),canvas); // add
+        drawCheckDrawable(getCheckDrawable(),canvas);// : add for addIcon begin
 //        canvas.restore();
     }
 
@@ -510,11 +510,11 @@ public class BubbleTextView extends TextView
             ((PreloadIconDrawable) mIcon).applyPreloaderTheme(getPreloaderTheme());
         }
         mSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
-        //lijun add for dynamic icon begin
+        // add for dynamic icon begin
         if(mIDynamicIcon!=null){
             mIDynamicIcon.updateDynamicIcon(false);
         }
-        //lijun add for dynamic icon end
+        // add for dynamic icon end
     }
 
     @Override
@@ -535,11 +535,11 @@ public class BubbleTextView extends TextView
     onDetachedFromWindow() {
         super.onDetachedFromWindow();
         if (mBackground != null) mBackground.setCallback(null);
-        //lijun add for dynamic icon begin
+        // add for dynamic icon begin
     /*    if(mIDynamicIcon!=null) {
             mIDynamicIcon.clearDynamicIcon();
         }*/
-        //lijun add for dynamic icon end
+        // add for dynamic icon end
     }
 
     @Override
@@ -761,7 +761,7 @@ public class BubbleTextView extends TextView
         }
         return 0;
     }
-    //uninstallMode: add by lijun begin
+    //uninstallMode: add by  begin
     @Override
     public void showUninstallApp() {
         Log.d(TAG, isUninstallMode+"   showUninstallApp =" + (ItemInfo)getTag() + " isShakeAnimation= "+isShakeAnimation+"    isUninstallMode="+isUninstallMode);
@@ -891,7 +891,7 @@ public class BubbleTextView extends TextView
         this.clearAnimation();
         isShakeAnimation = false;
     }
-    //uninstallMode: add by lijun end
+    //uninstallMode: add by  end
     /**
      * Interface to be implemented by the grand parent to allow click shadow effect.
      */
@@ -899,7 +899,7 @@ public class BubbleTextView extends TextView
         void setPressedIcon(BubbleTextView icon, Bitmap background);
     }
 
-    //lijun : add for addIcon begin
+    // : add for addIcon begin
     public boolean isChecked() {
         return isChecked;
     }
@@ -960,7 +960,7 @@ public class BubbleTextView extends TextView
     public int getIconSize() {
         return mIconSize;
     }
-    //M:lijun add the folderImportMode begin
+    //M: add the folderImportMode begin
     public void updateFolderIcon() {
         if(getTag() instanceof ShortcutInfo){
             ShortcutInfo shortcutInfo = (ShortcutInfo) getTag();
@@ -993,32 +993,32 @@ public class BubbleTextView extends TextView
     public boolean hasIDynamicIcon() {
         return mIDynamicIcon!=null;
     }
-    //lijun : add for addIcon end
+    // : add for addIcon end
 
-  // lijun add for hotseat icon center start
+  //  add for hotseat icon center start
   public void setUninstallModeFlag(){
     if(!isUninstallMode && !isShakeAnimation){
             invalidate();
     }
     isUninstallMode =true;
   }
- // lijun add for hotseat icon center end
+ //  add for hotseat icon center end
 
-    ///: lijun Added for unread message feature.@{
+    ///:  Added for unread message feature.@{
     private void drawUnreadEvent(Canvas canvas) {
         if (LauncherBadgeProvider.DEBUG&&getTag()!=null) {
 //            Log.d("BubbleTextView", "drawUnreadEvent() this = " + this);
         }
         boolean showingUnread = isShowingUnread;
-        if(!(isChecked||!mLauncher.isShowUnread())) {//lijun add
+        if(!(isChecked||!mLauncher.isShowUnread())) {// add
             BadgeController.drawUnreadEventIfNeed(canvas, this,showingUnread);
         }
     }
-//lijun add for array mode
+// add for array mode
     public boolean isArrayMode(){
         return mLauncher.isLauncherArrangeMode();
     }
-    //lijun add for badge;
+    // add for badge;
     public boolean isShowingUnread() {
         return isShowingUnread;
     }

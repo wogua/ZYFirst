@@ -6,7 +6,7 @@ import android.util.Log;
 import java.lang.reflect.Method;
 
 /**
- * Created by lijun on 17-3-6.
+ * Created by  on 17-3-6.
  */
 public class StatusBarAction {
     public static void collapsingNotification(Context context) {

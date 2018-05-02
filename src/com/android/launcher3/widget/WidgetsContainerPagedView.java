@@ -14,7 +14,7 @@ import com.android.launcher3.pageindicators.PageIndicatorUnderline;
 
 
 /**
- * Created by lijun on 17-3-7.
+ * Created by  on 17-3-7.
  */
 
 public class WidgetsContainerPagedView extends BaseWidgetsContainerView {

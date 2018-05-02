@@ -5,7 +5,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 /**
- * Created by lijun on 17-4-12.
+ * Created by  on 17-4-12.
  */
 
 public class UpToReleaseArrangeListener extends GestureDetector.SimpleOnGestureListener {

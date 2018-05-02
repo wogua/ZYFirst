@@ -58,10 +58,10 @@ public class WidgetCell extends LinearLayout implements OnLayoutChangeListener {
     private static final int FADE_IN_DURATION_MS = 90;
 
     /** Widget cell width is calculated by multiplying this factor to grid cell width. */
-    public static final float WIDTH_SCALE = 0.96f;//lijun modify 2.6 to 1.0
+    public static final float WIDTH_SCALE = 0.96f;// modify 2.6 to 1.0
 
     /** Widget preview width is calculated by multiplying this factor to the widget cell width. */
-    public static final float PREVIEW_SCALE = 0.96f;//lijun modify 0.8 to 0.96
+    public static final float PREVIEW_SCALE = 0.96f;// modify 0.8 to 0.96
 
     private int mPresetPreviewSize;
     int cellSize;
@@ -111,12 +111,12 @@ public class WidgetCell extends LinearLayout implements OnLayoutChangeListener {
 
         mWidgetImage = (WidgetImageView) findViewById(R.id.widget_preview);
         mWidgetName = ((TextView) findViewById(R.id.widget_name));
-        //lijun modify start for page widgets
+        // modify start for page widgets
 //        mWidgetDims = ((TextView) findViewById(R.id.widget_dims));
         if(!FeatureFlags.WIDGETS_CONTAINER_PAGE){
             mWidgetDims = ((TextView) findViewById(R.id.widget_dims));
         }
-        //lijun modify end
+        // modify end
     }
 
     /**
@@ -141,7 +141,7 @@ public class WidgetCell extends LinearLayout implements OnLayoutChangeListener {
 
     public void applyFromCellItem(WidgetItem item, WidgetPreviewLoader loader) {
         mItem = item;
-        //lijun modify start
+        // modify start
 //        mWidgetName.setText(mItem.label);
         InvariantDeviceProfile profile =
                 LauncherAppState.getInstance().getInvariantDeviceProfile();
@@ -151,7 +151,7 @@ public class WidgetCell extends LinearLayout implements OnLayoutChangeListener {
         String dimensionsFormatString = getContext().getString(R.string.widget_dims_format);
         String widgetDims = String.format(dimensionsFormatString, hSpan, vSpan);
         mWidgetName.setText(mergeDimsToName(widgetName,widgetDims));
-        //lijun modify end
+        // modify end
         if(!FeatureFlags.WIDGETS_CONTAINER_PAGE) {
             mWidgetDims.setText(getContext().getString(R.string.widget_dims_format,
                     mItem.spanX, mItem.spanY));
@@ -237,7 +237,7 @@ public class WidgetCell extends LinearLayout implements OnLayoutChangeListener {
     }
 
     /**
-     * lijun add
+     *  add
      * @param widgetName
      * @param dims
      * @return

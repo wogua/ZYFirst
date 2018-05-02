@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 /**
- * Created by lijun on 2018/1/29.
+ * Created by  on 2018/1/29.
  */
 
 public class PreferenceWithTip extends ListPreference {

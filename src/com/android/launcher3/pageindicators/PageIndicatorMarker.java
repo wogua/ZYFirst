@@ -32,7 +32,7 @@ public class PageIndicatorMarker extends FrameLayout {
     private static final String TAG = "PageIndicator";
 
     private static final int MARKER_FADE_DURATION = 175;
-    public boolean isCube = false;//lijun add for pageIndicatorCube
+    public boolean isCube = false;// add for pageIndicatorCube
     public int markerId;
 
     private ImageView mActiveMarker;
@@ -89,7 +89,7 @@ public class PageIndicatorMarker extends FrameLayout {
     }
 
     /**
-     * lijun add just for cubeindicator
+     *  add just for cubeindicator
      * 用于缩略图指示器
      */
     void setMarkerDrawables(Bitmap b) {
@@ -143,7 +143,7 @@ public class PageIndicatorMarker extends FrameLayout {
         return mIsActive;
     }
 
-    //lijun add for pageIndicatorCube
+    // add for pageIndicatorCube
     public int getCenterX(){
         return (this.getLeft() + this.getRight())/2;
     }

@@ -12,7 +12,7 @@ import android.widget.Switch;
 import com.android.zylauncher.badge.BadgeController;
 
 /**
- * Created by lijun on 2018/3/9.
+ * Created by  on 2018/3/9.
  */
 
 public class MySwitchPreference extends SwitchPreference {

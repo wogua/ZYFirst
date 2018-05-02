@@ -47,7 +47,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Created by lijun on 17-3-7.
+ * Created by  on 17-3-7.
  */
 public class WidgetsPagedView extends PagedView implements View.OnLongClickListener, View.OnClickListener, DragSource,DropTarget,DragController.DragListener {
     private static final String TAG = "WidgetsContainerPageView";

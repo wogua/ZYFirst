@@ -320,7 +320,7 @@ public class FastBitmapDrawable extends Drawable {
                 float brightnessF = getBrightness();
                 int brightnessI = (int) (255 * brightnessF);
                 if (usePorterDuffFilter) {
-                    filter = new PorterDuffColorFilter(Color.argb(brightnessI, 0, 0, 0),//lijun modify 255,255,255 to 0,0,0 for icon pressed filtercolor
+                    filter = new PorterDuffColorFilter(Color.argb(brightnessI, 0, 0, 0),// modify 255,255,255 to 0,0,0 for icon pressed filtercolor
                             PorterDuff.Mode.SRC_ATOP);
                 } else {
                     float saturationF = 1f - getDesaturation();

@@ -66,7 +66,7 @@ public class Hotseat extends FrameLayout
     private ColorDrawable mBackground;
     private ValueAnimator mBackgroundColorAnimator;
 
-    // lijun add for hotseat icon center start
+    //  add for hotseat icon center start
     private AnimatorSet mAnimatorSet;
     private BubbleTextView mInvisibleView;
     private boolean mInvisibleViewAdded = false;
@@ -85,7 +85,7 @@ public class Hotseat extends FrameLayout
 	private int workspaceCountX;
 	private int mWGap,mHGap;
     public static final int MAX_COUNT_X = 4;
-    // lijun add for hotseat icon center end
+    //  add for hotseat icon center end
 
     public Hotseat(Context context) {
         this(context, null);
@@ -143,10 +143,10 @@ public class Hotseat extends FrameLayout
         super.onFinishInflate();
 
         DeviceProfile grid = mLauncher.getDeviceProfile();
-	// lijun add for hotseat icon center start
+	//  add for hotseat icon center start
 		workspaceCountX = (int) grid.inv.numColumns; 
 		mViewCacheList = new ArrayList<View>(MAX_COUNT_X);
-	// lijun add for hotseat icon center end
+	//  add for hotseat icon center end
         mContent = (CellLayout) findViewById(R.id.layout);
         if (grid.isLandscape && !grid.isLargeTablet) {
             mContent.setGridSize(1, (int) grid.inv.numHotseatIcons);
@@ -214,7 +214,7 @@ public class Hotseat extends FrameLayout
     }
 
     public void updateColor(ExtractedColors extractedColors, boolean animate) {
-        //lijun remove
+        // remove
         /*if (!mHasVerticalHotseat) {
             int color = extractedColors.getColor(ExtractedColors.HOTSEAT_INDEX, Color.TRANSPARENT);
             if (mBackgroundColorAnimator != null) {
@@ -255,7 +255,7 @@ public class Hotseat extends FrameLayout
         return mBackgroundColor;
     }
 
-// lijun add for hotseat icon center start
+//  add for hotseat icon center start
      //generate invisible view for auto-replace
     private void generateInvisibleView() {
         int allAppsButtonRank = mLauncher.getDeviceProfile().inv.getAllAppsButtonRank();
@@ -1045,11 +1045,11 @@ public class Hotseat extends FrameLayout
                    destX += 10;
 				   destY += 10;
                  }else{
-                     //lijun add for offset begin
+                     // add for offset begin
                    destX += getDropOffsetX();
 				   destY += getDropOffsetY();
 
-                     //lijun add for offset end
+                     // add for offset end
                  }
 
                 final Runnable r = new Runnable() {
@@ -1257,17 +1257,17 @@ public class Hotseat extends FrameLayout
                             //R.dimen.textview_padding_in_hotseat)) / 2;
                     if (v instanceof BubbleTextView) {
                         btv = (BubbleTextView) v;
-                       // btv.setTempPadding(paddingLeftAndRight); lijun del
+                       // btv.setTempPadding(paddingLeftAndRight);  del
                     } else if (v instanceof FolderIcon) {
                         FolderIcon fi = (FolderIcon) v;
-                       // fi.setTempPadding(paddingLeftAndRight); lijun del
+                       // fi.setTempPadding(paddingLeftAndRight);  del
                     }
                 } else {
                     if (v instanceof BubbleTextView) {
                         btv = (BubbleTextView) v;
-                       // btv.resetTempPadding(); lijun del
+                       // btv.resetTempPadding();  del
                     } else if (v instanceof FolderIcon) {
-                       // ((FolderIcon) v).resetTempPadding(); lijun del
+                       // ((FolderIcon) v).resetTempPadding();  del
                     }
                 }
 
@@ -1277,7 +1277,7 @@ public class Hotseat extends FrameLayout
                 lp.x = l + lp.leftMargin;
                 //ItemInfo info = (ItemInfo)v.getTag();
                 l += (cellW + mWGap);
-                //lp.startWithGap = (visibleCount < workspaceCountX); lijun del
+                //lp.startWithGap = (visibleCount < workspaceCountX);  del
             }
             mContent.setGridSize(cellW, mContent.getCellHeight(), mWGap, mContent.getHeightGap());
         }
@@ -1348,17 +1348,17 @@ public class Hotseat extends FrameLayout
                     //R.dimen.textview_padding_in_hotseat)) / 2;
                     if (v instanceof BubbleTextView) {
                         btv = (BubbleTextView) v;
-                        // btv.setTempPadding(paddingLeftAndRight); lijun del
+                        // btv.setTempPadding(paddingLeftAndRight);  del
                     } else if (v instanceof FolderIcon) {
                         FolderIcon fi = (FolderIcon) v;
-                        // fi.setTempPadding(paddingLeftAndRight); lijun del
+                        // fi.setTempPadding(paddingLeftAndRight);  del
                     }
                 } else {
                     if (v instanceof BubbleTextView) {
                         btv = (BubbleTextView) v;
-                        // btv.resetTempPadding(); lijun del
+                        // btv.resetTempPadding();  del
                     } else if (v instanceof FolderIcon) {
-                        // ((FolderIcon) v).resetTempPadding(); lijun del
+                        // ((FolderIcon) v).resetTempPadding();  del
                     }
                 }
 
@@ -1370,7 +1370,7 @@ public class Hotseat extends FrameLayout
                 lp.x = 0;
                 //ItemInfo info = (ItemInfo)v.getTag();
                 t += (cellH + mHGap);
-                //lp.startWithGap = (visibleCount < workspaceCountX); lijun del
+                //lp.startWithGap = (visibleCount < workspaceCountX);  del
             }
             mContent.setGridSize(mContent.getCellWidth(), cellH, mContent.getWidthGap(), mHGap);
         }
@@ -1779,14 +1779,14 @@ public class Hotseat extends FrameLayout
      uninstallAnimation.stopShakeAnimation();
    } 	
  }
- // lijun add for hotseat icon center end
+ //  add for hotseat icon center end
 
-    // lijun add for offset drop animation begin
+    //  add for offset drop animation begin
 private int  getDropOffsetY(){
     return getResources().getDrawable(R.drawable.ic_uninstall).getIntrinsicHeight()/2-14;
 }
     private int  getDropOffsetX(){
         return getResources().getDrawable(R.drawable.ic_uninstall).getIntrinsicWidth()/2-2;
     }
-    // lijun add for offset drop animation end
+    //  add for offset drop animation end
 }

@@ -109,18 +109,18 @@ public class FolderPagedView extends PagedView {
     private PagedFolderKeyEventListener mKeyListener;
 
     private PageIndicator mPageIndicator;
-    //lijun : add for addIcon
+    // : add for addIcon
     private TextView mAddIcon;
     private View.OnClickListener mOnClickListenerl;
     private int mWidthGap;
     AnimatorSet mIconAnima;
-    //lijun add start
+    // add start
     final static float MAX_SWIPE_ANGLE = (float) Math.PI / 3;
     final static float START_DAMPING_TOUCH_SLOP_ANGLE = (float) Math.PI / 6;
     final static float TOUCH_SLOP_DAMPING_FACTOR = 4;
     private float mXDown;
     private float mYDown;
-    //lijun add end
+    // add end
     public FolderPagedView(Context context, AttributeSet attrs) {
         super(context, attrs);
         LauncherAppState app = LauncherAppState.getInstance();
@@ -146,7 +146,7 @@ public class FolderPagedView extends PagedView {
         mKeyListener = new PagedFolderKeyEventListener(folder);
         mPageIndicator = (PageIndicator) folder.findViewById(R.id.folder_page_indicator);
         initParentViews(folder);
-        mPageIndicator.setpagedView(this);//lijun add
+        mPageIndicator.setpagedView(this);// add
     }
 
     /**
@@ -269,9 +269,9 @@ public class FolderPagedView extends PagedView {
 
         textView.setLayoutParams(new CellLayout.LayoutParams(
                 item.cellX, item.cellY, item.spanX, item.spanY));
-        textView.setTextColor(ColorManager.getInstance().getColors()[0]);//lijun add for colormanager
+        textView.setTextColor(ColorManager.getInstance().getColors()[0]);// add for colormanager
 
-        mFolder.mFolderIcon.updateFolderUnreadNum();//lijun add for unread
+        mFolder.mFolderIcon.updateFolderUnreadNum();// add for unread
         return textView;
     }
 
@@ -451,7 +451,7 @@ public class FolderPagedView extends PagedView {
     }
 
     public View getFirstItem() {
-        if (getChildCount() < 1 || getCurrentCellLayout() == null) {//lijun add getCurrentCellLayout()
+        if (getChildCount() < 1 || getCurrentCellLayout() == null) {// add getCurrentCellLayout()
             return null;
         }
         ShortcutAndWidgetContainer currContainer = getCurrentCellLayout().getShortcutsAndWidgets();
@@ -502,7 +502,7 @@ public class FolderPagedView extends PagedView {
      * Sets the focus on the first visible child.
      */
     public void setFocusOnFirstChild() {
-        if (getCurrentCellLayout() == null) return;//lijun add fixed NullPointException
+        if (getCurrentCellLayout() == null) return;// add fixed NullPointException
         View firstChild = getCurrentCellLayout().getChildAt(0, 0);
         if (firstChild != null) {
             firstChild.requestFocus();
@@ -717,7 +717,7 @@ public class FolderPagedView extends PagedView {
         pos[0] = 0;
         pos[1] = getViewportHeight();
     }
-    //lijun : add for addIcon begin
+    // : add for addIcon begin
     public class FolderAddInfo extends ItemInfo{
 
         public FolderAddInfo(int x, int y) {
@@ -952,7 +952,7 @@ public class FolderPagedView extends PagedView {
         arrangeChildren(views, views.size(), false);
         return rank;
     }
-    //lijun : add for addIcon end
+    // : add for addIcon end
     public void setLastPage(){
         setCurrentPage(getItemCount()/mMaxItemsPerPage);
     }
@@ -962,7 +962,7 @@ public class FolderPagedView extends PagedView {
     }
 
     /**
-     * lijun add for uprelease arrangeicon
+     *  add for uprelease arrangeicon
      * @param ev
      */
     @Override
@@ -1000,7 +1000,7 @@ public class FolderPagedView extends PagedView {
     }
 
     /**
-     * lijun add for uprelease arrangeicon
+     *  add for uprelease arrangeicon
      * @param ev
      * @return
      */
@@ -1017,5 +1017,5 @@ public class FolderPagedView extends PagedView {
         }
         return super.onInterceptTouchEvent(ev);
     }
-    protected boolean isNormalState(){return false;} // lijun add for cycle slide
+    protected boolean isNormalState(){return false;} //  add for cycle slide
 }

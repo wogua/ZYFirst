@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Created by lijun on 17-3-14.
+ * Created by  on 17-3-14.
  */
 public class ZipIconGetter extends IconGetterAbsImpl{
     public static String TAG = ZipIconGetter.class.getSimpleName();

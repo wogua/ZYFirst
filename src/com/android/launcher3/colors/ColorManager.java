@@ -15,7 +15,7 @@ import com.android.launcher3.wallpaperpicker.WallpaperPicker;
 import java.util.ArrayList;
 
 /**
- * Created by lijun on 17-4-5.
+ * Created by  on 17-4-5.
  */
 
 public class ColorManager {

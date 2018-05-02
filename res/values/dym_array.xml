@@ -72,7 +72,7 @@
         <item>com.moji.daling</item>
     </string-array>
 
-    <!-- lijun add for special effect  start -->
+    <!--  add for special effect  start -->
     <string-array name="entries_effect_preference">
         <item>Classic</item>
         <item>Depth Focus</item>
@@ -114,7 +114,7 @@
         <item>@drawable/ic_effects_flip_up</item>
         <item>@drawable/ic_effects_flip_down</item>
     </array>
-    <!-- lijun add for special effect  end -->
+    <!--  add for special effect  end -->
 
 
     <string-array name="layout_selection">

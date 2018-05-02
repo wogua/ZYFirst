@@ -42,7 +42,7 @@
     <color name="all_apps_container_color">#FFF2F2F2</color>
     <color name="all_apps_navbar_color">#28000000</color>
 
-    <color name="spring_loaded_panel_color">#26ffffff</color><!-- lijun modify 40FFFFFF to 26ffffff-->
+    <color name="spring_loaded_panel_color">#26ffffff</color><!--  modify 40FFFFFF to 26ffffff-->
     <color name="spring_loaded_highlighted_panel_border_color">#FFF</color>
 
     <!-- Widgets view -->
@@ -56,7 +56,7 @@
     <!-- Used as a fallback since colorSecondary doesn't exist pre-API 25 -->
     <color name="fallback_secondary_color">#FF37474F</color>
 
-    <!-- lijun add for pageIndicatorCube -->
+    <!--  add for pageIndicatorCube -->
     <color name="celllayout_frame_nail_background_color_light">#80ffffff</color>
     <color name="celllayout_frame_nail_background_color_dark">#26000000</color>
     <color name="celllayout_frame_nail_background_color_translate">#00000000</color>
@@ -64,31 +64,31 @@
     <color name="celllayout_frame_nail_background_color_normal_outline_dark">#26000000</color>
     <color name="celllayout_frame_nail_background_color_normal_outline_light">#66ffffff</color>
 
-    <!-- lijun add for folder -->
+    <!--  add for folder -->
     <color name="workspace_bg_color">#B2000000</color>
 
-    <!-- lijun add for aline button -->
+    <!--  add for aline button -->
     <color name="aline_button_bg_color_light_normal">#ffffffff</color>
     <color name="aline_button_bg_color_light_pressed">#ff999999</color>
     <color name="aline_button_bg_color_dark_normal">#ff000000</color>
     <color name="aline_button_bg_color_dark_pressed">#ff999999</color>
 
     <color name="addscreen_color_normal">#00000000</color>
-    <color name="addscreen_color_pressed">#22ffffff</color><!-- lijun add for addscreen pressed-->
+    <color name="addscreen_color_pressed">#22ffffff</color><!--  add for addscreen pressed-->
 
-    <!-- lijun add for colorchange -->
+    <!--  add for colorchange -->
     <color name="page_indicator_dot_light_color">#804c4c4c  </color>
     <color name="page_indicator_dot_light_color_active">#ff4c4c4c</color>
 
-    <!-- lijun Add for dynamic      -->
+    <!--  Add for dynamic      -->
     <color name="dym_calender_date_text_color">#4a4a4a</color>
     <color name="dym_calender_week_text_color">#fa4856</color>
     <color name="dym_weather_text_color">#ffffff</color>
 
-    <!-- lijun add for theme loading -->
+    <!--  add for theme loading -->
     <color name="theme_loading_bg_color">#ee000000</color>
 
-  <!-- lijun add for special effect -->
+  <!--  add for special effect -->
   <color name="preview_effects_item_title_textcolor">#FFFFFFFF</color>
 
 </resources>

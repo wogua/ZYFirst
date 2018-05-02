@@ -261,7 +261,7 @@
     <!-- Accessibility description for the shortcuts menu shown for an app. -->
 
     <string name="shortcuts_menu_description"><xliff:g id="number_of_shortcuts" example="3">%1$d</xliff:g> shortcuts for <xliff:g id="app_name" example="Messenger">%2$s</xliff:g></string>
-    <!--lijun add-->
+    <!-- add-->
     <string name="folder_import_addicon">Add Apps</string>
     <string name="clock_launcher_label">"Launcher Clock"</string>
     <string name="hide_folder_confirm">Dismiss</string>
@@ -276,11 +276,11 @@
     <string name="appwidget_text">20:24</string>
     <string name="add_widget">Add widget</string>
     <string name="launcher_clock_time_format">"MMMM dd/HH:mm/EEEE/aa"</string>
-    <!-- lijun add for aline button -->
+    <!--  add for aline button -->
     <string name="aline_toast_text">icons alined</string>
     <string name="new_folder_text">New Folder</string>
 
-    <!--lijun add for dym-->
+    <!-- add for dym-->
     <string name="dym_calendar_week_format">EEE</string>
     <string name="default_folder">protruly app</string>
     <string name="default_folder_tools">Tools</string>
@@ -290,13 +290,13 @@
     <string name="xml_default_folder_tools">com.android.zylauncher:string:default_folder_tools</string>
     <string name="xml_other_folder">com.android.zylauncher:string:other_folder</string>
 
-    <!--lijun add for theme change-->
+    <!-- add for theme change-->
     <string name="theme_loding_text">theme loading ...</string>
-    <!--lijun add for special effect-->
+    <!-- add for special effect-->
     <string name="special_effect_setting">Special effects settings</string>
     <string name="cycle_slide">Loop desktop</string>
 
-    <!-- lijun add for uninstall shortcut -->
+    <!--  add for uninstall shortcut -->
     <string name="shortcut_uninstalled">Shortcut \"<xliff:g id="name" example="Browser">%s</xliff:g>\" was removed.</string>
 
     <string name="layout">Layout</string>

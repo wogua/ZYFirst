@@ -98,7 +98,7 @@ public class SpecialEffectPagedView extends SlidePagedView {
         mSharedPref = context.getSharedPreferences(
                 LauncherFiles.SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE);
         mPageAnimType = getSlideEffectMode(context);
-       /* lijun del
+       /*  del
        mSharedPrefListener = new OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
@@ -552,7 +552,7 @@ public class SpecialEffectPagedView extends SlidePagedView {
             centerX = getScrollX() + getWidth() / 2;
         }
         centerY = getScrollY() + childH * 0.6f;
-        //Log.d("lijun", "screen = " + screen+"  percentage = "+ percentage);
+        //Log.d("", "screen = " + screen+"  percentage = "+ percentage);
 
 
         mMatrix.reset();
@@ -654,14 +654,14 @@ public class SpecialEffectPagedView extends SlidePagedView {
                 v.setTranslationX(scrollProgress * (screenWidth + v.getWidth()) / 2);
             }
         } else {
-            /* lijun del
+            /*  del
             if(mLauncher.getWorkspace().inScaleState()){
                 v.setTranslationX(v.getWidth() * (1 - EDIT_SCALE) / 2);
             }*/
             v.setAlpha(0);
         }
 
-        // if (!cellLayout.isLeftPage()) { lijun del
+        // if (!cellLayout.isLeftPage()) {  del
         int count = container.getChildCount();
         for (int i = 0; i < count; i++) {
             View view = container.getChildAt(i);
@@ -671,7 +671,7 @@ public class SpecialEffectPagedView extends SlidePagedView {
             view.setPivotX(view.getWidth() * 0.5f);
             view.setRotationY(-scrollProgress * 180f);
         }
-      /* lijun del
+      /*  del
       } else {
          
             // for life center, apply the transformation on the cell layout
@@ -718,7 +718,7 @@ public class SpecialEffectPagedView extends SlidePagedView {
             canvas.scale((90.0f + angle) / 90.0f, 1.0f);
             canvas.translate(-centerX, -centerY);
         }
-        //Log.d("lijun", "screen = " + screen+"  percentage = "+ percentage);
+        //Log.d("", "screen = " + screen+"  percentage = "+ percentage);
         return true;
     }
 
@@ -846,7 +846,7 @@ public class SpecialEffectPagedView extends SlidePagedView {
             // if (!mLauncher.getWorkspace().inScaleState()){
             cl.setTranslationX(0);
             // }
-            // if (cl.isLeftPage()) lijun del
+            // if (cl.isLeftPage())  del
             //    cl.setRotationY(0);
             cl.setAlpha(1);
             ShortcutAndWidgetContainer container = cl.getShortcutsAndWidgets();
@@ -875,7 +875,7 @@ public class SpecialEffectPagedView extends SlidePagedView {
         }
     }
 
-    // lijun add
+    //  add
     protected int getScaledMeasuredWidth(View child) {
         // This functions are called enough times that it actually makes a difference in the
         // profiler -- so just inline the max() here
@@ -893,7 +893,7 @@ public class SpecialEffectPagedView extends SlidePagedView {
 
         //final int minWidth = mMinimumWidth;
         //final int maxWidth = (minWidth > measuredWidth) ? minWidth : measuredWidth;
-       /* lijun del
+       /*  del
        if(mLauncher.getWorkspace().inScaleState()){
  	   mLayoutScale = EDIT_SCALE;
    	} */

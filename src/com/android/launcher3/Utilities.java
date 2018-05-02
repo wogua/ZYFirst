@@ -554,7 +554,7 @@ public final class Utilities {
     }
 
     /**
-     * lijun add
+     *  add
      */
     public static boolean isSystemApp(String packageName,Context context) {
         PackageManager pm = context.getPackageManager();

@@ -97,7 +97,7 @@ public class DragView extends View {
         mDragLayer = launcher.getDragLayer();
         mDragController = launcher.getDragController();
 
-        final float scale = (bitmap.getWidth() + finalScaleDps) / bitmap.getWidth() * 1.1f;//lijun add for dragview scale
+        final float scale = (bitmap.getWidth() + finalScaleDps) / bitmap.getWidth() * 1.1f;// add for dragview scale
 
         // Set the initial scale to avoid any jumps
         setPivotY(bitmap.getHeight()/2);

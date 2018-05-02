@@ -138,9 +138,9 @@ public class DragLayer extends InsettableFrameLayout {
 
     private TouchController mActiveController;
 
-    //lijun add for upscroll to arrange icon start
+    // add for upscroll to arrange icon start
     UpToReleaseArrangeListener mUpToReleaseArrangeListener;
-    //lijun add for upscroll to arrange icon end
+    // add for upscroll to arrange icon end
     /**
      * Used to create a new DragLayer from XML.
      *
@@ -172,7 +172,7 @@ public class DragLayer extends InsettableFrameLayout {
         boolean isAccessibilityEnabled = ((AccessibilityManager) mLauncher.getSystemService(
                 Context.ACCESSIBILITY_SERVICE)).isEnabled();
         onAccessibilityStateChanged(isAccessibilityEnabled);
-        mUpToReleaseArrangeListener = new UpToReleaseArrangeListener(mLauncher);//lijun add for upscroll to arrange icon
+        mUpToReleaseArrangeListener = new UpToReleaseArrangeListener(mLauncher);// add for upscroll to arrange icon
     }
 
     public ViewGroupFocusHelper getFocusIndicatorHelper() {
@@ -185,12 +185,12 @@ public class DragLayer extends InsettableFrameLayout {
     }
 
     public void onAccessibilityStateChanged(boolean isAccessibilityEnabled) {
-        //lijun modify start
+        // modify start
 //        mPinchListener = FeatureFlags.LAUNCHER3_DISABLE_PINCH_TO_OVERVIEW || isAccessibilityEnabled
 //                ? null : new PinchToOverviewListener(mLauncher);
         mPinchListener = FeatureFlags.LAUNCHER3_DISABLE_PINCH_TO_OVERVIEW
                 ? null : new PinchToOverviewListener(mLauncher);
-        //lijun modify end
+        // modify end
     }
 
     public boolean isEventOverPageIndicator(MotionEvent ev) {
@@ -340,11 +340,11 @@ public class DragLayer extends InsettableFrameLayout {
             return true;
         }
 
-        //lijun add for upscroll to arrange icon
+        // add for upscroll to arrange icon
         if (mLauncher.isLauncherArrangeMode() && mUpToReleaseArrangeListener != null && mUpToReleaseArrangeListener.onInterceptTouchEvent(ev)) {
             return true;
         }
-        //lijun add end
+        // add end
         return false;
     }
 
@@ -794,11 +794,11 @@ public class DragLayer extends InsettableFrameLayout {
                 if (onFinishAnimationRunnable != null) {
                     onFinishAnimationRunnable.run();
                 }
-                //lijun add for uninstallMode begin
+                // add for uninstallMode begin
                 if(mLauncher.isUninstallMode&&child!=null && child instanceof UninstallMode) {
                     UninstallMode uninstallAnimationView = (UninstallMode) child;
                     uninstallAnimationView.showUninstallApp();
-                    //lijun add for uninstallMode end
+                    // add for uninstallMode end
                 }
             }
         };
@@ -963,7 +963,7 @@ public class DragLayer extends InsettableFrameLayout {
         mDropView = null;
         invalidate();
     }
-//lijun add for clearing drop animated bgein
+// add for clearing drop animated bgein
     public void clearAnimatedView(DragView dragView) {
         if (mDropAnim != null) {
             mDropAnim.cancel();
@@ -974,7 +974,7 @@ public class DragLayer extends InsettableFrameLayout {
         mDropView = null;
         invalidate();
     }
-//lijun add for clearing drop animated end
+// add for clearing drop animated end
     public View getAnimatedView() {
         return mDropView;
     }
@@ -1348,7 +1348,7 @@ public class DragLayer extends InsettableFrameLayout {
         animateView2(view, from, to, finalAlpha, initScaleX, initScaleY, finalScaleX, finalScaleY, duration,
                 null, null, onCompleteRunnable, animationEndStyle, anchorView);
     }
-//lijun add animate of drop icon in arrange mode begin
+// add animate of drop icon in arrange mode begin
     public void animateViewIntoPosition3(DragView dragView, final View child,
                                          final Runnable onFinishAnimationRunnable, View anchorView) {
         animateViewIntoPosition3(dragView, child, -1, onFinishAnimationRunnable, anchorView);
@@ -1521,7 +1521,7 @@ public class DragLayer extends InsettableFrameLayout {
         animateViewIntoPosition2(dragView, fromX, fromY, toX, toY, 1, 1, 1, toScale, toScale,
                 onCompleteRunnable, ANIMATION_END_DISAPPEAR, duration, anchorView);
     }
-//lijun add animate of drop icon in arrange mode end
+// add animate of drop icon in arrange mode end
     /**
      * This method animates a view at the end of a drag and drop animation.
      *
@@ -1661,7 +1661,7 @@ public class DragLayer extends InsettableFrameLayout {
     class CustomAnimation extends ValueAnimator{
         public DragView dragView;
     }
-    //lijun add
+    // add
     public TouchController getActiveController() {
         return mActiveController;
     }

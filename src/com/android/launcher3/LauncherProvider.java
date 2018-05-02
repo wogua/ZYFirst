@@ -835,7 +835,7 @@ public class LauncherProvider extends ContentProvider {
                     }
                     return;
                 }
-                //lijun add for unread start
+                // add for unread start
                 case 29:{
                     db.beginTransaction();
                     try {
@@ -852,7 +852,7 @@ public class LauncherProvider extends ContentProvider {
                     }
                     return;
                 }
-                //lijun add for unread end
+                // add for unread end
             }
 
             // DB was not upgraded
@@ -1193,7 +1193,7 @@ public class LauncherProvider extends ContentProvider {
         }
     }
     /**
-     * lijun add for  clearIconsFromDb
+     *  add for  clearIconsFromDb
      */
     public void clearIcons(){
         SQLiteDatabase db = mOpenHelper.getWritableDatabase();

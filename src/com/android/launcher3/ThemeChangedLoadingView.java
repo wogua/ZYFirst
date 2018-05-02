@@ -14,7 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 /**
- * Created by lijun on 17-6-29.
+ * Created by  on 17-6-29.
  */
 
 public class ThemeChangedLoadingView extends FrameLayout {

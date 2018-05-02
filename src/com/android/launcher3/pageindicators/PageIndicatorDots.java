@@ -52,15 +52,15 @@ public class PageIndicatorDots extends PageIndicator implements ColorManager.IWa
 
     private static final float SHIFT_PER_ANIMATION = 0.5f;
     private static final float SHIFT_THRESHOLD = 0.1f;
-    private static final long ANIMATION_DURATION = 0;//lijun 0>>150
-    //lijun add start
+    private static final long ANIMATION_DURATION = 0;// 0>>150
+    // add start
     private static final float GAP_COEFFICIENT_MAX = 2.5f;
     private static final float GAP_COEFFICIENT_MIN = 0.25f;
     private float gapCoefficient = GAP_COEFFICIENT_MAX;
-    //lijun add end
+    // add end
 
-    private static final int ENTER_ANIMATION_START_DELAY = 0;//lijun 0>>300
-    private static final int ENTER_ANIMATION_STAGGERED_DELAY = 0;//lijun 0>>150
+    private static final int ENTER_ANIMATION_START_DELAY = 0;// 0>>300
+    private static final int ENTER_ANIMATION_STAGGERED_DELAY = 0;// 0>>150
     private static final int ENTER_ANIMATION_DURATION = 400;
 
     // This value approximately overshoots to 1.5 times the original size.
@@ -68,13 +68,13 @@ public class PageIndicatorDots extends PageIndicator implements ColorManager.IWa
 
     private static final RectF sTempRect = new RectF();
 
-    //lijun add for move to default screen start
+    // add for move to default screen start
     private boolean isAnimationgToDefault = false;
     private long currentDuration = ANIMATION_DURATION;
     private int currentIndex,lastIndex;
     private int parentWidth;
     Launcher mLauncher;
-    //lijun add end
+    // add end
 
     private static final Property<PageIndicatorDots, Float> CURRENT_POSITION
             = new Property<PageIndicatorDots, Float>(float.class, "current_position") {
@@ -145,14 +145,14 @@ public class PageIndicatorDots extends PageIndicator implements ColorManager.IWa
         setOutlineProvider(new MyOutlineProver());
 
         //mActiveColor = Utilities.getColorAccent(context);
-        //lijun modify for colorchange
-//        mActiveColor = getResources().getColor(R.color.page_indicator_dot_color_active);//lijun add
+        // modify for colorchange
+//        mActiveColor = getResources().getColor(R.color.page_indicator_dot_color_active);// add
 //        mInActiveColor = getResources().getColor(R.color.page_indicator_dot_color);
         if (ColorManager.getInstance().isBlackText()) {
-            mActiveColor = getResources().getColor(R.color.page_indicator_dot_light_color_active);//lijun add
+            mActiveColor = getResources().getColor(R.color.page_indicator_dot_light_color_active);// add
             mInActiveColor = getResources().getColor(R.color.page_indicator_dot_light_color);
         } else {
-            mActiveColor = getResources().getColor(R.color.page_indicator_dot_color_active);//lijun add
+            mActiveColor = getResources().getColor(R.color.page_indicator_dot_color_active);// add
             mInActiveColor = getResources().getColor(R.color.page_indicator_dot_color);
         }
 
@@ -161,16 +161,16 @@ public class PageIndicatorDots extends PageIndicator implements ColorManager.IWa
         }else {
             mLauncher = Launcher.getLauncher(context);
         }
-        //lijun modify end
+        // modify end
 
         mIsRtl = Utilities.isRtl(getResources());
-        setCaretDrawable(new CaretDrawable(context));//lijun add for pageindicator
+        setCaretDrawable(new CaretDrawable(context));// add for pageindicator
     }
 
     @Override
     public void setScroll(int currentScroll, int totalScroll) {
         if (mNumPages > 1) {
-            //lijun modify start
+            // modify start
             /*if (mIsRtl) {
                 currentScroll = totalScroll - currentScroll;
             }
@@ -188,7 +188,7 @@ public class PageIndicatorDots extends PageIndicator implements ColorManager.IWa
                 animateToPostion(mActivePage);
             }*/
             animateToPostion(mActivePage);
-            //lijun modify end
+            // modify end
         }
     }
 
@@ -196,7 +196,7 @@ public class PageIndicatorDots extends PageIndicator implements ColorManager.IWa
         mFinalPosition = position;
         if (Math.abs(mCurrentPosition - mFinalPosition) < SHIFT_THRESHOLD) {
             mCurrentPosition = mFinalPosition<0?0:mFinalPosition;
-            isAnimationgToDefault = false;//lijun add for move to default screen
+            isAnimationgToDefault = false;// add for move to default screen
         }
         if (mAnimator == null && Float.compare(mCurrentPosition, mFinalPosition) != 0) {
             float positionForThisAnim = mCurrentPosition > mFinalPosition ?
@@ -204,7 +204,7 @@ public class PageIndicatorDots extends PageIndicator implements ColorManager.IWa
             mAnimator = ObjectAnimator.ofFloat(this, CURRENT_POSITION, positionForThisAnim);
             mAnimator.addListener(mAnimCycleListener);
 
-            mAnimator.setDuration(isAnimationgToDefault?currentDuration:ANIMATION_DURATION);//lijun add isAnimationgToDefault?currentDuration:
+            mAnimator.setDuration(isAnimationgToDefault?currentDuration:ANIMATION_DURATION);// add isAnimationgToDefault?currentDuration:
             mAnimator.start();
         }
     }
@@ -212,7 +212,7 @@ public class PageIndicatorDots extends PageIndicator implements ColorManager.IWa
     public void animateToDefaultPostion(float position) {
         if (position != mActivePage && Math.abs(mActivePage - position) > 1) {
             currentDuration = (long) (ANIMATION_DURATION/(Math.abs(mActivePage-position)));
-            isAnimationgToDefault = true;//lijun add for move to default screen
+            isAnimationgToDefault = true;// add for move to default screen
         }
     }
 
@@ -351,10 +351,10 @@ public class PageIndicatorDots extends PageIndicator implements ColorManager.IWa
     }
 
     private RectF getActiveRect() {
-        //lijun modify start
+        // modify start
         float startCircle = (int) mCurrentPosition;
         //float startCircle = mCurrentPosition >= 0 ? (int) mCurrentPosition : (int) mCurrentPosition ;
-        //lijun modify end
+        // modify end
         float delta = mCurrentPosition - startCircle;
         float diameter = 2 * mDotRadius;
         float circleGap = mDotRadius*(gapCoefficient+2);
@@ -365,7 +365,7 @@ public class PageIndicatorDots extends PageIndicator implements ColorManager.IWa
         sTempRect.left = startX + startCircle * circleGap;
         sTempRect.right = sTempRect.left + diameter;
         /*
-        lijun remove dot animation begin
+         remove dot animation begin
          */
 /*        if (delta < SHIFT_PER_ANIMATION) {
             // dot is capturing the right circle.
@@ -378,7 +378,7 @@ public class PageIndicatorDots extends PageIndicator implements ColorManager.IWa
             sTempRect.left += delta * circleGap * 2;
         }*/
          /*
-        lijun remove dot animation end
+         remove dot animation end
          */
         if (mIsRtl) {
             float rectWidth = sTempRect.width();
@@ -425,10 +425,10 @@ public class PageIndicatorDots extends PageIndicator implements ColorManager.IWa
     @Override
     public void onColorChange(int[] colors) {
         if (ColorManager.getInstance().isBlackText()) {
-            mActiveColor = getResources().getColor(R.color.page_indicator_dot_light_color_active);//lijun add
+            mActiveColor = getResources().getColor(R.color.page_indicator_dot_light_color_active);// add
             mInActiveColor = getResources().getColor(R.color.page_indicator_dot_light_color);
         } else {
-            mActiveColor = getResources().getColor(R.color.page_indicator_dot_color_active);//lijun add
+            mActiveColor = getResources().getColor(R.color.page_indicator_dot_color_active);// add
             mInActiveColor = getResources().getColor(R.color.page_indicator_dot_color);
         }
         invalidate();
@@ -438,10 +438,10 @@ public class PageIndicatorDots extends PageIndicator implements ColorManager.IWa
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         if (ColorManager.getInstance().isBlackText()) {
-            mActiveColor = getResources().getColor(R.color.page_indicator_dot_light_color_active);//lijun add
+            mActiveColor = getResources().getColor(R.color.page_indicator_dot_light_color_active);// add
             mInActiveColor = getResources().getColor(R.color.page_indicator_dot_light_color);
         } else {
-            mActiveColor = getResources().getColor(R.color.page_indicator_dot_color_active);//lijun add
+            mActiveColor = getResources().getColor(R.color.page_indicator_dot_color_active);// add
             mInActiveColor = getResources().getColor(R.color.page_indicator_dot_color);
         }
         invalidate();
@@ -454,7 +454,7 @@ public class PageIndicatorDots extends PageIndicator implements ColorManager.IWa
         ColorManager.getInstance().removeWallpaperCallback(this);
     }
 
-    //lijun add
+    // add
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (mNumPages <= 0 || mPagedView == null || !isVisible()) return false;

@@ -38,7 +38,7 @@ import com.android.launcher3.widget.PendingAddWidgetInfo;
 import java.util.ArrayList;
 
 /**
- * Created by lijun on 17-3-1.
+ * Created by  on 17-3-1.
  */
 
 public class PageIndicatorCube extends LinearLayout implements DropTarget {
@@ -644,11 +644,11 @@ public class PageIndicatorCube extends LinearLayout implements DropTarget {
                         target[2] = minSpanX;
                         target[3] = minSpanY;
                         mWorkspace.refreshviewCache(mWorkspace.getPageIndexForScreenId(screenId), target, null, false);
-                        // lijun add for hotseat icon center start
+                        //  add for hotseat icon center start
                         if (mWorkspace.dragFromHotseat(dragObject.dragInfo)) {
                             mLauncher.getHotseat().onDrop(true, dragObject.x,dragObject.y, null, cell, false);
                         }
-                        // lijun add for hotseat icon center end
+                        //  add for hotseat icon center end
                     }
 
                     // update the item's position after drop
@@ -688,7 +688,7 @@ public class PageIndicatorCube extends LinearLayout implements DropTarget {
                     mTargetCell[0] = lp.cellX;
                     mTargetCell[1] = lp.cellY;
 
-                    // lijun modify for hotseat icon center start
+                    //  modify for hotseat icon center start
                     CellLayout layout = null;
                     if (cell.getParent() != null) {
                         layout = (CellLayout) cell.getParent().getParent();
@@ -700,18 +700,18 @@ public class PageIndicatorCube extends LinearLayout implements DropTarget {
 
                     //CellLayout layout = (CellLayout) cell.getParent().getParent();
                     //layout.markCellsAsOccupiedForView(cell);
-                    // lijun modify for hotseat icon center end
-                    returnDragViewToHotseat(dragObject, cell, info); // lijun add for hotseat icon center
+                    //  modify for hotseat icon center end
+                    returnDragViewToHotseat(dragObject, cell, info); //  add for hotseat icon center
                 }
             }else{
-            // lijun add for hotseat icon center start
+            //  add for hotseat icon center start
 			  returnDragViewToHotseat(dragObject, cell, info); 	
             }
 
             if (cell.getParent() == null || cell.getParent().getParent() == null) {
                 return;
             }
-            // lijun add for hotseat icon center end
+            //  add for hotseat icon center end
 
             final CellLayout parent = (CellLayout) cell.getParent().getParent();
             // Prepare it to be animated into its new position
@@ -785,10 +785,10 @@ public class PageIndicatorCube extends LinearLayout implements DropTarget {
 //            mLauncher.getHotseat().onExitHotseat(v,CellLayout.MODE_DRAG_OVER);
         }
 
-        // lijun add for hotseat icon center start
+        //  add for hotseat icon center start
         boolean isDragFromHotseat = mWorkspace.dragFromHotseat(dragObject.dragInfo);
         mLauncher.getHotseat().onExitHotseat(isDragFromHotseat);
-        // lijun add for hotseat icon center end
+        //  add for hotseat icon center end
 
     }
 
@@ -1057,7 +1057,7 @@ public class PageIndicatorCube extends LinearLayout implements DropTarget {
             if (cell.getParent() == null || cell.getParent().getParent() == null) {
                 dragObject.deferDragViewCleanupPostAnimation = false;
                 cell.setVisibility(VISIBLE);
-                returnDragViewToHotseat(dragObject, cell, info); // lijun add for hotseat icon center
+                returnDragViewToHotseat(dragObject, cell, info); //  add for hotseat icon center
                 return;
             }
             final View parent = (View) cell.getParent().getParent();
@@ -1080,7 +1080,7 @@ public class PageIndicatorCube extends LinearLayout implements DropTarget {
                         mWorkspace.refreshSourceViewCache();
                     }
                 } else if (parent instanceof ShortcutAndWidgetContainer) {
-                    //lijun need here 这里拖拽view弹会到widget容器的动画后面补充
+                    // need here 这里拖拽view弹会到widget容器的动画后面补充
                     dragObject.deferDragViewCleanupPostAnimation = false;
                     cell.setVisibility(VISIBLE);
                 } else {
@@ -1092,7 +1092,7 @@ public class PageIndicatorCube extends LinearLayout implements DropTarget {
                 dragObject.deferDragViewCleanupPostAnimation = false;
                 cell.setVisibility(VISIBLE);
             }
-            returnDragViewToHotseat(dragObject, cell, info); // lijun add for hotseat icon center
+            returnDragViewToHotseat(dragObject, cell, info); //  add for hotseat icon center
         }
 
     }
@@ -1296,7 +1296,7 @@ public class PageIndicatorCube extends LinearLayout implements DropTarget {
         return mLauncher.isUnInstallMode() && (getVisibility() == VISIBLE) && (getAlpha() > 0.01f);
     }
 
-    // lijun add for hotseat icon center start
+    //  add for hotseat icon center start
     public void returnDragViewToHotseat(DragObject dragObject, final View cell, final ItemInfo info) {
 
         if (mWorkspace.dragFromHotseat(dragObject.dragInfo)) {
@@ -1310,7 +1310,7 @@ public class PageIndicatorCube extends LinearLayout implements DropTarget {
         }
         
     }
-    // lijun add for hotseat icon center end
+    //  add for hotseat icon center end
 
     @Override
     public void setVisibility(int visibility) {

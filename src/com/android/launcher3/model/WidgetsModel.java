@@ -56,11 +56,11 @@ public class WidgetsModel {
 
     private ArrayList<WidgetItem> mRawList;
 
-    //add by lijun start
+    //add by  start
     private Context mContext;
     private AppNameComparator lableComparator;
     private boolean isSpeakEnglish;
-    //add by lijun end
+    //add by  end
 
     public WidgetsModel(Context context,  IconCache iconCache, AppFilter appFilter) {
         mAppWidgetMgr = AppWidgetManagerCompat.getInstance(context);
@@ -73,10 +73,10 @@ public class WidgetsModel {
 
         mRawList = new ArrayList<>();
 
-        //add by lijun start
+        //add by  start
         mContext = context;
         lableComparator = new AppNameComparator(context);
-        //add by lijun end
+        //add by  end
     }
 
     @SuppressWarnings("unchecked")
@@ -124,13 +124,13 @@ public class WidgetsModel {
             // Widgets
             AppWidgetManagerCompat widgetManager = AppWidgetManagerCompat.getInstance(context);
             for (AppWidgetProviderInfo widgetInfo : widgetManager.getAllProviders()) {
-                //lijun add start
+                // add start
                 if(widgetInfo.minWidth < 0 || widgetInfo.minHeight < 0) {
                     Log.e("LAUNCHER_DEBUG", "WidgetsModel updateAndClone minWidth or minHeight < 0, widgetInfo label=" + widgetInfo.label + ", minWidth="
                             + widgetInfo.minWidth + ", minHeight=" + widgetInfo.minHeight + ", provider = " + widgetInfo.provider);
                     continue;
                 }
-                //lijun add end
+                // add end
                 widgetsAndShortcuts.add(new WidgetItem(
                         LauncherAppWidgetProviderInfo.fromProviderInfo(context, widgetInfo),
                         widgetManager));
@@ -227,14 +227,14 @@ public class WidgetsModel {
         }
 
         // sort the package entries.
-        //lijun modify start
+        // modify start
 //        Collections.sort(mPackageItemInfos, mAppNameComparator);
         sortBySystemOrThirdPart();
-        //lijun modify end
+        // modify end
     }
 
     /**
-     * lijun add start
+     *  add start
      */
     private void sortBySystemOrThirdPart(){
         if(mPackageItemInfos == null || mPackageItemInfos.size()<=0)return;
@@ -282,7 +282,7 @@ public class WidgetsModel {
         }
     }
     /**
-     * lijun add end
+     *  add end
      */
 
     /**

@@ -143,7 +143,7 @@ public abstract class FocusIndicatorHelper implements
     }
 
     private Rect getDrawRect() {
-        if (mCurrentView != null && mCurrentView.getParent()!=null) {//lijun add  '&& mCurrentView.getParent()!=null' for nullpoint exception for bug:257
+        if (mCurrentView != null && mCurrentView.getParent()!=null) {// add  '&& mCurrentView.getParent()!=null' for nullpoint exception for bug:257
             viewToRect(mCurrentView, sTempRect1);
 
             if (mShift > 0 && mTargetView != null) {

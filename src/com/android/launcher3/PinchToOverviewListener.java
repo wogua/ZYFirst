@@ -172,7 +172,7 @@ public class PinchToOverviewListener extends ScaleGestureDetector.SimpleOnScaleG
         mAnimationManager.animateToProgress(currentProgress, toProgress, duration,
                 mThresholdManager);
         mPinchStarted = false;
-        mWorkspace.isHotseatAnimating = false;//lijun add
+        mWorkspace.isHotseatAnimating = false;// add
     }
 
     @Override
@@ -216,7 +216,7 @@ public class PinchToOverviewListener extends ScaleGestureDetector.SimpleOnScaleG
         mPreviousTimeMillis = System.currentTimeMillis();
         return false;
     }
-    //lijun add
+    // add
     public boolean isPinchStarted() {
         return mPinchStarted;
     }

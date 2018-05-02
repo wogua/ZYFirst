@@ -16,7 +16,7 @@ import android.support.v7.graphics.Palette;
 import android.util.Log;
 
 /**
- * Created by lijun on 16-11-9.
+ * Created by  on 16-11-9.
  */
 public class PhotoUtils {
     public static Bitmap drawable2bitmap(Drawable dw) {

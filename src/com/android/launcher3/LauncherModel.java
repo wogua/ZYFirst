@@ -116,8 +116,8 @@ public class LauncherModel extends BroadcastReceiver
     private static final int ITEMS_CHUNK = 6; // batch size for the workspace icons
     private static final long INVALID_SCREEN_ID = -1L;
 
-    public boolean reloadForThemechanged = false;//lijun add for themechanged
-    private String[] currentTheme = new String[2];//lijun add for themechanged
+    public boolean reloadForThemechanged = false;// add for themechanged
+    private String[] currentTheme = new String[2];// add for themechanged
     private String currentThemeId = null;
 
     @Thunk final LauncherAppState mApp;
@@ -185,7 +185,7 @@ public class LauncherModel extends BroadcastReceiver
     //       shortcuts within folders).
     static final ArrayList<ItemInfo> sBgWorkspaceItems = new ArrayList<ItemInfo>();
 
-    static final ArrayList<ItemInfo> sHideAppItems = new ArrayList<ItemInfo>();//lijun add
+    static final ArrayList<ItemInfo> sHideAppItems = new ArrayList<ItemInfo>();// add
 
     // sBgAppWidgets is all LauncherAppWidgetInfo created by LauncherModel. Passed to bindAppWidget()
     static final ArrayList<LauncherAppWidgetInfo> sBgAppWidgets =
@@ -419,7 +419,7 @@ public class LauncherModel extends BroadcastReceiver
                 occupied.markCells(r, true);
             }
         }
-        //modify by lijun For icon Install
+        //modify by  For icon Install
         boolean finalOccupiedFlag = false;
         for(int y = profile.numRows -1; y >= 0; y--){
             for(int x = profile.numColumns-1; x >= 0; x--){
@@ -597,7 +597,7 @@ public class LauncherModel extends BroadcastReceiver
     }
 
     /**
-     * lijun add for launch on first screen default
+     *  add for launch on first screen default
      * Adds the provided items to the workspace.
      */
     public void addAndBindAddedWorkspaceItemsNoAnimal(final Context context,
@@ -696,7 +696,7 @@ public class LauncherModel extends BroadcastReceiver
         }
     }
 
-    //lijun add
+    // add
     public static void updateItemInfo(final ItemInfo item) {
         if (item == null) return;
         ItemInfo modelItem = sBgItemsIdMap.get(item.id);
@@ -713,7 +713,7 @@ public class LauncherModel extends BroadcastReceiver
         ItemInfo modelItem = sBgItemsIdMap.get(itemId);
         if (modelItem != null && item != modelItem) {
             // check all the data is consistent
-            String why = "";//lijun add to trace bug
+            String why = "";// add to trace bug
             if (modelItem instanceof ShortcutInfo && item instanceof ShortcutInfo) {
                 ShortcutInfo modelShortcut = (ShortcutInfo) modelItem;
                 ShortcutInfo shortcut = (ShortcutInfo) item;
@@ -1007,7 +1007,7 @@ public class LauncherModel extends BroadcastReceiver
     @Thunk boolean shortcutExists(Context context, Intent intent, UserHandleCompat user) {
         assertWorkspaceLoaded();
         final String intentWithPkg, intentWithoutPkg;
-        final String component,dualComponent;//lijun add
+        final String component,dualComponent;// add
         if (intent.getComponent() != null) {
             // If component is not null, an intent with null package will produce
             // the same result and should also be a match.
@@ -1019,11 +1019,11 @@ public class LauncherModel extends BroadcastReceiver
                 intentWithPkg = new Intent(intent).setPackage(packageName).toUri(0);
                 intentWithoutPkg = intent.toUri(0);
             }
-            component = intent.getComponent().toString();//lijun add
+            component = intent.getComponent().toString();// add
         } else {
             intentWithPkg = intent.toUri(0);
             intentWithoutPkg = intent.toUri(0);
-            component = "";//lijun add
+            component = "";// add
         }
 
         if(intent.getAction() == "com.lbe.parallel.ACTION_LAUNCH_PACKAGE"){
@@ -1046,7 +1046,7 @@ public class LauncherModel extends BroadcastReceiver
                             targetIntent.setSourceBounds(sourceBounds);
                             return true;
                         }
-                        //lijun add start
+                        // add start
                         if(intent.getAction() == "com.lbe.parallel.ACTION_LAUNCH_PACKAGE" && targetIntent.getAction() == "com.lbe.parallel.ACTION_LAUNCH_PACKAGE"){
                             if(dualComponent.equals(targetIntent.getStringExtra("EXTRA_LAUNCH_PACKAGE"))){
                                 targetIntent.setSourceBounds(sourceBounds);
@@ -1056,7 +1056,7 @@ public class LauncherModel extends BroadcastReceiver
 							targetIntent.setSourceBounds(sourceBounds);
                             return true;
                         }
-                        //lijun add end
+                        // add end
                         targetIntent.setSourceBounds(sourceBounds);
                     }
                 }
@@ -1433,7 +1433,7 @@ public class LauncherModel extends BroadcastReceiver
             }
         } else if (Intent.ACTION_WALLPAPER_CHANGED.equals(action)) {
             ExtractionUtils.startColorExtractionServiceIfNecessary(context);
-        }else if ("com.hb.theme.ACTION_THEME_CHANGE".equals(action)) {//lijun add for themechanged
+        }else if ("com.hb.theme.ACTION_THEME_CHANGE".equals(action)) {// add for themechanged
 //            Log.e("LauncherModel","LauncherModel onReceive com.hb.theme.ACTION_THEME_CHANGE : " +this +", Pid:" + Process.myPid());
 
             String themeId = intent.getStringExtra("themeId");
@@ -1459,7 +1459,7 @@ public class LauncherModel extends BroadcastReceiver
 
 //            currentTheme = themenv;
             reloadForThemechanged = true;
-            //lijun add for themechanged start
+            // add for themechanged start
             final Callbacks callbacks = getCallback();
             if(callbacks !=null && callbacks instanceof Launcher){
                 Launcher launcher = (Launcher)callbacks;
@@ -1476,7 +1476,7 @@ public class LauncherModel extends BroadcastReceiver
                     }
                 });
             }
-            //lijun add for themechanged end
+            // add for themechanged end
 
             forceReload();
         }else if("com.zylauncher.ACTION_LAYOUT_CHANGE".equals(action)){
@@ -1736,7 +1736,7 @@ public class LauncherModel extends BroadcastReceiver
                 if (DEBUG_LOADERS) Log.d(TAG, "step 1: loading workspace");
                 loadAndBindWorkspace();
 
-                //lijun add for themechanged start
+                // add for themechanged start
                 final Callbacks callbacks = getCallback();
                 if(callbacks !=null && callbacks instanceof Launcher){
                     runOnMainThread(new Runnable() {
@@ -1746,7 +1746,7 @@ public class LauncherModel extends BroadcastReceiver
                         }
                     });
                 }
-                //lijun add for themechanged end
+                // add for themechanged end
 
                 if (mStopped) {
                     break keep_running;
@@ -1932,7 +1932,7 @@ public class LauncherModel extends BroadcastReceiver
             int countX = profile.numColumns;
             int countY = profile.numRows;
 
-            HideAppNavigationBar.loadHideAppsFromPrf(context);//lijun add
+            HideAppNavigationBar.loadHideAppsFromPrf(context);// add
 
             boolean clearDb = false;
             try {
@@ -4037,21 +4037,21 @@ public class LauncherModel extends BroadcastReceiver
     /**parameter
      * Make an ShortcutInfo object for a shortcut that isn't an application.
      */
-    public void loadInfoFromCursor(ShortcutInfo info, Cursor c, CursorIconInfo iconInfo,Intent intent) {//lijun add the parameter of Intent
+    public void loadInfoFromCursor(ShortcutInfo info, Cursor c, CursorIconInfo iconInfo,Intent intent) {// add the parameter of Intent
         info.title = iconInfo.getTitle(c);
         Bitmap icon = iconInfo.loadIcon(c, info);
        /* if(icon!=null){
             icon=normalizeIcon(icon);
         }*/
         // the fallback icon
-         //lijun add for dual icon begin
+         // add for dual icon begin
         if (intent.getAction() == "com.lbe.parallel.ACTION_LAUNCH_PACKAGE") {
             UserHandle user = info.user.getUser();
             String dualComponent = null;
             dualComponent = intent.getStringExtra("EXTRA_LAUNCH_PACKAGE");
             icon = mIconCache.getIconProvider().getIconFromPackageName(dualComponent, user);
         }
-        //lijun add for dual icon end
+        // add for dual icon end
         if (icon == null) {
             icon = mIconCache.getDefaultIcon(info.user);
             info.usingFallbackIcon = true;
@@ -4098,11 +4098,11 @@ public class LauncherModel extends BroadcastReceiver
         // Only support intents for current user for now. Intents sent from other
         // users wouldn't get here without intent forwarding anyway.
         info.user = UserHandleCompat.myUserHandle();
-      /*  lijun add for normalization icon begin
+      /*   add for normalization icon begin
         if(icon!=null) {
             icon=normalizeIcon(icon);
         }
-        lijun add for normalization icon end*/
+         add for normalization icon end*/
         if (icon == null) {
             icon = mIconCache.getDefaultIcon(info.user);
             info.usingFallbackIcon = true;
@@ -4197,10 +4197,10 @@ public class LauncherModel extends BroadcastReceiver
             }
         }
         if (!added.isEmpty()) {
-            //lijun modify for launch on first screen default
+            // modify for launch on first screen default
 //            addAndBindAddedWorkspaceItems(context, added);
             addAndBindAddedWorkspaceItemsNoAnimal(context, added);
-            //lijun modify end
+            // modify end
         }
     }
 
@@ -4216,7 +4216,7 @@ public class LauncherModel extends BroadcastReceiver
     public boolean isAllAppsLoaded() {
         return mAllAppsLoaded;
     }
-    //lijun add for normalization icon begin
+    // add for normalization icon begin
     private Bitmap normalizeIcon(Bitmap icon) {
         if (icon != null) {
             BitmapDrawable drawable = new BitmapDrawable(mIconCache.normalizeIcons(icon));
@@ -4227,9 +4227,9 @@ public class LauncherModel extends BroadcastReceiver
         return null;
     }
 
-    //lijun add for normalization icon end
+    // add for normalization icon end
 
-    //lijun add start for unread
+    // add start for unread
     public ArrayList<String> getCustomShortcutIds(Context context, String pkg) {
         if (pkg == null) return null;
         final ContentResolver contentResolver = context.getContentResolver();
@@ -4259,7 +4259,7 @@ public class LauncherModel extends BroadcastReceiver
         return customShortcutIds;
     }
 
-    //lijun add end for unread
+    // add end for unread
     public void checkDualItem(Intent intent) {
         for (final ItemInfo info : sBgItemsIdMap) {
             Intent infoIntent = info.getIntent();

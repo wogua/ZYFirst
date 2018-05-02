@@ -98,7 +98,7 @@ public class WidgetPreviewLoader {
         WidgetCacheKey key = new WidgetCacheKey(item.componentName, item.user, size);
 
         PreviewLoadTask task = new PreviewLoadTask(key, item, previewWidth, previewHeight, caller);
-        task.executeOnExecutor(Utilities.THREAD_POOL_EXECUTOR);//lijun need here maybe SERIAL_EXECUTOR
+        task.executeOnExecutor(Utilities.THREAD_POOL_EXECUTOR);// need here maybe SERIAL_EXECUTOR
         return new PreviewLoadRequest(task);
     }
 
@@ -275,12 +275,12 @@ public class WidgetPreviewLoader {
     private Bitmap generatePreview(Launcher launcher, WidgetItem item, Bitmap recycle,
             int previewWidth, int previewHeight) {
         if (item.widgetInfo != null) {
-            //lijun modify start
+            // modify start
 //            return generateWidgetPreview(launcher, item.widgetInfo,
 //                    previewWidth, recycle, null);
             return generateWidgetPageViewPreview(launcher, item.widgetInfo,
                     previewWidth, recycle, null);
-            //lijun modify end
+            // modify end
         } else {
             return generateShortcutPreview(launcher, item.activityInfo,
                     previewWidth, previewHeight, recycle);
@@ -413,7 +413,7 @@ public class WidgetPreviewLoader {
 
 
     /**
-     * lijun add for widgetsPageview
+     *  add for widgetsPageview
      */
     public Bitmap generateWidgetPageViewPreview(Launcher launcher, LauncherAppWidgetProviderInfo info,
                                         int maxPreviewWidth, Bitmap preview, int[] preScaledWidthOut) {
@@ -573,7 +573,7 @@ public class WidgetPreviewLoader {
         Drawable icon = mutateOnMainThread(mIconCache.getFullResIcon(info));
         icon.setFilterBitmap(true);
 
-        //lijun remove
+        // remove
         // Draw a desaturated/scaled version of the icon in the background as a watermark
 //        ColorMatrix colorMatrix = new ColorMatrix();
 //        colorMatrix.setSaturation(0);
@@ -588,17 +588,17 @@ public class WidgetPreviewLoader {
 //        icon.setBounds(paddingLeft, paddingTop,
 //                paddingLeft + scaledIconWidth, paddingTop + scaledIconWidth);
 //        icon.draw(c);
-        //lijun remove end
+        // remove end
         // Draw the final icon at top left corner.
         // TODO: use top right for RTL
         int appIconSize = launcher.getDeviceProfile().iconSizePx;
 
         icon.setAlpha(255);
         icon.setColorFilter(null);
-        //lijun modify start
+        // modify start
 //        icon.setBounds(0, 0, appIconSize, appIconSize);
         icon.setBounds(mProfileBadgeMargin, mProfileBadgeMargin, maxWidth - mProfileBadgeMargin, maxHeight -mProfileBadgeMargin);
-        //lijun modify end
+        // modify end
         icon.draw(c);
 
         c.setBitmap(null);
@@ -815,7 +815,7 @@ public class WidgetPreviewLoader {
     }
 
     /**
-     * lijun add for clear icon database as theme thanged
+     *  add for clear icon database as theme thanged
      */
     public void clearIcons(){
         mDb.clearDatas();

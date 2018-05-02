@@ -133,15 +133,15 @@ public class DragController implements DragDriver.EventListener, TouchController
 
     private boolean mIsDragDeferred;
 
-    //lijun add for pageindicator
+    // add for pageindicator
     protected int mPageIndicatorCubeDragOverVelocity;
     /**
      * Interface to receive notifications when a drag starts or stops
      */
-   // lijun add for hotseat icon center start
+   //  add for hotseat icon center start
     private int curTouchX;
 	private int curTouchY;
-   // lijun add for hotseat icon center end
+   //  add for hotseat icon center end
    
     public interface DragListener {
         /**
@@ -170,7 +170,7 @@ public class DragController implements DragDriver.EventListener, TouchController
 
         mFlingToDeleteThresholdVelocity =
                 r.getDimensionPixelSize(R.dimen.drag_flingToDeleteMinVelocity);
-        mPageIndicatorCubeDragOverVelocity = (int) (50 * r.getDisplayMetrics().density);//lijun add for pageindicator
+        mPageIndicatorCubeDragOverVelocity = (int) (50 * r.getDisplayMetrics().density);// add for pageindicator
         mIsRtl = Utilities.isRtl(r);
     }
 
@@ -383,7 +383,7 @@ public class DragController implements DragDriver.EventListener, TouchController
     /**
      * This only gets called as a result of drag view cleanup being deferred in endDrag();
      */
-    public void onDeferredEndDrag(DragView dragView) {  // lijun add public for hotseat icon center
+    public void onDeferredEndDrag(DragView dragView) {  //  add public for hotseat icon center
         dragView.remove();
 
         if (mDragObject!=null&&mDragObject.deferDragViewCleanupPostAnimation) {
@@ -536,10 +536,10 @@ public class DragController implements DragDriver.EventListener, TouchController
         DropTarget dropTarget = findDropTarget(x, y, coordinates);
         mDragObject.x = coordinates[0];
         mDragObject.y = coordinates[1];
-	    // lijun add for hotseat icon center start
+	    //  add for hotseat icon center start
 		curTouchX = x;
 		curTouchY = y;
-		// lijun add for hotseat icon center end
+		//  add for hotseat icon center end
         checkTouchMove(dropTarget);
 
         // Check if we are hovering over the scroll areas
@@ -817,7 +817,7 @@ public class DragController implements DragDriver.EventListener, TouchController
     }
 
     /**
-     * lijun add for pageindicator
+     *  add for pageindicator
      */
     public boolean isContainDropTarget(DropTarget target){
         return mDropTargets.contains(target);
@@ -882,7 +882,7 @@ public class DragController implements DragDriver.EventListener, TouchController
     }
 
     /**
-     * lijun add for pageindicator
+     *  add for pageindicator
      * @return
      */
     public boolean checkVelocityTrackerToPage(){
@@ -894,7 +894,7 @@ public class DragController implements DragDriver.EventListener, TouchController
         return false;
     }
 
-// lijun add for hotseat icon center start
+//  add for hotseat icon center start
    public int getCurTouchX()
    {
       return curTouchX;
@@ -905,6 +905,6 @@ public class DragController implements DragDriver.EventListener, TouchController
       return curTouchY;
    }
 
-// lijun add for hotseat icon center start
+//  add for hotseat icon center start
 
 }

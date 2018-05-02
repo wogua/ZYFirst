@@ -23,9 +23,9 @@
     <integer name="config_overviewTransitionTime">250</integer>
 
     <!-- Out of 100, the percent to shrink the workspace during spring loaded mode. -->
-    <integer name="config_workspaceSpringLoadShrinkPercentage">93</integer><!--lijun modify 90 to 93 -->
+    <integer name="config_workspaceSpringLoadShrinkPercentage">93</integer><!-- modify 90 to 93 -->
     <!-- Out of 100, the percent to shrink the workspace during overview mode. -->
-    <integer name="config_workspaceOverviewShrinkPercentage">93</integer><!--lijun modify 70 to 93 -->
+    <integer name="config_workspaceOverviewShrinkPercentage">93</integer><!-- modify 70 to 93 -->
 
     <!-- Fade/zoom in/out duration & scale in a Launcher overlay transition.
          Note: This should be less than the config_overlayTransitionTime as they happen together. -->
@@ -46,7 +46,7 @@
          we are dragging objects around on the home screen. -->
     <integer name="config_dragOutlineFadeTime">900</integer>
 
-    <!-- The alpha value at which to show the most recent drop visualization outline. lijun 96 >>128-->
+    <!-- The alpha value at which to show the most recent drop visualization outline.  96 >>128-->
     <integer name="config_dragOutlineMaxAlpha">96</integer>
 
     <!-- Parameters controlling the animation for when an item is dropped on the home screen,
@@ -110,12 +110,12 @@
     <item type="id" name="action_resize" />
     <item type="id" name="action_deep_shortcuts" />
 
-    <!-- lijun add :Max number of page indicators of Cube to show -->
+    <!--  add :Max number of page indicators of Cube to show -->
     <integer name="config_maxNumberOfPageIndicatorsToShow_Cube">6</integer>
-    <!-- lijun add horizontal count of widgetsContainerPageView's CellLayout -->
+    <!--  add horizontal count of widgetsContainerPageView's CellLayout -->
     <integer name="config_widegtscontainerpageview_cells_count">4</integer>
 
-    <!--Folder Animation lijun-->
+    <!--Folder Animation -->
     <integer name="workspace_bg_ani_duration" >350</integer>
     <integer name="folder_blur_background_duration" >350</integer>
     <integer name="folder_blur_background_startDelay" >60</integer>
@@ -130,7 +130,7 @@
     <integer name="folder_icon_alpha" >40</integer>
     <integer name="folder_icon_animation_interval" >40</integer>
 
-    <!-- lijun add for cycle slide -->
+    <!--  add for cycle slide -->
     <bool name="cycle_slide_flag">true</bool>
 
     <bool name="badge_flag">true</bool>

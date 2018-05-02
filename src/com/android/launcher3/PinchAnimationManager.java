@@ -131,7 +131,7 @@ public class PinchAnimationManager {
         mWorkspace.setTranslationY(interpolatedTranslationY);
         setOverviewPanelsAlpha(1f - interpolatedProgress, 0);
 
-        //lijun add
+        // add
         mLauncher.updatePinchProgress(interpolatedProgress);
     }
 
@@ -175,7 +175,7 @@ public class PinchAnimationManager {
         }
     }
 
-    //lijun add
+    // add
     public void animateToNormal() {
         animateOverviewPanelButtons(false);
         animateHotseatAndQsb(true);

@@ -6,7 +6,7 @@ import com.android.launcher3.BubbleTextView;
 import com.android.launcher3.ItemInfo;
 
 /**
- * Created by lijun on 17-4-1.
+ * Created by  on 17-4-1.
  */
 
 public interface IDynamicIcon {

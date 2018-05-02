@@ -98,7 +98,7 @@ public class LauncherStateTransitionAnimation {
 
     private static final float FINAL_REVEAL_ALPHA_FOR_WIDGETS = 0.3f;
 
-    boolean beingAnimaBetweenOverViewAndWidgets = false;//lijun add for WIDGETS_CONTAINER_PAGE
+    boolean beingAnimaBetweenOverViewAndWidgets = false;// add for WIDGETS_CONTAINER_PAGE
     /**
      * Private callbacks made during transition setup.
      */
@@ -185,7 +185,7 @@ public class LauncherStateTransitionAnimation {
      */
     public void startAnimationToWidgets(final Workspace.State fromWorkspaceState,
             final boolean animated) {
-        //lijun modify WidgetsContainerView to BaseWidgetsContainerView
+        // modify WidgetsContainerView to BaseWidgetsContainerView
         final BaseWidgetsContainerView toView = mLauncher.getWidgetsView();
         final View buttonView = mLauncher.getWidgetsButton();
         startAnimationToOverlay(fromWorkspaceState,
@@ -566,7 +566,7 @@ public class LauncherStateTransitionAnimation {
     private void startAnimationToWorkspaceFromWidgets(final Workspace.State fromWorkspaceState,
             final Workspace.State toWorkspaceState, final boolean animated,
             final Runnable onCompleteRunnable) {
-        //lijun modify WidgetsContainerView to BaseWidgetsContainerView
+        // modify WidgetsContainerView to BaseWidgetsContainerView
         final BaseWidgetsContainerView widgetsView = mLauncher.getWidgetsView();
         PrivateTransitionCallbacks cb =
                 new PrivateTransitionCallbacks(FINAL_REVEAL_ALPHA_FOR_WIDGETS) {
@@ -968,7 +968,7 @@ public class LauncherStateTransitionAnimation {
 
 
     /**
-     * lijun add it for animal between widgetsPageview and overview
+     *  add it for animal between widgetsPageview and overview
      */
     public AnimatorSet startAnimationBetweenOverviewAndOverviewHiden(final Workspace.State toWorkspaceState,final Launcher.State launcherState, final boolean animated){
         mLauncher.mWorkspace.setmState(toWorkspaceState);
@@ -988,7 +988,7 @@ public class LauncherStateTransitionAnimation {
                 fromView = mLauncher.getArrangeNavigationBar();
             }else if(launcherState == Launcher.State.HIDE_APP){
                 fromView = mLauncher.getmHideAppNavigationbar();
-            }else if(launcherState == Launcher.State.SPECIALEFFECT){// lijun add for special effect
+            }else if(launcherState == Launcher.State.SPECIALEFFECT){//  add for special effect
                 fromView = mLauncher.getSpecialEffectPreview();
             }else if(launcherState == Launcher.State.WORKSPACE){
                 return null;
@@ -1006,7 +1006,7 @@ public class LauncherStateTransitionAnimation {
                 mLauncher.mWorkspace.addEmptyScreenAsArrange();
             }else if(launcherState == Launcher.State.HIDE_APP){
                 toView = mLauncher.getmHideAppNavigationbar();
-            } else if(launcherState == Launcher.State.SPECIALEFFECT){ // lijun add for special effect
+            } else if(launcherState == Launcher.State.SPECIALEFFECT){ //  add for special effect
                 toView = mLauncher.getSpecialEffectPreview(); 
             }else if(launcherState == Launcher.State.WORKSPACE){
                 return null;
@@ -1025,7 +1025,7 @@ public class LauncherStateTransitionAnimation {
             initialized =  mLauncher.getArrangeNavigationBar() != null;
         }else if(launcherState == Launcher.State.HIDE_APP){
             initialized =  mLauncher.getmHideAppNavigationbar() != null;
-        }else if(launcherState == Launcher.State.SPECIALEFFECT){ // lijun add for special effect
+        }else if(launcherState == Launcher.State.SPECIALEFFECT){ //  add for special effect
             initialized =  mLauncher.getSpecialEffectPreview() != null; 
         }else{
             initialized = false;

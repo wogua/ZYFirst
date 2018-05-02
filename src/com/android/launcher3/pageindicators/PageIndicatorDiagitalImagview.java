@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 
 /**
- * Created by lijun on 16-6-24.
+ * Created by  on 16-6-24.
  */
 public class PageIndicatorDiagitalImagview extends ImageView {
     Paint paint = new Paint();

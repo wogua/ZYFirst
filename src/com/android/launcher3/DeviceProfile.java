@@ -124,27 +124,27 @@ public class DeviceProfile {
     // Drop Target
     public int dropTargetBarSizePx;
 
-    //lijun add for page indicator cube
+    // add for page indicator cube
     public int pageIndicatorCubePanelWidthPx;
     public int pageIndicatorCubeCellWidthPx;
     public int pageIndicatorCubeCellHeightPx;
     public int pageIndicatorCubeCellXGap;
     public int widgetPagedviewIndicatorHeightPx;
-    //lijun add end
+    // add end
 
-    //lijun add for WidgetContainerPageView start
+    // add for WidgetContainerPageView start
     public int widgetsContainerBarHeightPx;
     public int widgetsPageviewMarginBottom;
     public int widgetsImageViewHeightPx;
     public int widgetsTextViewHeightPx;
     public int widgetsCellImageViewTopMarginPx;
     public int widgetsCellImageViewBottomMarginPx;
-    //lijun add for WidgetContainerPageView end
+    // add for WidgetContainerPageView end
 
-    //lijun add for Wallpaper panel start
+    // add for Wallpaper panel start
     public int wallpaperContainerBarHeightPx;
-    //lijun add for Wallpaper panel end
-  public int workspaceToHotsetGapOffset;//lijun add for reduce gap
+    // add for Wallpaper panel end
+  public int workspaceToHotsetGapOffset;// add for reduce gap
     // Insets
     private Rect mInsets = new Rect();
 
@@ -212,19 +212,19 @@ public class DeviceProfile {
                 res.getDimensionPixelSize(R.dimen.dynamic_grid_container_land_right_padding);
         workspaceToHotsetGapOffset =
                 res.getDimensionPixelSize(R.dimen.dynamic_grid_workspace_hotseat_gap_offset);
-        //lijun add for pageIndicator px
+        // add for pageIndicator px
         pageIndicatorCubeCellWidthPx = res.getDimensionPixelSize(R.dimen.pageindicator_cube_cell_width);
         pageIndicatorCubeCellHeightPx = res.getDimensionPixelSize(R.dimen.pageindicator_cube_cell_height);
         pageIndicatorCubeCellXGap = res.getDimensionPixelSize(R.dimen.pageindicator_cube_cell_left_right_margin);
         int maxSizeForPageIndicatorCube= res.getInteger(R.integer.config_maxNumberOfPageIndicatorsToShow_Cube);
         pageIndicatorCubePanelWidthPx = maxSizeForPageIndicatorCube *(pageIndicatorCubeCellWidthPx + pageIndicatorCubeCellXGap*2);
-        //lijun add for WidgetsContainer px
+        // add for WidgetsContainer px
         widgetsCellImageViewTopMarginPx = res.getDimensionPixelSize(R.dimen.widget_img_top_padding);
         widgetsCellImageViewBottomMarginPx = res.getDimensionPixelSize(R.dimen.widget_img_bottom_padding);
         widgetsImageViewHeightPx = res.getDimensionPixelSize(R.dimen.widgets_paged_imageview_height);//(int) (cellWidthPx* WidgetCell.PREVIEW_SCALE);
         widgetsPageviewMarginBottom = res.getDimensionPixelSize(R.dimen.widget_pagedview_margin_bottom);
 
-        //lijun add for wallpaper
+        // add for wallpaper
         wallpaperContainerBarHeightPx = res.getDimensionPixelSize(R.dimen.wallpaper_containterbar_height);
 
         widgetPagedviewIndicatorHeightPx = res.getDimensionPixelSize(R.dimen.widget_pagedview_indicator);
@@ -317,7 +317,7 @@ public class DeviceProfile {
                     res.getInteger(R.integer.config_workspaceSpringLoadShrinkPercentage) / 100.0f;
         }
 
-        workspaceSpringLoadShrinkFactor = res.getInteger(R.integer.config_workspaceSpringLoadShrinkPercentage) / 100f;//lijun add
+        workspaceSpringLoadShrinkFactor = res.getInteger(R.integer.config_workspaceSpringLoadShrinkPercentage) / 100f;// add
 
         // Folder cell
         int cellPaddingX = res.getDimensionPixelSize(R.dimen.folder_cell_x_padding);
@@ -332,13 +332,13 @@ public class DeviceProfile {
                 + Utilities.calculateTextHeight(res.getDimension(R.dimen.folder_label_text_size));
 
         // Don't let the folder get too close to the edges of the screen.
-        //lijun: change width for folder  begin
+        //: change width for folder  begin
         Rect workspacePadding = getWorkspacePadding(null);
         int cellHeight2Workspace = (availableHeightPx - workspacePadding.top - workspacePadding.bottom)/inv.numRows;
         int cellWeight2Workspace = (availableWidthPx - cellWidthGap*2)/inv.numFolderColumns;
         folderCellWidthPx =cellWeight2Workspace/*Math.min(iconSizePx + 2 * cellPaddingX,
                 (availableWidthPx - 4 * edgeMarginPx) / inv.numFolderColumns)*/;
-        //lijun: change width for folder  end
+        //: change width for folder  end
         folderCellHeightPx = cellHeight2Workspace;//Math.min(iconSizePx + 3 * cellPaddingY + folderChildTextSize,
                 //(availableHeightPx - 4 * edgeMarginPx - folderBottomPanelSize) / inv.numFolderRows);
         folderChildDrawablePaddingPx = Math.max(0,
@@ -349,11 +349,11 @@ public class DeviceProfile {
         folderIconSizePx = iconSizePx + 2 * -folderBackgroundOffset;
         folderIconPreviewPadding = res.getDimensionPixelSize(R.dimen.folder_preview_padding);
 
-        //lijun add for widgetsContainerPageView
+        // add for widgetsContainerPageView
         widgetsTextViewHeightPx = Utilities.calculateTextHeight(iconTextSizePx);
         widgetsContainerBarHeightPx = widgetsImageViewHeightPx + widgetsTextViewHeightPx + widgetsCellImageViewTopMarginPx +
                 widgetsCellImageViewBottomMarginPx + widgetsPageviewMarginBottom;
-        //lijun add end
+        // add end
     }
 
     public void updateInsets(Rect insets) {
@@ -478,13 +478,13 @@ public class DeviceProfile {
     }
 
     int getOverviewModeButtonBarHeight() {
-        //lijun modify start
+        // modify start
         /*int zoneHeight = (int) (overviewModeIconZoneRatio * availableHeightPx);
         zoneHeight = Math.min(overviewModeMaxIconZoneHeightPx,
                 Math.max(overviewModeMinIconZoneHeightPx, zoneHeight));
         return zoneHeight;*/
         return overviewModeMinIconZoneHeightPx;
-        //lijun modify end
+        // modify end
     }
 
     public static int calculateCellWidth(int width, int countX) {
@@ -585,7 +585,7 @@ public class DeviceProfile {
         hotseat.setLayoutParams(lp);
 
         // Layout the page indicators
-        //lijun modify for cube pageindicator
+        // modify for cube pageindicator
 //        View pageIndicator = launcher.findViewById(R.id.page_indicator);
         View pageIndicator;
         if(FeatureFlags.SHOW_PAGEINDICATOR_CUBE){
@@ -593,7 +593,7 @@ public class DeviceProfile {
         }else {
             pageIndicator = launcher.findViewById(R.id.page_indicator);
         }
-        //lijun modify end
+        // modify end
         if (pageIndicator != null) {
             lp = (FrameLayout.LayoutParams) pageIndicator.getLayoutParams();
             if (isVerticalBarLayout()) {
@@ -609,11 +609,11 @@ public class DeviceProfile {
                 // Put the page indicators above the hotseat
                 lp.gravity = Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM;
                 lp.height = pageIndicatorHeightPx;
-                lp.bottomMargin = hotseatBarHeightPx + mInsets.bottom - 25;//lijun add -25
+                lp.bottomMargin = hotseatBarHeightPx + mInsets.bottom - 25;// add -25
             }
             pageIndicator.setLayoutParams(lp);
         }
-        //lijun add for pageIndicator begin
+        // add for pageIndicator begin
         if(FeatureFlags.SHOW_PAGEINDICATOR_CUBE) {
             View pageIndicatorCube = launcher.findViewById(R.id.page_indicator_cube);
             if (pageIndicatorCube != null) {
@@ -629,7 +629,7 @@ public class DeviceProfile {
                 }
             }
         }
-        //lijun add for pageIndicator end
+        // add for pageIndicator end
 
         // Layout the Overview Mode
         ViewGroup overviewMode = launcher.getOverviewPanel();

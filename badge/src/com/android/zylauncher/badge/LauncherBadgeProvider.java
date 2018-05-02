@@ -22,7 +22,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 /**
- * Created by lijun on 17-7-27.
+ * Created by  on 17-7-27.
  */
 
 public class LauncherBadgeProvider extends ContentProvider {

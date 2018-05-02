@@ -110,7 +110,7 @@ public class ItemInfo {
 
     public UserHandleCompat user;
 
-    public int unreadNum = 0;//lijun add for unread
+    public int unreadNum = 0;// add for unread
 
     public boolean isHide = false;
 
@@ -136,7 +136,7 @@ public class ItemInfo {
         container = info.container;
         user = info.user;
         contentDescription = info.contentDescription;
-        unreadNum = info.unreadNum;//lijun add for unread
+        unreadNum = info.unreadNum;// add for unread
     }
 
     public Intent getIntent() {

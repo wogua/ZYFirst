@@ -9,7 +9,7 @@ import notification.NotificationKeyData;
 import notification.PackageUserKey;
 
 /**
- * Created by lijun on 17-9-20.
+ * Created by  on 17-9-20.
  */
 
 public class BadgeInfo {

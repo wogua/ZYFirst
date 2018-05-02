@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!-- lijun add for special effect  start -->
+  <!--  add for special effect  start -->
     <string-array name="entries_effect_preference">
         <item>经典</item>
         <item>景深</item>
@@ -14,5 +14,5 @@
         <item>向上翻转</item>
         <item>向下翻转</item>
     </string-array>
- <!-- lijun add for special effect  end -->
+ <!--  add for special effect  end -->
 </resources>

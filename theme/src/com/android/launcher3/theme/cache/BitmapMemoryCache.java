@@ -8,7 +8,7 @@ import android.util.Log;
 import android.util.LruCache;
 
 /**
- * Created by lijun on 16-11-8.
+ * Created by  on 16-11-8.
  */
 public class BitmapMemoryCache {
     private LruCache<String, Bitmap> mMemoryCache;

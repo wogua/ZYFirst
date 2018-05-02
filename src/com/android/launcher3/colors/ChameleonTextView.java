@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.android.launcher3.R;
 
 /**
- * Created by lijun on 17-4-6.
+ * Created by  on 17-4-6.
  */
 
 public class ChameleonTextView extends TextView implements ColorManager.IWallpaperChange {
