@@ -298,7 +298,11 @@ public class WorkspaceStateTransitionAnimation {
         if (states.stateIsOverview || states.stateIsOverviewHidden) {
             finalWorkspaceTranslationY = mWorkspace.getOverviewModeTranslationYNew();// modify getOverviewModeTranslationY to getOverviewModeTranslationYNew
         } else if (states.stateIsSpringLoaded) {
-            finalWorkspaceTranslationY = mWorkspace.getOverviewModeTranslationYNew();// modify getSpringLoadedTranslationY to getOverviewModeTranslationYNew
+            if (mLauncher.isLandscape) {
+                finalWorkspaceTranslationY = 0;
+            } else {
+                finalWorkspaceTranslationY = mWorkspace.getOverviewModeTranslationYNew();//lijun modify getSpringLoadedTranslationY to getOverviewModeTranslationYNew
+            }
         }
 
         // add for pageIndicatorCube

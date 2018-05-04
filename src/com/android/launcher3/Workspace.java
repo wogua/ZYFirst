@@ -2630,7 +2630,6 @@ public class Workspace extends SpecialEffectPagedView
      * @return
      */
     int getOverviewModeTranslationYNew() {
-        if(mLauncher.isLandscape)return 0;
         DeviceProfile grid = mLauncher.getDeviceProfile();
         Rect workspacePadding = grid.getWorkspacePadding(sTempRect);
 
