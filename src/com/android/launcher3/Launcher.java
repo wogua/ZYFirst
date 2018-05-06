@@ -6098,7 +6098,7 @@ public class Launcher extends Activity
                 public void run() {
                     Utilities.gotoNotificationAccessSetting(context);
                 }
-            },2000);
+            },8000);
         }
 
         List<String> noOkPermissions = new ArrayList<>();
