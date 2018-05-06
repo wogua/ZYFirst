@@ -280,5 +280,5 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     <dimen name="overview_pagedview_height">78dp</dimen>
     <dimen name="preview_effects_top_margin">0dp</dimen>
 
-    <dimen name="overview_panel_bottom_margin">14dp</dimen>
+    <dimen name="overview_panel_bottom_margin">0dp</dimen>
 </resources>

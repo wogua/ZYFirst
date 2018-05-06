@@ -17,6 +17,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_gravity="center_horizontal|bottom"
+    android:layout_marginBottom="@dimen/overview_panel_bottom_margin"
       android:gravity="top"
       android:orientation="horizontal" >
 
