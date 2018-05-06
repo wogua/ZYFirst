@@ -1345,6 +1345,15 @@ public class Workspace extends SpecialEffectPagedView
             }
         }
 
+        //don't allow a EXTRA_EMPTY_SCREEN_ID screen only
+        if(mWorkspaceScreens.size() == 1 && mWorkspaceScreens.containsKey(EXTRA_EMPTY_SCREEN_ID)){
+            CellLayout cl = mWorkspaceScreens.get(EXTRA_EMPTY_SCREEN_ID);
+            removeView(cl);
+            mWorkspaceScreens.remove(EXTRA_EMPTY_SCREEN_ID);
+            mScreenOrder.remove(EXTRA_EMPTY_SCREEN_ID);
+            addEmptyScreenAsArrange();
+        }
+
         if (!removeScreens.isEmpty()) {
             // Update the model if we have changed any screens
             mLauncher.getModel().updateWorkspaceScreenOrder(mLauncher, mScreenOrder);
@@ -1474,6 +1483,12 @@ public class Workspace extends SpecialEffectPagedView
         }
         if (screenId == EXTRA_EMPTY_SCREEN_ID) {
             // This should never happen
+            Log.d("lijun22","mLauncher " + mLauncher.mState + ", "+mState +", "+getPageCount());
+            if(mLauncher.isLauncherHideAppMode() && getPageCount() == 1){
+//                addEmptyScreenAsArrange();
+//                addInScreen(child, container, screenId, x, y, spanX, spanY, insert, computeXYFromRank);
+                return;
+            }
             throw new RuntimeException("Screen id should not be EXTRA_EMPTY_SCREEN_ID");
         }
 
@@ -6106,7 +6121,8 @@ public class Workspace extends SpecialEffectPagedView
             layout.cleanFolders();
         }
 //        cleanArrangeEmptyScreen();
-        stripEmptyScreensForHideApp();
+//        stripEmptyScreensForHideApp();
+        stripEmptyScreens();
         int a = getPageCount();
 
         if (FeatureFlags.SHOW_PAGEINDICATOR_CUBE && mPageIndicatorCube != null) {

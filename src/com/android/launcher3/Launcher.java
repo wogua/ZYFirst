@@ -6264,7 +6264,7 @@ public class Launcher extends Activity
      * @param gotoFullscreen
      */
     public void fullscreenOrNot(boolean gotoFullscreen) {
-        Log.d("LauncherDebug", "fullscreenOrNot gotoFullscreen : " + gotoFullscreen + "\n" + Log.getStackTraceString(new Throwable()));
+//        Log.d("LauncherDebug", "fullscreenOrNot gotoFullscreen : " + gotoFullscreen + "\n" + Log.getStackTraceString(new Throwable()));
         int flags;
         if (gotoFullscreen) {
             windowChangeListener(true);
