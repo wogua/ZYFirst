@@ -379,6 +379,8 @@ public class InvariantDeviceProfile {
             return R.xml.default_workspace_v11s;
         } else */if(Build.MODEL.contains("ZYVM2")){
             return R.xml.default_workspace_zyvm2;
+        }else if (Build.MODEL.contains("vm4")) {
+            return R.xml.default_workspace_vm4;
         }
         return closestProfile.defaultLayoutId;
     }
