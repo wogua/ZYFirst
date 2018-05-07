@@ -289,7 +289,7 @@ public class BadgeController extends BroadcastReceiver {
 
     }
 
-    public static void checkAndSetShortCutInfo(final ShortcutInfo info,final ArrayList<BadgeInfo> unreadApps) {
+    public static void checkAndSetShortCutInfo(final ShortcutInfo info,final ArrayList<BadgeInfo> unreadApps,boolean fullRefrush) {
         final Intent intent = info.intent;
         final ComponentName componentName = intent.getComponent();
         BadgeInfo badgeInfo1 = null;
@@ -303,7 +303,9 @@ public class BadgeController extends BroadcastReceiver {
         if (badgeInfo1 != null) {
             info.unreadNum = badgeInfo1.badgeCount;
         } else {
-            info.unreadNum = 0;
+            if(fullRefrush) {
+                info.unreadNum = 0;
+            }
         }
     }
 

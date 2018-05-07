@@ -1185,7 +1185,7 @@ public class FolderIcon extends FrameLayout implements FolderListener ,Uninstall
             public void run() {
                 ArrayList<BadgeInfo> unreadApps = mLauncher.getUnreadApps();
                 if(unreadApps!=null && unreadApps.size()>0){
-                    updateFolderUnreadNum(unreadApps);
+                    updateFolderUnreadNum(unreadApps,true);
                     FolderIcon.this.postInvalidate();
                 }
             }
@@ -1197,7 +1197,7 @@ public class FolderIcon extends FrameLayout implements FolderListener ,Uninstall
      * Update unread number of the folder, the number is the total unread number
      * of all shortcuts in folder, duplicate shortcut will be only count once.
      */
-    public void updateFolderUnreadNum(ArrayList<BadgeInfo> unreadApps) {
+    public void updateFolderUnreadNum(ArrayList<BadgeInfo> unreadApps,boolean fullRefrush) {
         if (unreadApps == null || unreadApps.size() <= 0) return;
         final ArrayList<ShortcutInfo> contents = mInfo.contents;
         final int contentsCount = contents.size();
@@ -1209,7 +1209,7 @@ public class FolderIcon extends FrameLayout implements FolderListener ,Uninstall
             shortcutInfo = contents.get(i);
             componentName = shortcutInfo.intent.getComponent();
 
-            BadgeController.checkAndSetShortCutInfo(shortcutInfo,unreadApps);
+            BadgeController.checkAndSetShortCutInfo(shortcutInfo,unreadApps,fullRefrush);
             unreadNumTotal += shortcutInfo.unreadNum;
         }
         if (BadgeController.DEBUG) {

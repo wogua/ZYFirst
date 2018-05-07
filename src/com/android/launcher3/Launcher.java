@@ -3977,6 +3977,7 @@ public class Launcher extends Activity
     public boolean onLongClick(View v) {
         if (!isDraggingEnabled()) return false;
         if (isWorkspaceLocked()) return false;
+
         // add begin
         if (mDragLayer.getActiveController() instanceof PinchToOverviewListener) {
             PinchToOverviewListener controller = (PinchToOverviewListener) mDragLayer.getActiveController();
@@ -6661,12 +6662,16 @@ public class Launcher extends Activity
 
     @Override
     public void bindWorkspaceUnreadInfo(final ArrayList<BadgeInfo> unreadApps) {
+        bindWorkspaceUnreadInfo(unreadApps,true);
+    }
+
+    public void bindWorkspaceUnreadInfo(final ArrayList<BadgeInfo> unreadApps, final boolean fullRefrush) {
         if (!FeatureFlags.UNREAD_ENABLE) return;
         mHandler.post(new Runnable() {
             public void run() {
                 final long start = System.currentTimeMillis();
                 if (mWorkspace != null) {
-                    mWorkspace.updateShortcutsAndFoldersUnread(unreadApps);
+                    mWorkspace.updateShortcutsAndFoldersUnread(unreadApps,fullRefrush);
                 }
             }
         });

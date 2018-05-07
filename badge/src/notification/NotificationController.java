@@ -41,6 +41,7 @@ public class NotificationController implements NotificationListener.Notification
             return;
         }
         BadgeInfo badgeInfo = mPackageUserToBadgeInfos.get(postedPackageUserKey.hashCode());
+        Log.e("lijun22","onNotificationPosted pkg:"+postedPackageUserKey.mPackageName);
         boolean badgeShouldBeRefreshed;
         if (badgeInfo == null) {
             if (!shouldBeFilteredOut) {
@@ -69,6 +70,7 @@ public class NotificationController implements NotificationListener.Notification
         if (isSystemApp(removedPackageUserKey, mLauncher.getApplicationContext())) {
             return;
         }
+        Log.e("lijun22","onNotificationPosted pkg:"+removedPackageUserKey.mPackageName);
         BadgeInfo oldBadgeInfo = mPackageUserToBadgeInfos.get(removedPackageUserKey.hashCode());
         if (oldBadgeInfo != null && oldBadgeInfo.removeNotificationKey(notificationKey)) {
             if (oldBadgeInfo.getNotificationKeys().size() == 0) {
@@ -86,6 +88,10 @@ public class NotificationController implements NotificationListener.Notification
         mPackageUserToBadgeInfos.clear();
         for (StatusBarNotification notification : activeNotifications) {
             PackageUserKey packageUserKey = PackageUserKey.fromNotification(notification);
+            if (isSystemApp(packageUserKey, mLauncher.getApplicationContext())) {
+                continue;
+            }
+            Log.d("lijun22","notification pk : " + packageUserKey.mPackageName);
             BadgeInfo badgeInfo = mPackageUserToBadgeInfos.get(packageUserKey.hashCode());
             if (badgeInfo == null) {
                 badgeInfo = new BadgeInfo(packageUserKey);
@@ -97,15 +103,12 @@ public class NotificationController implements NotificationListener.Notification
 
         // Add and remove from updatedBadges so it contains the PackageUserKeys of updated badges.
         for (Integer packageUserKeyHash : mPackageUserToBadgeInfos.keySet()) {
-            if (isSystemApp(mPackageUserToBadgeInfos.get(packageUserKeyHash).getmPackageUserKey(), mLauncher.getApplicationContext())) {
-                continue;
-            }
             BadgeInfo prevBadge = updatedBadges.get(packageUserKeyHash);
             BadgeInfo newBadge = mPackageUserToBadgeInfos.get(packageUserKeyHash);
             if (prevBadge == null) {
                 updatedBadges.put(packageUserKeyHash, newBadge);
             } else {
-                if (!prevBadge.shouldBeInvalidated(newBadge)) {
+                if (prevBadge.shouldBeInvalidated(newBadge)) {
                     updatedBadges.remove(packageUserKeyHash);
                 }
             }
@@ -165,7 +168,7 @@ public class NotificationController implements NotificationListener.Notification
                 badgeInfos.add(badgeInfo);
             }
         }
-        mLauncher.bindWorkspaceUnreadInfo(badgeInfos);
+        mLauncher.bindWorkspaceUnreadInfo(badgeInfos,false);
     }
 
 

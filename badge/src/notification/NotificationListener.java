@@ -145,7 +145,7 @@ public class NotificationListener extends NotificationListenerService {
     }
 
     public static void setNotificationsChangedListener(NotificationsChangedListener listener) {
-        if (sNotificationsChangedListener == listener && listener != null) return;
+//        if (sNotificationsChangedListener == listener && listener != null) return;
         sNotificationsChangedListener = listener;
 
         NotificationListener notificationListener = getInstanceIfConnected();
@@ -261,10 +261,10 @@ public class NotificationListener extends NotificationListenerService {
 //        }
         Notification notification = sbn.getNotification();
         boolean isGroupHeader = (notification.flags & Notification.FLAG_GROUP_SUMMARY) != 0;
-        CharSequence title = notification.extras.getCharSequence(Notification.EXTRA_TITLE);
-        CharSequence text = notification.extras.getCharSequence(Notification.EXTRA_TEXT);
-        boolean missingTitleAndText = TextUtils.isEmpty(title) && TextUtils.isEmpty(text);
-        return (isGroupHeader || missingTitleAndText);
+//        CharSequence title = notification.extras.getCharSequence(Notification.EXTRA_TITLE);
+//        CharSequence text = notification.extras.getCharSequence(Notification.EXTRA_TEXT);
+//        boolean missingTitleAndText = TextUtils.isEmpty(title) && TextUtils.isEmpty(text);
+        return (isGroupHeader /*|| missingTitleAndText*/);
     }
 
     public interface NotificationsChangedListener {

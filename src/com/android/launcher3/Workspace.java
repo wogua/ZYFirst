@@ -1345,7 +1345,7 @@ public class Workspace extends SpecialEffectPagedView
             }
         }
 
-        //don't allow a EXTRA_EMPTY_SCREEN_ID screen only
+        //don't allow a EXTRA_EMPTY_SCREEN_ID screen on
         if(mWorkspaceScreens.size() == 1 && mWorkspaceScreens.containsKey(EXTRA_EMPTY_SCREEN_ID)){
             CellLayout cl = mWorkspaceScreens.get(EXTRA_EMPTY_SCREEN_ID);
             removeView(cl);
@@ -6428,7 +6428,7 @@ public class Workspace extends SpecialEffectPagedView
      *  add for unread feature
      * Update unread number of shortcuts and folders in workspace and hotseat.
      */
-    public void updateShortcutsAndFoldersUnread(ArrayList<BadgeInfo> unreadApps) {
+    public void updateShortcutsAndFoldersUnread(ArrayList<BadgeInfo> unreadApps,boolean fullRefrush) {
         if (BadgeController.DEBUG) {
             Log.d(TAG, "updateShortcutsAndFolderUnread: this = " + this);
         }
@@ -6449,10 +6449,10 @@ public class Workspace extends SpecialEffectPagedView
                             + j + ", view = " + view);
                 }
                 if (tag instanceof ShortcutInfo) {
-                    BadgeController.checkAndSetShortCutInfo((ShortcutInfo) tag,unreadApps);
+                    BadgeController.checkAndSetShortCutInfo((ShortcutInfo) tag,unreadApps,fullRefrush);
                     view.invalidate();
                 } else if (tag instanceof FolderInfo) {
-                    ((FolderIcon) view).updateFolderUnreadNum(unreadApps);
+                    ((FolderIcon) view).updateFolderUnreadNum(unreadApps,fullRefrush);
                     view.invalidate();
                 }
             }
