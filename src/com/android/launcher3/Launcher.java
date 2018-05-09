@@ -523,7 +523,9 @@ public class Launcher extends Activity
         super.onCreate(savedInstanceState);
 
         checkPermission();// add for checkAllPermission
-        mNotificationController = new NotificationController(this);
+        if(FeatureFlags.NOTIFICATION_UNREAD) {
+            mNotificationController = new NotificationController(this);
+        }
 
         LauncherAppState app = LauncherAppState.getInstance();
         ColorManager.getInstance().addWallpaperCallback(this);// add for wallpaper change
@@ -1098,7 +1100,7 @@ public class Launcher extends Activity
             mAppWidgetHost.startListening();
         }
         updateDynamicStatus(true);// add
-        if (!isWorkspaceLoading()) {
+        if (FeatureFlags.NOTIFICATION_UNREAD && !isWorkspaceLoading()) {
             NotificationListener.setNotificationsChangedListener(mNotificationController);
         }
     }
@@ -5079,8 +5081,9 @@ public class Launcher extends Activity
         }
 
         InstallShortcutReceiver.disableAndFlushInstallQueue(this);
-
-        NotificationListener.setNotificationsChangedListener(mNotificationController);
+        if(FeatureFlags.NOTIFICATION_UNREAD) {
+            NotificationListener.setNotificationsChangedListener(mNotificationController);
+        }
 
         if (mLauncherCallbacks != null) {
             mLauncherCallbacks.finishBindingItems(false);
@@ -6091,15 +6094,17 @@ public class Launcher extends Activity
      *  add
      */
     private void checkPermission() {
-        boolean isNotificationAccessed = Utilities.isUnreadNotificationAccessed(this);
-        if(!isNotificationAccessed){
-            final Context context = getApplicationContext();
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Utilities.gotoNotificationAccessSetting(context);
-                }
-            },8000);
+        if(FeatureFlags.NOTIFICATION_UNREAD) {
+            boolean isNotificationAccessed = Utilities.isUnreadNotificationAccessed(this);
+            if (!isNotificationAccessed) {
+                final Context context = getApplicationContext();
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Utilities.gotoNotificationAccessSetting(context);
+                    }
+                }, 8000);
+            }
         }
 
         List<String> noOkPermissions = new ArrayList<>();

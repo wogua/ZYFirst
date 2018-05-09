@@ -39,8 +39,8 @@
         launcher:x="1"
         launcher:y="4" />
     <favorite
-        launcher:className="com.android.settings.Settings$HdmiSettingsActivity"
-        launcher:packageName="com.android.settings"
+        launcher:className="com.android.deskclock.DeskClock"
+        launcher:packageName="com.android.deskclock"
         launcher:screen="0"
         launcher:x="2"
         launcher:y="4" />
@@ -50,10 +50,11 @@
         launcher:screen="0"
         launcher:x="3"
         launcher:y="4" />
+
     <!-- 2 screen -->
-    <favorite
-        launcher:className="com.mediatek.datatransfer.BootActivity"
-        launcher:packageName="com.mediatek.datatransfer"
+    <!--<favorite
+        launcher:className="com.android.fmradio.FmMainActivity"
+        launcher:packageName="com.android.fmradio"
         launcher:screen="1"
         launcher:x="0"
         launcher:y="0" />
@@ -104,95 +105,6 @@
         launcher:packageName="com.android.email"
         launcher:screen="1"
         launcher:x="0"
-        launcher:y="2" />
-    <favorite
-        launcher:className="com.android.providers.downloads.ui.DownloadList"
-        launcher:packageName="com.android.providers.downloads.ui"
-        launcher:screen="1"
-        launcher:x="1"
-        launcher:y="2" />
-    <favorite
-        launcher:className="com.android.fmradio.FmMainActivity"
-        launcher:packageName="com.android.fmradio"
-        launcher:screen="1"
-        launcher:x="2"
-        launcher:y="2" />
-    <favorite
-        launcher:className="com.android.music.MusicBrowserActivity"
-        launcher:packageName="com.android.music"
-        launcher:screen="1"
-        launcher:x="3"
-        launcher:y="2" />
-    <favorite
-        launcher:className="com.android.camera.CameraLauncher"
-        launcher:packageName="com.mediatek.camera"
-        launcher:screen="1"
-        launcher:x="0"
-        launcher:y="3" />
-    <favorite
-        launcher:className="com.vvelink.yiqilai.launch.LaunchActivity"
-        launcher:packageName="com.vvelink.yiqilai"
-        launcher:screen="1"
-        launcher:x="1"
-        launcher:y="3" />
-    <favorite
-        launcher:className="com.iflytek.inputmethod.LauncherActivity"
-        launcher:packageName="com.iflytek.inputmethod"
-        launcher:screen="1"
-        launcher:x="2"
-        launcher:y="3" />
-    <favorite
-        launcher:className="com.vve.account.MainActivity"
-        launcher:packageName="com.vve.account"
-        launcher:screen="1"
-        launcher:x="3"
-        launcher:y="3" />
-    <favorite
-        launcher:className="com.redstone.ota.ui.activity.RsMainActivity"
-        launcher:packageName="com.redstone.ota.ui"
-        launcher:screen="1"
-        launcher:x="0"
-        launcher:y="4" />
-
-    <!-- 3 screen -->
-    <!--<favorite
-        launcher:className="com.tencent.pangu.link.SplashActivity"
-        launcher:packageName="com.tencent.android.qqdownloader"
-        launcher:screen="2"
-        launcher:x="0"
-        launcher:y="0" />
-    <favorite
-        launcher:className="com.moji.mjweather.LauncherActivity"
-        launcher:packageName="com.moji.mjweather"
-        launcher:screen="2"
-        launcher:x="1"
-        launcher:y="0" />
-    <favorite
-        launcher:className="cn.wps.moffice.documentmanager.PreStartActivity"
-        launcher:packageName="cn.wps.moffice_eng"
-        launcher:screen="2"
-        launcher:x="2"
-        launcher:y="0" />
-    <favorite
-        launcher:className="com.UCMobile.main.UCMobile"
-        launcher:packageName="com.UCMobile"
-        launcher:screen="2"
-        launcher:x="0"
-        launcher:y="1" />
-    <favorite
-        launcher:className="com.tencent.mm.ui.LauncherUI"
-        launcher:packageName="com.tencent.mm"
-        launcher:screen="2"
-        launcher:x="1"
-        launcher:y="1" />
-
-
-
-    <favorite
-        launcher:className="com.ss.android.ugc.live.splash.LiveSplashActivity"
-        launcher:packageName="com.ss.android.ugc.live"
-        launcher:screen="3"
-        launcher:x="0"
-        launcher:y="0" />-->
+        launcher:y="2" />-->
 
 </favorites>

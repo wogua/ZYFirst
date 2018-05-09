@@ -63,4 +63,6 @@ public final class FeatureFlags {
 	public static final boolean CYCLE_SLIDE = true;
 
     public static final boolean UNREAD_ENABLE = true;
+
+    public static final boolean NOTIFICATION_UNREAD = false;
 }

@@ -39,8 +39,8 @@
         launcher:x="1"
         launcher:y="4" />
     <favorite
-        launcher:className="com.android.settings.Settings$HdmiSettingsActivity"
-        launcher:packageName="com.android.settings"
+        launcher:className="com.android.deskclock.DeskClock"
+        launcher:packageName="com.android.deskclock"
         launcher:screen="0"
         launcher:x="2"
         launcher:y="4" />
@@ -52,9 +52,9 @@
         launcher:y="4" />
 
     <!-- 2 screen -->
-    <favorite
-        launcher:className="com.android.music.MusicBrowserActivity"
-        launcher:packageName="com.android.music"
+    <!--<favorite
+        launcher:className="com.android.fmradio.FmMainActivity"
+        launcher:packageName="com.android.fmradio"
         launcher:screen="1"
         launcher:x="0"
         launcher:y="0" />
@@ -105,18 +105,6 @@
         launcher:packageName="com.android.email"
         launcher:screen="1"
         launcher:x="0"
-        launcher:y="2" />
-    <favorite
-        launcher:className="com.android.fmradio.FmMainActivity"
-        launcher:packageName="com.android.fmradio"
-        launcher:screen="1"
-        launcher:x="1"
-        launcher:y="2" />
-    <favorite
-        launcher:className="com.android.documentsui.LauncherActivity"
-        launcher:packageName="com.android.documentsui"
-        launcher:screen="1"
-        launcher:x="2"
-        launcher:y="2" />
+        launcher:y="2" />-->
 
 </favorites>
