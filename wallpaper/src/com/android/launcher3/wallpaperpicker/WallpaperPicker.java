@@ -360,6 +360,9 @@ public class WallpaperPicker extends RecyclerView {
 
         ArrayList<WallpaperTileInfo> wallpaperInfos = new ArrayList<>();
         for (ResolveInfo resolveInfo : list) {
+            if(resolveInfo.serviceInfo!=null && "com.tencent.android.qqdownloader".equals(resolveInfo.serviceInfo.packageName)){
+                continue;
+            }
             WallpaperInfo info;
             try {
                 info = new WallpaperInfo(context, resolveInfo);
