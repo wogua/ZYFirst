@@ -4392,6 +4392,7 @@ public class Launcher extends Activity
                     Workspace.State.SPRING_LOADED, true /* animated */,
                     onCompleteRunnable /* onCompleteRunnable */);
         }
+        mWorkspace.resetPages();
         // modify end
         if (isAppsViewVisible()) {
             mState = State.APPS_SPRING_LOADED;
