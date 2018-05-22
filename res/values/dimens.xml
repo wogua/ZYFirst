@@ -209,7 +209,7 @@
     <dimen name="widget_cell_bg_round_radius">3dp</dimen>
     <dimen name="widgets_panel_bottom_margin">14dp</dimen>
     <dimen name="widget_img_top_padding">4dp</dimen>
-    <dimen name="widget_img_bottom_padding">4dp</dimen>
+    <dimen name="widget_img_bottom_padding">1dp</dimen>
     <dimen name="widget_indicator_padding">2dp</dimen>
     <dimen name="widget_indicator_top_padding">-6dp</dimen>
 
