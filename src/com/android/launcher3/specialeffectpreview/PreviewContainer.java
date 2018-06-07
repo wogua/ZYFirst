@@ -5,7 +5,9 @@ package com.android.launcher3.specialeffectpreview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.annotation.IntDef;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -45,4 +47,11 @@ public class PreviewContainer extends LinearLayout {
            mPagedView.addEffectViews();
    }
 
+    @Override
+    public void setVisibility( int visibility) {
+        super.setVisibility(visibility);
+        if(visibility == GONE){
+            Log.d("lijun22","visibility = " + visibility);
+        }
+    }
 }

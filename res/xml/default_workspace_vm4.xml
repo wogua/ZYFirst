@@ -33,8 +33,8 @@
         launcher:x="0"
         launcher:y="4" />
     <favorite
-        launcher:className="com.android.contacts.activities.PeopleActivity"
-        launcher:packageName="com.android.contacts"
+        launcher:className="com.android.browser.BrowserActivity"
+        launcher:packageName="com.android.browser"
         launcher:screen="0"
         launcher:x="1"
         launcher:y="4" />
@@ -44,9 +44,21 @@
         launcher:screen="0"
         launcher:x="2"
         launcher:y="4" />
-    <favorite
+    <!--<favorite
+        launcher:className="com.android.deskclock.DeskClock"
+        launcher:packageName="com.android.deskclock"
+        launcher:screen="0"
+        launcher:x="2"
+        launcher:y="4" />-->
+    <!--<favorite
         launcher:className="com.mediatek.filemanager.FileManagerOperationActivity"
         launcher:packageName="com.mediatek.filemanager"
+        launcher:screen="0"
+        launcher:x="3"
+        launcher:y="4" />-->
+    <favorite
+        launcher:className="com.android.music.MusicBrowserActivity"
+        launcher:packageName="com.android.music"
         launcher:screen="0"
         launcher:x="3"
         launcher:y="4" />

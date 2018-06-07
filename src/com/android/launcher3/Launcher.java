@@ -1472,7 +1472,8 @@ public class Launcher extends Activity
         }
 
         State state = intToState(savedState.getInt(RUNTIME_STATE, State.WORKSPACE.ordinal()));
-        if (state == State.APPS || state == State.WIDGETS || state == State.WALLPAPER) {// add WALLPAPER
+        boolean landscapeState = savedState.getBoolean("isLandScape_state");
+        if ((landscapeState == isLandscape) && (state == State.APPS || state == State.WIDGETS || state == State.WALLPAPER)) {// add WALLPAPER
             mOnResumeState = state;
         }
 
@@ -2366,6 +2367,8 @@ public class Launcher extends Activity
         if (mPendingActivityResult != null) {
             outState.putParcelable(RUNTIME_STATE_PENDING_ACTIVITY_RESULT, mPendingActivityResult);
         }
+
+        outState.putBoolean("isLandScape_state",isLandscape);
 
         if (mLauncherCallbacks != null) {
             mLauncherCallbacks.onSaveInstanceState(outState);

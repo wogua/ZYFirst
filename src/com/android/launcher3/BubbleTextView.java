@@ -822,7 +822,7 @@ public class BubbleTextView extends TextView
 
                 }
                 int offset = 10;
-                mUninstallMarkRect = new Rect(left-offset,top-offset,right+offset,button+offset);
+                mUninstallMarkRect = new Rect(left-offset,top-offset,right+offset+20,button+offset+20);
                 mMarkDrawable.setBounds(left, top, right, button);
             }
             return mMarkDrawable;

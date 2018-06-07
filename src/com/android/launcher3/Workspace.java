@@ -1483,7 +1483,6 @@ public class Workspace extends SpecialEffectPagedView
         }
         if (screenId == EXTRA_EMPTY_SCREEN_ID) {
             // This should never happen
-            Log.d("lijun22","mLauncher " + mLauncher.mState + ", "+mState +", "+getPageCount());
             if(mLauncher.isLauncherHideAppMode() && getPageCount() == 1){
 //                addEmptyScreenAsArrange();
 //                addInScreen(child, container, screenId, x, y, spanX, spanY, insert, computeXYFromRank);
