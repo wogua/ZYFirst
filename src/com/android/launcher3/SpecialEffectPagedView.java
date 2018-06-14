@@ -287,6 +287,11 @@ public class SpecialEffectPagedView extends SlidePagedView {
             super.drawScreen(canvas, screen, drawingTime);
             return;
         }
+
+        if (mLauncher.getDragController().isDragging()) {
+            return;
+        }
+
         canvas.save();
         mCamera.save();
 

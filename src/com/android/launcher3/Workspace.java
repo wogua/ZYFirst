@@ -520,6 +520,7 @@ public class Workspace extends SpecialEffectPagedView
         }
         // add end for pageindicator
 
+        resetPages();
         updateChildrenLayersEnabled(false);
         mLauncher.onDragStarted();
         mLauncher.lockScreenOrientation();

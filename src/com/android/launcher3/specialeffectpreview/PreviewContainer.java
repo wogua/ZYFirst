@@ -46,12 +46,4 @@ public class PreviewContainer extends LinearLayout {
    public void initPagedView(){
            mPagedView.addEffectViews();
    }
-
-    @Override
-    public void setVisibility( int visibility) {
-        super.setVisibility(visibility);
-        if(visibility == GONE){
-            Log.d("lijun22","visibility = " + visibility);
-        }
-    }
 }
