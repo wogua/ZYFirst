@@ -5826,11 +5826,11 @@ public class Workspace extends SpecialEffectPagedView
         invalidate();
     }
 
-    public void initDefaultScreen(){
+    public void initDefaultScreen(int savedScreen) {
         defaultScreenId = Utilities.getPrefs(mLauncher).getLong(HOMESCREEN_PREFERENCE_KEY,getScreenIdForPageIndex(hasCustomContent() ? 1:0));
         setDefaultScreen(defaultScreenId);
         if(!mLauncher.isShowThemeChang()) {
-            snapToScreenId(defaultScreenId);
+            snapToScreenId(savedScreen > 0 ? savedScreen : defaultScreenId);
         }
     }
     private void saveDefaultScreen(){

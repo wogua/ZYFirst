@@ -332,6 +332,8 @@ public class Launcher extends Activity
     @Thunk
     WidgetsModel mWidgetsModel;
 
+    private int mSavedCurrentScreen = -1;
+
     private Bundle mSavedState;
     // We set the state in both onCreate and then onNewIntent in some cases, which causes both
     // scroll issues (because the workspace may not have been measured yet) and extra work.
@@ -523,7 +525,7 @@ public class Launcher extends Activity
         super.onCreate(savedInstanceState);
 
         checkPermission();// add for checkAllPermission
-        if(FeatureFlags.NOTIFICATION_UNREAD) {
+        if (FeatureFlags.NOTIFICATION_UNREAD) {
             mNotificationController = new NotificationController(this);
         }
 
@@ -1477,10 +1479,10 @@ public class Launcher extends Activity
             mOnResumeState = state;
         }
 
-        int currentScreen = savedState.getInt(RUNTIME_STATE_CURRENT_SCREEN,
+        mSavedCurrentScreen = savedState.getInt(RUNTIME_STATE_CURRENT_SCREEN,
                 PagedView.INVALID_RESTORE_PAGE);
-        if (currentScreen != PagedView.INVALID_RESTORE_PAGE) {
-            mWorkspace.setRestorePage(currentScreen);
+        if (mSavedCurrentScreen != PagedView.INVALID_RESTORE_PAGE) {
+            mWorkspace.setRestorePage(mSavedCurrentScreen);
         }
 
         PendingRequestArgs requestArgs = savedState.getParcelable(RUNTIME_STATE_PENDING_REQUEST_ARGS);
@@ -1621,9 +1623,9 @@ public class Launcher extends Activity
         // add for wallpaper
         mWallpaperPicker = (WallpaperPagedViewContainer) findViewById(R.id.wallpaper_picker);
         mVulvanClearBuuton = findViewById(R.id.valcants_clear_button);
-        if(hasArrangeIcons()) {
+        if (hasArrangeIcons()) {
             mVulvanClearBuuton.setOnClickListener(buttonClickLisener);
-        }else {
+        } else {
             mVulvanClearBuuton.setVisibility(View.GONE);
         }
 
@@ -2107,21 +2109,21 @@ public class Launcher extends Activity
     }
 
     /**
-     *  add for WIDGETS_CONTAINER_PAGE
+     * add for WIDGETS_CONTAINER_PAGE
      */
     public View getWidgetsPanel() {
         return mWidgetsView;
     }
 
     /**
-     *  add for wallpaper
+     * add for wallpaper
      */
     public WallpaperPagedViewContainer getmWallpaperPicker() {
         return mWallpaperPicker;
     }
 
     /**
-     *  add for wallpaper
+     * add for wallpaper
      */
     public View getmWallpaperButton() {
         return mWallpaperButton;
@@ -2217,7 +2219,7 @@ public class Launcher extends Activity
                     getDragController().removeDropTarget(mNavigationbar);// add
                 }
                 return;
-            }else if (isLauncherHideAppMode()) {
+            } else if (isLauncherHideAppMode()) {
                 Folder openFolder = mWorkspace.getOpenFolder();
                 if (openFolder != null) {
                     if (openFolder.isEditingName()) {
@@ -2368,7 +2370,7 @@ public class Launcher extends Activity
             outState.putParcelable(RUNTIME_STATE_PENDING_ACTIVITY_RESULT, mPendingActivityResult);
         }
 
-        outState.putBoolean("isLandScape_state",isLandscape);
+        outState.putBoolean("isLandScape_state", isLandscape);
 
         if (mLauncherCallbacks != null) {
             mLauncherCallbacks.onSaveInstanceState(outState);
@@ -2390,7 +2392,7 @@ public class Launcher extends Activity
 
         NotificationListener.removeNotificationsChangedListener();
 
-        if(isLauncherHideAppMode()){
+        if (isLauncherHideAppMode()) {
             getmHideAppNavigationbar().onBackPressed();
         }
 
@@ -4266,7 +4268,7 @@ public class Launcher extends Activity
     }
 
     /**
-     *  add to hide Widgets PageView
+     * add to hide Widgets PageView
      */
     private boolean showOverviewModeFromOverviewHidenMode(State toState, boolean animated) {
         //  add for special effect :State.SPECIALEFFECT
@@ -5072,7 +5074,7 @@ public class Launcher extends Activity
             mSavedState = null;
         }
 
-        mWorkspace.initDefaultScreen();// add for homebutton
+        mWorkspace.initDefaultScreen(mSavedCurrentScreen);// add for homebutton
         mWorkspace.restoreInstanceStateForRemainingPages();
 
         Log.d(TAG, "finishBindingItems");
@@ -5085,7 +5087,7 @@ public class Launcher extends Activity
         }
 
         InstallShortcutReceiver.disableAndFlushInstallQueue(this);
-        if(FeatureFlags.NOTIFICATION_UNREAD) {
+        if (FeatureFlags.NOTIFICATION_UNREAD) {
             NotificationListener.setNotificationsChangedListener(mNotificationController);
         }
 
@@ -5169,7 +5171,7 @@ public class Launcher extends Activity
     }
 
     /**
-     *  add for  remove item of dual
+     * add for  remove item of dual
      */
 
     @Override
@@ -6095,10 +6097,10 @@ public class Launcher extends Activity
     // add the background of workspace when opening folder end
 
     /**
-     *  add
+     * add
      */
     private void checkPermission() {
-        if(FeatureFlags.NOTIFICATION_UNREAD) {
+        if (FeatureFlags.NOTIFICATION_UNREAD) {
             boolean isNotificationAccessed = Utilities.isUnreadNotificationAccessed(this);
             if (!isNotificationAccessed) {
                 final Context context = getApplicationContext();
@@ -6131,7 +6133,7 @@ public class Launcher extends Activity
     }
 
     /**
-     *  add for pinch
+     * add for pinch
      *
      * @param progress
      */
@@ -6269,7 +6271,7 @@ public class Launcher extends Activity
     }
 
     /**
-     *  add for hide statusbar
+     * add for hide statusbar
      *
      * @param gotoFullscreen
      */
@@ -6299,7 +6301,7 @@ public class Launcher extends Activity
     }
 
     /**
-     *  add for fullscreen
+     * add for fullscreen
      */
     private void windowChangeListener(boolean listener) {
         View decorView = getWindow().getDecorView();
@@ -6654,7 +6656,7 @@ public class Launcher extends Activity
 
 
     /**
-     *  add start for unread
+     * add start for unread
      */
     @Override
     public void bindComponentUnreadChanged(final String packageName, final int count, final String shortcutCustomId) {
@@ -6671,7 +6673,7 @@ public class Launcher extends Activity
 
     @Override
     public void bindWorkspaceUnreadInfo(final ArrayList<BadgeInfo> unreadApps) {
-        bindWorkspaceUnreadInfo(unreadApps,true);
+        bindWorkspaceUnreadInfo(unreadApps, true);
     }
 
     public void bindWorkspaceUnreadInfo(final ArrayList<BadgeInfo> unreadApps, final boolean fullRefrush) {
@@ -6680,7 +6682,7 @@ public class Launcher extends Activity
             public void run() {
                 final long start = System.currentTimeMillis();
                 if (mWorkspace != null) {
-                    mWorkspace.updateShortcutsAndFoldersUnread(unreadApps,fullRefrush);
+                    mWorkspace.updateShortcutsAndFoldersUnread(unreadApps, fullRefrush);
                 }
             }
         });
@@ -6695,14 +6697,14 @@ public class Launcher extends Activity
      */
 
     /**
-     *  add  for unread
+     * add  for unread
      */
     public boolean isShowUnread() {
         return !(getWorkspace().getState() == Workspace.State.OVERVIEW || getWorkspace().getState() == Workspace.State.OVERVIEW_HIDDEN || isLauncherArrangeMode());
     }
 
     /**
-     *  add  for Application of the double open
+     * add  for Application of the double open
      */
     private void deleteParallelShortcut(ItemInfo info) {
         if (info != null && info.itemType == LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT) {
@@ -6718,7 +6720,7 @@ public class Launcher extends Activity
     }
 
     /**
-     *  add for get WallpaperInfos
+     * add for get WallpaperInfos
      *
      * @return WallpaperInfos
      */
