@@ -3090,6 +3090,11 @@ public class Launcher extends Activity
                     updateImportButton();
                 }
             } else {
+                if(v instanceof BubbleTextView){
+                    if(((BubbleTextView)v).isLongMoved()){
+                        return ;
+                    }
+                }
                 onClickAppShortcut(v);
             }
             //M: add for addIcon end

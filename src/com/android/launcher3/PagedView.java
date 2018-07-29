@@ -1953,6 +1953,7 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
 
                 mTotalMotionX += Math.abs(mLastMotionX + mLastMotionXRemainder - x);
 
+
                 boolean isFling = mTotalMotionX > MIN_LENGTH_FOR_FLING &&
                         Math.abs(velocityX) > mFlingThresholdVelocity;
 
@@ -2311,6 +2312,9 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
             TimeInterpolator interpolator) {
         whichPage = validateNewPage(whichPage);
 
+        if (this instanceof Workspace) {
+            ((Workspace) this).debugPagesHiden();
+        }
         mNextPage = whichPage;
 
         pageBeginMoving();

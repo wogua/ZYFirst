@@ -339,6 +339,8 @@ public class BubbleTextView extends TextView
         return mOnLongClickListener;
     }
 
+    int mTouchDownX;
+    int mTouchDownY ;
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         // Call the superclass onTouchEvent first, because sometimes it changes the state to
@@ -353,6 +355,8 @@ public class BubbleTextView extends TextView
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                mTouchDownX = (int) event.getX();
+                mTouchDownY = (int) event.getY();
                 // So that the pressed outline is visible immediately on setStayPressed(),
                 // we pre-create it on ACTION_DOWN (it takes a small but perceptible amount of time
                 // to create it)
@@ -386,6 +390,22 @@ public class BubbleTextView extends TextView
                 break;
         }
         return result;
+    }
+
+    /**
+     * 滑动距离大于10不响应点击事件
+     * @return
+     */
+    public boolean isLongMoved(){
+        int dx = Math.abs(mLastTouchX - mTouchDownX);
+        int dy = Math.abs(mLastTouchY - mTouchDownY);
+
+        int dxy = (int) Math.sqrt(dx*dx+dy*dy);
+        Log.d("lijun222","dxy = " + dxy);
+        if(dxy > 10){
+            return true;
+        }
+        return false;
     }
 
     void setStayPressed(boolean stayPressed) {

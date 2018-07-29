@@ -2225,6 +2225,30 @@ public class Workspace extends SpecialEffectPagedView
         }
     }
 
+    void debugPagesHiden() {
+
+        boolean needUpdateAlpha = (mLauncher.isUninstallMode || mPrepareUninstallMode ||
+                (mWorkspaceFadeInAdjacentScreens &&
+                        !inModalStateSetAlpha() &&
+                        !mIsSwitchingState));
+
+        boolean notModal = (mWorkspaceFadeInAdjacentScreens &&
+                !inModalStateSetAlpha() &&
+                !mIsSwitchingState);
+
+        if (!needUpdateAlpha) {
+            Log.d("LauncherDebug1", "snapToPage debugPagesHiden --- workspace_state=" + mState + ", launcher_state=" + mLauncher.mState);
+            Log.e("LauncherDebug1", "why not update apha --- isUninstallMode=" + mLauncher.isUninstallMode
+                    + ", mPrepareUninstallMode=" + mPrepareUninstallMode + ", notModal=" + notModal);
+
+            if (!notModal) {
+                Log.d("LauncherDebug1", "notModal --- mWorkspaceFadeInAdjacentScreens=" + mWorkspaceFadeInAdjacentScreens +
+                        ", inModalStateSetAlpha()=" + inModalStateSetAlpha() + ", mIsSwitchingState=" + mIsSwitchingState);
+            }
+
+        }
+    }
+
     private void updatePageAlphaValues(int screenCenter) {
         if (mLauncher.isUninstallMode ||mPrepareUninstallMode||
 			(mWorkspaceFadeInAdjacentScreens &&
