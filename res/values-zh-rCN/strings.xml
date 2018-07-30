@@ -137,4 +137,7 @@
     <string name="layout">桌面布局</string>
     <string name="hide_app_title">隐藏图标</string>
     <string name="overview_tab_hide_app_empty">点击屏幕添加图标</string>
+
+    <string name="add_item_request_drag_hint">"触摸并按住即可手动放置"</string>
+    <string name="place_automatically">"自动添加"</string>
 </resources>

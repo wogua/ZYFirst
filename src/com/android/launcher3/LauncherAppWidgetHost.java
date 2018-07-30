@@ -34,14 +34,23 @@ import java.util.ArrayList;
  * always pick up and move widgets.
  */
 public class LauncherAppWidgetHost extends AppWidgetHost {
+    public static final int APPWIDGET_HOST_ID = 1024;
 
     private final ArrayList<Runnable> mProviderChangeListeners = new ArrayList<Runnable>();
 
     private Launcher mLauncher;
+    private final Context mContext;
 
     public LauncherAppWidgetHost(Launcher launcher, int hostId) {
         super(launcher, hostId);
         mLauncher = launcher;
+        mContext = null;
+    }
+
+    public LauncherAppWidgetHost(Context context) {
+        super(context, APPWIDGET_HOST_ID);
+        mLauncher = null;
+        mContext = context;
     }
 
     @Override
@@ -107,8 +116,9 @@ public class LauncherAppWidgetHost extends AppWidgetHost {
      */
     @Override
     protected void onProviderChanged(int appWidgetId, AppWidgetProviderInfo appWidget) {
+        Context context = mLauncher != null? mLauncher:mContext;
         LauncherAppWidgetProviderInfo info = LauncherAppWidgetProviderInfo.fromProviderInfo(
-                mLauncher, appWidget);
+                context, appWidget);
         super.onProviderChanged(appWidgetId, info);
         // The super method updates the dimensions of the providerInfo. Update the
         // launcher spans accordingly.

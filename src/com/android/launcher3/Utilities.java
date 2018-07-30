@@ -110,6 +110,9 @@ public final class Utilities {
     private static final int[] sLoc0 = new int[2];
     private static final int[] sLoc1 = new int[2];
 
+    public static final boolean ATLEAST_OREO =
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.O;
+
     public static boolean isNycMR1OrAbove() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1;
     }

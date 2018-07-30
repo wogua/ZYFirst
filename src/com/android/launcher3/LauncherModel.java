@@ -60,6 +60,7 @@ import com.android.launcher3.config.ProviderConfig;
 import com.android.launcher3.dynamicui.ExtractionUtils;
 import com.android.launcher3.folder.Folder;
 import com.android.launcher3.folder.FolderIcon;
+import com.android.launcher3.graphics.LauncherIcons;
 import com.android.launcher3.logging.FileLog;
 import com.android.launcher3.model.GridSizeMigrationTask;
 import com.android.launcher3.model.WidgetsModel;
@@ -79,6 +80,7 @@ import com.android.launcher3.util.ManagedProfileHeuristic;
 import com.android.launcher3.util.MultiHashMap;
 import com.android.launcher3.util.PackageManagerHelper;
 import com.android.launcher3.util.Preconditions;
+import com.android.launcher3.util.Provider;
 import com.android.launcher3.util.StringFilter;
 import com.android.launcher3.util.Thunk;
 import com.android.launcher3.util.ViewOnDrawExecutor;
@@ -1008,6 +1010,7 @@ public class LauncherModel extends BroadcastReceiver
         assertWorkspaceLoaded();
         final String intentWithPkg, intentWithoutPkg;
         final String component,dualComponent;// add
+        final String wechatShortcutId;
         if (intent.getComponent() != null) {
             // If component is not null, an intent with null package will produce
             // the same result and should also be a match.
@@ -1031,6 +1034,13 @@ public class LauncherModel extends BroadcastReceiver
         }else {
             dualComponent = "";
         }
+        if(intent.getCategories()!=null && intent.getCategories().contains("com.android.launcher3.DEEP_SHORTCUT")
+                && intent.getComponent()!=null && "com.tencent.mm.ui.LauncherUI".equals(intent.getComponent().getClassName())){
+            //微信公众号快捷方式
+            wechatShortcutId = intent.getStringExtra("shortcut_id");
+        }else {
+            wechatShortcutId = null;
+        }
 
         synchronized (sBgLock) {
             for (ItemInfo item : sBgItemsIdMap) {
@@ -1042,18 +1052,26 @@ public class LauncherModel extends BroadcastReceiver
                         Rect sourceBounds = targetIntent.getSourceBounds();
                         targetIntent.setSourceBounds(null);
                         String s = targetIntent.toUri(0);
+
                         if (intentWithPkg.equals(s) || intentWithoutPkg.equals(s)) {
                             targetIntent.setSourceBounds(sourceBounds);
                             return true;
                         }
                         // add start
-                        if(intent.getAction() == "com.lbe.parallel.ACTION_LAUNCH_PACKAGE" && targetIntent.getAction() == "com.lbe.parallel.ACTION_LAUNCH_PACKAGE"){
-                            if(dualComponent.equals(targetIntent.getStringExtra("EXTRA_LAUNCH_PACKAGE"))){
+                        if (intent.getAction() == "com.lbe.parallel.ACTION_LAUNCH_PACKAGE" && targetIntent.getAction() == "com.lbe.parallel.ACTION_LAUNCH_PACKAGE") {
+                            if (dualComponent.equals(targetIntent.getStringExtra("EXTRA_LAUNCH_PACKAGE"))) {
                                 targetIntent.setSourceBounds(sourceBounds);
                                 return true;
                             }
-                        }else if(targetIntent.getComponent()!=null && component.equals(targetIntent.getComponent().toString())){
-							targetIntent.setSourceBounds(sourceBounds);
+                        } else if (wechatShortcutId != null && targetIntent.getComponent() != null && "com.tencent.mm.ui.LauncherUI".equals(targetIntent.getComponent().getClassName())) {
+                            //微信公众
+                            String targetShortcutId = targetIntent.getStringExtra("shortcut_id");
+                            if (targetShortcutId != null && targetShortcutId.equals(wechatShortcutId)) {
+                                targetIntent.setSourceBounds(sourceBounds);
+                                return true;
+                            }
+                        } else if (targetIntent.getComponent() != null && component.equals(targetIntent.getComponent().toString())) {
+                            targetIntent.setSourceBounds(sourceBounds);
                             return true;
                         }
                         // add end
@@ -1555,7 +1573,7 @@ public class LauncherModel extends BroadcastReceiver
      */
     public boolean startLoader(int synchronousBindPage) {
         // Enable queue before starting loader. It will get disabled in Launcher#finishBindingItems
-        InstallShortcutReceiver.enableInstallQueue();
+        InstallShortcutReceiver.enableInstallQueue(InstallShortcutReceiver.FLAG_LOADER_RUNNING);
         synchronized (mLock) {
             // Don't bother to start the thread if we know it's not going to do anything
             if (mCallbacks != null && mCallbacks.get() != null) {
@@ -3593,7 +3611,7 @@ public class LauncherModel extends BroadcastReceiver
                 }
 
                 // Remove any queued items from the install queue
-                InstallShortcutReceiver.removeFromInstallQueue(context, removedPackages, mUser);
+                InstallShortcutReceiver.removeFromInstallQueue(context, removedPackages, mUser == null ? Process.myUserHandle() : mUser.getUser());
 
                 // Call the components-removed callback
                 final Callbacks callbacks = getCallback();

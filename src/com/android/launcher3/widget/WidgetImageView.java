@@ -42,6 +42,7 @@ public class WidgetImageView extends View {
     private float bgRectRadius = 6;
     private final Paint mBackgroundPaint = new Paint();
     // add end
+    boolean isDeepShortcut = false;
     public WidgetImageView(Context context) {
         super(context);
     }
@@ -67,7 +68,7 @@ public class WidgetImageView extends View {
     protected void onDraw(Canvas canvas) {
         if (mBitmap != null) {
             updateDstRectF();
-            drawBg(canvas);// add
+            drawBg(canvas);
             canvas.drawBitmap(mBitmap, null, mDstRectF, mPaint);
         }
     }
@@ -79,13 +80,20 @@ public class WidgetImageView extends View {
     private void drawBg(Canvas canvas){
         Rect rect = new Rect();
         int aaa = 20;
+        if(isDeepShortcut) {
+            aaa = 0;
+        }
         rect.left = (int) (mDstRectF.left -aaa);
         rect.right = (int) (mDstRectF.right +aaa);
         rect.top = (int) (mDstRectF.top);
         rect.bottom = (int) (mDstRectF.bottom);
 
         GradientDrawable bgDrawable = new GradientDrawable();
-        bgDrawable.setColor(Color.parseColor("#1A000000"));
+        if(isDeepShortcut) {
+            bgDrawable.setColor(Color.parseColor("#FFFFFF"));
+        }else {
+            bgDrawable.setColor(Color.parseColor("#1A000000"));
+        }
         bgDrawable.setCornerRadius(bgRectRadius);
         bgDrawable.setStroke(2, Color.parseColor("#1Affffff"));
         bgDrawable.setBounds(rect);

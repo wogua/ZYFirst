@@ -64,10 +64,22 @@
         android:restoreAnyVersion="true"
         android:supportsRtl="true" >
 
+        <activity android:name="com.android.launcher3.dragndrop.AddItemActivity"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert"
+            android:excludeFromRecents="true"
+            android:autoRemoveFromRecents="true"
+            android:label="@string/action_add_to_workspace" >
+            <intent-filter>
+                <action android:name="android.content.pm.action.CONFIRM_PIN_SHORTCUT" />
+                <action android:name="android.content.pm.action.CONFIRM_PIN_APPWIDGET" />
+            </intent-filter>
+        </activity>
+
         <!-- Intent received used to install shortcuts from other applications -->
         <receiver
             android:name="com.android.launcher3.InstallShortcutReceiver"
-            android:permission="com.android.launcher.permission.INSTALL_SHORTCUT">
+            android:permission="com.android.launcher.permission.INSTALL_SHORTCUT"
+            android:enabled="true" >
             <intent-filter>
                 <action android:name="com.android.launcher.action.INSTALL_SHORTCUT" />
             </intent-filter>

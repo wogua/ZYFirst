@@ -304,4 +304,6 @@
     <string name="hide_app_title">Hide apps</string>
     <string name="overview_tab_hide_app_empty">Touch screen to add icons</string>
 
+    <string name="add_item_request_drag_hint">Touch &amp; hold to place manually</string>
+    <string name="place_automatically">Add automatically</string>
 </resources>

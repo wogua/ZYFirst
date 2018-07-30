@@ -1,15 +1,20 @@
 package com.android.launcher3.model;
 
+import android.annotation.TargetApi;
 import android.content.ComponentName;
 import android.content.pm.ActivityInfo;
+import android.content.pm.LauncherApps;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.pm.ShortcutInfo;
+import android.os.Build;
 
 import com.android.launcher3.InvariantDeviceProfile;
 import com.android.launcher3.LauncherAppState;
 import com.android.launcher3.LauncherAppWidgetProviderInfo;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.compat.AppWidgetManagerCompat;
+import com.android.launcher3.compat.ShortcutConfigActivityInfo;
 import com.android.launcher3.compat.UserHandleCompat;
 import com.android.launcher3.util.ComponentKey;
 
@@ -27,6 +32,7 @@ public class WidgetItem extends ComponentKey implements Comparable<WidgetItem> {
 
     public final LauncherAppWidgetProviderInfo widgetInfo;
     public final ActivityInfo activityInfo;
+    public final ShortcutConfigActivityInfo shortcutInfo;
 
     public final String label;
     public final int spanX, spanY;
@@ -37,10 +43,23 @@ public class WidgetItem extends ComponentKey implements Comparable<WidgetItem> {
         label = Utilities.trim(widgetManager.loadLabel(info));
         widgetInfo = info;
         activityInfo = null;
+        shortcutInfo = null;
 
         InvariantDeviceProfile idv = LauncherAppState.getInstance().getInvariantDeviceProfile();
         spanX = Math.min(info.spanX, idv.numColumns);
         spanY = Math.min(info.spanY, idv.numRows);
+    }
+
+    public WidgetItem(LauncherAppWidgetProviderInfo info, PackageManager pm,InvariantDeviceProfile idp) {
+        super(info.provider, UserHandleCompat.myUserHandle());
+
+        label = Utilities.trim(info.getLabel(pm));
+        widgetInfo = info;
+        activityInfo = null;
+        shortcutInfo = null;
+
+        spanX = Math.min(info.spanX, idp.numColumns);
+        spanY = Math.min(info.spanY, idp.numRows);
     }
 
     public WidgetItem(ResolveInfo info, PackageManager pm) {
@@ -49,6 +68,16 @@ public class WidgetItem extends ComponentKey implements Comparable<WidgetItem> {
         label = Utilities.trim(info.loadLabel(pm));
         widgetInfo = null;
         activityInfo = info.activityInfo;
+        shortcutInfo = null;
+        spanX = spanY = 1;
+    }
+
+    public WidgetItem(ShortcutConfigActivityInfo info) {
+        super(info.getComponent(), UserHandleCompat.myUserHandle());
+        label = Utilities.trim(info.getLabel());
+        widgetInfo = null;
+        activityInfo = null;
+        shortcutInfo = info;
         spanX = spanY = 1;
     }
 

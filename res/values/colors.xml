@@ -91,4 +91,6 @@
   <!--  add for special effect -->
   <color name="preview_effects_item_title_textcolor">#FFFFFFFF</color>
 
+    <color name="legacy_icon_background">#FFFFFF</color>
+
 </resources>

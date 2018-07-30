@@ -1,6 +1,7 @@
 package com.android.launcher3.theme;
 
 import android.content.Context;
+import android.content.pm.LauncherActivityInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -47,6 +48,9 @@ public class IconProvider {
 
 
     public Drawable getIcon(LauncherActivityInfoCompat info, int iconDpi) {
+        return info.getIcon(iconDpi);
+    }
+    public Drawable getIcon(LauncherActivityInfo info, int iconDpi) {
         return info.getIcon(iconDpi);
     }
     public Bitmap normalizeIcons(Bitmap bitmap) {

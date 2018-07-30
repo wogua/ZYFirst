@@ -301,7 +301,7 @@ public class WorkspaceStateTransitionAnimation {
             if (mLauncher.isLandscape) {
                 finalWorkspaceTranslationY = 0;
             } else {
-                finalWorkspaceTranslationY = mWorkspace.getOverviewModeTranslationYNew();//lijun modify getSpringLoadedTranslationY to getOverviewModeTranslationYNew
+                finalWorkspaceTranslationY = mWorkspace.getOverviewModeTranslationYNew();// modify getSpringLoadedTranslationY to getOverviewModeTranslationYNew
             }
         }
 

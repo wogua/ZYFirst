@@ -170,7 +170,7 @@ import notification.NotificationListener;
 /**
  * Default launcher application.
  */
-public class Launcher extends Activity
+public class Launcher extends BaseActivity
         implements LauncherExterns, View.OnClickListener, OnLongClickListener,
         LauncherModel.Callbacks, View.OnTouchListener, LauncherProviderChangeListener,
         AccessibilityManager.AccessibilityStateChangeListener, ColorManager.IWallpaperChange, LauncherBadgeProvider.BadgeChangedCallBack {// add ColorManager.IWallpaperChange LauncherBadgeProvider.BadgeChangedCallBack
@@ -972,7 +972,7 @@ public class Launcher extends Activity
     }
 
     @Override
-    protected void onActivityResult(
+    public void onActivityResult(
             final int requestCode, final int resultCode, final Intent data) {
         handleActivityResult(requestCode, resultCode, data);
         if (mLauncherCallbacks != null) {
@@ -1218,7 +1218,7 @@ public class Launcher extends Activity
 
         if (!isWorkspaceLoading()) {
             // Process any items that were added while Launcher was away.
-            InstallShortcutReceiver.disableAndFlushInstallQueue(this);
+            InstallShortcutReceiver.disableAndFlushInstallQueue(InstallShortcutReceiver.FLAG_ACTIVITY_PAUSED,this);
 
             // Refresh shortcuts if the permission changed.
             mModel.refreshShortcutsIfRequired();
@@ -1238,7 +1238,7 @@ public class Launcher extends Activity
     @Override
     protected void onPause() {
         // Ensure that items added to Launcher are queued until Launcher returns
-        InstallShortcutReceiver.enableInstallQueue();
+        InstallShortcutReceiver.enableInstallQueue(InstallShortcutReceiver.FLAG_ACTIVITY_PAUSED);
 
         super.onPause();
         mPaused = true;
@@ -5091,7 +5091,7 @@ public class Launcher extends Activity
             mPendingActivityResult = null;
         }
 
-        InstallShortcutReceiver.disableAndFlushInstallQueue(this);
+        InstallShortcutReceiver.disableAndFlushInstallQueue(InstallShortcutReceiver.FLAG_LOADER_RUNNING,this);
         if (FeatureFlags.NOTIFICATION_UNREAD) {
             NotificationListener.setNotificationsChangedListener(mNotificationController);
         }

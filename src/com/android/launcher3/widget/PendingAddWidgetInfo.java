@@ -25,6 +25,7 @@ import com.android.launcher3.LauncherAppWidgetProviderInfo;
 import com.android.launcher3.LauncherSettings;
 import com.android.launcher3.PendingAddItemInfo;
 import com.android.launcher3.compat.AppWidgetManagerCompat;
+import com.android.launcher3.compat.UserHandleCompat;
 
 /**
  * Meta data used for late binding of {@link LauncherAppWidgetProviderInfo}.
@@ -46,6 +47,24 @@ public class PendingAddWidgetInfo extends PendingAddItemInfo {
         }
         this.info = i;
         user = AppWidgetManagerCompat.getInstance(context).getUser(i);
+        componentName = i.provider;
+        previewImage = i.previewImage;
+        icon = i.icon;
+
+        spanX = i.spanX;
+        spanY = i.spanY;
+        minSpanX = i.minSpanX;
+        minSpanY = i.minSpanY;
+    }
+
+    public PendingAddWidgetInfo( LauncherAppWidgetProviderInfo i) {
+        if (i.isCustomWidget) {
+            itemType = LauncherSettings.Favorites.ITEM_TYPE_CUSTOM_APPWIDGET;
+        } else {
+            itemType = LauncherSettings.Favorites.ITEM_TYPE_APPWIDGET;
+        }
+        this.info = i;
+        user = UserHandleCompat.myUserHandle();
         componentName = i.provider;
         previewImage = i.previewImage;
         icon = i.icon;

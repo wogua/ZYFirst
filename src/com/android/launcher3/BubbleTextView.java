@@ -401,7 +401,6 @@ public class BubbleTextView extends TextView
         int dy = Math.abs(mLastTouchY - mTouchDownY);
 
         int dxy = (int) Math.sqrt(dx*dx+dy*dy);
-        Log.d("lijun222","dxy = " + dxy);
         if(dxy > 10){
             return true;
         }

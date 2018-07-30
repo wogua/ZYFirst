@@ -3,9 +3,7 @@ package com.android.launcher3;
 import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
+import android.content.pm.*;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -29,8 +27,10 @@ import android.util.Log;
 import android.util.LongSparseArray;
 
 import com.android.launcher3.compat.AppWidgetManagerCompat;
+import com.android.launcher3.compat.ShortcutConfigActivityInfo;
 import com.android.launcher3.compat.UserHandleCompat;
 import com.android.launcher3.compat.UserManagerCompat;
+import com.android.launcher3.graphics.LauncherIcons;
 import com.android.launcher3.model.WidgetItem;
 import com.android.launcher3.util.ComponentKey;
 import com.android.launcher3.util.Preconditions;
@@ -272,7 +272,7 @@ public class WidgetPreviewLoader {
         return null;
     }
 
-    private Bitmap generatePreview(Launcher launcher, WidgetItem item, Bitmap recycle,
+    private Bitmap generatePreview(BaseActivity launcher, WidgetItem item, Bitmap recycle,
             int previewWidth, int previewHeight) {
         if (item.widgetInfo != null) {
             // modify start
@@ -281,7 +281,10 @@ public class WidgetPreviewLoader {
             return generateWidgetPageViewPreview(launcher, item.widgetInfo,
                     previewWidth, recycle, null);
             // modify end
-        } else {
+        } else if(item.shortcutInfo != null){
+            return generateShortcutPreview(launcher, item.shortcutInfo,
+                    previewWidth, previewHeight, recycle);
+        }else {
             return generateShortcutPreview(launcher, item.activityInfo,
                     previewWidth, previewHeight, recycle);
         }
@@ -415,7 +418,7 @@ public class WidgetPreviewLoader {
     /**
      *  add for widgetsPageview
      */
-    public Bitmap generateWidgetPageViewPreview(Launcher launcher, LauncherAppWidgetProviderInfo info,
+    public Bitmap generateWidgetPageViewPreview(BaseActivity launcher, LauncherAppWidgetProviderInfo info,
                                         int maxPreviewWidth, Bitmap preview, int[] preScaledWidthOut) {
         // Load the preview image if possible
         if (maxPreviewWidth < 0) maxPreviewWidth = 181;
@@ -557,7 +560,7 @@ public class WidgetPreviewLoader {
     }
 
     private Bitmap generateShortcutPreview(
-            Launcher launcher, ActivityInfo info, int maxWidth, int maxHeight, Bitmap preview) {
+            BaseActivity launcher, ActivityInfo info, int maxWidth, int maxHeight, Bitmap preview) {
         final Canvas c = new Canvas();
         if (preview == null) {
             preview = Bitmap.createBitmap(maxWidth, maxHeight, Config.ARGB_8888);
@@ -590,6 +593,37 @@ public class WidgetPreviewLoader {
 //        icon.draw(c);
         // remove end
         // Draw the final icon at top left corner.
+        // TODO: use top right for RTL
+        int appIconSize = launcher.getDeviceProfile().iconSizePx;
+
+        icon.setAlpha(255);
+        icon.setColorFilter(null);
+        // modify start
+//        icon.setBounds(0, 0, appIconSize, appIconSize);
+        icon.setBounds(mProfileBadgeMargin, mProfileBadgeMargin, maxWidth - mProfileBadgeMargin, maxHeight -mProfileBadgeMargin);
+        // modify end
+        icon.draw(c);
+
+        c.setBitmap(null);
+        return preview;
+    }
+
+    private Bitmap generateShortcutPreview(BaseActivity launcher, ShortcutConfigActivityInfo info,
+                                           int maxWidth, int maxHeight, Bitmap preview) {
+        final Canvas c = new Canvas();
+        if (preview == null) {
+            preview = Bitmap.createBitmap(maxWidth, maxHeight, Config.ARGB_8888);
+            c.setBitmap(preview);
+        } else if (preview.getWidth() != maxWidth || preview.getHeight() != maxHeight) {
+            throw new RuntimeException("Improperly sized bitmap passed as argument");
+        } else {
+            // Reusing bitmap. Clear it.
+            c.setBitmap(preview);
+            c.drawColor(0, PorterDuff.Mode.CLEAR);
+        }
+
+        Drawable icon = info.getFullResIcon(mIconCache);
+        icon.setFilterBitmap(true);
         // TODO: use top right for RTL
         int appIconSize = launcher.getDeviceProfile().iconSizePx;
 
@@ -687,6 +721,8 @@ public class WidgetPreviewLoader {
         @Thunk long[] mVersions;
         @Thunk Bitmap mBitmapToRecycle;
 
+        private final BaseActivity mActivity;
+
         PreviewLoadTask(WidgetCacheKey key, WidgetItem info, int previewWidth,
                 int previewHeight, WidgetCell caller) {
             mKey = key;
@@ -694,6 +730,7 @@ public class WidgetPreviewLoader {
             mPreviewHeight = previewHeight;
             mPreviewWidth = previewWidth;
             mCaller = caller;
+            mActivity = BaseActivity.fromContext(mCaller.getContext());
             if (DEBUG) {
                 Log.d(TAG, String.format("%s, %s, %d, %d",
                         mKey, mInfo, mPreviewHeight, mPreviewWidth));
@@ -729,7 +766,10 @@ public class WidgetPreviewLoader {
             if (isCancelled()) {
                 return unusedBitmap;
             }
-            Bitmap preview = readFromDb(mKey, unusedBitmap, this);
+            Bitmap preview = null;
+            if(!mCaller.deepShortCut){
+                preview = readFromDb(mKey, unusedBitmap, this);
+            }
             // Only consider generating the preview if we have not cancelled the task already
             if (!isCancelled() && preview == null) {
                 // Fetch the version info before we generate the preview, so that, in-case the
@@ -737,10 +777,8 @@ public class WidgetPreviewLoader {
                 // which would gets re-written next time.
                 mVersions = getPackageVersion(mKey.componentName.getPackageName());
 
-                Launcher launcher = Launcher.getLauncher(mCaller.getContext());
-
                 // it's not in the db... we need to generate it
-                preview = generatePreview(launcher, mInfo, unusedBitmap, mPreviewWidth, mPreviewHeight);
+                preview = generatePreview(mActivity, mInfo, unusedBitmap, mPreviewWidth, mPreviewHeight);
             }
             return preview;
         }
@@ -757,7 +795,9 @@ public class WidgetPreviewLoader {
                         if (!isCancelled()) {
                             // If we are still using this preview, then write it to the DB and then
                             // let the normal clear mechanism recycle the bitmap
-                            writeToDb(mKey, mVersions, preview);
+                            if(!mCaller.deepShortCut) {
+                                writeToDb(mKey, mVersions, preview);
+                            }
                             mBitmapToRecycle = preview;
                         } else {
                             // If we've already cancelled, then skip writing the bitmap to the DB

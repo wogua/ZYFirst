@@ -28,6 +28,7 @@ import android.view.ViewPropertyAnimator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.launcher3.BaseActivity;
 import com.android.launcher3.DeviceProfile;
 import com.android.launcher3.InvariantDeviceProfile;
 import com.android.launcher3.ItemInfo;
@@ -63,20 +64,25 @@ public class WidgetCell extends LinearLayout implements OnLayoutChangeListener {
     /** Widget preview width is calculated by multiplying this factor to the widget cell width. */
     public static final float PREVIEW_SCALE = 0.96f;// modify 0.8 to 0.96
 
-    private int mPresetPreviewSize;
+    protected int mPresetPreviewSize;
     int cellSize;
 
     private WidgetImageView mWidgetImage;
     private TextView mWidgetName;
     private TextView mWidgetDims;
 
-    private WidgetItem mItem;
+    protected WidgetItem mItem;
 
     private WidgetPreviewLoader mWidgetPreviewLoader;
-    private PreviewLoadRequest mActiveRequest;
+    public PreviewLoadRequest mActiveRequest;
     private StylusEventHelper mStylusEventHelper;
+    public boolean deepShortCut;
 
-    private final Launcher mLauncher;
+    public WidgetImageView getWidgetView(){
+        return mWidgetImage;
+    }
+
+    protected final BaseActivity mActivity;
 
     public WidgetCell(Context context) {
         this(context, null);
@@ -90,17 +96,17 @@ public class WidgetCell extends LinearLayout implements OnLayoutChangeListener {
         super(context, attrs, defStyle);
 
         final Resources r = context.getResources();
-        mLauncher = Launcher.getLauncher(context);
+        mActivity = BaseActivity.fromContext(context);
         mStylusEventHelper = new StylusEventHelper(new SimpleOnStylusPressListener(this), this);
 
         setContainerWidth();
         setWillNotDraw(false);
         setClipToPadding(false);
-        setAccessibilityDelegate(mLauncher.getAccessibilityDelegate());
+        setAccessibilityDelegate(mActivity.getAccessibilityDelegate());
     }
 
     private void setContainerWidth() {
-        DeviceProfile profile = mLauncher.getDeviceProfile();
+        DeviceProfile profile = mActivity.getDeviceProfile();
         cellSize = (int) (profile.cellWidthPx * WIDTH_SCALE);
         mPresetPreviewSize = (int) (cellSize * PREVIEW_SCALE);
     }
@@ -160,10 +166,12 @@ public class WidgetCell extends LinearLayout implements OnLayoutChangeListener {
         }
         mWidgetPreviewLoader = loader;
 
-        if (item.activityInfo != null) {
+        if (item.shortcutInfo != null) {
+            setTag(new PendingAddShortcutInfo(item.shortcutInfo));
+        }else if (item.activityInfo != null) {
             setTag(new PendingAddShortcutInfo(item.activityInfo));
         } else {
-            setTag(new PendingAddWidgetInfo(mLauncher, item.widgetInfo));
+            setTag(new PendingAddWidgetInfo(item.widgetInfo));
         }
     }
 
@@ -206,7 +214,7 @@ public class WidgetCell extends LinearLayout implements OnLayoutChangeListener {
     public int getActualItemWidth() {
         ItemInfo info = (ItemInfo) getTag();
         int[] size = getPreviewSize();
-        int cellWidth = mLauncher.getDeviceProfile().cellWidthPx;
+        int cellWidth = mActivity.getDeviceProfile().cellWidthPx;
 
         return Math.min(size[0], info.spanX * cellWidth);
     }
@@ -282,5 +290,10 @@ public class WidgetCell extends LinearLayout implements OnLayoutChangeListener {
 //        return "(" + widgetDims + ")" + widgetName;
         return widgetName + widgetDims;
 //        return widgetName;
+    }
+
+    public void setDeepShortCut(boolean deepShortCut) {
+        this.deepShortCut = deepShortCut;
+        mWidgetImage.isDeepShortcut = deepShortCut;
     }
 }

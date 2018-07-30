@@ -15,11 +15,15 @@
  */
 package com.android.launcher3.widget;
 
+import android.annotation.TargetApi;
 import android.content.ComponentName;
 import android.content.pm.ActivityInfo;
+import android.content.pm.ShortcutInfo;
+import android.os.Build;
 
 import com.android.launcher3.LauncherSettings;
 import com.android.launcher3.PendingAddItemInfo;
+import com.android.launcher3.compat.ShortcutConfigActivityInfo;
 
 /**
  * Meta data used for late binding of the short cuts.
@@ -28,11 +32,21 @@ import com.android.launcher3.PendingAddItemInfo;
  */
 public class PendingAddShortcutInfo extends PendingAddItemInfo {
 
-    ActivityInfo activityInfo;
+    ActivityInfo activityInfo = null;
+    public ShortcutConfigActivityInfo activityInfoSC;
 
     public PendingAddShortcutInfo(ActivityInfo activityInfo) {
         this.activityInfo = activityInfo;
+        this.activityInfoSC = null;
+
         componentName = new ComponentName(activityInfo.packageName, activityInfo.name);
         itemType = LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT;
+    }
+
+    public PendingAddShortcutInfo(ShortcutConfigActivityInfo activityInfo) {
+        this.activityInfo = null;
+        this.activityInfoSC = activityInfo;
+        componentName = activityInfo.getComponent();
+        itemType = activityInfo.getItemType();
     }
 }

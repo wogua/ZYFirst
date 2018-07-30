@@ -175,6 +175,10 @@ public class ShortcutInfo extends ItemInfo {
         return promisedIntent != null ? promisedIntent : intent;
     }
 
+
+    public Bitmap iconBitmap;
+
+
     ShortcutInfo(Intent intent, CharSequence title, CharSequence contentDescription,
             Bitmap icon, UserHandleCompat user) {
         this();

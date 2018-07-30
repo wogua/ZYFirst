@@ -11,6 +11,8 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Parcel;
+import android.os.Process;
+import android.os.UserHandle;
 import android.util.Log;
 
 /**
@@ -128,5 +130,9 @@ public class LauncherAppWidgetProviderInfo extends AppWidgetProviderInfo {
         return new Point(
                 (resizeMode & RESIZE_HORIZONTAL) != 0 ? minSpanX : -1,
                         (resizeMode & RESIZE_VERTICAL) != 0 ? minSpanY : -1);
+    }
+
+    public UserHandle getUser() {
+        return isCustomWidget ? Process.myUserHandle() : getProfile();
     }
  }

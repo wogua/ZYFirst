@@ -16,12 +16,14 @@
 
 package com.android.launcher3;
 
+import android.annotation.TargetApi;
 import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.LauncherActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -37,6 +39,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.text.TextUtils;
@@ -185,6 +188,33 @@ public class IconCache {
         }
 
         return getFullResDefaultActivityIcon();
+    }
+
+    @TargetApi(Build.VERSION_CODES.N_MR1)
+    public Drawable getFullResIcon(android.content.pm.ShortcutInfo info) {
+        Resources resources;
+        try {
+            resources = mPackageManager.getResourcesForApplication(
+                    info.getActivity().getPackageName());
+        } catch (PackageManager.NameNotFoundException e) {
+            resources = null;
+        }
+//        if (resources != null) {
+//            int iconId = info.getIconResourceId();
+//            if (iconId != 0) {
+//                return getFullResIcon(resources, iconId);
+//            }
+//        }
+
+        return getFullResDefaultActivityIcon();
+    }
+
+    public Drawable getFullResIcon(LauncherActivityInfo info) {
+        return getFullResIcon(info, true);
+    }
+
+    public Drawable getFullResIcon(LauncherActivityInfo info, boolean flattenDrawable) {
+        return mIconProvider.getIcon(info, mIconDpi);
     }
 
     private Bitmap makeDefaultIcon(UserHandleCompat user) {
