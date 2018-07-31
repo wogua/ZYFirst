@@ -120,7 +120,7 @@
     <string name="aline_toast_text">图标已对齐</string>
     <string name="new_folder_text">新建文件夹</string>
     <string name="default_folder">保千里应用</string>
-    <string name="default_folder_tools">系统工具</string>
+    <string name="default_folder_tools">常用应用</string>
     <string name="other_folder">其他</string>
     <!-- add for dym-->
     <string name="dym_calendar_week_format">EEEE</string>

@@ -104,7 +104,8 @@
         android:text="@string/hide_app_title"
         android:textAllCaps="true"
         android:textColor="@android:color/white"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:visibility="gone"/>
 
     <com.android.launcher3.colors.ChameleonTextView
         android:id="@+id/settings_button"
