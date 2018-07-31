@@ -66,14 +66,6 @@
         <item>com.iflytek.inputmethod|com.iflytek.inputmethod$com.iflytek.inputmethod.LauncherActivity|讯飞输入法#ic_iflytek.png</item>
         <!-- 账号 -->
         <item>com.vve.account|com.vve.account$com.vve.account.MainActivity|账号#xxx.png</item>
-        <!--wps-->
-        <item>cn.wps.moffice_eng|cn.wps.moffice_eng$cn.wps.moffice.documentmanager.PreStartActivity|WPS Office#ic_vve_wps.png</item>
-        <!--sogou input-->
-        <item>com.sohu.inputmethod.sogou|com.sohu.inputmethod.sogou$com.sohu.inputmethod.sogou.SogouIMELauncher|搜狗输入法#ic_vve_sogouinput.png</item>
-        <!--应用宝-->
-        <item>com.tencent.android.qqdownloader|com.tencent.android.qqdownloader$com.tencent.pangu.link.SplashActivity|应用宝#ic_vve_qqdownloader.png</item>
-        <!--美颜相机-->
-        <item>com.meitu.meiyancamera|com.meitu.meiyancamera$com.meitu.myxj.preinstall.activity.PrepareStartupActivity|美颜相机#ic_vve_meiyan.png</item>
-        <item>com.meitu.meiyancamera|com.meitu.meiyancamera$com.meitu.meiyancamera.MyxjActivity|美颜相机#ic_vve_meiyan.png</item>
+
     </string-array>
 </resources>
