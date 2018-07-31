@@ -287,7 +287,11 @@ public class DeviceProfile {
     private void updateIconSize(float scale, int drawablePadding, Resources res,
                                 DisplayMetrics dm) {
         iconSizePx = (int) (Utilities.pxFromDp(inv.iconSize, dm) * scale);
-        iconTextSizePx = (int) (Utilities.pxFromSp(inv.iconTextSize, dm) * scale);
+        if(isLandscape){
+            iconTextSizePx = (int) (Utilities.pxFromSp(inv.iconTextSize, dm) * 1/*(scale + (1-scale)/2)*/);
+        }else {
+            iconTextSizePx = (int) (Utilities.pxFromSp(inv.iconTextSize, dm) * scale);
+        }
         iconDrawablePaddingPx = drawablePadding;
         hotseatIconSizePx = (int) (Utilities.pxFromDp(inv.hotseatIconSize, dm) * scale);
         allAppsIconSizePx = iconSizePx;
