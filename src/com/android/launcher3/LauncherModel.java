@@ -1010,7 +1010,7 @@ public class LauncherModel extends BroadcastReceiver
         assertWorkspaceLoaded();
         final String intentWithPkg, intentWithoutPkg;
         final String component,dualComponent;// add
-        final String wechatShortcutId;
+        final String deepShortcutId;
         if (intent.getComponent() != null) {
             // If component is not null, an intent with null package will produce
             // the same result and should also be a match.
@@ -1029,17 +1029,17 @@ public class LauncherModel extends BroadcastReceiver
             component = "";// add
         }
 
+        //&& intent.getComponent()!=null && "com.tencent.mm.ui.LauncherUI".equals(intent.getComponent().getClassName())
+        if(intent.getCategories()!=null && intent.getCategories().contains("com.android.launcher3.DEEP_SHORTCUT")){
+            deepShortcutId = intent.getStringExtra("shortcut_id");
+        }else{
+            deepShortcutId = null;
+        }
+
         if(intent.getAction() == "com.lbe.parallel.ACTION_LAUNCH_PACKAGE"){
             dualComponent = intent.getStringExtra("EXTRA_LAUNCH_PACKAGE");
         }else {
             dualComponent = "";
-        }
-        if(intent.getCategories()!=null && intent.getCategories().contains("com.android.launcher3.DEEP_SHORTCUT")
-                && intent.getComponent()!=null && "com.tencent.mm.ui.LauncherUI".equals(intent.getComponent().getClassName())){
-            //微信公众号快捷方式
-            wechatShortcutId = intent.getStringExtra("shortcut_id");
-        }else {
-            wechatShortcutId = null;
         }
 
         synchronized (sBgLock) {
@@ -1063,14 +1063,18 @@ public class LauncherModel extends BroadcastReceiver
                                 targetIntent.setSourceBounds(sourceBounds);
                                 return true;
                             }
-                        } else if (wechatShortcutId != null && targetIntent.getComponent() != null && "com.tencent.mm.ui.LauncherUI".equals(targetIntent.getComponent().getClassName())) {
-                            //微信公众
+                        }
+                        //for deepshortcut
+                        else if (deepShortcutId != null && deepShortcutId.equals(targetIntent.getStringExtra("shortcut_id"))) {
+                            targetIntent.setSourceBounds(sourceBounds);
+                            return true;
+                        } /*else if (deepShortcutId != null && targetIntent.getComponent() != null && "com.tencent.mm.ui.LauncherUI".equals(targetIntent.getComponent().getClassName())) {
                             String targetShortcutId = targetIntent.getStringExtra("shortcut_id");
-                            if (targetShortcutId != null && targetShortcutId.equals(wechatShortcutId)) {
+                            if (targetShortcutId != null && targetShortcutId.equals(deepShortcutId)) {
                                 targetIntent.setSourceBounds(sourceBounds);
                                 return true;
                             }
-                        } else if (targetIntent.getComponent() != null && component.equals(targetIntent.getComponent().toString())) {
+                        }*/ else if (deepShortcutId == null && targetIntent.getComponent() != null && component.equals(targetIntent.getComponent().toString())) {
                             targetIntent.setSourceBounds(sourceBounds);
                             return true;
                         }

@@ -631,7 +631,8 @@ public class WidgetPreviewLoader {
         icon.setColorFilter(null);
         // modify start
 //        icon.setBounds(0, 0, appIconSize, appIconSize);
-        icon.setBounds(mProfileBadgeMargin, mProfileBadgeMargin, maxWidth - mProfileBadgeMargin, maxHeight -mProfileBadgeMargin);
+//        icon.setBounds(mProfileBadgeMargin, mProfileBadgeMargin, maxWidth - mProfileBadgeMargin, maxHeight -mProfileBadgeMargin);
+        icon.setBounds(0, 0, maxWidth, maxHeight);
         // modify end
         icon.draw(c);
 
