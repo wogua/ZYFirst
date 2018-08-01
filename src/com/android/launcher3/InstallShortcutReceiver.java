@@ -236,7 +236,7 @@ public class InstallShortcutReceiver extends BroadcastReceiver {
 
     public static ShortcutInfo fromShortcutIntent(Context context, Intent data) {
         PendingInstallShortcutInfo info = createPendingInfo(context, data);
-        return info == null ? null : (ShortcutInfo) info.getItemInfo().first;
+        return info == null ? null : info.getShortcutInfo();
     }
 
     public static ShortcutInfo fromActivityInfo(LauncherActivityInfo info, Context context) {
