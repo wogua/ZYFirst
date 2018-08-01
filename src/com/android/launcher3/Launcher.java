@@ -855,6 +855,10 @@ public class Launcher extends BaseActivity
         final PendingRequestArgs requestArgs = mPendingRequestArgs;
         setWaitingForResult(null);
         if (requestArgs == null) {
+            if (resultCode == RESULT_CANCELED){
+                mWorkspace.removeExtraEmptyScreenDelayed(false, null,
+                        ON_ACTIVITY_RESULT_ANIMATION_DELAY, false);
+            }
             return;
         }
 
