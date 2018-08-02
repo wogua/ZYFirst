@@ -56,14 +56,14 @@ public class SpecialEffectPagedView extends SlidePagedView {
 
     public static class Type {
         public final static int HORIZONTAL = 0;
-        public final static int DEPTH_FOCUS = 1;
-        public final static int BOX_OUT = 2;
-        public final static int BOX_IN = 3;
-        public final static int ROLL_WINDOW = 4;
-        public final static int ROLL_OVER = 5;
-        public final static int SCALE_IN_OUT = 6;
-        public final static int RANDOM_SWITCH = 7;
-        public final static int CASCADE = 8;
+        public final static int CASCADE = 1;
+        public final static int DEPTH_FOCUS = 2;
+        public final static int BOX_OUT = 3;
+        public final static int BOX_IN = 4;
+        public final static int ROLL_WINDOW = 5;
+        public final static int ROLL_OVER = 6;
+        public final static int SCALE_IN_OUT = 7;
+        public final static int RANDOM_SWITCH = 8;
         public final static int ROLL_UP = 9;
         public final static int ROLL_DOWN = 10;
     }
