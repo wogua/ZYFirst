@@ -1334,7 +1334,7 @@ public class Hotseat extends FrameLayout
             }
 
             for (int i = 0; i < visibleCount; i++) {
-                View v = visibleChild.get(!rtl ? i : visibleCount - i - 1);
+                View v = visibleChild.get(!rtl ? visibleCount - i - 1 : i);
                 //!!important, in some case, the view's TranslationX is not 0 on animation ended
                 v.setTranslationY(0);
                 v.setLeft(0);
