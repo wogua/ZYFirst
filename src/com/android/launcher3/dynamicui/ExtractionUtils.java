@@ -23,6 +23,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v4.graphics.ColorUtils;
 import android.support.v7.graphics.Palette;
+import android.util.Log;
 
 import com.android.launcher3.Utilities;
 
@@ -59,7 +60,11 @@ public class ExtractionUtils {
 
     /** Starts the {@link ColorExtractionService} without checking the wallpaper id */
     public static void startColorExtractionService(Context context) {
-        context.startService(new Intent(context, ColorExtractionService.class));
+        try {
+            context.startService(new Intent(context, ColorExtractionService.class));
+        }catch (Exception e){
+            Log.e("ZYLauncher"," startColorExtractionService failed " + e.toString());
+        }
     }
 
     private static boolean hasWallpaperIdChanged(Context context) {
