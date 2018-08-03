@@ -334,7 +334,7 @@ public class DragLayer extends InsettableFrameLayout {
             return true;
         }
 
-        if (/*!mLauncher.isLandscape &&*/ mPinchListener != null && mPinchListener.onInterceptTouchEvent(ev)) {
+        if (!mLauncher.isLandscape && mPinchListener != null && mPinchListener.onInterceptTouchEvent(ev)) {
             // Stop listening for scrolling etc. (onTouchEvent() handles the rest of the pinch.)
             mActiveController = mPinchListener;
             return true;
