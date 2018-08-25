@@ -166,6 +166,7 @@ public class LauncherExtension extends Launcher {
             public void onShow(boolean fromResume) {
                 Log.d("lijun22","left onShow");
                 startWecommunity();
+                LauncherExtension.this.isStartActivityToLeftCustom = true;
             }
 
             // Custom content is completely hidden

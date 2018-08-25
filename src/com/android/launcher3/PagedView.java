@@ -1982,6 +1982,12 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
                             finalPage=getChildCount() - 1;
                          }
 						//  add for cycle slide end
+                        //lijun here
+                        if (this instanceof Workspace && !((Workspace) this).stateCanShowCustomPage()
+                                && finalPage == 0 && ((Workspace) this).hasCustomContent()) {
+                            finalPage = 1;
+                        }
+
                         snapToPageWithVelocity(finalPage, velocityX);
                     } else if (((isSignificantMove && isDeltaXLeft && !isFling) ||
                             (isFling && isVelocityXLeft)) &&
@@ -1992,6 +1998,10 @@ public abstract class PagedView extends ViewGroup implements ViewGroup.OnHierarc
                             finalPage= 0;
                          }
 					    //  add for cycle slide end
+                        if (this instanceof Workspace && !((Workspace) this).stateCanShowCustomPage()
+                                && finalPage == 0 && ((Workspace) this).hasCustomContent()) {
+                            finalPage = 1;
+                        }
                         snapToPageWithVelocity(finalPage, velocityX);
                     } else {
                         snapToDestination();

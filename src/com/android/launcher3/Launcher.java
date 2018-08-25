@@ -425,6 +425,8 @@ public class Launcher extends BaseActivity
 
     // add for pageindicator begin
     PageIndicatorDiagitalImagview mPageIndicatorDiagital;
+
+    public boolean isStartActivityToLeftCustom = false;
     // add for pageindicator end
 
     // This is set to the view that launched the activity that navigated the user away from
@@ -1122,6 +1124,7 @@ public class Launcher extends BaseActivity
         if (mLauncherCallbacks != null) {
             mLauncherCallbacks.preOnResume();
         }
+        isStartActivityToLeftCustom = false;
 
         super.onResume();
         getUserEventDispatcher().resetElapsedSessionMillis();
@@ -1673,7 +1676,7 @@ public class Launcher extends BaseActivity
         mWallpaperButton = findViewById(R.id.wallpaper_button);
         mWallpaperButton.setOnClickListener(buttonClickLisener);
         mWallpaperButton.setOnLongClickListener(performClickOnLongClick);
-//        mWallpaperButton.setOnTouchListener(getHapticFeedbackTouchListener());
+        mWallpaperButton.setOnTouchListener(getHapticFeedbackTouchListener());
 
         // Bind widget button actions
         mWidgetsButton = findViewById(R.id.widget_button);
@@ -1684,7 +1687,7 @@ public class Launcher extends BaseActivity
         specialEffectButton = findViewById(R.id.special_effect_button);
         specialEffectButton.setOnClickListener(buttonClickLisener);
         specialEffectButton.setOnLongClickListener(performClickOnLongClick);
-//        specialEffectButton.setOnTouchListener(getHapticFeedbackTouchListener());
+        specialEffectButton.setOnTouchListener(getHapticFeedbackTouchListener());
 
         mSettingsButton = findViewById(R.id.settings_button);
         //  add for special effect
@@ -1692,7 +1695,7 @@ public class Launcher extends BaseActivity
         if (hasSettings) {
             mSettingsButton.setOnClickListener(buttonClickLisener);
             mSettingsButton.setOnLongClickListener(performClickOnLongClick);
-//            mSettingsButton.setOnTouchListener(getHapticFeedbackTouchListener());
+            mSettingsButton.setOnTouchListener(getHapticFeedbackTouchListener());
         } else {
             mSettingsButton.setVisibility(View.GONE);
         }
@@ -1700,7 +1703,7 @@ public class Launcher extends BaseActivity
         mHideAppButton = findViewById(R.id.hide_app_button);
         mHideAppButton.setOnClickListener(buttonClickLisener);
         mHideAppButton.setOnLongClickListener(performClickOnLongClick);
-//        mHideAppButton.setOnTouchListener(getHapticFeedbackTouchListener());
+        mHideAppButton.setOnTouchListener(getHapticFeedbackTouchListener());
 
         mOverviewPanel.setAlpha(0f);
     }

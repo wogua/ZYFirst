@@ -2298,6 +2298,7 @@ public class Workspace extends SpecialEffectPagedView
 
     public boolean hasCustomContent() {
         return (mScreenOrder.size() > 0 && mScreenOrder.get(0) == CUSTOM_CONTENT_SCREEN_ID);
+
     }
 
     public int numCustomPages() {
@@ -6348,9 +6349,13 @@ public class Workspace extends SpecialEffectPagedView
 	return true;
     }
 	return false;
-  }  
+  }
  //  add for cycle slide end
- 
+
+    public boolean stateCanShowCustomPage(){
+        return mState == State.NORMAL;
+    }
+
  //  add for special effect  start
     public boolean inScaleState() {
         return  mState==State.OVERVIEW
@@ -6359,12 +6364,12 @@ public class Workspace extends SpecialEffectPagedView
     }
 
     private class ScrollEffectAnimator implements Runnable {
-        private int mLastDemoPage = 0;
+        private int mLastDemoPage = numCustomPages();
         public void run() {
-            int toPage = 0;
+            int toPage = numCustomPages();
             if(mAnimateScrollEffectMode) {
                 mLastDemoPage = mCurrentPage;
-                toPage = mCurrentPage == 0 ? 1 : mCurrentPage - 1;
+                toPage = mCurrentPage == numCustomPages() ? numCustomPages()+1 : mCurrentPage - 1;
             } else {
                 toPage = mLastDemoPage;
             }

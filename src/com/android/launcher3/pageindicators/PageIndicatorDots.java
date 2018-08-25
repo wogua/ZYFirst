@@ -28,7 +28,9 @@ import android.graphics.Canvas;
 import android.graphics.Outline;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.IntDef;
 import android.util.AttributeSet;
 import android.util.Property;
@@ -43,6 +45,7 @@ import com.android.launcher3.R;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.Workspace;
 import com.android.launcher3.colors.ColorManager;
+import com.android.launcher3.theme.utils.PhotoUtils;
 
 /**
  * {@link PageIndicator} which shows dots per page. The active page is shown with the current
@@ -74,6 +77,8 @@ public class PageIndicatorDots extends PageIndicator implements ColorManager.IWa
     private int currentIndex,lastIndex;
     private int parentWidth;
     Launcher mLauncher;
+    private Bitmap mHomeIcon;
+    private final float mHomeDotRadius;
     // add end
 
     private static final Property<PageIndicatorDots, Float> CURRENT_POSITION
@@ -142,6 +147,7 @@ public class PageIndicatorDots extends PageIndicator implements ColorManager.IWa
         mCirclePaint.setStyle(Style.FILL);
         mDotRadius = getResources().getDimension(R.dimen.page_indicator_dot_size) / 2;
         mDotRadiusInActive = getResources().getDimension(R.dimen.page_indicator_dot_size_active) / 2;
+        mHomeDotRadius = mDotRadiusInActive*1.2f;
         setOutlineProvider(new MyOutlineProver());
 
         //mActiveColor = Utilities.getColorAccent(context);
@@ -155,6 +161,8 @@ public class PageIndicatorDots extends PageIndicator implements ColorManager.IWa
             mActiveColor = getResources().getColor(R.color.page_indicator_dot_color_active);// add
             mInActiveColor = getResources().getColor(R.color.page_indicator_dot_color);
         }
+
+        mHomeIcon = PhotoUtils.drawable2bitmap(getResources().getDrawable(R.drawable.ic_indicator_home));
 
         if(context instanceof Launcher){
             mLauncher = (Launcher) context;
@@ -340,8 +348,13 @@ public class PageIndicatorDots extends PageIndicator implements ColorManager.IWa
             }
         } else {
             mCirclePaint.setColor(mInActiveColor);
+            RectF r1 = new RectF(x-mHomeDotRadius,y - mHomeDotRadius ,x + mHomeDotRadius , y + mHomeDotRadius);
             for (int i = 0; i < mNumPages; i++) {
-                canvas.drawCircle(x, y, mDotRadiusInActive, mCirclePaint);
+                if(i == 0 ){
+                    canvas.drawBitmap(mHomeIcon,null,r1,mCirclePaint);
+                }else {
+                    canvas.drawCircle(x, y, mDotRadiusInActive, mCirclePaint);
+                }
                 x += circleGap;
             }
 
