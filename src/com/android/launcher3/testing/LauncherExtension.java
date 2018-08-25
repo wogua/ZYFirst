@@ -1,16 +1,21 @@
 package com.android.launcher3.testing;
 
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.android.launcher3.AppInfo;
 import com.android.launcher3.Launcher;
 import com.android.launcher3.LauncherCallbacks;
+import com.android.launcher3.R;
 import com.android.launcher3.allapps.AllAppsSearchBarController;
 import com.android.launcher3.logging.UserEventDispatcher;
 import com.android.launcher3.util.ComponentKey;
@@ -33,7 +38,17 @@ public class LauncherExtension extends Launcher {
         super.onCreate(savedInstanceState);
     }
 
+    @Override
+    protected void onResume() {
+        if(mWorkspace.isCustomContentShowing()){
+            mWorkspace.snapToPage(mWorkspace.numCustomPages());
+        }
+        super.onResume();
+    }
+
     public class LauncherExtensionCallbacks implements LauncherCallbacks {
+
+        private View customContent = null;
 
         @Override
         public void preOnCreate() {
@@ -149,15 +164,19 @@ public class LauncherExtension extends Launcher {
             // Custom content is completely shown. {@code fromResume} indicates whether this was caused
             // by a onResume or by scrolling otherwise.
             public void onShow(boolean fromResume) {
+                Log.d("lijun22","left onShow");
+                startWecommunity();
             }
 
             // Custom content is completely hidden
             public void onHide() {
+                Log.d("lijun22","left onHide");
             }
 
             // Custom content scroll progress changed. From 0 (not showing) to 1 (fully showing).
             public void onScrollProgressChanged(float progress) {
-
+                Log.d("lijun22","left onScrollProgressChanged progress = "+progress);
+                customContent.setAlpha(progress);
             }
 
             // Indicates whether the user is allowed to scroll away from the custom content.
@@ -167,6 +186,18 @@ public class LauncherExtension extends Launcher {
 
         };
 
+        public void startWecommunity() {
+            Intent intent = new Intent("android.intent.action.MAIN");
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addCategory("android.intent.category.LAUNCHER");
+            intent.setComponent(new ComponentName("com.zhiyun.coin", "com.zhiyun.coin.ui.launch.LaunchActivity"));
+            try {
+                LauncherExtension.this.startActivity(intent);
+            } catch (ActivityNotFoundException | SecurityException e) {
+                Log.e(TAG, "Unable to startWecommunity intent=" + intent);
+            }
+        }
+
         @Override
         public boolean hasCustomContentToLeft() {
             return true;
@@ -174,8 +205,10 @@ public class LauncherExtension extends Launcher {
 
         @Override
         public void populateCustomContentContainer() {
-            FrameLayout customContent = new FrameLayout(LauncherExtension.this);
-            customContent.setBackgroundColor(Color.GRAY);
+//            FrameLayout customContent = new FrameLayout(LauncherExtension.this);
+//            customContent.setBackgroundColor(Color.GRAY);
+
+            customContent = getLayoutInflater().inflate(R.layout.custom_content_container,null);
             addToCustomContentPage(customContent, mCustomContentCallbacks, "");
         }
 

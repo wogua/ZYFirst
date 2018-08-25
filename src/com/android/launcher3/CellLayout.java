@@ -200,6 +200,15 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler ,Un
     }
     // add end
 
+    private boolean mIsCustomContentPage = false;
+    public boolean isCustomContentPage(){
+        return mIsCustomContentPage;
+    }
+
+    public void setCustomContentPage(){
+        mIsCustomContentPage = true;
+    }
+
     public CellLayout(Context context) {
         this(context, null);
     }
@@ -685,12 +694,14 @@ public class CellLayout extends ViewGroup implements BubbleTextShadowHandler ,Un
             mShortcutsAndWidgets.addView(child, index, lp);
 			//  add for hotseat icon center start
 			ItemInfo info = (ItemInfo)child.getTag();
-            if (this == mLauncher.getHotseat().getCellLayout()) {
-                mLauncher.getHotseat().initViewCacheList();
-            } else {
-                if (LauncherSettings.Favorites.CONTAINER_HOTSEAT == info.container) {
-                    mLauncher.getHotseat().removeViewByItemInfo(info);
+            if (info != null) {
+                if (this == mLauncher.getHotseat().getCellLayout()) {
                     mLauncher.getHotseat().initViewCacheList();
+                } else {
+                    if (LauncherSettings.Favorites.CONTAINER_HOTSEAT == info.container) {
+                        mLauncher.getHotseat().removeViewByItemInfo(info);
+                        mLauncher.getHotseat().initViewCacheList();
+                    }
                 }
             }
            //  add for hotseat icon center end

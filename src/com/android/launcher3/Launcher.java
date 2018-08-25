@@ -1673,18 +1673,18 @@ public class Launcher extends BaseActivity
         mWallpaperButton = findViewById(R.id.wallpaper_button);
         mWallpaperButton.setOnClickListener(buttonClickLisener);
         mWallpaperButton.setOnLongClickListener(performClickOnLongClick);
-        mWallpaperButton.setOnTouchListener(getHapticFeedbackTouchListener());
+//        mWallpaperButton.setOnTouchListener(getHapticFeedbackTouchListener());
 
         // Bind widget button actions
         mWidgetsButton = findViewById(R.id.widget_button);
         mWidgetsButton.setOnClickListener(buttonClickLisener);
         mWidgetsButton.setOnLongClickListener(performClickOnLongClick);
-        mWidgetsButton.setOnTouchListener(getHapticFeedbackTouchListener());
+//        mWidgetsButton.setOnTouchListener(getHapticFeedbackTouchListener());
 
         specialEffectButton = findViewById(R.id.special_effect_button);
         specialEffectButton.setOnClickListener(buttonClickLisener);
         specialEffectButton.setOnLongClickListener(performClickOnLongClick);
-        specialEffectButton.setOnTouchListener(getHapticFeedbackTouchListener());
+//        specialEffectButton.setOnTouchListener(getHapticFeedbackTouchListener());
 
         mSettingsButton = findViewById(R.id.settings_button);
         //  add for special effect
@@ -1692,7 +1692,7 @@ public class Launcher extends BaseActivity
         if (hasSettings) {
             mSettingsButton.setOnClickListener(buttonClickLisener);
             mSettingsButton.setOnLongClickListener(performClickOnLongClick);
-            mSettingsButton.setOnTouchListener(getHapticFeedbackTouchListener());
+//            mSettingsButton.setOnTouchListener(getHapticFeedbackTouchListener());
         } else {
             mSettingsButton.setVisibility(View.GONE);
         }
@@ -1700,7 +1700,7 @@ public class Launcher extends BaseActivity
         mHideAppButton = findViewById(R.id.hide_app_button);
         mHideAppButton.setOnClickListener(buttonClickLisener);
         mHideAppButton.setOnLongClickListener(performClickOnLongClick);
-        mHideAppButton.setOnTouchListener(getHapticFeedbackTouchListener());
+//        mHideAppButton.setOnTouchListener(getHapticFeedbackTouchListener());
 
         mOverviewPanel.setAlpha(0f);
     }
@@ -6165,6 +6165,7 @@ public class Launcher extends BaseActivity
         float childScale = progress * (1f - CellLayout.CELLLAYOUT_CONTENT_SCALE) + CellLayout.CELLLAYOUT_CONTENT_SCALE;
         for (int i = 0; i < childCount; i++) {
             final CellLayout cl = (CellLayout) mWorkspace.getChildAt(i);
+            if(cl.isCustomContentPage())continue;
             View homeButton = cl.getmHomeButton();
             ShortcutAndWidgetContainer swc = cl.getShortcutsAndWidgets();
             swc.setScaleX(childScale);

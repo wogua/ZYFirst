@@ -1013,6 +1013,7 @@ public class Workspace extends SpecialEffectPagedView
                 mLauncher.getLayoutInflater().inflate(R.layout.workspace_screen, this, false);
         customScreen.disableDragTarget();
         customScreen.disableJailContent();
+        customScreen.setCustomContentPage();
 
         mWorkspaceScreens.put(CUSTOM_CONTENT_SCREEN_ID, customScreen);
         mScreenOrder.add(0, CUSTOM_CONTENT_SCREEN_ID);
@@ -2338,9 +2339,9 @@ public class Workspace extends SpecialEffectPagedView
 
         // We should only update the drag layer background alpha if we are not in all apps or the
         // widgets tray
-        if (mState == State.NORMAL) {
-            mLauncher.getDragLayer().setBackgroundAlpha(progress == 1 ? 0 : progress * 0.8f);
-        }
+//        if (mState == State.NORMAL) {
+//            mLauncher.getDragLayer().setBackgroundAlpha(progress == 1 ? 0 : progress * 0.8f);
+//        }
 
         if (mLauncher.getHotseat() != null) {
             mLauncher.getHotseat().setTranslationX(translationX);
@@ -5262,6 +5263,7 @@ public class Workspace extends SpecialEffectPagedView
         Set<ItemInfo> itemInfos = children.keySet();
         PackageManager packageManager = mLauncher.getPackageManager();
         for (ItemInfo info : itemInfos) {
+            if(info == null)continue;
             if (UninstallShortcutReceiver.isDualIntent(info.getIntent())) {
                 List<ResolveInfo> resolveInfos = packageManager.queryIntentActivities(info.getIntent(), 0);
                 if (resolveInfos == null || resolveInfos.size() == 0) {
@@ -6335,8 +6337,10 @@ public class Workspace extends SpecialEffectPagedView
    //  add for hotseat icon center end
 
   //  add for cycle slide start
-   public void setCycleSlideFlag(){
-     cycleSlideFlag  = Utilities.getPrefs(mLauncher).getBoolean(SpecialEffectPagedView.SPECIAL_EFFECT_CYCLE_SLIDE, true);
+   public void setCycleSlideFlag() {
+       cycleSlideFlag = Utilities.getPrefs(mLauncher).getBoolean(SpecialEffectPagedView.SPECIAL_EFFECT_CYCLE_SLIDE, true)
+               && !mLauncher.hasCustomContentToLeft();
+       Log.d("lijun22","setCycleSlideFlag : " + cycleSlideFlag);
    }
    
   protected boolean isNormalState(){
@@ -6675,5 +6679,9 @@ public class Workspace extends SpecialEffectPagedView
             child.setScaleX(1.0f);
             child.setScaleY(1.0f);
         }
+    }
+
+    public boolean isCustomContentShowing(){
+        return mCustomContentShowing;
     }
 }
