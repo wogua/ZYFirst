@@ -27,6 +27,7 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.res.Resources;
 import android.os.Build;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
@@ -595,7 +596,7 @@ public class LauncherStateTransitionAnimation {
      * Starts an animation to the workspace from another workspace state, e.g. normal to overview.
      */
     private void startAnimationToNewWorkspaceState(final Workspace.State fromWorkspaceState,
-            final Workspace.State toWorkspaceState, final boolean animated,
+            final Workspace.State toWorkspaceState, final boolean animated1,
             final Runnable onCompleteRunnable) {
         final View fromWorkspace = mLauncher.getWorkspace();
         final HashMap<View, Integer> layerViews = new HashMap<>();
@@ -608,8 +609,11 @@ public class LauncherStateTransitionAnimation {
 
         boolean multiplePagesVisible = toWorkspaceState.hasMultipleVisiblePages;
 
+        final boolean animated = Utilities.isAnimatorDurationScale(mLauncher)? false:animated1;
+
         playCommonTransitionAnimations(toWorkspaceState, fromWorkspace, null,
                 animated, animated, animation, layerViews);
+
 
         if (animated) {
             dispatchOnLauncherTransitionPrepare(fromWorkspace, animated, multiplePagesVisible);
@@ -970,7 +974,8 @@ public class LauncherStateTransitionAnimation {
     /**
      *  add it for animal between widgetsPageview and overview
      */
-    public AnimatorSet startAnimationBetweenOverviewAndOverviewHiden(final Workspace.State toWorkspaceState,final Launcher.State launcherState, final boolean animated){
+    public AnimatorSet startAnimationBetweenOverviewAndOverviewHiden(final Workspace.State toWorkspaceState,final Launcher.State launcherState, final boolean animated1){
+        final boolean animated = Utilities.isAnimatorDurationScale(mLauncher)? false:animated1;
         mLauncher.mWorkspace.setmState(toWorkspaceState);
         final AnimatorSet animation = LauncherAnimUtils.createAnimatorSet();
         final boolean toOverview = (toWorkspaceState == Workspace.State.OVERVIEW);

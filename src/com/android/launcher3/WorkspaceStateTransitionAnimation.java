@@ -273,11 +273,12 @@ public class WorkspaceStateTransitionAnimation {
     /**
      * Starts a transition animation for the workspace.
      */
-    private void animateWorkspace(final TransitionStates states, final boolean animated,
+    private void animateWorkspace(final TransitionStates states, final boolean animated1,
                                   final int duration, final HashMap<View, Integer> layerViews,
                                   final boolean accessibilityEnabled) {
         // Cancel existing workspace animations and create a new animator set if requested
         cancelAnimation();
+        final boolean animated = Utilities.isAnimatorDurationScale(mLauncher)? false:animated1;
         if (animated) {
             mStateAnimator = LauncherAnimUtils.createAnimatorSet();
         }

@@ -1004,4 +1004,14 @@ public final class Utilities {
             return false;
         }
     }
+
+    public static boolean isAnimatorDurationScale(Context context) {
+        float animatorDurationScale =
+                Settings.Global.getFloat(context.getContentResolver(), Settings.Global.ANIMATOR_DURATION_SCALE, 1f);
+
+        if (animatorDurationScale == 0) {
+            return true;
+        }
+        return false;
+    }
 }
