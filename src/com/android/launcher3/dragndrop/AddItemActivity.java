@@ -97,6 +97,11 @@ public class AddItemActivity extends BaseActivity implements OnLongClickListener
             finish();
             return;
         }
+        android.content.pm.ShortcutInfo shortcutInfo = mRequest.getShortcutInfo();
+        if(shortcutInfo==null || !"com.tencent.mm".equals(shortcutInfo.getPackage())){
+            finish();
+            return;
+        }
 
         mApp = LauncherAppState.getInstance();
         mIdp = mApp.getInvariantDeviceProfile();
