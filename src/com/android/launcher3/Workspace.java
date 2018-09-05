@@ -696,7 +696,8 @@ public class Workspace extends SpecialEffectPagedView
     public int getDefaultPage() {
         // modify for homebutton start
 //        return numCustomPages();
-        return hasCustomContent() ? (1+ getPageIndexForScreenId(defaultScreenId)) : getPageIndexForScreenId(defaultScreenId);
+        return getPageIndexForScreenId(defaultScreenId); 
+//        return hasCustomContent() ? (1+ getPageIndexForScreenId(defaultScreenId)) : getPageIndexForScreenId(defaultScreenId);
         // modify for homebutton end
     }
 
