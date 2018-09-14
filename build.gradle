@@ -35,11 +35,11 @@ android {
 
     buildTypes {
         debug {
-            minifyEnabled true
+            minifyEnabled false
             proguardFile 'proguard.flags'
         }
          release{
-            minifyEnabled true
+            minifyEnabled false
             proguardFile 'proguard.flags'
          }
     }

@@ -690,7 +690,7 @@ public class Launcher extends Activity
 
     /** To be overridden by subclasses to hint to Launcher that we have custom content */
     protected boolean hasCustomContentToLeft() {
-        if (mLauncherCallbacks != null && Utilities.getPrefs(this).getBoolean(SettingsActivity.KEY_CUSTOM_CONTENT, false)) {
+        if (mLauncherCallbacks != null) {
             return mLauncherCallbacks.hasCustomContentToLeft();
         }
         return false;
