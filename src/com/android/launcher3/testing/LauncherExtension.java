@@ -30,6 +30,8 @@ import java.util.List;
  * class to exercise the LauncherOverlay interface.
  */
 public class LauncherExtension extends Launcher {
+    private static final String CUSTOM_PKG = "com.zhiyun.coin";
+    private static final String CUSTOM_CLASS = "com.zhiyun.coin.ui.launch.LaunchActivity";
 
     //------ Activity methods -------//
     @Override
@@ -44,6 +46,15 @@ public class LauncherExtension extends Launcher {
             mWorkspace.snapToPage(mWorkspace.numCustomPages());
         }
         super.onResume();
+    }
+
+    public boolean customExist(){
+        Intent intent = new Intent();
+        intent.setClassName(CUSTOM_PKG, CUSTOM_CLASS);
+        if (getPackageManager().resolveActivity(intent, 0) == null) {
+            return false;
+        }
+        return true;
     }
 
     public class LauncherExtensionCallbacks implements LauncherCallbacks {
@@ -164,19 +175,16 @@ public class LauncherExtension extends Launcher {
             // Custom content is completely shown. {@code fromResume} indicates whether this was caused
             // by a onResume or by scrolling otherwise.
             public void onShow(boolean fromResume) {
-                Log.d("lijun22","left onShow");
                 startWecommunity();
                 LauncherExtension.this.isStartActivityToLeftCustom = true;
             }
 
             // Custom content is completely hidden
             public void onHide() {
-                Log.d("lijun22","left onHide");
             }
 
             // Custom content scroll progress changed. From 0 (not showing) to 1 (fully showing).
             public void onScrollProgressChanged(float progress) {
-                Log.d("lijun22","left onScrollProgressChanged progress = "+progress);
                 customContent.setAlpha(progress);
             }
 
@@ -191,7 +199,8 @@ public class LauncherExtension extends Launcher {
             Intent intent = new Intent("android.intent.action.MAIN");
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.addCategory("android.intent.category.LAUNCHER");
-            intent.setComponent(new ComponentName("com.zhiyun.coin", "com.zhiyun.coin.ui.launch.LaunchActivity"));
+//            intent.setComponent(new ComponentName(CUSTOM_PKG, CUSTOM_CLASS));
+            intent.setComponent(new ComponentName(CUSTOM_PKG, CUSTOM_CLASS));
             try {
                 LauncherExtension.this.startActivity(intent);
             } catch (ActivityNotFoundException | SecurityException e) {

@@ -329,7 +329,7 @@ public class DragLayer extends InsettableFrameLayout {
             return true;
         }
 
-        if(mLauncher.isStartActivityToLeftCustom){
+        if(mLauncher.isStartActivityToLeftCustom && mLauncher.customExist()){
             return true;
         }
 

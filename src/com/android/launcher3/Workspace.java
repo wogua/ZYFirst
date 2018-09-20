@@ -696,7 +696,7 @@ public class Workspace extends SpecialEffectPagedView
     public int getDefaultPage() {
         // modify for homebutton start
 //        return numCustomPages();
-        return getPageIndexForScreenId(defaultScreenId); 
+        return getPageIndexForScreenId(defaultScreenId);
 //        return hasCustomContent() ? (1+ getPageIndexForScreenId(defaultScreenId)) : getPageIndexForScreenId(defaultScreenId);
         // modify for homebutton end
     }
@@ -2466,11 +2466,12 @@ public class Workspace extends SpecialEffectPagedView
 
   //  add for set alpha  start
     public boolean inModalStateSetAlpha() {
-        return mState != State.NORMAL
-                &&mState!=State.FOLDER_IMPORT
-                &&mState!=State.OVERVIEW
-                &&mState!= OVERVIEW_HIDDEN
-                &&mState!=State.SPRING_LOADED;
+        return false;
+//        return mState != State.NORMAL
+//                &&mState!=State.FOLDER_IMPORT
+//                &&mState!=State.OVERVIEW
+//                &&mState!= OVERVIEW_HIDDEN
+//                &&mState!=State.SPRING_LOADED;
     }
   //  add for set alpha  start
 
@@ -6684,6 +6685,7 @@ public class Workspace extends SpecialEffectPagedView
             child.setAlpha(1.0f);
             child.setScaleX(1.0f);
             child.setScaleY(1.0f);
+            child.setVisibility(VISIBLE);
         }
     }
 

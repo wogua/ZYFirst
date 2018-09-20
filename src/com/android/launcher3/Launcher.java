@@ -6547,6 +6547,9 @@ public class Launcher extends BaseActivity
         boolean needHideIconarrange;
         boolean needHideSpecialEffect;
         boolean needHideHideApp;
+        if (launcherState == State.WORKSPACE) {
+            mWorkspace.resetPages();
+        }
 
         if (launcherState == State.WIDGETS) {
             needHideWidgets = false;
@@ -6755,5 +6758,9 @@ public class Launcher extends BaseActivity
             mHideAppEmptyHint.setVisibility(View.GONE);
             mHideAppEmptyHint.setAlpha(0.0f);
         }
+    }
+
+    public boolean customExist() {
+        return false;
     }
 }
