@@ -1343,8 +1343,12 @@ public class Launcher extends BaseActivity
             // setting.
             return !getResources().getBoolean(R.bool.allow_rotation);
         }*/
-        return false;
+        return true;
         // modify end
+    }
+
+    protected boolean hasHideApp(){
+        return false;
     }
 
     public void addToCustomContentPage(View customContent,
@@ -1701,9 +1705,14 @@ public class Launcher extends BaseActivity
         }
 
         mHideAppButton = findViewById(R.id.hide_app_button);
-        mHideAppButton.setOnClickListener(buttonClickLisener);
-        mHideAppButton.setOnLongClickListener(performClickOnLongClick);
-        mHideAppButton.setOnTouchListener(getHapticFeedbackTouchListener());
+        if(hasHideApp()){
+            mHideAppButton.setOnClickListener(buttonClickLisener);
+            mHideAppButton.setOnLongClickListener(performClickOnLongClick);
+            mHideAppButton.setOnTouchListener(getHapticFeedbackTouchListener());
+        }else {
+            mHideAppButton.setVisibility(View.GONE);
+        }
+
 
         mOverviewPanel.setAlpha(0f);
     }
