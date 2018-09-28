@@ -210,7 +210,7 @@ public class LauncherExtension extends Launcher {
 
         @Override
         public boolean hasCustomContentToLeft() {
-            return true;
+            return customExist();
         }
 
         @Override

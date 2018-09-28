@@ -350,7 +350,7 @@ public class PageIndicatorDots extends PageIndicator implements ColorManager.IWa
             mCirclePaint.setColor(mInActiveColor);
             RectF r1 = new RectF(x-mHomeDotRadius,y - mHomeDotRadius ,x + mHomeDotRadius , y + mHomeDotRadius);
             for (int i = 0; i < mNumPages; i++) {
-                if(i == 0 ){
+                if(i == 0 && mLauncher.customExist()){
                     canvas.drawBitmap(mHomeIcon,null,r1,mCirclePaint);
                 }else {
                     canvas.drawCircle(x, y, mDotRadiusInActive, mCirclePaint);

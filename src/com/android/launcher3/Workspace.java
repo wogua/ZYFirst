@@ -6355,7 +6355,7 @@ public class Workspace extends SpecialEffectPagedView
  //  add for cycle slide end
 
     public boolean stateCanShowCustomPage(){
-        return mState == State.NORMAL;
+        return mLauncher.customExist() && mState == State.NORMAL;
     }
 
  //  add for special effect  start
