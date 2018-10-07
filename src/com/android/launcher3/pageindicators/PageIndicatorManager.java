@@ -200,6 +200,10 @@ public class PageIndicatorManager {
             if(mLauncher.isLandscape){
                 mPageIndicatorCube.setVisibility(View.GONE);
                 mPageIndicatorDots.setVisibility(View.GONE);
+            } else {
+                mPageIndicatorCube.setAlpha(0.0f);
+                mPageIndicatorDots.setAlpha(1.0f);
+                mPageIndicatorDots.setVisibility(View.VISIBLE);
             }
             mPageIndicatorDots.setOnTouchListener(mCircleIndicatorTouchListener);
             ONDRAGING = false;

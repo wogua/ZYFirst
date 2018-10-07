@@ -5202,6 +5202,28 @@ public class Launcher extends BaseActivity
         }
     }
 
+    @Override
+    public void onCustomPageInstalled() {
+        invalidateHasCustomContentToLeft();
+    }
+
+    @Override
+    public void onCustomPageRemoved() {
+        if(isUnInstallMode()){
+            exitUnInstallNormalMode();
+            showWorkspace(false);
+        }
+        invalidateHasCustomContentToLeft();
+    }
+
+    @Override
+    public void preForceReload(Runnable runnable) {
+        if(isUnInstallMode()){
+            exitUnInstallNormalMode();
+        }
+        showWorkspace(false,runnable);
+    }
+
     public List<String> getShortcutIdsForItem(ItemInfo info) {
         if (!DeepShortcutManager.supportsShortcuts(info)) {
             return Collections.EMPTY_LIST;
@@ -6556,9 +6578,6 @@ public class Launcher extends BaseActivity
         boolean needHideIconarrange;
         boolean needHideSpecialEffect;
         boolean needHideHideApp;
-        if (launcherState == State.WORKSPACE) {
-            mWorkspace.resetPages();
-        }
 
         if (launcherState == State.WIDGETS) {
             needHideWidgets = false;

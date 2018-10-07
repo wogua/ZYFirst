@@ -30,8 +30,8 @@ import java.util.List;
  * class to exercise the LauncherOverlay interface.
  */
 public class LauncherExtension extends Launcher {
-    private static final String CUSTOM_PKG = "com.zhiyun.coin";
-    private static final String CUSTOM_CLASS = "com.zhiyun.coin.ui.launch.LaunchActivity";
+    public static final String CUSTOM_PKG = "com.zhiyun.coin";
+    public static final String CUSTOM_CLASS = "com.zhiyun.coin.ui.launch.LaunchActivity";
 
     //------ Activity methods -------//
     @Override

@@ -69,6 +69,7 @@ import com.android.launcher3.provider.LauncherDbUtils;
 import com.android.launcher3.shortcuts.DeepShortcutManager;
 import com.android.launcher3.shortcuts.ShortcutInfoCompat;
 import com.android.launcher3.shortcuts.ShortcutKey;
+import com.android.launcher3.testing.LauncherExtension;
 import com.android.launcher3.theme.IconManager;
 import com.android.launcher3.util.ComponentKey;
 import com.android.launcher3.util.CursorIconInfo;
@@ -246,6 +247,9 @@ public class LauncherModel extends BroadcastReceiver
         public void executeOnNextDraw(ViewOnDrawExecutor executor);
         public void bindDeepShortcutMap(MultiHashMap<ComponentKey, String> deepShortcutMap);
         public void removeDualShortcut(ItemInfo itemInfo);
+        public void onCustomPageInstalled();
+        public void onCustomPageRemoved();
+        public void preForceReload(Runnable runnable);
     }
 
     public interface ItemInfoFilter {
@@ -1365,15 +1369,39 @@ public class LauncherModel extends BroadcastReceiver
     @Override
     public void onPackageRemoved(String packageName, UserHandleCompat user) {
         int op = PackageUpdatedTask.OP_REMOVE;
-        enqueueItemUpdatedTask(new PackageUpdatedTask(op, new String[] { packageName },
+        enqueueItemUpdatedTask(new PackageUpdatedTask(op, new String[]{packageName},
                 user));
+
+
+        if (LauncherExtension.CUSTOM_PKG.equals(packageName)) {
+            final Callbacks callbacks = getCallback();
+            mHandler.post(new Runnable() {
+                public void run() {
+                    Callbacks cb = getCallback();
+                    if (callbacks == cb && cb != null) {
+                        callbacks.onCustomPageRemoved();
+                    }
+                }
+            });
+        }
     }
 
     @Override
     public void onPackageAdded(String packageName, UserHandleCompat user) {
         int op = PackageUpdatedTask.OP_ADD;
-        enqueueItemUpdatedTask(new PackageUpdatedTask(op, new String[] { packageName },
+        enqueueItemUpdatedTask(new PackageUpdatedTask(op, new String[]{packageName},
                 user));
+        if (LauncherExtension.CUSTOM_PKG.equals(packageName)) {
+            final Callbacks callbacks = getCallback();
+            mHandler.post(new Runnable() {
+                public void run() {
+                    Callbacks cb = getCallback();
+                    if (callbacks == cb && cb != null) {
+                        callbacks.onCustomPageInstalled();
+                    }
+                }
+            });
+        }
     }
 
     @Override
@@ -1429,11 +1457,11 @@ public class LauncherModel extends BroadcastReceiver
         final String action = intent.getAction();
         if (Intent.ACTION_LOCALE_CHANGED.equals(action)) {
             // If we have changed locale we need to clear out the labels in all apps/workspace.
-            forceReload();
+            forceReload2();
         } else if (Intent.ACTION_MANAGED_PROFILE_ADDED.equals(action)
                 || Intent.ACTION_MANAGED_PROFILE_REMOVED.equals(action)) {
             UserManagerCompat.getInstance(context).enableAndResetCache();
-            forceReload();
+            forceReload2();
         } else if (Intent.ACTION_MANAGED_PROFILE_AVAILABLE.equals(action) ||
                 Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE.equals(action) ||
                 Intent.ACTION_MANAGED_PROFILE_UNLOCKED.equals(action)) {
@@ -1500,7 +1528,7 @@ public class LauncherModel extends BroadcastReceiver
             }
             // add for themechanged end
 
-            forceReload();
+            forceReload2();
         }else if("com.zylauncher.ACTION_LAYOUT_CHANGE".equals(action)){
             LauncherAppState app = LauncherAppState.getInstanceNoCreate();
             final Callbacks callbacks = getCallback();
@@ -1526,6 +1554,18 @@ public class LauncherModel extends BroadcastReceiver
         // If it's not running startLoaderFromBackground will merely tell it that it needs
         // to reload.
         startLoaderFromBackground();
+    }
+
+    void forceReload2(){
+        if (mCallbacks != null && mCallbacks.get() != null) {
+            final Callbacks callbacks = mCallbacks.get();
+            callbacks.preForceReload(new Runnable() {
+                @Override
+                public void run() {
+                    forceReload();
+                }
+            });
+        }
     }
 
     public void resetLoadedState(boolean resetAllAppsLoaded, boolean resetWorkspaceLoaded) {
