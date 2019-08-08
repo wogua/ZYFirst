@@ -5209,6 +5209,13 @@ public class Launcher extends BaseActivity
 
     @Override
     public void onCustomPageRemoved() {
+        Folder openFolder = mWorkspace.getOpenFolder();
+        if (openFolder != null) {
+            if (openFolder.isEditingName()) {
+                openFolder.dismissEditingName();
+            }
+            closeFolder(false);
+        }
         if(isUnInstallMode()){
             exitUnInstallNormalMode();
             showWorkspace(false);

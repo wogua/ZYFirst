@@ -33,7 +33,6 @@ public class LauncherBadgeProvider extends ContentProvider {
     private static final String DB_NAME = "launcherbadge.db";
     public static final String BADGE_PKG_TEMP = "_lbe_clone";
 
-
     private static final String DB_CREATE = "CREATE TABLE IF NOT EXISTS " + Badge.TABLE_NAME +
             " (" + Badge.ID + " integer primary key autoincrement, " +
             Badge.PACKAGE_NAME + " text not null, " +

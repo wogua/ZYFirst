@@ -1,18 +1,18 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+     * Copyright (C) 2016 The Android Open Source Project
+     *
+     * Licensed under the Apache License, Version 2.0 (the "License");
+     * you may not use this file except in compliance with the License.
+     * You may obtain a copy of the License at
+     *
+     *      http://www.apache.org/licenses/LICENSE-2.0
+     *
+     * Unless required by applicable law or agreed to in writing, software
+     * distributed under the License is distributed on an "AS IS" BASIS,
+     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     * See the License for the specific language governing permissions and
+     * limitations under the License.
+     */
 
 package com.android.launcher3.keyboard;
 
@@ -35,103 +35,103 @@ import android.view.View.OnFocusChangeListener;
 
 import com.android.launcher3.R;
 
-/**
- * A helper class to draw background of a focused view.
- */
-@TargetApi(VERSION_CODES.LOLLIPOP)
-public abstract class FocusIndicatorHelper implements
-        OnFocusChangeListener, AnimatorUpdateListener {
-
-    private static final float MIN_VISIBLE_ALPHA = 0.2f;
-    private static final long ANIM_DURATION = 150;
-
-    public static final Property<FocusIndicatorHelper, Float> ALPHA =
-            new Property<FocusIndicatorHelper, Float>(Float.TYPE, "alpha") {
-                @Override
-                public void set(FocusIndicatorHelper object, Float value) {
-                    object.setAlpha(value);
-                }
-
-                @Override
-                public Float get(FocusIndicatorHelper object) {
-                    return object.mAlpha;
-                }
-            };
-
-    public static final Property<FocusIndicatorHelper, Float> SHIFT =
-            new Property<FocusIndicatorHelper, Float>(
-                    Float.TYPE, "shift") {
-
-                @Override
-                public void set(FocusIndicatorHelper object, Float value) {
-                    object.mShift = value;
-                }
-
-                @Override
-                public Float get(FocusIndicatorHelper object) {
-                    return object.mShift;
-                }
-            };
-
-    private static final RectEvaluator RECT_EVALUATOR = new RectEvaluator(new Rect());
-    private static final Rect sTempRect1 = new Rect();
-    private static final Rect sTempRect2 = new Rect();
-
-    private final View mContainer;
-    private final Paint mPaint;
-    private final int mMaxAlpha;
-
-    private final Rect mDirtyRect = new Rect();
-    private boolean mIsDirty = false;
-
-    private View mLastFocusedView;
-
-    private View mCurrentView;
-    private View mTargetView;
     /**
-     * The fraction indicating the position of the focusRect between {@link #mCurrentView}
-     * & {@link #mTargetView}
+     * A helper class to draw background of a focused view.
      */
-    private float mShift;
+    @TargetApi(VERSION_CODES.LOLLIPOP)
+    public abstract class FocusIndicatorHelper implements
+            OnFocusChangeListener, AnimatorUpdateListener {
 
-    private ObjectAnimator mCurrentAnimation;
-    private float mAlpha;
+        private static final float MIN_VISIBLE_ALPHA = 0.2f;
+        private static final long ANIM_DURATION = 150;
 
-    public FocusIndicatorHelper(View container) {
-        mContainer = container;
+        public static final Property<FocusIndicatorHelper, Float> ALPHA =
+                new Property<FocusIndicatorHelper, Float>(Float.TYPE, "alpha") {
+                    @Override
+                    public void set(FocusIndicatorHelper object, Float value) {
+                        object.setAlpha(value);
+                    }
 
-        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        int color = container.getResources().getColor(R.color.focused_background);
-        mMaxAlpha = Color.alpha(color);
-        mPaint.setColor(0xFF000000 | color);
+                    @Override
+                    public Float get(FocusIndicatorHelper object) {
+                        return object.mAlpha;
+                    }
+                };
 
-        setAlpha(0);
-        mShift = 0;
-    }
+        public static final Property<FocusIndicatorHelper, Float> SHIFT =
+                new Property<FocusIndicatorHelper, Float>(
+                        Float.TYPE, "shift") {
 
-    protected void setAlpha(float alpha) {
-        mAlpha = alpha;
-        mPaint.setAlpha((int) (mAlpha * mMaxAlpha));
-    }
+                    @Override
+                    public void set(FocusIndicatorHelper object, Float value) {
+                        object.mShift = value;
+                    }
 
-    @Override
-    public void onAnimationUpdate(ValueAnimator animation) {
-        invalidateDirty();
-    }
+                    @Override
+                    public Float get(FocusIndicatorHelper object) {
+                        return object.mShift;
+                    }
+                };
 
-    protected void invalidateDirty() {
-        if (mIsDirty) {
-            mContainer.invalidate(mDirtyRect);
-            mIsDirty = false;
+        private static final RectEvaluator RECT_EVALUATOR = new RectEvaluator(new Rect());
+        private static final Rect sTempRect1 = new Rect();
+        private static final Rect sTempRect2 = new Rect();
+
+        private final View mContainer;
+        private final Paint mPaint;
+        private final int mMaxAlpha;
+
+        private final Rect mDirtyRect = new Rect();
+        private boolean mIsDirty = false;
+
+        private View mLastFocusedView;
+
+        private View mCurrentView;
+        private View mTargetView;
+        /**
+         * The fraction indicating the position of the focusRect between {@link #mCurrentView}
+         * & {@link #mTargetView}
+         */
+        private float mShift;
+
+        private ObjectAnimator mCurrentAnimation;
+        private float mAlpha;
+
+        public FocusIndicatorHelper(View container) {
+            mContainer = container;
+
+            mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            int color = container.getResources().getColor(R.color.focused_background);
+            mMaxAlpha = Color.alpha(color);
+            mPaint.setColor(0xFF000000 | color);
+
+            setAlpha(0);
+            mShift = 0;
         }
 
-        Rect newRect = getDrawRect();
-        if (newRect != null) {
-            mContainer.invalidate(newRect);
+        protected void setAlpha(float alpha) {
+            mAlpha = alpha;
+            mPaint.setAlpha((int) (mAlpha * mMaxAlpha));
         }
-    }
 
-    public void draw(Canvas c) {
+        @Override
+        public void onAnimationUpdate(ValueAnimator animation) {
+            invalidateDirty();
+        }
+
+        protected void invalidateDirty() {
+            if (mIsDirty) {
+                mContainer.invalidate(mDirtyRect);
+                mIsDirty = false;
+            }
+
+            Rect newRect = getDrawRect();
+            if (newRect != null) {
+                mContainer.invalidate(newRect);
+            }
+        }
+
+        public void draw(Canvas c) {
         /*if (mAlpha > 0) {
             Rect newRect = getDrawRect();
             if (newRect != null) {
@@ -140,7 +140,7 @@ public abstract class FocusIndicatorHelper implements
                 mIsDirty = true;
             }
         }*/
-    }
+        }
 
     private Rect getDrawRect() {
         if (mCurrentView != null && mCurrentView.getParent()!=null) {// add  '&& mCurrentView.getParent()!=null' for nullpoint exception for bug:257
